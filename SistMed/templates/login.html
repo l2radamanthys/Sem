@@ -17,35 +17,25 @@
 </head>
 
 <body>
-    <div align='center'>
-    <table border='1' colspan='0' width="900px">
+    <div align="center" class='cont_flotante'>
+    <form action='.'  method='post'>
+    <table>
         <tr>
-            <td colspan='2'>
-            <h1> Sistema </h1>
-            </td>
+            <td><label>Usuario</label></td>
+            <td><input type='text' name='usuario'></td>
         </tr>
-
         <tr>
-            <td width='200px'>
-                {% block cont_sec %}
-                {% endblock %}
-            </td>
-
-            <td>
-                <h1> {{ titulo }} </h1>
-
-                {% block contenido %}
-                {% endblock %}
-            </td>
+            <td><label>Contraseña:</label></td>
+            <td><input type='password' name='contrasenia'></td>
         </tr>
-
         <tr>
-            <td colspan='2'>
-            </td>
+            <td><input type='Submit' value='Enviar' /></td>
+            <td><input type='Reset' value='Limpiar' /></td>
         </tr>
-
     </table>
+    </form>
     </div>
+
 </body>
 </html>
 
