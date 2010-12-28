@@ -6,18 +6,22 @@ from django.contrib.auth.models import User
 
 
 #choices
-SEXO_CHOICE = {
+
+#sexo del usuario
+SEXO_CHOICE = (
     ('M','Masculino'),
     ('F', 'Femenino'),
-    ('-','-----')
-}
+    ('-','-----'),
+)
 
-SOLICITUD_ESTADO = {
+#solicitud turnos
+SOLICITUD_ESTADO = (
     ('P','Pendiente'),
     ('A','Aceptado'),
     ('C','Cancelado'),
-}
+)
 
+#modelos
 class Usuarios(User):
     """
         Para el login y el manejo de secciones
@@ -54,7 +58,7 @@ class TipoUsuario(models.Model):
         En ves de crear las clases Medico, Paciente, Administrativo
         cree una clase categoria q le definira la clase al paciente
     """
-    nombre = models.CharField('Nro de telefono', max_length=30)
+    nombre = models.CharField('Nombre Tipo Usuario', max_length=30)
 
 
 #remplazadas por la clase categoria
@@ -78,6 +82,9 @@ class Expecialidades(models.Model):
 
 
 class ExpecialidadesMedicos(models.Model):
+    """
+        Clasificacion de las Distintas Expecialidades de los Medicos
+    """
     #fk
     codigo_medico = models.ForeignKey(Usuarios)
     cod_expecialidad = models.ForeignKey(Expecialidades)
@@ -130,6 +137,9 @@ class DiasAtencion(models.Model):
 
 
 class Turnos(models.Model):
+    """
+        Objecto q representa los turnos asignados
+    """
     fecha = models.DateField()
     hora_inicio = models.TimeField()
     hora_fin = models.TimeField()
