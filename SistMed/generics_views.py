@@ -21,13 +21,22 @@ BASE_DIC = {
     'page_title': '',
 }
 
+def index(request):
+    plantilla = get_template('base.html')
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
 
 def login(request):
     plantilla = get_template('login.html')
     contexto = Context(dict)
-    xhtml = plantilla.render(contexto)
-    return HttpResponse(xhtml)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
 
 
 def logout(request):
-    pass
+    plantilla = get_template('logout.html')
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
