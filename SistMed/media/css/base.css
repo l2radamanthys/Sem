@@ -1,0 +1,19 @@
+body {
+    font-family: Verdana, Geneva, Dejavu Sans;
+    font-size: 80%;
+}
+
+
+cont_flotante {
+    margin-top: 300px;
+}
+
+
+/*para los mensaje de error*/
+.msj_error {
+    text-align:center;
+    background-color: #FF0000;
+    color: #FFFFFF;
+    margin-left: 300px;
+    margin-right: 300px;
+}

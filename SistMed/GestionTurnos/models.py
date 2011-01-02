@@ -4,22 +4,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE
 
-#choices
-
-#sexo del usuario
-SEXO_CHOICE = (
-    ('M','Masculino'),
-    ('F', 'Femenino'),
-    ('-','-----'),
-)
-
-#solicitud turnos
-SOLICITUD_ESTADO = (
-    ('P','Pendiente'),
-    ('A','Aceptado'),
-    ('C','Cancelado'),
-)
 
 #modelos
 #class TipoUsuario(models.Model):
@@ -152,7 +138,7 @@ class SolitudesTurnos(models.Model):
     """
     fecha_solicitud = models.DateField() #fecha en la q se solicito el turno
     fecha_requerida = models.DateField()#fecha para la cual se solicito turno
-    estado = models.CharField(max_length=1, default='P' ,choices=SOLICITUD_ESTADO)
+    estado = models.CharField(max_length=1, default='P' ,choices=SOLICITUD_ESTADO_CHOICE)
     comentarios = models.TextField()
 
     #fk

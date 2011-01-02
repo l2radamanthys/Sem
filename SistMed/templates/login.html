@@ -17,24 +17,35 @@
 </head>
 
 <body>
+
     <div align="center" class='cont_flotante'>
     <form action='.'  method='post'>
     <table>
         <tr>
             <td><label>Usuario</label></td>
-            <td><input type='text' name='usuario'></td>
+            <td><input type="text" name="username" value="" id="username" /></td>
         </tr>
         <tr>
             <td><label>Contraseña:</label></td>
-            <td><input type='password' name='contrasenia'></td>
+            <td><input type="password" name="password" value="" id="password" /></td>
         </tr>
         <tr>
-            <td><input type='Submit' value='Enviar' /></td>
-            <td><input type='Reset' value='Limpiar' /></td>
+            <td colspan='2' align='center'>
+            <input type='Submit' value='Conectar' />
+            <input type='Reset' value='Limpiar' />
+            </td>
         </tr>
     </table>
     </form>
     </div>
+
+    {% if login_fail %}
+        <div class='msj_error'>
+        <p><strong>Error:</strong> El nombre de usuario y contraseña no es valido </p>
+        </div>
+    {% endif %}
+
+
 
 </body>
 </html>
