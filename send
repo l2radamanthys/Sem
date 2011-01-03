@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#envia los datos al repositorio principal
+git push origin master
+
