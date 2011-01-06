@@ -21,6 +21,16 @@ from constantes import BASE_DIC
 
 def index(request):
     plantilla = get_template('base.html')
+
+    dict = BASE_DIC.copy()
+    #usuario conectado
+    if request.user.is_authenticated():
+        dict['login_status'] = 'online'
+        dict['url_action'] = '/accounts/logout/'
+    else:
+        dict['login_status'] = 'offline'
+        dict['url_action'] = '/accounts/login/'
+
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -30,31 +40,42 @@ def login(request):
     """
         Autentificar usuarios
     """
-    plantilla = get_template('login.html')
-    dict = BASE_DIC.copy()
-    dict['login_fail'] = True
-    try:
-        username = request.POST['username']
-        password = request.POST['password']
-        user = auth.authenticate(username=username, password=password)
-    except: #arreglar esto
-        user = None
-        dict['login_fail'] = False
-    
-    if user is not None:
-        if user.is_active:
-            # Clave correcta, y el usuario está marcado "activo"
-            auth.login(request, user)
-            # Redirigir a una página de éxito.
-            HttpResponseRedirect('/admin/')
 
-    contexto = Context(dict)
-    html = plantilla.render(contexto)
-    return HttpResponse(html)
+    if not(request.user.is_authenticated()):
+        plantilla = get_template('login.html')
+        dict = BASE_DIC.copy()
+        
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        user = auth.authenticate(username=username, password=password)
+        
+        if user is not None:
+            if user.is_active:
+                # Clave correcta, y el usuario estï¿½ marcado "activo"
+                auth.login(request, user)
+                dict['mensaje'] = username
+                # Redirigir a una pagina de exito.
+                return HttpResponseRedirect('/')
+    
+        if username != '':
+            dict['login_fail'] = True
+            dict['mensaje'] = "El Nombre de usuario o contraseÃ±a no son validos"
+    
+        contexto = Context(dict)
+        html = plantilla.render(contexto)
+        return HttpResponse(html)
+
+    else:
+        return HttpResponseRedirect('/')
 
 
 def logout(request):
+    """
+        Salida de un usuario
+    """
+    auth.logout(request)
     plantilla = get_template('logout.html')
+    dict = BASE_DIC.copy()
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)

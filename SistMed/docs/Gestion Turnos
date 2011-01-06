@@ -1,0 +1,96 @@
+Usuarios
+--------
+    - user
+    - password
+    - categoria (Paciente, Medico, Administrativo)
+    - cod_categoria
+    -Telefono
+    -Mail
+    -DNI
+    -Nombre
+
+
+Categorias
+----------
+    - codigo
+    - Nombre
+
+
+Medico(Usuarios)
+------
+    -Matricula
+
+
+Paciente(Usuarios)
+--------
+
+
+Administrativos(Usuarios)
+---------------
+
+
+Expecialidades
+--------------
+    - id
+    - nombre
+
+
+ExpecialidadesMedicos
+---------------------
+    - cod_medico
+    - cod_expecialidad
+
+
+Consultorios
+------------
+    - id
+    - nombre
+
+
+HorariosAtencion
+----------------
+    - dia (Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo)
+    - cod_medico
+    - hora_inicio
+    - hora_fin
+    - cod_expecialidad
+    - duracion_turno //en minutos
+    - intervalo //en minutos
+
+
+DiasAtencion
+------------
+    - fecha
+    - cod_medico
+    - hora_inicio
+    - hora_fin
+    - prox_turno //este dato se va mod continuament
+
+
+Turnos
+------
+    - fecha
+    - cod_paciente
+    - cod_medico
+    - hora_inicio
+    - hora_fin
+    - comentarios
+
+
+SolitudesTurnos
+---------------
+    - cod_paciente
+    - cod_medico
+    - fecha_req
+    - fecha_solicitud
+    - estado (Aceptado, Pendiente, Cancelado)
+    - comentarios
+
+
+
+
+
+
+
+
+

@@ -27,7 +27,7 @@ class Expecialidades(models.Model):
         return self.nombre
 
 
-class Usuarios(User):
+class Usuarios(models.Model):
     """
         Para el login y el manejo de secciones
     """
@@ -35,20 +35,17 @@ class Usuarios(User):
     sexo = models.CharField(max_length=1, default='-', choices=SEXO_CHOICE)
     telefono = models.CharField(max_length=20)
     direccion = models.CharField(max_length=60)
+
+    #FK segun django.es de esta forma anda yo queria usar herencia :(
+    user = models.ForeignKey(User, unique=True)
     
-    #FK
-    #tipo = models.ForeignKey(TipoUsuario)
-
-    #datos utiles para recordar
-    #username, password, first_name, last_name
-
 
     def nombre_completo(self):
-        return self.first_name + self.last_name
+        return self.user.first_name + self.user.last_name
 
 
     def __str__(self):
-        return self.username
+        return self.user.username
 
 
 class Medicos(Usuarios):
@@ -56,6 +53,8 @@ class Medicos(Usuarios):
 
 
 class Pacientes(Usuarios):
+    #por el momento no tiene canpos adjuntos mas adelantes tendra mas..
+    #cuando implemente la parte de Historia Clinica :P
     pass
 
 

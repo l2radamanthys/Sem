@@ -3,17 +3,62 @@ body {
     font-size: 80%;
 }
 
-
-cont_flotante {
-    margin-top: 300px;
+a{
+    text-decoration: None;
 }
+
 
 
 /*para los mensaje de error*/
 .msj_error {
     text-align:center;
-    background-color: #FF0000;
+    background-color:  #F68840;
     color: #FFFFFF;
-    margin-left: 300px;
-    margin-right: 300px;
+    width: 300px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border: 2px solid #D2D3D5;
 }
+
+.cont_flotante {
+    margin-top: 100px;
+    background-color: #ECEFF2;
+    width: 300px;
+    /*border: 1px solid #B3B4B5;*/
+    -moz-border-left-radius: 10px;
+    -webkit-border-radius: 10px;
+    behavior:url(border-radius.htc);
+}
+
+
+/* titulos vent imagina */
+.title_ventana {
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 18px;
+    text-align:center;
+    background-color: #5392D4;
+    color: #FFFFFF;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+
+.online {
+    font-weight: bold;
+    text-align: center;
+    background-color: #00FF00;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.offline {
+    font-weight: bold;
+    text-align: center;
+    background-color: #FF0000;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+

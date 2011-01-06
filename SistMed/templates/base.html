@@ -29,6 +29,11 @@
             <td width='200px'>
                 {% block cont_sec %}
                 {% endblock %}
+
+                <div class='{{ login_status }}'>
+                    <a href="{{ url_action }}">{{ login_status }}</a>
+                </div>
+
             </td>
 
             <td>

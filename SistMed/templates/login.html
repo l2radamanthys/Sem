@@ -17,10 +17,12 @@
 </head>
 
 <body>
+    <div align="center">
+    <div class='cont_flotante'>
+    <h4 class='title_ventana'>Login</h4>
 
-    <div align="center" class='cont_flotante'>
-    <form action='.'  method='post'>
-    <table>
+    <form action='/accounts/login/'  method='post'>
+    <table border='0' cellpadding='0'>
         <tr>
             <td><label>Usuario</label></td>
             <td><input type="text" name="username" value="" id="username" /></td>
@@ -38,12 +40,15 @@
     </table>
     </form>
     </div>
-
+    <br />
     {% if login_fail %}
         <div class='msj_error'>
-        <p><strong>Error:</strong> El nombre de usuario y contraseña no es valido </p>
+        <p><strong>Error:</strong> {{ mensaje }} </p>
         </div>
     {% endif %}
+
+    </div>
+
 
 
 

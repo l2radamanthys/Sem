@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 from django.conf.urls.defaults import *
 
-# Uncomment the next two lines to enable the admin:
+#admni
 from django.contrib import admin
 admin.autodiscover()
 
@@ -33,4 +34,7 @@ urlpatterns = patterns('',
     #sessiones
     (r'^accounts/login/$', generics_views.login),
     (r'^accounts/logout/$', generics_views.logout),
+
+    #gestion turnos
+    #--
 )
