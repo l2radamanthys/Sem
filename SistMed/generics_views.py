@@ -15,7 +15,6 @@ from django.template.loader import get_template
 from django.template import Context
 from django.contrib import auth #para login
 
-from GestionTurnos.models import Pacientes
 from constantes import BASE_DIC
 
 
@@ -23,7 +22,8 @@ def index(request):
     plantilla = get_template('base.html')
 
     dict = BASE_DIC.copy()
-    #usuario conectado
+    #usuario estado
+    dict['titulo'] = 'Inicio'
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
         dict['url_action'] = '/accounts/logout/'

@@ -3,6 +3,14 @@ body {
     font-size: 80%;
 }
 
+h1, h2, h3, h4, h5 {
+    text-align: center;
+}
+
+h1, h2 {
+    margin-top: 3px;
+}
+
 a{
     text-decoration: None;
 }
@@ -61,4 +69,13 @@ a{
     margin-right: 50px;
 }
 
+.tbl_separador {
+    background-color: #5392D4;
+    color: #FFFFFF;
+}
 
+.tbl_separador h5{
+    text-align:0px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}

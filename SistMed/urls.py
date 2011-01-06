@@ -11,6 +11,8 @@ admin.autodiscover()
 from settings import MEDIA_ROOT
 
 import generics_views
+from GestionTurnos import pacientes_views
+
 
 
 urlpatterns = patterns('',
@@ -36,5 +38,8 @@ urlpatterns = patterns('',
     (r'^accounts/logout/$', generics_views.logout),
 
     #gestion turnos
-    #--
+    #(r'^pacientes/listado/$', pacientes_views.listado_paciente),
+    (r'^pacientes/nuevo/$', pacientes_views.nuevo_paciente),
+    #(r'^pacientes/modificar/$', pacientes_views.modificar_paciente),
+    #(r'^pacientes/borrar/$', pacientes_views.borrar_paciente),
 )

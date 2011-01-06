@@ -18,17 +18,27 @@
 
 <body>
     <div align='center'>
-    <table border='1' colspan='0' width="900px">
+    <table style="text-align: left;" border="1" cellpadding="5" cellspacing="0" width="900px">
         <tr>
             <td colspan='2'>
-            <h1> {{ titulo }} </h1>
+            <h1> {{ cabecera }} </h1>
             </td>
         </tr>
 
         <tr>
-            <td width='200px'>
+            <td width='200px'  valign='top'>
                 {% block cont_sec %}
                 {% endblock %}
+
+                <a href='/'>Inicio</a><br />
+                <h3>Pacientes</h3>
+                <a href='pacientes/listado/'>Listado</a><br />
+                <a href='pacientes/nuevo/'>Nuevo</a><br />
+                <a href='pacientes/modificar/'>Modificar Datos</a><br />
+                <a href='pacientes/borrar/'>Borrar</a><br />
+
+
+
 
                 <div class='{{ login_status }}'>
                     <a href="{{ url_action }}">{{ login_status }}</a>
@@ -36,7 +46,7 @@
 
             </td>
 
-            <td>
+            <td  valign='top'>
                 <h1> {{ titulo }} </h1>
 
                 {% block contenido %}
