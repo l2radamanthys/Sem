@@ -33,6 +33,7 @@
         </tr>
         <tr>
             <td colspan='2' align='center'>
+            <input type="hidden" name="query" value="1"/>
             <input type='Submit' value='Conectar' />
             <input type='Reset' value='Limpiar' />
             </td>
@@ -41,9 +42,9 @@
     </form>
     </div>
     <br />
-    {% if login_fail %}
-        <div class='msj_error'>
-        <p><strong>Error:</strong> {{ mensaje }} </p>
+    {% if query %}
+        <div class='{{ msj_class }}'>
+        <p>{{ mensaje }} </p>
         </div>
     {% endif %}
 

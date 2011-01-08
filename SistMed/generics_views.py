@@ -44,22 +44,27 @@ def login(request):
     if not(request.user.is_authenticated()):
         plantilla = get_template('login.html')
         dict = BASE_DIC.copy()
+
+        query = int(request.POST.get('query', '0'))
+        dict['query'] = query
+
+        if query:
+            username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
+            user = auth.authenticate(username=username, password=password)
         
-        username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
-        user = auth.authenticate(username=username, password=password)
-        
-        if user is not None:
-            if user.is_active:
+            if (user != None) and user.is_active:
                 # Clave correcta, y el usuario est� marcado "activo"
                 auth.login(request, user)
                 dict['mensaje'] = username
                 # Redirigir a una pagina de exito.
                 return HttpResponseRedirect('/')
     
-        if username != '':
-            dict['login_fail'] = True
-            dict['mensaje'] = "El Nombre de usuario o contraseña no son validos"
+            else:
+                dict['query'] = True
+                dict['msj_class'] = 'msj_error'
+                dict['mensaje'] = "Error: El Nombre de usuario o contraseña no son validos"
+
     
         contexto = Context(dict)
         html = plantilla.render(contexto)
