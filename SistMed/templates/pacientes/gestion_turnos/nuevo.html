@@ -49,22 +49,22 @@
 
         <tr>
             <td><label>Direccion:</label></td>
-            <td><input type="text" name="apellido" maxlength=""/></td>
+            <td><input type="text" name="direccion" maxlength=""/></td>
         </tr>
 
         <tr>
             <td><label>Telefono:</label></td>
-            <td><input type="text" name="apellido" maxlength=""/></td>
+            <td><input type="text" name="telefono" maxlength=""/></td>
         </tr>
 
         <tr>
             <td><label>Email:</label></td>
-            <td><input type="text" name="apellido" maxlength=""/></td>
+            <td><input type="text" name="email" maxlength=""/></td>
         </tr>
 
         <tr>
             <td><label>Sexo:</label></td>
-            <td><input type="text" name="apellido" maxlength=""/></td>
+            <td><input type="text" name="sexo" maxlength=""/></td>
         </tr>
 
         <tr>
@@ -82,13 +82,12 @@
         </tbody>
     </table>
     </form>
-    </div>
 
     {% if query %}
         <div class="{{ msj_class }}">
             <p>{{ mensaje }}</p>
         </div>
     {% endif %}
-
+    </div>
 
 {% endblock %}

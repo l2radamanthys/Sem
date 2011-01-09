@@ -28,6 +28,18 @@ a{
     border: 2px solid #D2D3D5;
 }
 
+
+.msj_ok{
+    text-align: center;
+    background-color: #4DB37A;
+    color: #FFFFFF;
+    width: 300px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border: 2px solid #D2D3D5;
+}
+
+
 .cont_flotante {
     margin-top: 100px;
     background-color: #ECEFF2;
@@ -79,3 +91,18 @@ a{
     margin-top: 2px;
     margin-bottom: 2px;
 }
+
+/* filas de colores de las tablas */
+.table_title {
+    background-color: #DFDFDF;
+    font-weight: bold;
+}
+
+.field_a {
+    background-color: #00FF80;
+}
+
+.field_b {
+    background-color: #00FFFF;
+}
+

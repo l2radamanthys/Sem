@@ -38,10 +38,10 @@ class Usuarios(models.Model):
 
     #FK segun django.es de esta forma anda yo queria usar herencia :(
     user = models.ForeignKey(User, unique=True)
-    
+
 
     def nombre_completo(self):
-        return self.user.first_name + self.user.last_name
+        return self.user.first_name + " " + self.user.last_name
 
 
     def __str__(self):

@@ -4,6 +4,28 @@
 {% endblock %}
 
 {% block contenido %}
+
+<table style="text-align: center;" width="600px" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+        <tr class='table_title'>
+            <td>Usuario</td>
+            <td>Nombre y Apellido</td>
+            <td>Ver</td>
+            <td>Modificar</td>
+            <td>Borra</td>
+        </tr>
+        {% for pac in listado_pacientes %}
+            <tr class='{{ pac|slice:"3:"|first }}'>
+                <td>{{ pac|slice:"1:"|first }}</td>
+                <td>{{ pac|slice:"2:"|first }}</td>
+                <td><a href='/pacientes/mostrar/{{ pac|first }}/'>Ver</a></td>
+                <td><a href='/pacientes/modificar/{{ pac|first }}/'>Modificar</a></td>
+                <td><a href='/pacientes/borrar/{{ pac|first }}/'>Borrar</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}
 
 {% block pie_pagina %}
