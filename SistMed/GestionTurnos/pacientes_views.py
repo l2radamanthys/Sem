@@ -12,7 +12,7 @@ from django.contrib import auth #para login
 from django.contrib.auth.models import User, Group
 
 from GestionTurnos.models import Pacientes
-from utils import get_field_css, sexo_choice_expand
+from utils import get_field_css, sexo_choice_expand, get_POST_value
 from constantes import BASE_DIC, PACIENTES
 
 
@@ -58,8 +58,8 @@ def nuevo_paciente(request):
         user = None
         if user is None:
             user = User.objects.create_user(username, email, password)
-            user.first_name = request.POST.get('nombre', '')
-            user.last_name = request.POST.get('apellido', '')
+            user.first_name = request.POST.get('nombre', '-')
+            user.last_name = request.POST.get('apellido', '-')
             user.email = request.POST.get('email', '@')
             user.is_staff = False #no es admin
             user.is_active = True #esta activo
@@ -68,17 +68,18 @@ def nuevo_paciente(request):
             user.groups.add(pac_group)
             #guardamos
             user.save()
-
             paciente = Pacientes(
-                dni = int(request.POST.get('dni', '')),
-                sexo = request.POST.get('sexo', '-'),
+                dni = int(get_POST_value(request,'dni','0','0')),
+                sexo = get_POST_value(request,'sexo','-','-'),
                 telefono = request.POST.get('telefono', ''),
                 direccion = request.POST.get('direccion', ''),
                 user = User.objects.get(username__exact=username)
             )
+            #guardamos
             paciente.save()
             dict['msj_class'] = 'msj_ok'
             dict['mensaje'] = "Se ha Agregado: %s" %username
+            
         else:
             dict['msj_class'] = 'msj_error'
             dict['mensaje'] = "Error el nombre de usuario %s, no esta disponible" %username
@@ -214,3 +215,97 @@ def modificar_paciente(request, pac_id=-1):
     return HttpResponse(html)
 
 
+def borrar_paciente(request, pac_id=-1):
+    """
+        Vista de confirmacion de borrado de un paciente
+
+        pueden acceder
+        --------------
+        - administrativos
+
+        sin acceso
+        ----------
+        - medicos
+        - pacientes
+        - usuarios no registrados
+    """
+    plantilla = get_template('pacientes/gestion_turnos/borrar.html')
+    dict = BASE_DIC.copy()
+
+    dict['titulo'] = 'Borrar Paciente'
+    #usuario estado
+    if request.user.is_authenticated():
+        dict['login_status'] = 'online'
+        dict['login_img'] = 'online.png'
+        dict['url_action'] = '/accounts/logout/'
+    else:
+        dict['login_status'] = 'offline'
+        dict['login_img'] = 'offline.png'
+        dict['url_action'] = '/accounts/login/'
+
+    pac_id = int(pac_id)
+
+    if pac_id != -1:
+        paciente = Pacientes.objects.get(id=pac_id)
+        dict['query'] = True
+        dict['nombre'] = paciente.nombre_completo()
+        dict['pac_id'] = pac_id
+
+    else:
+        dict['query'] = False
+        dict['msj_class'] = 'msj_error'
+        dict['mensaje'] = 'Error Datos Invalido'
+
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def borrado_paciente(request, pac_id=-1):
+    """
+        Permite Borrar un paciente
+
+        pueden acceder
+        --------------
+        - administrativos
+
+        sin acceso
+        ----------
+        - medicos
+        - pacientes
+        - usuarios no registrados
+    """
+    plantilla = get_template('pacientes/gestion_turnos/borrar.html')
+    dict = BASE_DIC.copy()
+
+    dict['titulo'] = 'Borrar Paciente'
+    #usuario estado
+    if request.user.is_authenticated():
+        dict['login_status'] = 'online'
+        dict['login_img'] = 'online.png'
+        dict['url_action'] = '/accounts/logout/'
+    else:
+        dict['login_status'] = 'offline'
+        dict['login_img'] = 'offline.png'
+        dict['url_action'] = '/accounts/login/'
+
+    pac_id = int(pac_id)
+
+    if pac_id != -1:
+        paciente = Pacientes.objects.get(id=pac_id)
+        dict['query'] = True
+        dict['nombre'] = paciente.nombre_completo()
+        paciente.user.delete()
+        paciente.delete()
+
+    else:
+        dict['query'] = False
+        dict['msj_class'] = 'msj_error'
+        dict['mensaje'] = 'Error Operacion No valida'
+
+
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)

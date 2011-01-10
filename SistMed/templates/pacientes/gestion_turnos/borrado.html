@@ -4,7 +4,18 @@
 {% endblock %}
 
 {% block contenido %}
-{% endblock %}
-
-{% block pie_pagina %}
+    <div align='right'>
+        <hr />
+        <a class='boton' href='/'>Volver al Inicio</a>
+        <hr />
+    </div>
+    <br />
+    <div align='center'>
+    {% if query %}
+        <p>Operacion exitosa, se ha Borrado el siguiente contacto:<strong>{{ nombre }} </strong></p>
+        </div>
+    {% else %}
+        <p class='msj_error'>{{ mensaje }}</p>
+    {%endif%}
+    </div>
 {% endblock %}

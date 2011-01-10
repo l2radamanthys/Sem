@@ -5,7 +5,7 @@
     listado de Funciones de Utilidad
 """
 
-from constantes import SEXO_CHOICE_DIC
+from constantes import SEXO_CHOICE_DIC, POST, GET
 
 
 def get_field_css(band=True):
@@ -23,3 +23,25 @@ def sexo_choice_expand(key):
         Expande el identificador del choice sexo
     """
     return SEXO_CHOICE_DIC[key]
+
+
+
+def get_GET_value(request, key='', default='', blank=''):
+    value = request.POST.get(key, default)
+    if value == '':
+        value = default
+    return value
+
+
+def get_POST_value(request, key='', default='', blank=''):
+     value = request.POST.get(key, default)
+     if value == '':
+        value = default
+     return value
+
+
+def get_value(request=None, key='', default='', blank='', method=POST):
+    if method == POST:
+        return get_POST_value(request, key, default, blank)
+    else:
+        return get_GET_value(request, key, default, blank)

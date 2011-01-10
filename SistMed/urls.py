@@ -38,14 +38,18 @@ urlpatterns = patterns('',
     (r'^accounts/logout/$', generics_views.logout),
     #(r'/accounts/change_password/$' generics_views.cambiar_contrasenia),
 
-    #gestion turnos
+    #Gestion Turnos
+    # - Pacientes Views
     (r'^pacientes/listado/$', pacientes_views.listado_pacientes),
     (r'^pacientes/nuevo/$', pacientes_views.nuevo_paciente),
     (r'^pacientes/datos/(\d{1,2})/$', pacientes_views.datos_paciente),
     #(r'^pacientes/modificar/(\d{1,2})/$', pacientes_views.modificar_paciente),
-    #(r'^pacientes/borrar/(\d{1,2})/$', pacientes_views.borrar_paciente),
-    #(r'^borrado/$', pacientes_views.borrado),
-    #(r'^borrado/(\d{1,2})/$', pacientes_views.borrado),
+    (r'^pacientes/borrar/$', pacientes_views.borrar_paciente),
+    (r'^pacientes/borrar/(\d{1,2})/$', pacientes_views.borrar_paciente),
+    (r'^pacientes/borrado/$', pacientes_views.borrado_paciente),
+    (r'^pacientes/borrado/(\d{1,2})/$', pacientes_views.borrado_paciente),
+    
+    
 )
 
 
