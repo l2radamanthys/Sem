@@ -40,16 +40,29 @@ class Usuarios(models.Model):
     user = models.ForeignKey(User, unique=True)
 
 
+    def username(self):
+        """
+            devuelve el nombre de usuario
+        """
+        return self.user.username
+
+
     def nombre_completo(self):
+        """
+            Nombre completo del paciente
+        """
         return self.user.first_name + " " + self.user.last_name
 
 
     def __str__(self):
-        return self.user.username
+        return self.username()
 
 
 class Medicos(Usuarios):
     matricula = models.CharField(max_length=30)
+
+    def __str__(self):
+        return "Med - %s" %self.username()
 
 
 class Pacientes(Usuarios):
@@ -58,8 +71,17 @@ class Pacientes(Usuarios):
     pass
 
 
+    def __str__(self):
+        return "Pac - %s" %self.username()
+
+
 class Administrativos(Usuarios):
     pass
+
+
+    def __str__(self):
+        return "Adm - %s" %self.username()
+
 
 
 class ExpecialidadesMedicos(models.Model):
@@ -70,6 +92,10 @@ class ExpecialidadesMedicos(models.Model):
     codigo_medico = models.ForeignKey(Medicos)
     cod_expecialidad = models.ForeignKey(Expecialidades)
 
+
+    def __str__(self):
+        return "%s - %s" %(self.codigo_medico, self.cod_expecialidad)
+    
 
 #sin usar por el momento
 class Consultorios(models.Model):
@@ -96,7 +122,7 @@ class HorarioAtencion(models.Model):
 
 
     def __str__(self):
-        f_cad = "[ %s | Desde: %s | Hasta: %s ]" %(str(self.dia), str(self.hora_inicio), str(self.hora_fin))
+        f_cad = "[Fecha: %s | Desde: %s | Hasta: %s ]" %(str(self.dia), str(self.hora_inicio), str(self.hora_fin))
         return f_cad
 
 
@@ -115,6 +141,15 @@ class DiasAtencion(models.Model):
 
     #fk
     cod_medico = models.ForeignKey(Medicos)
+
+
+    def n_turno(self):
+        """
+            devuelve los datos de un nuevo turno
+        """
+        #no implementado
+        self.cant_turno += 1
+        self.save()
 
 
 class Turnos(models.Model):

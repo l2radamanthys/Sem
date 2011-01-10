@@ -17,10 +17,16 @@ BASE_DIC = {
 #choices
 #sexo del usuario
 SEXO_CHOICE = (
-    ('M','Masculino'),
+    ('M', 'Masculino'),
     ('F', 'Femenino'),
-    ('-','-----'),
+    ('-', '-----'),
 )
+
+SEXO_CHOICE_DIC = {
+    'M' : 'Masculino',
+    'F' : 'Femenino',
+    '-' : '-----',
+}
 
 #solicitud turnos
 SOLICITUD_ESTADO_CHOICE = (
@@ -28,6 +34,12 @@ SOLICITUD_ESTADO_CHOICE = (
     ('A','Aceptado'),
     ('C','Cancelado'),
 )
+
+
+#nombres grupos
+PACIENTES = 'Pacientes'
+MEDICOS = 'Medicos'
+ADMINISTRATIVOS = 'Administrativos'
 
 
 #ruta del proyecto

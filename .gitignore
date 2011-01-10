@@ -1,5 +1,6 @@
 *.pyc
 *.txt
 *.bat
+*log.py
 /nbproject
 /data

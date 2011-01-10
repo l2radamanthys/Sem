@@ -33,16 +33,19 @@ urlpatterns = patterns('',
     #pagina inicio
     (r'^/?$', generics_views.index),
 
-    #sessiones
+    #sesiones
     (r'^accounts/login/$', generics_views.login),
     (r'^accounts/logout/$', generics_views.logout),
+    #(r'/accounts/change_password/$' generics_views.cambiar_contrasenia),
 
     #gestion turnos
     (r'^pacientes/listado/$', pacientes_views.listado_pacientes),
     (r'^pacientes/nuevo/$', pacientes_views.nuevo_paciente),
-    #(r'^pacientes/datos/(\d{1,2})/$', pacientes_views.datos_paciente),
+    (r'^pacientes/datos/(\d{1,2})/$', pacientes_views.datos_paciente),
     #(r'^pacientes/modificar/(\d{1,2})/$', pacientes_views.modificar_paciente),
     #(r'^pacientes/borrar/(\d{1,2})/$', pacientes_views.borrar_paciente),
+    #(r'^borrado/$', pacientes_views.borrado),
+    #(r'^borrado/(\d{1,2})/$', pacientes_views.borrado),
 )
 
 

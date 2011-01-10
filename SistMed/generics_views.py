@@ -26,9 +26,11 @@ def index(request):
     dict['titulo'] = 'Inicio'
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
+        dict['login_img'] = 'online.png'
         dict['url_action'] = '/accounts/logout/'
     else:
         dict['login_status'] = 'offline'
+        dict['login_img'] = 'offline.png'
         dict['url_action'] = '/accounts/login/'
 
     contexto = Context(dict)
@@ -84,5 +86,12 @@ def logout(request):
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
+
+
+def cambio_contrasenia(request):
+    """
+        Permite cambiar la contrasenia del usuario
+    """
+    pass
 
 

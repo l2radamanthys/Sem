@@ -4,15 +4,7 @@
 #log# args = []
 #log# It is safe to make manual edits below here.
 #log#-----------------------------------------------------------------------
- from django.contrib.auth.models import Group as DjangoGroup 
-        gUsers = DjangoGroup(name='Users') 
-        gUsers.save() 
-        gGroupAdmins = DjangoGroup(name='GroupAdmins') 
-        gGroupAdmins.save() 
-        # Set users 
-        zen = User.objects.create_user('zen', 'zen@emailaddress', 
-'pwd123') 
-        zen.groups = [gUsers] 
-from django.contrib.auth.models import Group
-g = Group.objects.get(name='Pacientes')
-g
+from django.contrib.auth.models import User, Group
+user = User.objects.get(username__exact='pac_01')
+user = User.objects.get(username='pac_01')
+user = User.objects.get(username='pac_01')

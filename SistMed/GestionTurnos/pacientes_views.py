@@ -12,20 +12,22 @@ from django.contrib import auth #para login
 from django.contrib.auth.models import User, Group
 
 from GestionTurnos.models import Pacientes
-from utils import get_field_css
-from constantes import BASE_DIC
+from utils import get_field_css, sexo_choice_expand
+from constantes import BASE_DIC, PACIENTES
 
 
 def nuevo_paciente(request):
     """
         Vista que Permite crear un nuevo paciente
 
-        pueden acceder a esta vista
+        pueden acceder
+        --------------
         - usuarios no registrados
         - medicos
         -administrativos
 
         sin acceso
+        ----------
         - pacientes
     """
     plantilla = get_template('pacientes/gestion_turnos/nuevo.html')
@@ -35,9 +37,11 @@ def nuevo_paciente(request):
     #usuario estado
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
+        dict['login_img'] = 'online.png'
         dict['url_action'] = '/accounts/logout/'
     else:
         dict['login_status'] = 'offline'
+        dict['login_img'] = 'offline.png'
         dict['url_action'] = '/accounts/login/'
 
     #si se realizo una consulta
@@ -49,28 +53,35 @@ def nuevo_paciente(request):
         password = request.POST.get('password_1', '')
         email = request.POST.get('email', '')
 
-        user = User.objects.create_user(username, email, password)
-        user.first_name = request.POST.get('nombre', '')
-        user.last_name = request.POST.get('apellido', '')
-        user.is_staff = False #no es admin
-        user.is_active = True #esta activo
-        #lo agrego al grupo de los pacientes
-        pac_group = Group.objects.get(name='Pacientes')
-        user.groups.add(pac_group)
-        #guardamos
-        user.save()
+        #para comprobar si el usuario ya existe
+        #user = User.objects.get(username__exact=username)
+        user = None
+        if user is None:
+            user = User.objects.create_user(username, email, password)
+            user.first_name = request.POST.get('nombre', '')
+            user.last_name = request.POST.get('apellido', '')
+            user.email = request.POST.get('email', '@')
+            user.is_staff = False #no es admin
+            user.is_active = True #esta activo
+            #lo agrego al grupo de los pacientes
+            pac_group = Group.objects.get(name=PACIENTES)
+            user.groups.add(pac_group)
+            #guardamos
+            user.save()
 
-        paciente = Pacientes(
-            dni = int(request.POST.get('dni', '')),
-            sexo = request.POST.get('sexo', '-'),
-            telefono = request.POST.get('telefono', ''),
-            direccion = request.POST.get('direccion', ''),
-            user = User.objects.get(username__exact=username)
-        )
-        paciente.save()
-        dict['msj_class'] = 'msj_ok'
-        dict['mensaje'] = "Se ha Agregado, %s" %username
-
+            paciente = Pacientes(
+                dni = int(request.POST.get('dni', '')),
+                sexo = request.POST.get('sexo', '-'),
+                telefono = request.POST.get('telefono', ''),
+                direccion = request.POST.get('direccion', ''),
+                user = User.objects.get(username__exact=username)
+            )
+            paciente.save()
+            dict['msj_class'] = 'msj_ok'
+            dict['mensaje'] = "Se ha Agregado: %s" %username
+        else:
+            dict['msj_class'] = 'msj_error'
+            dict['mensaje'] = "Error el nombre de usuario %s, no esta disponible" %username
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
@@ -81,11 +92,13 @@ def listado_pacientes(request):
     """
         Vista que permite mostrar el listado de pacientes
 
-        pueden acceder a esta vista
+        pueden acceder
+        --------------
         - medicos
         -administrativos
 
         sin acceso
+        ----------
         - usuarios no registrados
         - pacientes
     """
@@ -96,9 +109,11 @@ def listado_pacientes(request):
     #usuario estado
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
+        dict['login_img'] = 'online.png'
         dict['url_action'] = '/accounts/logout/'
     else:
         dict['login_status'] = 'offline'
+        dict['login_img'] = 'offline.png'
         dict['url_action'] = '/accounts/login/'
 
 
@@ -118,4 +133,84 @@ def listado_pacientes(request):
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
+
+
+def datos_paciente(request, pac_id=0):
+    """
+        Muestra los datos del Paciente ademas de las
+        solicitudes y turnos q le fueron asignados
+
+        pueden acceder
+        --------------
+        - medicos
+        - administrativos
+        - pacientes (unicamente a su propio perfil)
+
+        sin acceso
+        ----------
+        - usuarios no registrados
+    """
+    plantilla = get_template('pacientes/gestion_turnos/datos.html')
+    dict = BASE_DIC.copy()
+
+    dict['titulo'] = 'Datos Paciente'
+    #usuario estado
+    if request.user.is_authenticated():
+        dict['login_status'] = 'online'
+        dict['login_img'] = 'online.png'
+        dict['url_action'] = '/accounts/logout/'
+    else:
+        dict['login_status'] = 'offline'
+        dict['login_img'] = 'offline.png'
+        dict['url_action'] = '/accounts/login/'
+
+
+    paciente = Pacientes.objects.get(id=int(pac_id))
+    dict['pac_id'] = pac_id
+    dict['username'] = paciente.username()
+    dict['nombre'] = paciente.nombre_completo()
+    dict['direccion'] = paciente.direccion
+    dict['telefono'] = paciente.telefono
+    dict['email'] = paciente.username()
+    dict['sexo'] = sexo_choice_expand(paciente.sexo)
+
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def modificar_paciente(request, pac_id=-1):
+    """
+        Permite modificar algunos datos del paciente
+
+        pueden acceder
+        --------------
+        - medicos
+        - administrativos
+        - pacientes (unicamente a su propio perfil)
+
+        sin acceso
+        ----------
+        - usuarios no registrados
+    """
+    plantilla = get_template('pacientes/gestion_turnos/modificar.html')
+    dict = BASE_DIC.copy()
+
+    dict['titulo'] = 'Datos Paciente'
+    #usuario estado
+    if request.user.is_authenticated():
+        dict['login_status'] = 'online'
+        dict['login_img'] = 'online.png'
+        dict['url_action'] = '/accounts/logout/'
+    else:
+        dict['login_status'] = 'offline'
+        dict['login_img'] = 'offline.png'
+        dict['url_action'] = '/accounts/login/'
+
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
 

@@ -20,33 +20,36 @@
     <div align='center'>
     <table style="text-align: left;" border="1" cellpadding="5" cellspacing="0" width="900px">
         <tr>
-            <td colspan='2'>
+            <td class='celda_superior' colspan='2'>
             <h1> {{ cabecera }} </h1>
             </td>
         </tr>
 
         <tr>
-            <td width='200px'  valign='top'>
+            <td class='celda_izquierda' valign='top' width='150px' >
                 {% block cont_sec %}
                 {% endblock %}
 
+                <h3>Menu</h3>
                 <a href='/'>Inicio</a><br />
+                <h3>Usuarios</h3>
+                <a href='/accounts/change_password/'>Cambio Contraseña</a><br />
                 <h3>Pacientes</h3>
+                <a href='/pacientes/buscar/'>buscar</a><br />
                 <a href='/pacientes/listado/'>Listado</a><br />
                 <a href='/pacientes/nuevo/'>Nuevo</a><br />
-                <a href='/pacientes/modificar/'>Modificar Datos</a><br />
-                <a href='/pacientes/borrar/'>Borrar</a><br />
 
 
 
-
+                <br />
+                <br />
                 <div class='{{ login_status }}'>
-                    <a href="{{ url_action }}">{{ login_status }}</a>
+                    <a href="{{ url_action }}"><img src='/site_media/imagenes/{{ login_img }}' alt='{{ login_status }}' border='0px'/></a>
                 </div>
 
             </td>
 
-            <td  valign='top'>
+            <td class='celda_central' valign='top'>
                 <h1> {{ titulo }} </h1>
 
                 {% block contenido %}
@@ -55,7 +58,8 @@
         </tr>
 
         <tr>
-            <td colspan='2'>
+            <td class='celda_inferior' colspan='2'>
+                <p>Pie de pagina</p>
             </td>
         </tr>
 
