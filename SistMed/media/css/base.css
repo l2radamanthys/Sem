@@ -22,6 +22,7 @@ a{
 }
 
 
+
 /*contenedores principales*/
 .celda_superior {
     background-image: url('/site_media/imagenes/imgbg_sup.png');
@@ -178,3 +179,10 @@ a{
     border-right: 2px solid #cccccc;
     border-left: 2px solid #666666;
 }
+
+/*elementos de formulario*/
+.edt_c, .edt_m, .edt_g {
+    border:1px solid #67BCC2;
+}
+
+

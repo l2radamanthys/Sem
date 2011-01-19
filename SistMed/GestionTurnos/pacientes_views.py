@@ -136,7 +136,7 @@ def listado_pacientes(request):
     return HttpResponse(html)
 
 
-def datos_paciente(request, pac_id=0):
+def datos_paciente(request, pac_id=-1):
     """
         Muestra los datos del Paciente ademas de las
         solicitudes y turnos q le fueron asignados
@@ -166,15 +166,19 @@ def datos_paciente(request, pac_id=0):
         dict['url_action'] = '/accounts/login/'
 
 
-    paciente = Pacientes.objects.get(id=int(pac_id))
-    dict['pac_id'] = pac_id
-    dict['username'] = paciente.username()
-    dict['nombre'] = paciente.nombre_completo()
-    dict['direccion'] = paciente.direccion
-    dict['telefono'] = paciente.telefono
-    dict['email'] = paciente.username()
-    dict['sexo'] = sexo_choice_expand(paciente.sexo)
+    pac_id = int(pac_id)
+    if pac_id != -1:
+        paciente = Pacientes.objects.get(id=pac_id)
+        dict['pac_id'] = pac_id
+        dict['username'] = paciente.username()
+        dict['nombre'] = paciente.nombre_completo()
+        dict['direccion'] = paciente.direccion
+        dict['telefono'] = paciente.telefono
+        dict['email'] = paciente.username()
+        dict['sexo'] = sexo_choice_expand(paciente.sexo)
 
+    else:
+        pass
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
@@ -198,7 +202,7 @@ def modificar_paciente(request, pac_id=-1):
     plantilla = get_template('pacientes/gestion_turnos/modificar.html')
     dict = BASE_DIC.copy()
 
-    dict['titulo'] = 'Datos Paciente'
+    dict['titulo'] = 'Modificar Datos Paciente'
     #usuario estado
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
@@ -208,6 +212,90 @@ def modificar_paciente(request, pac_id=-1):
         dict['login_status'] = 'offline'
         dict['login_img'] = 'offline.png'
         dict['url_action'] = '/accounts/login/'
+
+    pac_id = int(pac_id)
+    if pac_id != -1:
+        #query = int(get_POST_value(request,'query', '0'))
+        #dict['query'] = query
+        #si se envio un formulario modificado
+        #if query:
+        #    pass
+        #caso q recien se muestre la pagina
+        #else:
+        dict['query'] = True
+        paciente = Pacientes.objects.get(id=pac_id)
+        dict['nombre'] = paciente.user.first_name
+        dict['apellido'] = paciente.user.last_name
+        dict['dni'] = paciente.dni
+        dict['direccion'] = paciente.direccion
+        dict['telefono'] = paciente.telefono
+        dict['email'] = paciente.user.email
+        dict['sexo'] = paciente.sexo
+
+    else:
+        dict['query'] = False
+        dict['msj_class'] = 'msj_error'
+        dict['mensaje'] = 'Error Datos Invalido'
+
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def guardar_cambios_paciente(request, pac_id=-1):
+    """
+        Permite modificar algunos datos del paciente
+
+        pueden acceder
+        --------------
+        - medicos
+        - administrativos
+        - pacientes (unicamente a su propio perfil)
+
+        sin acceso
+        ----------
+        - usuarios no registrados
+    """
+    plantilla = get_template('pacientes/gestion_turnos/guardar.html')
+    dict = BASE_DIC.copy()
+
+    dict['titulo'] = 'Guardar Datos Paciente'
+    #usuario estado
+    if request.user.is_authenticated():
+        dict['login_status'] = 'online'
+        dict['login_img'] = 'online.png'
+        dict['url_action'] = '/accounts/logout/'
+    else:
+        dict['login_status'] = 'offline'
+        dict['login_img'] = 'offline.png'
+        dict['url_action'] = '/accounts/login/'
+
+
+    query = int(get_POST_value(request,'query', '0'))
+    dict['query'] = query
+
+    pac_id = int(pac_id)
+    if pac_id != -1 and query:
+        paciente = Pacientes.objects.get(id=pac_id)
+        paciente.user.first_name = get_POST_value(request,'nombre','')
+        paciente.user.last_name = get_POST_value(request,'apellido','')
+        paciente.user.save()
+        paciente.dni = int(get_POST_value(request,'dni','0','0'))
+        paciente.direccion = get_POST_value(request,'direccion','')
+        paciente.telefono = get_POST_value(request,'telefono','')
+        paciente.email = get_POST_value(request,'email','')
+        paciente.sexo = get_POST_value(request,'sexo','-','-')
+        paciente.save()
+
+        #redireciono a la pagina q muestra los datos del paciente
+        HttpResponseRedirect("/pacientes/datos/%d/" %pac_id)
+        
+
+    else:
+        dict['query'] = False
+        dict['msj_class'] = 'msj_error'
+        dict['mensaje'] = 'Error Datos Invalido'
 
 
     contexto = Context(dict)
