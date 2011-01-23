@@ -7,3 +7,11 @@ gGroupAdmins.save()
 # Set users
 zen = User.objects.create_user('zen', 'zen@emailaddress','pwd123')
 zen.groups = [gUsers]
+
+#obtener usuarios
+u = User.objects.get(username='usuario')
+
+
+
+## buscar en clave foranea (JOIN)
+list_pacientes = Pacientes.objects.filter(user__username__icontains=buscar_text)

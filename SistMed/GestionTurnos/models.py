@@ -8,12 +8,16 @@ from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE
 
 
 #modelos
-#class TipoUsuario(models.Model):
-#    """
-#        En ves de crear las clases Medico, Paciente, Administrativo
-#        cree una clase categoria q le definira la clase al paciente
-#    """
-#    nombre = models.CharField(max_length=30)
+class TipoUsuario(models.Model):
+    """
+        En ves de crear las clases Medico, Paciente, Administrativo
+       cree una clase categoria q le definira la clase al paciente
+    """
+    nombre = models.CharField("Tipo",max_length=15)
+
+
+    def __str__(self):
+        return self.nombre
 
 
 class Expecialidades(models.Model):
@@ -36,7 +40,11 @@ class Usuarios(models.Model):
     telefono = models.CharField(max_length=20)
     direccion = models.CharField(max_length=60)
 
-    #FK segun django.es de esta forma anda yo queria usar herencia :(
+    #FK
+    #tipo usuario (paciente, medico, administrativo)
+    tipo_usuario = models.ForeignKey(TipoUsuario)
+    #segun django.es de esta forma anda con la clase user
+    #yo queria usar herencia :(
     user = models.ForeignKey(User, unique=True)
 
 
@@ -52,6 +60,14 @@ class Usuarios(models.Model):
             Nombre completo del paciente
         """
         return self.user.first_name + " " + self.user.last_name
+
+        
+    def tipo(self):
+        return self.tipo_usuario.nombre
+
+
+    def tipo_id(self):
+        return self.tipo_usuario.id
 
 
     def __str__(self):

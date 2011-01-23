@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-    manejo de vistas de los pacientes
+    manejo de vistas de los Administrativos
 """
+
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import get_template
@@ -11,29 +12,29 @@ from django.template import Context
 from django.contrib import auth #para login
 from django.contrib.auth.models import User, Group
 
-from GestionTurnos.models import Pacientes, TipoUsuario
+from GestionTurnos.models import Administrativos, TipoUsuario
 from utils import get_field_css, sexo_choice_expand, get_POST_value
-from constantes import BASE_DIC, PACIENTES
+from constantes import BASE_DIC
 
 
-def nuevo_paciente(request):
+def nuevo_admin(request):
     """
-        Vista que Permite crear un nuevo paciente
+        Vista que Permite crear un nuevo Admin
 
         pueden acceder
         --------------
-        - usuarios no registrados
-        - medicos
         -administrativos
 
         sin acceso
         ----------
         - pacientes
+        - usuarios no registrados
+        - medicos
     """
-    plantilla = get_template('pacientes/gestion_turnos/nuevo.html')
+    plantilla = get_template('administrativo/gestion_turnos/nuevo.html')
     dict = BASE_DIC.copy()
 
-    dict['titulo'] = 'Nuevo Paciente'
+    dict['titulo'] = 'Nuevo Admin'
     #usuario estado
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
@@ -54,7 +55,11 @@ def nuevo_paciente(request):
         email = request.POST.get('email', '')
 
         #para comprobar si el usuario ya existe
-        user = User.objects.filter(username__exact=username)
+        try:
+            user = User.objects.get(username__exact=username)
+        except:
+            user = None
+
         if user is None:
             user = User.objects.create_user(username, email, password)
             user.first_name = request.POST.get('nombre', '-')
@@ -62,25 +67,25 @@ def nuevo_paciente(request):
             user.email = request.POST.get('email', '@')
             user.is_staff = False #no es admin
             user.is_active = True #esta activo
-            #lo agrego al grupo de los pacientes
+            #lo agrego al grupo de los admins
             #pac_group = Group.objects.get(name=PACIENTES)
             #user.groups.add(pac_group)
             #guardamos
             user.save()
-            paciente = Pacientes(
+            admin = Administrativos(
                 dni = int(get_POST_value(request,'dni','0','0')),
                 sexo = get_POST_value(request,'sexo','-','-'),
                 telefono = request.POST.get('telefono', ''),
                 direccion = request.POST.get('direccion', ''),
-                tipo_usuario = TipoUsuario.objects.get(nombre__exact='Paciente'),
+                tipo_usuario = TipoUsuario.objects.get(nombre__exact='Administrativo'),
                 user = User.objects.get(username__exact=username)
 
             )
             #guardamos
-            paciente.save()
+            admin.save()
             dict['msj_class'] = 'msj_ok'
             dict['mensaje'] = "Se ha Agregado: %s" %username
-            
+
         else:
             dict['msj_class'] = 'msj_error'
             dict['mensaje'] = "Error el nombre de usuario %s, no esta disponible" %username
@@ -90,24 +95,24 @@ def nuevo_paciente(request):
     return HttpResponse(html)
 
 
-def listado_pacientes(request):
+def listado_admins(request):
     """
-        Vista que permite mostrar el listado de pacientes
+        Vista que permite mostrar el listado de admins
 
         pueden acceder
         --------------
-        - medicos
         -administrativos
 
         sin acceso
         ----------
+        - medicos
         - usuarios no registrados
         - pacientes
     """
-    plantilla = get_template('pacientes/gestion_turnos/listado.html')
+    plantilla = get_template('administrativo/gestion_turnos/listado.html')
     dict = BASE_DIC.copy()
 
-    dict['titulo'] = 'Listado Paciente'
+    dict['titulo'] = 'Listado Admins'
     #usuario estado
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
@@ -119,43 +124,43 @@ def listado_pacientes(request):
         dict['url_action'] = '/accounts/login/'
 
 
-    listado_pacientes = []
+    listado_admins = []
     band = True
-    for paciente in Pacientes.objects.all():
-        id = paciente.id
-        username = paciente.user.username
-        nombre = paciente.nombre_completo()
+    for admin in Administrativos.objects.all():
+        id = admin.id
+        username = admin.user.username
+        nombre = admin.nombre_completo()
         css = get_field_css(band)
         band = not(band)
-        listado_pacientes.append([id, username, nombre, css])
+        listado_admins.append([id, username, nombre, css])
 
 
-    dict['listado_pacientes'] = listado_pacientes
+    dict['listado_admins'] = listado_admins
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
 
 
-def datos_paciente(request, pac_id=-1):
+def datos_admin(request, adm_id=-1):
     """
         Muestra los datos del Paciente ademas de las
         solicitudes y turnos q le fueron asignados
 
         pueden acceder
         --------------
-        - medicos
         - administrativos
-        - pacientes (unicamente a su propio perfil)
-
+       
         sin acceso
         ----------
+        - medicos
+        - pacientes
         - usuarios no registrados
     """
-    plantilla = get_template('pacientes/gestion_turnos/datos.html')
+    plantilla = get_template('administrativo/gestion_turnos/datos.html')
     dict = BASE_DIC.copy()
 
-    dict['titulo'] = 'Datos Paciente'
+    dict['titulo'] = 'Datos Admin'
     #usuario estado
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
@@ -167,16 +172,16 @@ def datos_paciente(request, pac_id=-1):
         dict['url_action'] = '/accounts/login/'
 
 
-    pac_id = int(pac_id)
-    if pac_id != -1:
-        paciente = Pacientes.objects.get(id=pac_id)
-        dict['pac_id'] = pac_id
-        dict['username'] = paciente.username()
-        dict['nombre'] = paciente.nombre_completo()
-        dict['direccion'] = paciente.direccion
-        dict['telefono'] = paciente.telefono
-        dict['email'] = paciente.username()
-        dict['sexo'] = sexo_choice_expand(paciente.sexo)
+    adm_id = int(adm_id)
+    if adm_id != -1:
+        admin = Administrativos.objects.get(id=adm_id)
+        dict['adm_id'] = adm_id
+        dict['username'] = admin.username()
+        dict['nombre'] = admin.nombre_completo()
+        dict['direccion'] = admin.direccion
+        dict['telefono'] = admin.telefono
+        dict['email'] = admin.username()
+        dict['sexo'] = sexo_choice_expand(admin.sexo)
 
     else:
         pass
@@ -186,21 +191,22 @@ def datos_paciente(request, pac_id=-1):
     return HttpResponse(html)
 
 
-def modificar_paciente(request, pac_id=-1):
+def modificar_admin(request, adm_id=-1):
     """
-        Permite modificar algunos datos del paciente
+        Permite modificar algunos datos del admin
 
         pueden acceder
         --------------
-        - medicos
         - administrativos
-        - pacientes (unicamente a su propio perfil)
+        
 
         sin acceso
         ----------
         - usuarios no registrados
+        - pacientes
+        - medicos
     """
-    plantilla = get_template('pacientes/gestion_turnos/modificar.html')
+    plantilla = get_template('administrativos/gestion_turnos/modificar.html')
     dict = BASE_DIC.copy()
 
     dict['titulo'] = 'Modificar Datos Paciente'
@@ -214,8 +220,8 @@ def modificar_paciente(request, pac_id=-1):
         dict['login_img'] = 'offline.png'
         dict['url_action'] = '/accounts/login/'
 
-    pac_id = int(pac_id)
-    if pac_id != -1:
+    adm_id = int(adm_id)
+    if adm_id != -1:
         #query = int(get_POST_value(request,'query', '0'))
         #dict['query'] = query
         #si se envio un formulario modificado
@@ -224,15 +230,15 @@ def modificar_paciente(request, pac_id=-1):
         #caso q recien se muestre la pagina
         #else:
         dict['query'] = True
-        dict['pac_id'] = pac_id
-        paciente = Pacientes.objects.get(id=pac_id)
-        dict['nombre'] = paciente.user.first_name
-        dict['apellido'] = paciente.user.last_name
-        dict['dni'] = paciente.dni
-        dict['direccion'] = paciente.direccion
-        dict['telefono'] = paciente.telefono
-        dict['email'] = paciente.user.email
-        dict['sexo'] = paciente.sexo
+        dict['adm_id'] = adm_id
+        admin = Administrativos.objects.get(id=adm_id)
+        dict['nombre'] = admin.user.first_name
+        dict['apellido'] = admin.user.last_name
+        dict['dni'] = admin.dni
+        dict['direccion'] = admin.direccion
+        dict['telefono'] = admin.telefono
+        dict['email'] = admin.user.email
+        dict['sexo'] = admin.sexo
 
     else:
         dict['query'] = False
@@ -245,21 +251,21 @@ def modificar_paciente(request, pac_id=-1):
     return HttpResponse(html)
 
 
-def guardar_cambios_paciente(request, pac_id=-1):
+def guardar_cambios_admin(request, adm_id=-1):
     """
-        Permite modificar algunos datos del paciente
+        Permite modificar algunos datos del admin
 
         pueden acceder
         --------------
         - medicos
         - administrativos
-        - pacientes (unicamente a su propio perfil)
+        - admins (unicamente a su propio perfil)
 
         sin acceso
         ----------
         - usuarios no registrados
     """
-    plantilla = get_template('pacientes/gestion_turnos/guardar.html')
+    plantilla = get_template('admins/gestion_turnos/guardar.html')
     dict = BASE_DIC.copy()
 
     dict['titulo'] = 'Guardar Datos Paciente'
@@ -277,22 +283,22 @@ def guardar_cambios_paciente(request, pac_id=-1):
     query = int(get_POST_value(request,'query', '0'))
     dict['query'] = query
 
-    pac_id = int(pac_id)
-    if pac_id != -1 and query:
-        paciente = Pacientes.objects.get(id=pac_id)
-        paciente.user.first_name = get_POST_value(request,'nombre','')
-        paciente.user.last_name = get_POST_value(request,'apellido','')
-        paciente.user.save()
-        paciente.dni = int(get_POST_value(request,'dni','0','0'))
-        paciente.direccion = get_POST_value(request,'direccion','')
-        paciente.telefono = get_POST_value(request,'telefono','')
-        paciente.email = get_POST_value(request,'email','')
-        paciente.sexo = get_POST_value(request,'sexo','-','-')
-        paciente.save()
+    adm_id = int(adm_id)
+    if adm_id != -1 and query:
+        admin = Administrativos.objects.get(id=adm_id)
+        admin.user.first_name = get_POST_value(request,'nombre','')
+        admin.user.last_name = get_POST_value(request,'apellido','')
+        admin.user.save()
+        admin.dni = int(get_POST_value(request,'dni','0','0'))
+        admin.direccion = get_POST_value(request,'direccion','')
+        admin.telefono = get_POST_value(request,'telefono','')
+        admin.email = get_POST_value(request,'email','')
+        admin.sexo = get_POST_value(request,'sexo','-','-')
+        admin.save()
 
-        #redireciono a la pagina q muestra los datos del paciente
-        #HttpResponseRedirect("/pacientes/datos/%d/" %pac_id)
-        dict['pac_id'] = pac_id
+        #redireciono a la pagina q muestra los datos del admin
+        #HttpResponseRedirect("/admins/datos/%d/" %adm_id)
+        dict['adm_id'] = adm_id
         dict['msj_class'] = 'msj_ok'
         dict['mensaje'] = 'Cambios Realizados Correctamente'
 
@@ -307,9 +313,9 @@ def guardar_cambios_paciente(request, pac_id=-1):
     return HttpResponse(html)
 
 
-def borrar_paciente(request, pac_id=-1):
+def borrar_admin(request, adm_id=-1):
     """
-        Vista de confirmacion de borrado de un paciente
+        Vista de confirmacion de borrado de un admin
 
         pueden acceder
         --------------
@@ -318,10 +324,10 @@ def borrar_paciente(request, pac_id=-1):
         sin acceso
         ----------
         - medicos
-        - pacientes
+        - admins
         - usuarios no registrados
     """
-    plantilla = get_template('pacientes/gestion_turnos/borrar.html')
+    plantilla = get_template('admins/gestion_turnos/borrar.html')
     dict = BASE_DIC.copy()
 
     dict['titulo'] = 'Borrar Paciente'
@@ -335,13 +341,13 @@ def borrar_paciente(request, pac_id=-1):
         dict['login_img'] = 'offline.png'
         dict['url_action'] = '/accounts/login/'
 
-    pac_id = int(pac_id)
+    adm_id = int(adm_id)
 
-    if pac_id != -1:
-        paciente = Pacientes.objects.get(id=pac_id)
+    if adm_id != -1:
+        admin = Administrativos.objects.get(id=adm_id)
         dict['query'] = True
-        dict['nombre'] = paciente.nombre_completo()
-        dict['pac_id'] = pac_id
+        dict['nombre'] = admin.nombre_completo()
+        dict['adm_id'] = adm_id
 
     else:
         dict['query'] = False
@@ -354,9 +360,9 @@ def borrar_paciente(request, pac_id=-1):
     return HttpResponse(html)
 
 
-def borrado_paciente(request, pac_id=-1):
+def borrado_admin(request, adm_id=-1):
     """
-        Permite Borrar un paciente
+        Permite Borrar un admin
 
         pueden acceder
         --------------
@@ -365,10 +371,10 @@ def borrado_paciente(request, pac_id=-1):
         sin acceso
         ----------
         - medicos
-        - pacientes
+        - admins
         - usuarios no registrados
     """
-    plantilla = get_template('pacientes/gestion_turnos/borrar.html')
+    plantilla = get_template('admins/gestion_turnos/borrar.html')
     dict = BASE_DIC.copy()
 
     dict['titulo'] = 'Borrar Paciente'
@@ -382,14 +388,14 @@ def borrado_paciente(request, pac_id=-1):
         dict['login_img'] = 'offline.png'
         dict['url_action'] = '/accounts/login/'
 
-    pac_id = int(pac_id)
+    adm_id = int(adm_id)
 
-    if pac_id != -1:
-        paciente = Pacientes.objects.get(id=pac_id)
+    if adm_id != -1:
+        admin = Administrativos.objects.get(id=adm_id)
         dict['query'] = True
-        dict['nombre'] = paciente.nombre_completo()
-        paciente.user.delete()
-        paciente.delete()
+        dict['nombre'] = admin.nombre_completo()
+        admin.user.delete()
+        admin.delete()
 
     else:
         dict['query'] = False
@@ -403,9 +409,9 @@ def borrado_paciente(request, pac_id=-1):
     return HttpResponse(html)
 
 
-def buscar_pacientes(request):
+def buscar_admins(request):
     """
-        Permite Buscar un paciente por nombre, apellido o usuario
+        Permite Buscar un admin por nombre, apellido o usuario
 
         pueden acceder
         --------------
@@ -414,10 +420,10 @@ def buscar_pacientes(request):
 
         sin acceso
         ----------
-        - pacientes
+        - admins
         - usuarios no registrados
     """
-    plantilla = get_template('pacientes/gestion_turnos/buscar.html')
+    plantilla = get_template('admins/gestion_turnos/buscar.html')
     dict = BASE_DIC.copy()
 
     dict['titulo'] = 'Buscar Paciente'
@@ -443,29 +449,29 @@ def buscar_pacientes(request):
 
         if buscar_text != "":
             if buscar_por == 0:
-                list_pacientes = Pacientes.objects.filter(user__username__icontains=buscar_text)
+                list_admins = Administrativos.objects.filter(user__username__icontains=buscar_text)
 
             elif buscar_por == 1:
-                list_pacientes = Pacientes.objects.filter(user__first_name__icontains=buscar_text)
+                list_admins = Administrativos.objects.filter(user__first_name__icontains=buscar_text)
 
             elif buscar_por == 2:
-                list_pacientes = Pacientes.objects.filter(user__last_name__icontains=buscar_text)
+                list_admins = Administrativos.objects.filter(user__last_name__icontains=buscar_text)
 
         #si se ingreso text en blanco pongo todos
         else:
-            list_pacientes = Pacientes.objects.all()
+            list_admins = Administrativos.objects.all()
 
-            
-        listado_pacientes = []
+
+        listado_admins = []
         band = True
-        for paciente in list_pacientes:
-            id = paciente.id
-            username = paciente.user.username
-            nombre = paciente.nombre_completo()
+        for admin in list_admins:
+            id = admin.id
+            username = admin.user.username
+            nombre = admin.nombre_completo()
             css = get_field_css(band)
             band = not(band)
-            listado_pacientes.append([id, username, nombre, css])
-        dict['listado_pacientes'] = listado_pacientes
+            listado_admins.append([id, username, nombre, css])
+        dict['listado_admins'] = listado_admins
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

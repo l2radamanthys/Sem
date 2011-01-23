@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block cont_secundario %}
+{% endblock %}
+
+{% block contenido %}
+<!--- botones de accion -->
+<div align='right'>
+    <hr />
+    <a class='boton' href='/pacientes/modificar/{{ adm_id }}/'>Modificar</a>
+    <a class='boton' href='/pacientes/borrar/{{ adm_id }}/'>Borrar</a>
+    <a class='boton' href='/'>Volver al Inicio</a>
+    <hr />
+</div>
+<br />
+
+<!-- detalles -->
+<table style="text-align: left;" border="0" width='400px' cellpadding="2" cellspacing="2">
+    <tbody>
+        <tr>
+            <td class='field_b'><label>Usuario:</label></td>
+            <td class='field_a'><label>{{ username }}</label></td>
+        </tr>
+
+        <tr>
+            <td class='field_b'><label>Nombre:</label></td>
+            <td class='field_a'><label>{{ nombre }}</label></td>
+        </tr>
+
+        <tr>
+            <td class='field_b'><label>Direccion:</label></td>
+            <td class='field_a'><label>{{ direccion }}</label></td>
+        </tr>
+
+        <tr>
+            <td class='field_b'><label>Telefono:</label></td>
+            <td class='field_a'><label>{{ telefono }}</label></td>
+        </tr>
+
+        <tr>
+            <td class='field_b'><label>Email:</label></td>
+            <td class='field_a'><label>{{ email }}</label></td>
+        </tr>
+
+        <tr>
+            <td class='field_b'><label>Sexo:</label></td>
+            <td class='field_a'><label>{{ sexo }}</label></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- solicitudes turnos q hiso -->
+
+<!-- turnos asignados -->
+
+{% endblock %}
+
+{% block pie_pagina %}
+{% endblock %}

@@ -12,7 +12,7 @@ admin.autodiscover()
 from settings import MEDIA_ROOT
 
 import generics_views
-from GestionTurnos import pacientes_views
+from GestionTurnos import pacientes_views, admin_views
 
 
 urlpatterns = patterns('',
@@ -36,13 +36,12 @@ urlpatterns = patterns('',
     #sesiones
     (r'^accounts/login/$', generics_views.login),
     (r'^accounts/logout/$', generics_views.logout),
-    #(r'/accounts/change_password/$' generics_views.cambiar_contrasenia),
+    (r'/accounts/change_password/$', generics_views.cambio_contrasenia),
 
     #Gestion Turnos
     # - Pacientes Views
-    (r'^pacientes/buscar/$', pacientes_views.buscar_pacientes),
-    (r'^pacientes/listado/$', pacientes_views.listado_pacientes),
     (r'^pacientes/nuevo/$', pacientes_views.nuevo_paciente),
+    (r'^pacientes/listado/$', pacientes_views.listado_pacientes),
     (r'^pacientes/datos/$', pacientes_views.datos_paciente),
     (r'^pacientes/datos/(\d{1,2})/$', pacientes_views.datos_paciente),
     (r'^pacientes/modificar/$', pacientes_views.modificar_paciente),
@@ -53,10 +52,21 @@ urlpatterns = patterns('',
     (r'^pacientes/borrar/(\d{1,2})/$', pacientes_views.borrar_paciente),
     (r'^pacientes/borrado/$', pacientes_views.borrado_paciente),
     (r'^pacientes/borrado/(\d{1,2})/$', pacientes_views.borrado_paciente),
+    (r'^pacientes/buscar/$', pacientes_views.buscar_pacientes),
+
+    # - Medicos Views
+
+    # - Administrativos Views
+    (r'^administrativos/nuevo/$', admin_views.nuevo_admin),
+    (r'^administrativos/listado/$', admin_views.listado_admins),
+    (r'^administrativos/datos/$', admin_views.datos_admin),
+    (r'^administrativos/datos/(\d{1,2})/$', admin_views.datos_admin),
     
+
+
+    # - Otras Views
     
 )
-
 
 #paginas personalizadas para los errores 404 y 505
 #handler404 = 'generics_views.error404'

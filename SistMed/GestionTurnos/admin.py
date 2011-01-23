@@ -7,6 +7,7 @@ from GestionTurnos import models
 
 
 #establesco las tablas que seran modificadas por el admin
+admin.site.register(models.TipoUsuario)
 admin.site.register(models.Expecialidades)
 admin.site.register(models.Medicos)
 admin.site.register(models.Pacientes)

@@ -92,6 +92,12 @@ def cambio_contrasenia(request):
     """
         Permite cambiar la contrasenia del usuario
     """
-    pass
+
+    #if request.user.is_authenticated():
+    plantilla = get_template('cambio_contrasenia.html')
+    dict = BASE_DIC.copy()
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
 
 
