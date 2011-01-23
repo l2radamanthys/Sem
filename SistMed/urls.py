@@ -40,6 +40,7 @@ urlpatterns = patterns('',
 
     #Gestion Turnos
     # - Pacientes Views
+    (r'^pacientes/buscar/$', pacientes_views.buscar_pacientes),
     (r'^pacientes/listado/$', pacientes_views.listado_pacientes),
     (r'^pacientes/nuevo/$', pacientes_views.nuevo_paciente),
     (r'^pacientes/datos/$', pacientes_views.datos_paciente),

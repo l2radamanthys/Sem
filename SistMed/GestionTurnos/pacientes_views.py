@@ -223,6 +223,7 @@ def modificar_paciente(request, pac_id=-1):
         #caso q recien se muestre la pagina
         #else:
         dict['query'] = True
+        dict['pac_id'] = pac_id
         paciente = Pacientes.objects.get(id=pac_id)
         dict['nombre'] = paciente.user.first_name
         dict['apellido'] = paciente.user.last_name
@@ -289,11 +290,13 @@ def guardar_cambios_paciente(request, pac_id=-1):
         paciente.save()
 
         #redireciono a la pagina q muestra los datos del paciente
-        HttpResponseRedirect("/pacientes/datos/%d/" %pac_id)
-        
+        #HttpResponseRedirect("/pacientes/datos/%d/" %pac_id)
+        dict['pac_id'] = pac_id
+        dict['msj_class'] = 'msj_ok'
+        dict['mensaje'] = 'Cambios Realizados Correctamente'
 
     else:
-        dict['query'] = False
+        #dict['query'] = False
         dict['msj_class'] = 'msj_error'
         dict['mensaje'] = 'Error Datos Invalido'
 
@@ -393,6 +396,75 @@ def borrado_paciente(request, pac_id=-1):
         dict['mensaje'] = 'Error Operacion No valida'
 
 
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def buscar_pacientes(request):
+    """
+        Permite Buscar un paciente por nombre, apellido o usuario
+
+        pueden acceder
+        --------------
+        - administrativos
+        - medicos
+
+        sin acceso
+        ----------
+        - pacientes
+        - usuarios no registrados
+    """
+    plantilla = get_template('pacientes/gestion_turnos/buscar.html')
+    dict = BASE_DIC.copy()
+
+    dict['titulo'] = 'Buscar Paciente'
+    #usuario estado
+    if request.user.is_authenticated():
+        dict['login_status'] = 'online'
+        dict['login_img'] = 'online.png'
+        dict['url_action'] = '/accounts/logout/'
+    else:
+        dict['login_status'] = 'offline'
+        dict['login_img'] = 'offline.png'
+        dict['url_action'] = '/accounts/login/'
+
+    #tipo de busqueda
+    #1 usuario
+    #2 nombre
+    #3 apellido
+    query = int(request.POST.get('query', '0'))
+    dict['query'] = query
+    if query:
+        buscar_text = request.POST.get('buscar_text', '')
+        buscar_por = int(request.POST.get('buscar_por', '0'))
+
+        if buscar_text != "":
+            if buscar_por == 0:
+                pass
+
+            elif buscar_por == 1:
+                pass
+
+            elif buscar_por == 2:
+                pass
+
+        #si se ingreso text en blanco pongo todos
+        else:
+            list_pacientes = Pacientes.objects.all()
+
+            
+        listado_pacientes = []
+        band = True
+        for paciente in list_pacientes:
+            id = paciente.id
+            username = paciente.user.username
+            nombre = paciente.nombre_completo()
+            css = get_field_css(band)
+            band = not(band)
+            listado_pacientes.append([id, username, nombre, css])
+        dict['listado_pacientes'] = listado_pacientes
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

@@ -88,6 +88,16 @@ a{
     behavior:url(border-radius.htc);
 }
 
+.contenedor {
+    /*margin-top: 100px;*/
+    background-color: #ECEFF2;
+    width: 300px;
+    /*border: 1px solid #B3B4B5;*/
+    -moz-border-left-radius: 10px;
+    -webkit-border-radius: 10px;
+    behavior:url(border-radius.htc);
+}
+
 
 /* titulos vent imagina */
 .title_ventana {
