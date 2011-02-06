@@ -62,7 +62,15 @@ urlpatterns = patterns('',
     (r'^administrativos/datos/$', admin_views.datos_admin),
     (r'^administrativos/datos/(\d{1,2})/$', admin_views.datos_admin),
     
-
+    #(r'^administrativos/modificar/$', pacientes_views.modificar_paciente),
+    #(r'^administrativos/modificar/(\d{1,2})/$', pacientes_views.modificar_paciente),
+    #(r'^administrativos/guardar/$', pacientes_views.guardar_cambios_paciente),
+    #(r'^administrativos/guardar/(\d{1,2})/$', pacientes_views.guardar_cambios_paciente),
+    #(r'^administrativos/borrar/$', pacientes_views.borrar_paciente),
+    #(r'^administrativos/borrar/(\d{1,2})/$', pacientes_views.borrar_paciente),
+    #(r'^administrativos/borrado/$', pacientes_views.borrado_paciente),
+    #(r'^administrativos/borrado/(\d{1,2})/$', pacientes_views.borrado_paciente),
+    #(r'^administrativos/buscar/$', pacientes_views.buscar_pacientes),
 
     # - Otras Views
     
