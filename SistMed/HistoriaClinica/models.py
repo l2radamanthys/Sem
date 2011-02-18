@@ -58,8 +58,8 @@ class HabitosToxicos(models.Model):
     alcohol = models.CharField() #S/N
     tabaco = models.CharField()#S/N
     drogas = models.CharField()#S/N
-    infuciones = = models.CharField()#S/N
-    comentarios = = models.CharField()#text
+    infuciones = models.CharField()#S/N
+    comentarios= models.TextField()#text
 
 
 #Examen Fisico
@@ -101,11 +101,55 @@ class PielFaneasTejidoCelularSubcutaneo:
 
 #Examen Fisico
 class Cabeza():
-    craneo_cara = models.TextField('Craneo y Cara')
-    cuero_cabelludo = models.TextField('Cuero Cabelludo')
-    region_frontal = models.TextField('Region Frontal')
-    region_orbito_nasal = models.TextField('Region Orbito Nasal')
-    region_orofaringena = models.TextField('Region Orofaringenas')
+    craneo = #N/A Normal - Alterado
+    fontanelas_y_suturas
+    facie
+    parpados
+    conjuntivas
+    globo_ocular_mov
+    vision
+    nariz_fosas_nasales
+    labios
+    dientes
+    lengua
+    mucosa_bucofaringea
+    amigdalas
+    pabellones_auriculares
+    cond_audit_externo
+    timpanos
+    audicion
+    info_adicional = models.TextField('informacion Adicional')
+
+
+#Examen Fisico
+class Cuello:
+    pass
+
+
+#Examen Fisico
+class ToraxAparatoRespiratorio:
+    pass
+
+
+#Examen Fisico
+class AparatoCardiovascular:
+    pass
+
+
+#Examen Fisico
+class AbdomenPelvis:
+    pass
+
+
+#Examen Fisico
+class SistemaOsteoArticular:
+    pass
+
+
+#Examen Fisico
+class SistemaNeuroMuscular:
+    pass
+
 
 
 
