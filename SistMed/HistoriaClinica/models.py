@@ -207,13 +207,16 @@ class AbdomenPelvis:
 #Examen Fisico
 class SistemaOsteoArticular:
     """
-        Examen Fisico
+        Examen Fisico - Sistema Osteo Articular
     """
     hist_clinica = models.ForeignKey(InformacionBasica)
     fecha = models.DateTimeField()#fecha q se realizo el examem
 
-    columna_vertebral
-    miembros
+    columna_vertebral = models.CharField()
+    miembros = models.CharField()
+    ejes_oseos = models.CharField()
+    articulaciones = models.CharField()
+    trofismo_muscular = models.CharField() 
     observaciones = models.TextField()
 
 
@@ -223,4 +226,29 @@ class SistemaNeuroMuscular:
     fecha = models.DateTimeField()#fecha q se realizo el examem
 
 
+#Examen Fisico
+class OtrosEstudios:
+    hist_clinica = models.ForeignKey(InformacionBasica)
+    fecha = models.DateTimeField()#fecha q se realizo el examem
+    descripcion = models.TextField()
 
+
+
+class Imagen:
+    examen_fisico = #FK
+    imagen =
+    descripcion =
+    
+   
+class laboratorio:
+    pass
+
+
+class ConsultaMedica:
+    pass
+
+
+class Diagnostico:
+    hist_clinica = models.ForeignKey(InformacionBasica)
+    fecha =
+    observaciones =
