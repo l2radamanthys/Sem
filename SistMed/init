@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#borrar todos datos existentes
+python manage.py sqlclear
+
+#crear la BD a partir de los modelos
+python manage.py syncdb
+
+#agregar los campos necesarios
+python inicializar.py
