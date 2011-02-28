@@ -36,7 +36,9 @@ urlpatterns = patterns('',
     #sesiones
     (r'^accounts/login/$', generics_views.login),
     (r'^accounts/logout/$', generics_views.logout),
-    (r'/accounts/change_password/$', generics_views.cambio_contrasenia),
+    (r'^accounts/change_password/$', generics_views.cambio_contrasenia),
+    (r'^accounts/datos-personales/$', generics_views.datos_personales),
+    (r'^accounts/modificar-datos-personales/$', generics_views.datos_personales_modificar),
 
     #Gestion Turnos
     # - Pacientes Views
@@ -74,8 +76,11 @@ urlpatterns = patterns('',
 
     # - Otras Views
     
+    (r'^usuario-no-autorizado/$', generics_views.no_autorizado),
+
+    
 )
 
 #paginas personalizadas para los errores 404 y 505
-#handler404 = 'generics_views.error404'
+handler404 = 'generics_views.error404'
 #handler500 = 'generics_views.error500'

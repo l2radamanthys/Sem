@@ -195,4 +195,34 @@ a{
     border:1px solid #67BCC2;
 }
 
+.menu {
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    text-align: left;
+    border-left: 5px solid #dfdfdf;
+    background-color: #efefef;
+    padding-bottom: 4px;
+}
+
+.menu h3{
+    padding-top: 4px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: 2px solid rgb(220,220,220);
+    
+}
+
+.menu p{
+    font-size: 11px;
+    padding-left: 5px;
+    text-indent: 0px;
+}
+
+.menu a{
+    font-size: 11px;
+    padding-left: 5px;
+    color: #3D98C5
+}
 

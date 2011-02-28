@@ -17,12 +17,47 @@
 </head>
 
 <body>
-    <div align='center'>
-    <h2> Has Salido del Sistema...</h2>
-    <br />
-    <a href='/'>volver al inicio</a>
+    <div align="center">
+    <div class='cont_flotante'>
+    <h4 class='title_ventana'>Cambio Contraseña</h4>
+	
+    <form action='/accounts/change_password/'  method='post'>
+    <table border='0' cellpadding='0'>
+        <!--tr>
+            <td><label>Usuario</label></td>
+            <td><input type="text" name="username" value="" id="username" /></td>
+        </tr-->
+        <tr>
+            <td><label>Contraseña Anterior:</label></td>
+            <td><input type="password" name="password_old" value="" id="password" /></td>
+        </tr>
+        <tr>
+            <td><label>Nueva Contraseña:</label></td>
+            <td><input type="password" name="password_new0" value="" id="password" /></td>
+        </tr>
+        <tr>
+            <td><label>Repetir Nueva Contraseña:</label></td>
+            <td><input type="password" name="password_new1" value="" id="password" /></td>
+        </tr>
+        <tr>
+            <td colspan='2' align='center'>
+            <input type="hidden" name="query" value="1"/>
+            <input type='Submit' value='Cambiar' />
+            <input type='Reset' value='Limpiar' />
+            </td>
+        </tr>
+    </table>
+    </form>
     </div>
-
+    <br />
+    {% if query %}
+        <div class='{{ msj_class }}'>
+        <p>{{ mensaje }} </p>
+        </div>
+    {% endif %}
+    <br />
+    <a href='/' class='boton'>Volver al Inicio</a>	
+	</div>
 </body>
 </html>
 

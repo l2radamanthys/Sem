@@ -29,27 +29,51 @@
             <td class='celda_izquierda' valign='top' width='150px' >
                 {% block cont_sec %}
                 {% endblock %}
-
-                <h3>Menu</h3>
-                <a href='/'>Inicio</a><br />
-                <h3>Usuarios</h3>
-                <a href='/accounts/change_password/'>Cambio Contraseña</a><br />
+				
+				<div class='menu'>
+					<h3>Secciones</h3>
+					<a href='/'>Inicio</a><br />
+					<a href=''>Gestion Turnos</a><br />
+					<a href=''>Historia Clinica</a>
+                </div>
+                
+                {% if user_autenticado %}
+					<div class='menu'>
+					<h3>Usuario</h3>
+					<a href='/accounts/datos-personales/'>Datos Personales</a><br />
+					<a href='/accounts/modificar-datos-personales/'>Modificar Datos</a><br />
+					<a href='/accounts/change_password/'>Cambio Contraseña</a><br />
+					</div>
+				{% endif %}
+				
+				<div class='menu'>
                 <h3>Pacientes</h3>
                 <a href='/pacientes/buscar/'>buscar</a><br />
                 <a href='/pacientes/listado/'>Listado</a><br />
                 <a href='/pacientes/nuevo/'>Nuevo</a><br />
-
-                <h3>Administrativo</h3>
+				</div>
+	
+				<div class='menu'>
+				<h3>Medicos</h3>
+				</div>
+				
+				<div class='menu'>
+                <h3>Administrativos</h3>
                 <a href='/administrativos/buscar/'>buscar</a><br />
                 <a href='/administrativos/listado/'>Listado</a><br />
                 <a href='/administrativos/nuevo/'>Nuevo</a><br />
-
+				</div>
+				
+				<div class='menu'>
+				<h3>Menu</h3>
+				</div>
+				
                 <br />
                 <br />
                 <div class='{{ login_status }}'>
+					<label>{{ user }}</label>
                     <a href="{{ url_action }}"><img src='/site_media/imagenes/{{ login_img }}' alt='{{ login_status }}' border='0px'/></a>
                 </div>
-
             </td>
 
             <td class='celda_central' valign='top'>

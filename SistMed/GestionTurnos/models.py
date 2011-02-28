@@ -11,7 +11,8 @@ from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE
 class TipoUsuario(models.Model):
     """
         En ves de crear las clases Medico, Paciente, Administrativo
-       cree una clase categoria q le definira la clase al paciente
+       cree una clase categoria q le definira la clase a los diferentes
+       tipo de usuario para definir permisos
     """
     nombre = models.CharField("Tipo",max_length=15)
 
@@ -76,6 +77,7 @@ class Usuarios(models.Model):
 
 class Medicos(Usuarios):
     matricula = models.CharField(max_length=30)
+
 
     def __str__(self):
         return "Med - %s" %self.username()

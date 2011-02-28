@@ -11,15 +11,13 @@ class InformacionBasica(models.Model):
     """
         Datos identificatorios basicos del Paciente
     """
-    #el nombre de la clase no es le final
-
     #los sig datos se obtienen directamente del usuario q se asigna
     #- Nombre y Apellido
-    #- DNI
-    #- Sexo
     #- Email
-    #- telefono
-    #- direccion
+    dni = models.IntegerField()
+    sexo = models.CharField(max_length=1, default='-', choices=SEXO_CHOICE)
+    telefono = models.CharField(max_length=20)
+    direccion = models.CharField(max_length=60)
 
     fecha_nacimiento = models.CharField('Fecha Nacimiento')
     lugar_nacimiento = models.CharField()
@@ -32,6 +30,7 @@ class InformacionBasica(models.Model):
     motivo_consulta = models.CharField()#TEXT
     antecedentes_enfermedad_actual = models.CharField()#TEXT
 
+    user = models.ForeignKey(User, unique=True)
 
 class AntecedentesPerinatales(models.Model):
     """
@@ -65,12 +64,16 @@ class HabitosToxicos(models.Model):
 
 
 #Examen Fisico
-class ExamenFisicoBase:
+class ExamenFisico:
+    hist_clinica = models.ForeignKey(InformacionBasica)
+    fecha = models.DateTimeField()#fecha q se realizo el examem
+
+
+class ExamenBase:
     """
         Examen Fisico Basico
     """
-    hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.DateTimeField()#fecha q se realizo el examem
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
 
     #signos vitales
     FC = models.CharField()
@@ -91,8 +94,7 @@ class PielFaneasTejidoCelularSubcutaneo:
     """
         Examen Fisico - Analisis de Piel, Faneas y Tejido Subcutaneo
     """
-    hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.CharField()#fecha q se realizo el examem
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
 
     aspecto = models.TextField('Aspecto')
     dist_pilosa = models.TextField('Distribucion Pilosa')
@@ -103,8 +105,10 @@ class PielFaneasTejidoCelularSubcutaneo:
 
 #Examen Fisico
 class Cabeza():
-    hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.DateTimeField()#fecha q se realizo el examem
+    """
+        Examen Fisico - Cabeza
+    """
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
 
     craneo = models.CharField()  #N/A Normal - Alterado
     fontanelas_y_suturas = models.CharField()  #N/A Normal - Alterado
@@ -131,8 +135,7 @@ class Cuello:
     """
         Examen Fisico - Cuello
     """
-    hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.DateTimeField()#fecha q se realizo el examem
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
 
     inspecion = models.CharField('Inspecion')
     palpacion = models.CharField('Palpacion')
@@ -147,8 +150,8 @@ class ToraxAparatoRespiratorio:
     """
         Examen Fisico - Torax y Aparato Respiratorio
     """
-    hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.DateTimeField()#fecha q se realizo el examem
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
+
     inspecion = models.CharField('Inspecion')
     palpacion = models.CharField('Palpacion')
     percucion = models.CharField('Percucion')
@@ -157,9 +160,7 @@ class ToraxAparatoRespiratorio:
     tipo_respiracion = models.CharField()
     tiraje = models.CharField()
     uso_musculos_accesorios = models.CharField()
-
-    #semiologia
-    #omitido por el momentos
+    #semiologia omitido por el momentos
 
     observaciones = models.TextField('Observaciones')
 
@@ -200,8 +201,9 @@ class AparatoCardiovascular:
 
 #Examen Fisico
 class AbdomenPelvis:
-    hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.DateTimeField()#fecha q se realizo el examem
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
+    #falta
+    observaciones = models.TextField('Observaciones')
 
 
 #Examen Fisico
@@ -209,42 +211,39 @@ class SistemaOsteoArticular:
     """
         Examen Fisico - Sistema Osteo Articular
     """
-    hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.DateTimeField()#fecha q se realizo el examem
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
 
     columna_vertebral = models.CharField()
     miembros = models.CharField()
     ejes_oseos = models.CharField()
     articulaciones = models.CharField()
     trofismo_muscular = models.CharField() 
-    observaciones = models.TextField()
+    observaciones = models.TextField('Observaciones')
 
 
 #Examen Fisico
 class SistemaNeuroMuscular:
-    hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.DateTimeField()#fecha q se realizo el examem
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
+    #falta
+    observaciones = models.TextField('Observaciones')
+
 
 
 #Examen Fisico
-class OtrosEstudios:
-    hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.DateTimeField()#fecha q se realizo el examem
-    descripcion = models.TextField()
-
+class OtrosEstudio:
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
+    fecha = models.DateField()#fecha q se realizo el examem
+    descripcion = models.TextField('Descripcion')
 
 
 class Imagen:
-    examen_fisico = #FK
+    examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
     imagen =
-    descripcion =
+    descripcion = models.TextField()
     
    
-class laboratorio:
-    pass
-
-
-class ConsultaMedica:
+class AnalisisLaboratorio:
+    hist_clinica = models.ForeignKey(InformacionBasica)
     pass
 
 
@@ -252,3 +251,16 @@ class Diagnostico:
     hist_clinica = models.ForeignKey(InformacionBasica)
     fecha =
     observaciones =
+
+
+class ConsultaMedica:
+    hist_clinica = models.ForeignKey(InformacionBasica)
+    fecha = models.DateField()
+    pass
+
+
+class MedicamentosRecetados:
+    hist_clinica = models.ForeignKey(InformacionBasica)
+    consulta_medica = models.ForeignKey(ConsultaMedica)
+    medicamento = models.CharField()
+    prescripcion = models.TextField()

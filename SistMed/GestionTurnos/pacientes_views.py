@@ -12,7 +12,7 @@ from django.contrib import auth #para login
 from django.contrib.auth.models import User, Group
 
 from GestionTurnos.models import Pacientes, TipoUsuario
-from utils import get_field_css, sexo_choice_expand, get_POST_value
+from utils import get_field_css, sexo_choice_expand, get_POST_value, generar_base_dict
 from constantes import BASE_DIC, PACIENTES
 
 
@@ -31,18 +31,8 @@ def nuevo_paciente(request):
         - pacientes
     """
     plantilla = get_template('pacientes/gestion_turnos/nuevo.html')
-    dict = BASE_DIC.copy()
-
+    dict = generar_base_dict(request)
     dict['titulo'] = 'Nuevo Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
 
     #si se realizo una consulta
     query = int(request.POST.get('query', '0'))
@@ -51,12 +41,12 @@ def nuevo_paciente(request):
     if query:
         username = request.POST.get('usuario', '')
         password = request.POST.get('password_1', '')
-        email = request.POST.get('email', '')
+        email = request.POST.get('email', '@')
 
         #para comprobar si el usuario ya existe
         user = User.objects.filter(username__exact=username)
-        if user is None:
-            user = User.objects.create_user(username, email, password)
+        if user != None:
+            user = User.objects.create_user(username=username, email=email, password=password)
             user.first_name = request.POST.get('nombre', '-')
             user.last_name = request.POST.get('apellido', '-')
             user.email = request.POST.get('email', '@')
@@ -105,20 +95,9 @@ def listado_pacientes(request):
         - pacientes
     """
     plantilla = get_template('pacientes/gestion_turnos/listado.html')
-    dict = BASE_DIC.copy()
-
+    dict = dict = generar_base_dict(request)
     dict['titulo'] = 'Listado Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
-
+    
     listado_pacientes = []
     band = True
     for paciente in Pacientes.objects.all():
@@ -153,19 +132,8 @@ def datos_paciente(request, pac_id=-1):
         - usuarios no registrados
     """
     plantilla = get_template('pacientes/gestion_turnos/datos.html')
-    dict = BASE_DIC.copy()
-
+    dict = dict = generar_base_dict(request)
     dict['titulo'] = 'Datos Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
 
     pac_id = int(pac_id)
     if pac_id != -1:
@@ -175,7 +143,7 @@ def datos_paciente(request, pac_id=-1):
         dict['nombre'] = paciente.nombre_completo()
         dict['direccion'] = paciente.direccion
         dict['telefono'] = paciente.telefono
-        dict['email'] = paciente.username()
+        dict['email'] = paciente.user.email
         dict['sexo'] = sexo_choice_expand(paciente.sexo)
 
     else:
@@ -201,19 +169,9 @@ def modificar_paciente(request, pac_id=-1):
         - usuarios no registrados
     """
     plantilla = get_template('pacientes/gestion_turnos/modificar.html')
-    dict = BASE_DIC.copy()
-
+    dict = generar_base_dict(request)
     dict['titulo'] = 'Modificar Datos Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
+    
     pac_id = int(pac_id)
     if pac_id != -1:
         #query = int(get_POST_value(request,'query', '0'))
@@ -260,20 +218,9 @@ def guardar_cambios_paciente(request, pac_id=-1):
         - usuarios no registrados
     """
     plantilla = get_template('pacientes/gestion_turnos/guardar.html')
-    dict = BASE_DIC.copy()
-
+    dict = generar_base_dict(request)
     dict['titulo'] = 'Guardar Datos Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
-
+   
     query = int(get_POST_value(request,'query', '0'))
     dict['query'] = query
 
@@ -322,19 +269,9 @@ def borrar_paciente(request, pac_id=-1):
         - usuarios no registrados
     """
     plantilla = get_template('pacientes/gestion_turnos/borrar.html')
-    dict = BASE_DIC.copy()
-
+    dict =  generar_base_dict(request)
     dict['titulo'] = 'Borrar Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
+ 
     pac_id = int(pac_id)
 
     if pac_id != -1:
@@ -369,19 +306,9 @@ def borrado_paciente(request, pac_id=-1):
         - usuarios no registrados
     """
     plantilla = get_template('pacientes/gestion_turnos/borrar.html')
-    dict = BASE_DIC.copy()
-
+    dict =  generar_base_dict(request)
     dict['titulo'] = 'Borrar Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
+   
     pac_id = int(pac_id)
 
     if pac_id != -1:
@@ -418,19 +345,9 @@ def buscar_pacientes(request):
         - usuarios no registrados
     """
     plantilla = get_template('pacientes/gestion_turnos/buscar.html')
-    dict = BASE_DIC.copy()
-
+    dict =  generar_base_dict(request)
     dict['titulo'] = 'Buscar Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
+   
     #tipo de busqueda
     #1 usuario
     #2 nombre

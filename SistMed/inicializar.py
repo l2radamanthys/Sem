@@ -12,7 +12,8 @@
     crear conflictos en la Base de Datos
 """
 
-
+#from settings import *
+from django.conf.urls.defaults import *
 from GestionTurnos.models import TipoUsuario
 
 

@@ -43,6 +43,10 @@ PACIENTES = 'Pacientes'
 MEDICOS = 'Medicos'
 ADMINISTRATIVOS = 'Administrativos'
 
+PACIENTE = 'Paciente'
+MEDICO = 'Medico'
+ADMINISTRATIVO = 'Administrativo'
+
 
 #ruta del proyecto
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
