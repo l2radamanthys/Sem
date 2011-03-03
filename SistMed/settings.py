@@ -6,7 +6,7 @@
 from constantes import PROJECT_PATH, MI_TEMPLATE_DIR, _MEDIA_ROOT
 
 
-DEBUG = False
+DEBUG = True #False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

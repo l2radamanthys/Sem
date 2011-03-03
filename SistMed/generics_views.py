@@ -60,7 +60,8 @@ def login(request):
                 usuario = Usuarios.objects.get(user__username__exact=username)
                 request.session['usuario'] = usuario.username()
                 request.session['usuario_rol'] = usuario.tipo_usuario.nombre
-                
+                request.session['usuario_id'] = usuario.id
+
                 # Redirigir a una pagina de Inicio.
                 return HttpResponseRedirect('/')
     
@@ -90,7 +91,7 @@ def logout(request):
     return HttpResponse(html)
     request.session['usuario'] = ''
     request.session['usuario_rol'] = ''
-
+    request.session['usuario_id'] = '-1'
 
 def cambio_contrasenia(request):
     """
@@ -126,6 +127,9 @@ def cambio_contrasenia(request):
 
 
 def datos_personales(request):
+    """
+        Muestra los datos personales del usuario q actualmente esta logueado
+    """
     if request.user.is_authenticated():
         rol = request.session.get('usuario_rol', '')
         username = request.session.get('usuario', '')
@@ -140,13 +144,12 @@ def datos_personales(request):
 
         elif rol == ADMINISTRATIVO:
             adm = Administrativos.objects.get(user__username__exact=username)
-            url = '/administrativos/datos/%d/' %pac.id
+            url = '/administrativos/datos/%d/' %adm.id
         
         else:
             url = '/usuario-no-autorizado/[%s]' %rol
             
         return HttpResponseRedirect(url)
-
 
 
 def datos_personales_modificar(request):
@@ -162,9 +165,9 @@ def datos_personales_modificar(request):
         #    med = Medicos.objects.get(user__username__exact=username)
         #    url = '/medicos/modificar/%d/' %pac.id
 
-        #elif rol == ADMINISTRATIVO:
-        #    adm = Administrativos.objects.get(user__username__exact=username)
-        #    url = '/administrativos/modificar/%d/' %pac.id
+        elif rol == ADMINISTRATIVO:
+            adm = Administrativos.objects.get(user__username__exact=username)
+            url = '/administrativos/modificar/%d/' %adm.id
 
         else:
             url = '/usuario-no-autorizado/[%s]' %rol

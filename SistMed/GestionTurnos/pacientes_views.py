@@ -13,7 +13,7 @@ from django.contrib.auth.models import User, Group
 
 from GestionTurnos.models import Pacientes, TipoUsuario
 from utils import get_field_css, sexo_choice_expand, get_POST_value, generar_base_dict
-from constantes import BASE_DIC, PACIENTES
+from constantes import BASE_DIC
 
 
 def nuevo_paciente(request):
@@ -196,7 +196,6 @@ def modificar_paciente(request, pac_id=-1):
         dict['query'] = False
         dict['msj_class'] = 'msj_error'
         dict['mensaje'] = 'Error Datos Invalido'
-
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

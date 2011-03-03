@@ -5,7 +5,7 @@
     listado de Funciones de Utilidad
 """
 
-from constantes import SEXO_CHOICE_DIC, POST, GET, BASE_DIC
+from constantes import *
 
 
 def get_field_css(band=True):
@@ -60,6 +60,7 @@ def generar_base_dict(request):
         dict['user_autenticado'] = True
         #nombre de usuario y rol del mismo
         dict['user'] = request.session.get('usuario', '')
+        dict['user_id'] = request.session.get('usuario_id', '-1')
         #dict['user_rol'] = request.session.get('usuario_rol', '')
     else:
         dict['login_status'] = 'offline'
@@ -68,6 +69,39 @@ def generar_base_dict(request):
         #request.session['usuario'] = ''
         #request.session['usuario_rol'] = ''
         dict['user'] = ''
+        dict['user_id'] = '-1'
         #dict['user_rol'] = ''
         dict['user_autenticado'] = False
+
+    dict = insert_permisos_key(request, dict)
+    return dict
+
+
+def insert_permisos_key(request, dict):
+    """
+        define las variables de permisos
+        
+        - no registrado nivel_0
+        - pacientes hasta nivel 1
+        - medicos hasta nivel 2
+        - admins hasta nivel 3
+
+    """
+    rol = request.session.get('usuario_rol', '')
+    dict['nivel_1'] = False
+    dict['nivel_2'] = False
+    dict['nivel_3'] = False
+
+    if rol == PACIENTE:
+        dict['nivel_1'] = True
+
+    elif rol == MEDICO:
+        dict['nivel_1'] = True
+        dict['nivel_2'] = True
+
+    elif rol == ADMINISTRATIVO:
+        dict['nivel_1'] = True
+        dict['nivel_2'] = True
+        dict['nivel_3'] = True
+
     return dict

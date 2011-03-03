@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block cont_secundario %}
+{% endblock %}
+
+{% block contenido %}
+    <div align='right'>
+        <hr />
+        <a class='boton' href='/administrativos/datos/{{ adm_id }}/'>Datos Admin</a>
+        <a class='boton' href='/'>Volver al Inicio</a>
+        <hr />
+    </div>
+    <br />
+    <div align='center'>
+    <div class="{{ msj_class }}">
+            <p>{{ mensaje }}</p>
+    </div>
+    </div>
+{% endblock %}
+
+{% block pie_pagina %}
+{% endblock %}

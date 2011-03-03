@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block cont_secundario %}
+{% endblock %}
+
+{% block contenido %}
+    <div align='right'>
+        <hr />
+        <a class='boton' href='/'>Volver al Inicio</a>
+        <hr />
+    </div>
+    <br />
+    <div align='center'>
+    {% if query %}
+        <p>¿Esta seguro que desea borrar el siguiente Paciente:<strong>{{ nombre }} </strong>?</p>
+        <a class='boton' href='/administrativos/borrado/{{ adm_id }}/'>Borrar</a>
+        <a class='boton' href='/administrativos/listado/'>Cancelar</a>
+    {% else %}
+        <div class="{{ msj_class }}">
+            <p>{{ mensaje }}</p>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

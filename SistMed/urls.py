@@ -40,7 +40,7 @@ urlpatterns = patterns('',
     (r'^accounts/datos-personales/$', generics_views.datos_personales),
     (r'^accounts/modificar-datos-personales/$', generics_views.datos_personales_modificar),
 
-    #Gestion Turnos
+    ## - Gestion Turnos - ##
     # - Pacientes Views
     (r'^pacientes/nuevo/$', pacientes_views.nuevo_paciente),
     (r'^pacientes/listado/$', pacientes_views.listado_pacientes),
@@ -57,27 +57,41 @@ urlpatterns = patterns('',
     (r'^pacientes/buscar/$', pacientes_views.buscar_pacientes),
 
     # - Medicos Views
+    #(r'^medicos/nuevo/$', medicos_views.nuevo_medico),
+    #(r'^medicos/listado/$', medicos_views.listado_medico),
+    #(r'^medicos/datos/$', medicos_views.datos_medico),
+    #(r'^medicos/datos/(\d{1,2})/$', medicos_views.datos_medico),
+    #(r'^medicos/modificar/$', medicos_views.modificar_medico),
+    #(r'^medicos/modificar/(\d{1,2})/$', medicos_views.modificar_medico),
+    #(r'^medicos/guardar/$', medicos_views.guardar_cambios_medico),
+    #(r'^medicos/guardar/(\d{1,2})/$', medicos_views.guardar_cambios_medico),
+    #(r'^medicos/borrar/$', medicos_views.borrar_medico),
+    #(r'^medicos/borrar/(\d{1,2})/$', pacientes_views.borrar_medico),
+    #(r'^medicos/borrado/$', medicos_views.borrado_medico),
+    #(r'^medicos/borrado/(\d{1,2})/$', medicos_views.borrado_medico),
+    #(r'^medicos/buscar/$', medicos_views.buscar_pacientes),
 
     # - Administrativos Views
     (r'^administrativos/nuevo/$', admin_views.nuevo_admin),
     (r'^administrativos/listado/$', admin_views.listado_admins),
     (r'^administrativos/datos/$', admin_views.datos_admin),
     (r'^administrativos/datos/(\d{1,2})/$', admin_views.datos_admin),
-    
-    #(r'^administrativos/modificar/$', pacientes_views.modificar_paciente),
-    #(r'^administrativos/modificar/(\d{1,2})/$', pacientes_views.modificar_paciente),
-    #(r'^administrativos/guardar/$', pacientes_views.guardar_cambios_paciente),
-    #(r'^administrativos/guardar/(\d{1,2})/$', pacientes_views.guardar_cambios_paciente),
-    #(r'^administrativos/borrar/$', pacientes_views.borrar_paciente),
-    #(r'^administrativos/borrar/(\d{1,2})/$', pacientes_views.borrar_paciente),
-    #(r'^administrativos/borrado/$', pacientes_views.borrado_paciente),
-    #(r'^administrativos/borrado/(\d{1,2})/$', pacientes_views.borrado_paciente),
-    #(r'^administrativos/buscar/$', pacientes_views.buscar_pacientes),
+    (r'^administrativos/modificar/$', admin_views.modificar_admin),
+    (r'^administrativos/modificar/(\d{1,2})/$', admin_views.modificar_admin),
+    (r'^administrativos/guardar/$', admin_views.guardar_cambios_admin),
+    (r'^administrativos/guardar/(\d{1,2})/$', admin_views.guardar_cambios_admin),
+    (r'^administrativos/borrar/$', admin_views.borrar_admin),
+    (r'^administrativos/borrar/(\d{1,2})/$', admin_views.borrar_admin),
+    (r'^administrativos/borrado/$', admin_views.borrado_admin),
+    (r'^administrativos/borrado/(\d{1,2})/$', admin_views.borrado_admin),
+    (r'^administrativos/buscar/$', admin_views.buscar_admins),
 
-    # - Otras Views
-    
+    # - Turnos
+
+    ## - Historia Clinica - ##
+
+    ## - Otras Views - ##
     (r'^usuario-no-autorizado/$', generics_views.no_autorizado),
-
     
 )
 

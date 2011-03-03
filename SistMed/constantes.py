@@ -39,13 +39,21 @@ SOLICITUD_ESTADO_CHOICE = (
 
 
 #nombres grupos
-PACIENTES = 'Pacientes'
-MEDICOS = 'Medicos'
-ADMINISTRATIVOS = 'Administrativos'
+#PACIENTES = 'Pacientes'
+#MEDICOS = 'Medicos'
+#ADMINISTRATIVOS = 'Administrativos'
 
 PACIENTE = 'Paciente'
 MEDICO = 'Medico'
 ADMINISTRATIVO = 'Administrativo'
+
+#permisos
+NIVEL_0 = 0
+NIVEL_1 = 1
+NIVEL_2 = 2
+NIVEL_3 = 3
+
+
 
 
 #ruta del proyecto

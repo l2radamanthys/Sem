@@ -13,7 +13,7 @@ from django.contrib import auth #para login
 from django.contrib.auth.models import User, Group
 
 from GestionTurnos.models import Administrativos, TipoUsuario
-from utils import get_field_css, sexo_choice_expand, get_POST_value
+from utils import get_field_css, sexo_choice_expand, get_POST_value, generar_base_dict
 from constantes import BASE_DIC
 
 
@@ -31,20 +31,10 @@ def nuevo_admin(request):
         - usuarios no registrados
         - medicos
     """
-    plantilla = get_template('administrativo/gestion_turnos/nuevo.html')
-    dict = BASE_DIC.copy()
-
+    plantilla = get_template('administrativos/gestion_turnos/nuevo.html')
+    dict = generar_base_dict(request)
     dict['titulo'] = 'Nuevo Admin'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
+    
     #si se realizo una consulta
     query = int(request.POST.get('query', '0'))
     dict['query'] = query
@@ -109,21 +99,10 @@ def listado_admins(request):
         - usuarios no registrados
         - pacientes
     """
-    plantilla = get_template('administrativo/gestion_turnos/listado.html')
-    dict = BASE_DIC.copy()
-
+    plantilla = get_template('administrativos/gestion_turnos/listado.html')
+    dict = generar_base_dict(request)
     dict['titulo'] = 'Listado Admins'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
-
+   
     listado_admins = []
     band = True
     for admin in Administrativos.objects.all():
@@ -157,20 +136,9 @@ def datos_admin(request, adm_id=-1):
         - pacientes
         - usuarios no registrados
     """
-    plantilla = get_template('administrativo/gestion_turnos/datos.html')
-    dict = BASE_DIC.copy()
-
+    plantilla = get_template('administrativos/gestion_turnos/datos.html')
+    dict = generar_base_dict(request)
     dict['titulo'] = 'Datos Admin'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
 
     adm_id = int(adm_id)
     if adm_id != -1:
@@ -207,19 +175,9 @@ def modificar_admin(request, adm_id=-1):
         - medicos
     """
     plantilla = get_template('administrativos/gestion_turnos/modificar.html')
-    dict = BASE_DIC.copy()
-
-    dict['titulo'] = 'Modificar Datos Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Modificar Datos Admin'
+    
     adm_id = int(adm_id)
     if adm_id != -1:
         #query = int(get_POST_value(request,'query', '0'))
@@ -229,9 +187,9 @@ def modificar_admin(request, adm_id=-1):
         #    pass
         #caso q recien se muestre la pagina
         #else:
+        admin = Administrativos.objects.get(id=adm_id)
         dict['query'] = True
         dict['adm_id'] = adm_id
-        admin = Administrativos.objects.get(id=adm_id)
         dict['nombre'] = admin.user.first_name
         dict['apellido'] = admin.user.last_name
         dict['dni'] = admin.dni
@@ -265,21 +223,10 @@ def guardar_cambios_admin(request, adm_id=-1):
         ----------
         - usuarios no registrados
     """
-    plantilla = get_template('admins/gestion_turnos/guardar.html')
-    dict = BASE_DIC.copy()
-
+    plantilla = get_template('administrativos/gestion_turnos/guardar.html')
+    dict = generar_base_dict(request)
     dict['titulo'] = 'Guardar Datos Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
-
-
+    
     query = int(get_POST_value(request,'query', '0'))
     dict['query'] = query
 
@@ -327,22 +274,11 @@ def borrar_admin(request, adm_id=-1):
         - admins
         - usuarios no registrados
     """
-    plantilla = get_template('admins/gestion_turnos/borrar.html')
-    dict = BASE_DIC.copy()
-
-    dict['titulo'] = 'Borrar Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
+    plantilla = get_template('administrativos/gestion_turnos/borrar.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Borrar Admin'
 
     adm_id = int(adm_id)
-
     if adm_id != -1:
         admin = Administrativos.objects.get(id=adm_id)
         dict['query'] = True
@@ -374,10 +310,10 @@ def borrado_admin(request, adm_id=-1):
         - admins
         - usuarios no registrados
     """
-    plantilla = get_template('admins/gestion_turnos/borrar.html')
-    dict = BASE_DIC.copy()
+    plantilla = get_template('administrativos/gestion_turnos/borrar.html')
+    dict = generar_base_dict(request)
 
-    dict['titulo'] = 'Borrar Paciente'
+    dict['titulo'] = 'Borrar Admin'
     #usuario estado
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
@@ -402,8 +338,6 @@ def borrado_admin(request, adm_id=-1):
         dict['msj_class'] = 'msj_error'
         dict['mensaje'] = 'Error Operacion No valida'
 
-
-
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -423,19 +357,10 @@ def buscar_admins(request):
         - admins
         - usuarios no registrados
     """
-    plantilla = get_template('admins/gestion_turnos/buscar.html')
-    dict = BASE_DIC.copy()
+    plantilla = get_template('administrativos/gestion_turnos/buscar.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Buscar Admin'
 
-    dict['titulo'] = 'Buscar Paciente'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
 
     #tipo de busqueda
     #1 usuario

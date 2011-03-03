@@ -29,15 +29,16 @@
             <td class='celda_izquierda' valign='top' width='150px' >
                 {% block cont_sec %}
                 {% endblock %}
-				
-				<div class='menu'>
-					<h3>Secciones</h3>
-					<a href='/'>Inicio</a><br />
-					<a href=''>Gestion Turnos</a><br />
-					<a href=''>Historia Clinica</a>
+
+                <div class='menu'>
+                <h3>Secciones</h3>
+                <a href='/'>Inicio</a><br />
+                <a href='/'>Gestion Turnos</a><br />
+                <a href='/'>Historia Clinica</a>
                 </div>
+
                 
-                {% if user_autenticado %}
+                {% if nivel_1 %}
 					<div class='menu'>
 					<h3>Usuario</h3>
 					<a href='/accounts/datos-personales/'>Datos Personales</a><br />
@@ -45,24 +46,36 @@
 					<a href='/accounts/change_password/'>Cambio Contraseña</a><br />
 					</div>
 				{% endif %}
-				
-				<div class='menu'>
-                <h3>Pacientes</h3>
-                <a href='/pacientes/buscar/'>buscar</a><br />
-                <a href='/pacientes/listado/'>Listado</a><br />
-                <a href='/pacientes/nuevo/'>Nuevo</a><br />
-				</div>
-	
-				<div class='menu'>
-				<h3>Medicos</h3>
-				</div>
-				
-				<div class='menu'>
-                <h3>Administrativos</h3>
-                <a href='/administrativos/buscar/'>buscar</a><br />
-                <a href='/administrativos/listado/'>Listado</a><br />
-                <a href='/administrativos/nuevo/'>Nuevo</a><br />
-				</div>
+
+                {% if nivel_2 %}
+                    <div class='menu'>
+                    <h3>Pacientes</h3>
+                    <a href='/pacientes/buscar/'>buscar</a><br />
+                    <a href='/pacientes/listado/'>Listado</a><br />
+                    <a href='/pacientes/nuevo/'>Nuevo</a><br />
+                    </div>
+                {% endif %}
+                
+                
+                    <div class='menu'>
+                    <h3>Medicos</h3>
+                {% if nivel_3 %}
+                    <a href='/medicos/buscar/'>buscar</a><br />
+                {% endif %}
+                    <a href='/medicos/listado/'>Listado</a><br />
+                {% if nivel_3 %}
+                    <a href='/medicos/nuevo/'>Nuevo</a><br />
+                {% endif %}
+                    </div>
+
+                {% if nivel_3 %}
+                    <div class='menu'>
+                    <h3>Administrativos</h3>
+                    <a href='/administrativos/buscar/'>buscar</a><br />
+                    <a href='/administrativos/listado/'>Listado</a><br />
+                    <a href='/administrativos/nuevo/'>Nuevo</a><br />
+                    </div>
+                {% endif %}
 				
 				<div class='menu'>
 				<h3>Menu</h3>
@@ -86,8 +99,26 @@
 
         <tr>
             <td class='celda_inferior' colspan='2'>
-                <p>Pie de pagina</p>
+                {% if nivel_1 %}
+                    <span class='nivel_true'><label>Nivel 1</label></span>
+                {% else %}
+                    <span class='nivel_false'><label>Nivel 1</label></span>
+                {% endif %}
+
+                {% if nivel_2 %}
+                    <span class='nivel_true'><label>Nivel 2</label></span>
+                {% else %}
+                    <span class='nivel_false'><label>Nivel 2</label></span>
+                {% endif %}
+
+                {% if nivel_3 %}
+                    <span class='nivel_true'><label>Nivel 3</label></span>
+                {% else %}
+                    <span class='nivel_false'><label>Nivel 3</label></span>
+                {% endif %}
             </td>
+
+            
         </tr>
 
     </table>

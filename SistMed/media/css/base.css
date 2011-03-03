@@ -200,7 +200,7 @@ a{
     text-align: left;
     border-left: 5px solid #dfdfdf;
     background-color: #efefef;
-    padding-bottom: 4px;
+    padding-bottom: 0px;
 }
 
 .menu h3{
@@ -209,9 +209,9 @@ a{
     font-size: 13px;
     font-weight: bold;
     text-align: center;
-    padding-bottom: 2px;
+    padding-bottom: 0px;
     border-bottom: 2px solid rgb(220,220,220);
-    
+    margin-bottom: 0px;
 }
 
 .menu p{
@@ -226,3 +226,28 @@ a{
     color: #3D98C5
 }
 
+.nivel_true {
+    background-color: #0000FF;
+    color: #FFFFFF;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.nivel_false {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.sup_izq {
+    background-image: url('../imagenes/logo.png');
+}
+
+.sup_der {
+    background-image: url('../imagenes/logo.png');
+}
+
+.sup_cen {
+    background-image: url('../imagenes/logo.png');
+}
