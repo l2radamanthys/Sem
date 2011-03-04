@@ -13,7 +13,7 @@ from settings import MEDIA_ROOT
 
 import generics_views
 from GestionTurnos import pacientes_views, admin_views
-
+from GestionTurnos import medicos_views, especialidades_views
 
 urlpatterns = patterns('',
     # Example:
@@ -57,7 +57,7 @@ urlpatterns = patterns('',
     (r'^pacientes/buscar/$', pacientes_views.buscar_pacientes),
 
     # - Medicos Views
-    #(r'^medicos/nuevo/$', medicos_views.nuevo_medico),
+    (r'^medicos/nuevo/$', medicos_views.nuevo_medico),
     #(r'^medicos/listado/$', medicos_views.listado_medico),
     #(r'^medicos/datos/$', medicos_views.datos_medico),
     #(r'^medicos/datos/(\d{1,2})/$', medicos_views.datos_medico),
@@ -70,6 +70,14 @@ urlpatterns = patterns('',
     #(r'^medicos/borrado/$', medicos_views.borrado_medico),
     #(r'^medicos/borrado/(\d{1,2})/$', medicos_views.borrado_medico),
     #(r'^medicos/buscar/$', medicos_views.buscar_pacientes),
+
+    # - Medicos - Especialidades
+    (r'^medicos/especialidades/agregar/$', especialidades_views.agregar),
+    (r'^medicos/especialidades/listado/$', especialidades_views.listado),
+    #(r'^medicos/especialidades/modificar/$', ),
+    #(r'^medicos/especialidades/borrar/$', ),
+    #(r'^medicos/especialidades/asignar/$', ),
+
 
     # - Administrativos Views
     (r'^administrativos/nuevo/$', admin_views.nuevo_admin),
@@ -85,6 +93,8 @@ urlpatterns = patterns('',
     (r'^administrativos/borrado/$', admin_views.borrado_admin),
     (r'^administrativos/borrado/(\d{1,2})/$', admin_views.borrado_admin),
     (r'^administrativos/buscar/$', admin_views.buscar_admins),
+
+
 
     # - Turnos
 

@@ -16,55 +16,67 @@
         </tr>
         <tr>
             <td><label>Usuario:</label></td>
-            <td><input type="text" name="usuario" maxlength=""/></td>
+            <td><input type="text" name="usuario" maxlength="" class='edt_m'/></td>
         </tr>
         <tr>
             <td><label>Contraseña:</label></td>
-            <td><input type="password" name="password_1" maxlength=""/></td>
+            <td><input type="password" name="password_1" maxlength=""class='edt_m'/></td>
         </tr>
         <tr>
             <td><label>Repetir Contraseña:</label></td>
-            <td><input type="password" name="password_2" maxlength=""/></td>
+            <td><input type="password" name="password_2" maxlength=""class='edt_m'/></td>
         </tr>
 
         <tr>
             <td colspan='2' class='tbl_separador'>
-            <h5>Datos Paciente</h5>
+            <h5>Datos Medico</h5>
             </td>
         </tr>
+
         <tr>
             <td><label>Nombre:</label></td>
-            <td><input type="text" name="nombre" maxlength=""/></td>
+            <td><input type="text" name="nombre" maxlength=""class='edt_m'/></td>
         </tr>
 
         <tr>
             <td><label>Apellido:</label></td>
-            <td><input type="text" name="apellido" maxlength=""/></td>
+            <td><input type="text" name="apellido" maxlength=""class='edt_m'/></td>
         </tr>
 
         <tr>
             <td><label>DNI:</label></td>
-            <td><input type="text" name="dni" maxlength=""/></td>
+            <td><input type="text" name="dni" value='0' maxlength=""class='edt_m'/></td>
+        </tr>
+
+        <tr>
+            <td><label>Matricula:</label></td>
+            <td><input type="text" name="matricula" value='0' maxlength="" class='edt_m'/></td>
         </tr>
 
         <tr>
             <td><label>Direccion:</label></td>
-            <td><input type="text" name="apellido" maxlength=""/></td>
+            <td><input type="text" name="direccion" maxlength=""class='edt_m'/></td>
         </tr>
 
         <tr>
             <td><label>Telefono:</label></td>
-            <td><input type="text" name="apellido" maxlength=""/></td>
+            <td><input type="text" name="telefono" maxlength=""class='edt_m'/></td>
         </tr>
 
         <tr>
             <td><label>Email:</label></td>
-            <td><input type="text" name="apellido" maxlength=""/></td>
+            <td><input type="text" name="email" maxlength=""class='edt_m'/></td>
         </tr>
 
         <tr>
             <td><label>Sexo:</label></td>
-            <td><input type="text" name="apellido" maxlength=""/></td>
+            <td>
+            <select name="sexo">
+                <option value='-'>-------</option>
+                <option value='M'>Masculino</option>
+                <option value='F'>Femenino</option>
+            </select>
+            </td>
         </tr>
 
         <tr>
@@ -82,13 +94,12 @@
         </tbody>
     </table>
     </form>
-    </div>
 
     {% if query %}
         <div class="{{ msj_class }}">
             <p>{{ mensaje }}</p>
         </div>
     {% endif %}
-
+    </div>
 
 {% endblock %}

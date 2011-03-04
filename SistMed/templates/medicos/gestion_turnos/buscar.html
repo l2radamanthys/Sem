@@ -43,13 +43,13 @@
             <td>Modificar</td>
             <td>Borra</td>
         </tr>
-        {% for pac in listado_pacientes %}
-            <tr class='{{ pac|slice:"3:"|first }}'>
-                <td>{{ pac|slice:"1:"|first }}</td>
-                <td>{{ pac|slice:"2:"|first }}</td>
-                <td><a href='/pacientes/datos/{{ pac|first }}/'>Ver</a></td>
-                <td><a href='/pacientes/modificar/{{ pac|first }}/'>Modificar</a></td>
-                <td><a href='/pacientes/borrar/{{ pac|first }}/'>Borrar</a></td>
+        {% for adm in listado_admins %}
+            <tr class='{{ adm|slice:"3:"|first }}'>
+                <td>{{ adm|slice:"1:"|first }}</td>
+                <td>{{ adm|slice:"2:"|first }}</td>
+                <td><a href='/admnistrativos/datos/{{ adm|first }}/'>Ver</a></td>
+                <td><a href='/admnistrativos/modificar/{{ adm|first }}/'>Modificar</a></td>
+                <td><a href='/admnistrativos/borrar/{{ adm|first }}/'>Borrar</a></td>
             </tr>
         {% endfor %}
     </tbody>

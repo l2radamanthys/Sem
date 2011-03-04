@@ -37,15 +37,21 @@
                 <a href='/'>Historia Clinica</a>
                 </div>
 
-                
                 {% if nivel_1 %}
-					<div class='menu'>
-					<h3>Usuario</h3>
-					<a href='/accounts/datos-personales/'>Datos Personales</a><br />
-					<a href='/accounts/modificar-datos-personales/'>Modificar Datos</a><br />
-					<a href='/accounts/change_password/'>Cambio Contraseña</a><br />
-					</div>
-				{% endif %}
+                    <div class='menu'>
+                    <h3>Usuario</h3>
+                    <a href='/accounts/datos-personales/'>Datos Personales</a><br />
+                    <a href='/accounts/modificar-datos-personales/'>Modificar Datos</a><br />
+                    <a href='/accounts/change_password/'>Cambio Contraseña</a><br />
+                    </div>
+                {% endif %}
+
+                {% if nivel_0 %}
+                    <div class='menu'>
+                    <h3>Pacientes</h3>
+                    <a href='/pacientes/nuevo/'>Nuevo</a><br />
+                     </div>
+                {% endif %}
 
                 {% if nivel_2 %}
                     <div class='menu'>
@@ -55,8 +61,7 @@
                     <a href='/pacientes/nuevo/'>Nuevo</a><br />
                     </div>
                 {% endif %}
-                
-                
+
                     <div class='menu'>
                     <h3>Medicos</h3>
                 {% if nivel_3 %}
@@ -76,15 +81,21 @@
                     <a href='/administrativos/nuevo/'>Nuevo</a><br />
                     </div>
                 {% endif %}
-				
-				<div class='menu'>
-				<h3>Menu</h3>
-				</div>
-				
+
+                <div class='menu'>
+                <h3>Expecialidades</h3>
+                    <a href='/medicos/especialidades/agregar'>Agregar</a><br />
+                    <a href='/medicos/especialidades/listado'>Listado</a>
+                </div>
+
+                <div class='menu'>
+                <h3>Menu</h3>
+                </div>
+
                 <br />
                 <br />
                 <div class='{{ login_status }}'>
-					<label>{{ user }}</label>
+                    <label>{{ user }}</label>
                     <a href="{{ url_action }}"><img src='/site_media/imagenes/{{ login_img }}' alt='{{ login_status }}' border='0px'/></a>
                 </div>
             </td>
@@ -99,26 +110,33 @@
 
         <tr>
             <td class='celda_inferior' colspan='2'>
-                {% if nivel_1 %}
-                    <span class='nivel_true'><label>Nivel 1</label></span>
+                {% if nivel_0 %}
+                    <img src='/site_media/imagenes/icon-yes.gif'>
                 {% else %}
-                    <span class='nivel_false'><label>Nivel 1</label></span>
+                    <img src='/site_media/imagenes/icon-no.gif'>
+                {% endif %}
+
+                {% if nivel_1 %}
+                    <img src='/site_media/imagenes/icon-yes.gif'>
+                {% else %}
+                    <img src='/site_media/imagenes/icon-no.gif'>
                 {% endif %}
 
                 {% if nivel_2 %}
-                    <span class='nivel_true'><label>Nivel 2</label></span>
+                    <img src='/site_media/imagenes/icon-yes.gif'>
                 {% else %}
-                    <span class='nivel_false'><label>Nivel 2</label></span>
+                    <img src='/site_media/imagenes/icon-no.gif'>
                 {% endif %}
 
                 {% if nivel_3 %}
-                    <span class='nivel_true'><label>Nivel 3</label></span>
+                    <img src='/site_media/imagenes/icon-yes.gif'>
                 {% else %}
-                    <span class='nivel_false'><label>Nivel 3</label></span>
+                    <img src='/site_media/imagenes/icon-no.gif'>
                 {% endif %}
+
             </td>
 
-            
+
         </tr>
 
     </table>

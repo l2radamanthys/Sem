@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block cont_secundario %}
+{% endblock %}
+
+{% block contenido %}
+    <div align='center'>
+    {% if nivel_2 %}
+        <table>
+            <tbody>
+            <tr class='table_title'>
+                <td width='200px'>Nombre</td>
+                <td>Renombrar</td>
+                <td>Borra</td>
+            </tr>
+        {% for esp in especialidades %}
+            <tr class='{{ esp|slice:"2:"|first }}'>
+            <td>{{ esp|slice:"1:"|first }}</td>
+            <td><a href='/medicos/especialidades/modificar/{{ esp|slice:"0:"|first }}'>Editar</a></td>
+            <td><a href='/medicos/especialidades/borrar/{{ esp|slice:"0:"|first }}'>Borrar</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        <p>No tienes permisos para acceder a esta area.</p>
+    {% endif %}
+    </div>
+{% endblock %}

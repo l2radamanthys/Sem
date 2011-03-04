@@ -13,8 +13,8 @@
     <div align='center'>
     {% if query %}
         <p>¿Esta seguro que desea borrar el siguiente Paciente:<strong>{{ nombre }} </strong>?</p>
-        <a class='boton' href='/pacientes/borrado/{{ pac_id }}/'>Borrar</a>
-        <a class='boton' href='/pacientes/listado/'>Cancelar</a>
+        <a class='boton' href='/administrativos/borrado/{{ adm_id }}/'>Borrar</a>
+        <a class='boton' href='/administrativos/listado/'>Cancelar</a>
     {% else %}
         <div class="{{ msj_class }}">
             <p>{{ mensaje }}</p>

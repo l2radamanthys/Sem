@@ -1,6 +1,6 @@
 body {
     background-color: rgb(0, 0, 0);
-    font-family: sans-serif;
+    font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     font-size: 90%;
 }
 
@@ -20,7 +20,6 @@ h1 {
 a{
     text-decoration: None;
 }
-
 
 
 /*contenedores principales*/
@@ -88,9 +87,13 @@ a{
     behavior:url(border-radius.htc);
 }
 
+.cont_flotante label{
+    font-size: 75%;
+}
+
 .contenedor {
     /*margin-top: 100px;*/
-    background-color: #ECEFF2;
+    background-color: #F4F6F8;
     width: 300px;
     /*border: 1px solid #B3B4B5;*/
     -moz-border-left-radius: 10px;
@@ -148,19 +151,32 @@ a{
 }
 
 /* filas de colores de las tablas */
+
 .table_title {
-    background-color: #649CEC;
+    background-color: #DCE5E8;
     font-weight: bold;
+    color: #4985C1;
 }
 
 .field_a {
-    background-color: #AED2DC;
+    background-color: #EEE;
 }
 
 .field_b {
     /*background-color: #C5DCAE;*/
-    background-color: #D4D4D4;
+    background-color: #DFF1F7;
 }
+
+.field_a a, .field_b a {
+    color: #5b80b2;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+.field_a a:hover, .field_b a:hover {
+    color: #1E90FF;
+}
+
 
 /* clase para simular un boton */
 .boton {
@@ -250,4 +266,9 @@ a{
 
 .sup_cen {
     background-image: url('../imagenes/logo.png');
+}
+
+/* copy */
+p img, h1 img, h2 img, h3 img, h4 img, td img {
+    vertical-align: middle;
 }

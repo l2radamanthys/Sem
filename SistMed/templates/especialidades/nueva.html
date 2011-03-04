@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block cont_secundario %}
+{% endblock %}
+
+{% block contenido %}
+    <div align='center'>
+    {% if nivel_2 %}
+        <form action='/medicos/especialidades/agregar/' method='post'>
+            <label>Expecialidad</label>
+            <input type='text' name="nombre" value=""/><br />
+            <input type="hidden" name="query" value="1"/>
+            <input type='Submit' value='Agregar' />
+        </form>
+
+        {% if query %}
+            <br /><br />
+            <div class='{{ msj_class }}'>
+            <p>{{ mensaje }} </p>
+            </div>
+        {% endif %}
+    {% else %}
+        <p>No tienes permisos para acceder a esta area.</p>
+    {% endif %}
+    </div>
+{% endblock %}

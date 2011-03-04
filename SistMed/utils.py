@@ -88,18 +88,22 @@ def insert_permisos_key(request, dict):
 
     """
     rol = request.session.get('usuario_rol', '')
+    dict['nivel_0'] = True
     dict['nivel_1'] = False
     dict['nivel_2'] = False
     dict['nivel_3'] = False
 
     if rol == PACIENTE:
+        dict['nivel_0'] = False
         dict['nivel_1'] = True
 
     elif rol == MEDICO:
+        dict['nivel_0'] = False
         dict['nivel_1'] = True
         dict['nivel_2'] = True
 
     elif rol == ADMINISTRATIVO:
+        dict['nivel_0'] = False
         dict['nivel_1'] = True
         dict['nivel_2'] = True
         dict['nivel_3'] = True
