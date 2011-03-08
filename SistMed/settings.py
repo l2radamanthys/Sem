@@ -90,6 +90,10 @@ INSTALLED_APPS = (
 
     #mis app
     'SistMed.GestionTurnos',
+    #'SistMed.HistoriaClinica',
+
+    #utils
+    'django_extensions',
 )
 
 
