@@ -58,7 +58,9 @@ urlpatterns = patterns('',
 
     # - Medicos Views
     (r'^medicos/nuevo/$', medicos_views.nuevo_medico),
-    #(r'^medicos/listado/$', medicos_views.listado_medico),
+    (r'^medicos/listado/$', medicos_views.listado_medicos),
+    (r'^medicos/agregar-especialidades/$', medicos_views.agregar_especialidad),
+    (r'^medicos/agregar-especialidades/(\d{1,2})/$', medicos_views.agregar_especialidad),
     #(r'^medicos/datos/$', medicos_views.datos_medico),
     #(r'^medicos/datos/(\d{1,2})/$', medicos_views.datos_medico),
     #(r'^medicos/modificar/$', medicos_views.modificar_medico),

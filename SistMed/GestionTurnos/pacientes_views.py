@@ -13,7 +13,7 @@ from django.contrib.auth.models import User, Group
 
 from GestionTurnos.models import Pacientes, TipoUsuario
 from utils import get_field_css, sexo_choice_expand, get_POST_value, generar_base_dict
-from constantes import BASE_DIC
+from constantes import BASE_DIC, MSJ_OK, MSJ_ERROR
 
 
 def nuevo_paciente(request):
@@ -68,11 +68,11 @@ def nuevo_paciente(request):
             )
             #guardamos
             paciente.save()
-            dict['msj_class'] = 'msj_ok'
+            dict['msj_class'] = MSJ_OK
             dict['mensaje'] = "Se ha Agregado: %s" %username
             
         else:
-            dict['msj_class'] = 'msj_error'
+            dict['msj_class'] = MSJ_ERROR
             dict['mensaje'] = "Error el nombre de usuario %s, no esta disponible" %username
 
     contexto = Context(dict)
@@ -194,7 +194,7 @@ def modificar_paciente(request, pac_id=-1):
 
     else:
         dict['query'] = False
-        dict['msj_class'] = 'msj_error'
+        dict['msj_class'] = MSJ_ERROR
         dict['mensaje'] = 'Error Datos Invalido'
 
     contexto = Context(dict)
@@ -239,12 +239,12 @@ def guardar_cambios_paciente(request, pac_id=-1):
         #redireciono a la pagina q muestra los datos del paciente
         #HttpResponseRedirect("/pacientes/datos/%d/" %pac_id)
         dict['pac_id'] = pac_id
-        dict['msj_class'] = 'msj_ok'
+        dict['msj_class'] = MSJ_OK
         dict['mensaje'] = 'Cambios Realizados Correctamente'
 
     else:
         #dict['query'] = False
-        dict['msj_class'] = 'msj_error'
+        dict['msj_class'] = MSJ_ERROR
         dict['mensaje'] = 'Error Datos Invalido'
 
 
@@ -281,7 +281,7 @@ def borrar_paciente(request, pac_id=-1):
 
     else:
         dict['query'] = False
-        dict['msj_class'] = 'msj_error'
+        dict['msj_class'] = MSJ_ERROR
         dict['mensaje'] = 'Error Datos Invalido'
 
 
@@ -319,7 +319,7 @@ def borrado_paciente(request, pac_id=-1):
 
     else:
         dict['query'] = False
-        dict['msj_class'] = 'msj_error'
+        dict['msj_class'] = MSJ_ERROR
         dict['mensaje'] = 'Error Operacion No valida'
 
 

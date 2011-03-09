@@ -11,9 +11,9 @@ from django.template import Context
 from django.contrib import auth #para login
 from django.contrib.auth.models import User, Group
 
-from GestionTurnos.models import Medicos, TipoUsuario
+from GestionTurnos.models import Medicos, TipoUsuario, Expecialidades, ExpecialidadesMedicos
 from utils import get_field_css, sexo_choice_expand, get_POST_value, generar_base_dict
-from constantes import BASE_DIC
+from constantes import BASE_DIC, MSJ_OK, MSJ_ERROR
 
 def nuevo_medico(request):
     """
@@ -68,12 +68,103 @@ def nuevo_medico(request):
             )
             #guardamos
             medico.save()
-            dict['msj_class'] = 'msj_ok'
+            dict['msj_class'] = MSJ_OK
             dict['mensaje'] = "Se ha Agregado: %s" %username
 
         else:
-            dict['msj_class'] = 'msj_error'
+            dict['msj_class'] = MSJ_ERROR
             dict['mensaje'] = "Error el nombre de usuario %s, no esta disponible" %username
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def listado_medicos(request):
+    """
+        Vista que permite mostrar el listado de pacientes
+
+        pueden acceder
+        --------------
+        - medicos
+        -administrativos
+
+        sin acceso
+        ----------
+        - usuarios no registrados
+        - pacientes
+    """
+    plantilla = get_template('medicos/gestion_turnos/listado.html')
+    dict = dict = generar_base_dict(request)
+    dict['titulo'] = 'Listado Medicos'
+
+    listado_medicos = []
+    band = True
+    for medico in Medicos.objects.all():
+        id = medico.id
+        username = medico.username()
+        nombre = medico.nombre_completo()
+        css = get_field_css(band)
+        band = not(band)
+        listado_medicos.append([id, username, nombre, css])
+
+
+    dict['listado_medicos'] = listado_medicos
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def agregar_especialidad(request, med_id=-1):
+    """
+    """
+    plantilla = get_template('medicos/gestion_turnos/agregar-especialidad.html')
+    dict = dict = generar_base_dict(request)
+    dict['titulo'] = 'Medico - Agregar Expecialidad'
+
+    #si se realizo una consulta
+    query = int(request.POST.get('query', '0'))
+    dict['query'] = query
+    #id pasado
+    med_id = int(med_id)
+
+    if med_id != -1:
+        medico = Medicos.objects.get(id=med_id)
+        dict['med_name'] = medico.nombre_completo()
+
+        #agregamos la especialidad al medico
+        if query:
+            #medico = Medicos.objects.get(id=med_id)
+            especialidad = Expecialidades.objects.get(id=get_POST_value(request,'especialidad','-1','-1'))
+            esp_x_med = ExpecialidadesMedicos(codigo_medico=medico, cod_expecialidad=especialidad)
+            esp_x_med.save()
+
+            dict['msj_class'] = MSJ_OK
+            dict['mensaje'] = 'Se Asigno la Especialidad %s' %especialidad.nombre
+            
+
+
+        
+        especialidades_disp = [] #las q pueden ser agregadas
+        especialidades_no_disp = [] #las q ya tiene el medico
+
+        #esp no disponibles
+        band = True
+        for especialidad in ExpecialidadesMedicos.objects.filter(codigo_medico__id=med_id):
+            especialidades_no_disp.append((especialidad.id, especialidad.cod_expecialidad.nombre,get_field_css(band)))
+            band = not(band)
+
+        #esp disponibles
+        for esp in Expecialidades.objects.all().order_by('nombre'):
+            especialidades_disp.append((esp.id, esp.nombre))
+
+        dict['med_exp'] = especialidades_no_disp
+        dict['especialidades'] = especialidades_disp
+
+    else:
+        pass
+
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
