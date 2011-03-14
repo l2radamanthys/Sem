@@ -197,23 +197,27 @@ a{
 }
 
 
-/* clase para simular un boton */
+/* inicio fanci boton */
 .boton {
     background-color: #4D4D4D;
     color: #FFF;
-    font-family: verdana, arial, sans-serif;
+    font-family: Verdana, Arial, sans-serif;
     font-size: 9pt;
     text-decoration: None;
     padding-top: 1px;
     padding-bottom: 1px;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
     margin: 1px;
 
     border-top: 2px solid #666;
     border-bottom: 2px solid #333;
     border-left: 2px solid #666;
     border-right: 2px solid #333;
+
+    -moz-border-left-radius: 5px;
+    -webkit-border-radius: 5px;
+    behavior:url(border-radius.htc);
 }
 
 .boton:hover {
@@ -223,6 +227,8 @@ a{
     border-right: 2px solid #cccccc;
     border-left: 2px solid #666666;
 }
+/* fin fanci boton */
+
 
 /*elementos de formulario*/
 .edt_c, .edt_m, .edt_g {
