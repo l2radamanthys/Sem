@@ -13,7 +13,7 @@
     </title>
 
     <link type="text/css" rel="stylesheet" media="all" href="{{ css_template }}">
-    <!--script language="JavaScript" type="text/javascript" src=""></script -->
+    <script language="JavaScript" type="text/javascript" src="/site_media/scripts/utils.js"></script>
 </head>
 
 <body>
@@ -30,66 +30,81 @@
                 {% block cont_sec %}
                 {% endblock %}
 
-                <div class='menu'>
-                <h3>Secciones</h3>
-                <a href='/'>Inicio</a><br />
-                <a href='/'>Gestion Turnos</a><br />
-                <a href='/'>Historia Clinica</a>
+                <span class='title_menu'><a onClick="desplegar('menu_1')">Secciones</a></span>
+                <div id='menu_1' class='nav_menu'>
+                <ul>
+                    <li><a href='/'>Inicio</a><li/>
+                    <li><a href='/'>Gestion Turnos</a><li/>
+                    <li><a href='/'>Historia Clinica</a><li/>
+                </ul>
                 </div>
 
                 {% if nivel_1 %}
-                    <div class='menu'>
-                    <h3>Usuario</h3>
-                    <a href='/accounts/datos-personales/'>Datos Personales</a><br />
-                    <a href='/accounts/modificar-datos-personales/'>Modificar Datos</a><br />
-                    <a href='/accounts/change_password/'>Cambio Contraseña</a><br />
+                    <span class='title_menu'><a onClick="desplegar('menu_2')">Usuario</a></span>
+                    <div id='menu_2' class='nav_menu'>
+                    <ul>
+                    <li><a href='/accounts/datos-personales/'>Datos Personales</a><li/>
+                    <li><a href='/accounts/modificar-datos-personales/'>Modificar Datos</a><li/>
+                    <li><a href='/accounts/change_password/'>Cambio Contraseña</a><li/>
+                    </ul>
                     </div>
                 {% endif %}
 
                 {% if nivel_0 %}
-                    <div class='menu'>
-                    <h3>Pacientes</h3>
-                    <a href='/pacientes/nuevo/'>Nuevo</a><br />
-                     </div>
+                    <span class='title_menu'><a onClick="desplegar('menu_3')">Pacientes</a></span>
+                    <div id='menu_3' class='nav_menu'>
+                    <ul>
+                        <li><a href='/pacientes/nuevo/'>Nuevo</a><li/>
+                    </ul>
                 {% endif %}
 
                 {% if nivel_2 %}
-                    <div class='menu'>
-                    <h3>Pacientes</h3>
-                    <a href='/pacientes/buscar/'>buscar</a><br />
-                    <a href='/pacientes/listado/'>Listado</a><br />
-                    <a href='/pacientes/nuevo/'>Nuevo</a><br />
+                    <span class='title_menu'><a onClick="desplegar('menu_3')">Pacientes</a></span>
+                    <div id='menu_3' class='nav_menu'>
+                    <ul>
+                    <li><a href='/pacientes/buscar/'>buscar</a><li/>
+                    <li><a href='/pacientes/listado/'>Listado</a><li/>
+                    <li><a href='/pacientes/nuevo/'>Nuevo</a><li/>
+                    </ul>
                     </div>
                 {% endif %}
 
-                    <div class='menu'>
-                    <h3>Medicos</h3>
+                    <span class='title_menu'><a onClick="desplegar('menu_4')">Medicos</a></span>
+                    <div id='menu_4' class='nav_menu'>
+                    <ul>
                 {% if nivel_3 %}
-                    <a href='/medicos/buscar/'>buscar</a><br />
+                   <li><a href='/medicos/buscar/'>buscar</a><li/>
                 {% endif %}
-                    <a href='/medicos/listado/'>Listado</a><br />
+                    <li><a href='/medicos/listado/'>Listado</a><li/>
                 {% if nivel_3 %}
-                    <a href='/medicos/nuevo/'>Nuevo</a><br />
+                    <li><a href='/medicos/nuevo/'>Nuevo</a><li/>
                 {% endif %}
+                    </ul>
                     </div>
 
                 {% if nivel_3 %}
-                    <div class='menu'>
-                    <h3>Administrativos</h3>
-                    <a href='/administrativos/buscar/'>buscar</a><br />
-                    <a href='/administrativos/listado/'>Listado</a><br />
-                    <a href='/administrativos/nuevo/'>Nuevo</a><br />
+                    <span class='title_menu'><a onClick="desplegar('menu_5')">Administrativos</a></span>
+                    <div id='menu_5' class='nav_menu'>
+                    <ul>
+                    <li><a href='/administrativos/buscar/'>buscar</a><li/>
+                    <li><a href='/administrativos/listado/'>Listado</a><li/>
+                    <li><a href='/administrativos/nuevo/'>Nuevo</a><li/>
+                    </ul>
                     </div>
                 {% endif %}
 
-                <div class='menu'>
-                <h3>Expecialidades</h3>
-                    <a href='/medicos/especialidades/agregar'>Agregar</a><br />
-                    <a href='/medicos/especialidades/listado'>Listado</a>
+                <span class='title_menu'><a onClick="desplegar('menu_6')">Especialidades</a></span>
+                    <div id='menu_6' class='nav_menu'>
+                    <ul>
+                    <li><a href='/medicos/especialidades/agregar'>Agregar</a><li/>
+                    <li><a href='/medicos/especialidades/listado'>Listado</a><li/>
+                    </ul>
                 </div>
 
-                <div class='menu'>
-                <h3>Menu</h3>
+                <span class='title_menu'><a onClick="desplegar('menu_7')">Menu</a></span>
+                    <div id='menu_7' class='nav_menu'>
+                    <ul>
+                    </ul>
                 </div>
 
                 <br />

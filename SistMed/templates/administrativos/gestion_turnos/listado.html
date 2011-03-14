@@ -18,9 +18,9 @@
             <tr class='{{ adm|slice:"3:"|first }}'>
                 <td>{{ adm|slice:"1:"|first }}</td>
                 <td>{{ adm|slice:"2:"|first }}</td>
-                <td><a href='/administrativos/datos/{{ adm|first }}/'>Ver</a></td>
-                <td><a href='/administrativos/modificar/{{ adm|first }}/'>Modificar</a></td>
-                <td><a href='/administrativos/borrar/{{ adm|first }}/'>Borrar</a></td>
+                <td><a href='/administrativos/datos/{{ adm|first }}/'><img src='/site_media/imagenes/icon_ver.png'></a></td>
+                <td><a href='/administrativos/modificar/{{ adm|first }}/'><img src='/site_media/imagenes/icon_edit.png'></a></td>
+                <td><a href='/administrativos/borrar/{{ adm|first }}/'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
             </tr>
         {% endfor %}
     </tbody>

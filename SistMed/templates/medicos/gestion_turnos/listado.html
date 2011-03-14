@@ -15,12 +15,12 @@
             <td>Borra</td>
         </tr>
         {% for med in listado_medicos %}
-            <tr class='{{ adm|slice:"3:"|first }}'>
+            <tr class='{{ med|slice:"3:"|first }}'>
                 <td>{{ med|slice:"1:"|first }}</td>
                 <td>{{ med|slice:"2:"|first }}</td>
-                <td><a href='/medicos/datos/{{ med|first }}/'>Ver</a></td>
-                <td><a href='/medicos/modificar/{{ med|first }}/'>Modificar</a></td>
-                <td><a href='/medicos/borrar/{{ med|first }}/'>Borrar</a></td>
+                <td><a href='/medicos/datos/{{ med|first }}/'><img src='/site_media/imagenes/icon_ver.png'></a></td>
+                <td><a href='/medicos/modificar/{{ med|first }}/'><img src='/site_media/imagenes/icon_edit.png'></a></td>
+                <td><a href='/medicos/borrar/{{ med|first }}/'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
             </tr>
         {% endfor %}
     </tbody>

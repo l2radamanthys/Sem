@@ -5,6 +5,8 @@
 
 {% block contenido %}
 
+
+
 <table style="text-align: center;" width="600px" border="0" cellpadding="0" cellspacing="1">
     <tbody>
         <tr class='table_title'>
@@ -12,15 +14,15 @@
             <td>Nombre y Apellido</td>
             <td>Ver</td>
             <td>Modificar</td>
-            <td>Borra</td>
+            <td>Borrar</td>
         </tr>
         {% for pac in listado_pacientes %}
             <tr class='{{ pac|slice:"3:"|first }}'>
                 <td>{{ pac|slice:"1:"|first }}</td>
                 <td>{{ pac|slice:"2:"|first }}</td>
-                <td><a href='/pacientes/datos/{{ pac|first }}/'>Ver</a></td>
-                <td><a href='/pacientes/modificar/{{ pac|first }}/'>Modificar</a></td>
-                <td><a href='/pacientes/borrar/{{ pac|first }}/'>Borrar</a></td>
+                <td><a href='/pacientes/datos/{{ pac|first }}/'><img src='/site_media/imagenes/icon_ver.png'></a></td>
+                <td><a href='/pacientes/modificar/{{ pac|first }}/'><img src='/site_media/imagenes/icon_edit.png'></a></td>
+                <td><a href='/pacientes/borrar/{{ pac|first }}/'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
             </tr>
         {% endfor %}
     </tbody>

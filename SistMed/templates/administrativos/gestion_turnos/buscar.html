@@ -41,15 +41,15 @@
             <td>Nombre y Apellido</td>
             <td>Ver</td>
             <td>Modificar</td>
-            <td>Borra</td>
+            <td>Borrar</td>
         </tr>
         {% for adm in listado_admins %}
             <tr class='{{ adm|slice:"3:"|first }}'>
                 <td>{{ adm|slice:"1:"|first }}</td>
                 <td>{{ adm|slice:"2:"|first }}</td>
-                <td><a href='/admnistrativos/datos/{{ adm|first }}/'>Ver</a></td>
-                <td><a href='/admnistrativos/modificar/{{ adm|first }}/'>Modificar</a></td>
-                <td><a href='/admnistrativos/borrar/{{ adm|first }}/'>Borrar</a></td>
+                <td><a href='/admnistrativos/datos/{{ adm|first }}/'><img src='/site_media/imagenes/icon_ver.png'></a></td>
+                <td><a href='/admnistrativos/modificar/{{ adm|first }}/'><img src='/site_media/imagenes/icon_edit.png'></a></td>
+                <td><a href='/admnistrativos/borrar/{{ adm|first }}/'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
             </tr>
         {% endfor %}
     </tbody>

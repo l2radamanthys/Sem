@@ -229,76 +229,57 @@ a{
     border:1px solid #67BCC2;
 }
 
-/* menu css */
-.title_menu {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    font-weight: bold;
-    text-decoration: none;
-    Cursor : pointer;
-}
-
-.title_menu a{
-    background-image: url('/site_media/imagenes/bg_off.gif');
-    background-color: transparent;
-    background-position: top left;
-    background-repeat: x-repeat;
-    text-decoration: None;
-    color: #000;
-    padding:6px 5px 0 5px;
-    width: 160px;
-    display: block;
-    height: 24px;
-    margin: 0px;
-}
-
-.title_menu a:hover{
-    background-image:url('/site_media/imagenes/bg_on.gif');
-    color: #FFF;
-}
-
-.nav_menu {
-    /*display: none;*/
-    Cursor : pointer;
-}
-
-.nav_menu, .nav_menu ul, .nav_menu li {
-    margin: 0px;
-    border: 0 none;
-    padding: 0px;
-    /*width: 160px; /*For KHTML*/
-    list-style: none;
-}
-
-.nav_menu a {
+.menu {
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    text-align: left;
+    border-left: 5px solid #dfdfdf;
     background-color: #efefef;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
+    padding-bottom: 0px;
+}
+
+.menu h3{
+    padding-top: 4px;
+    text-transform: uppercase;
+    font-size: 13px;
     font-weight: bold;
-    text-decoration: None;
-    color: #3D98C5;
-    padding-top: 3px;
-    padding-bottom: 2px;
-    padding-left: 6px;
-    border: 1px solid #FFF;
-    border-right: 1px solid #CCC;
-    border-bottom: 1px solid #CCC;
-    width: 160px;
-    display: block;
+    text-align: center;
+    padding-bottom: 0px;
+    border-bottom: 2px solid rgb(220,220,220);
+    margin-bottom: 0px;
+
+    Cursor : pointer;
 }
 
-.nav_menu a:hover {
-    background-color: #8CC8F4;
-    color: #FFF;
+.menu p{
+    font-size: 11px;
+    padding-left: 5px;
+    text-indent: 0px;
 }
 
-.hide_nav_menu {
-    display: none;
+.menu a{
+    font-size: 11px;
+    padding-left: 5px;
+    color: #3D98C5
 }
-/* menu css */
 
+.ocultar_menu {
+    display:none;
+}
 
-/*
+.nivel_true {
+    background-color: #0000FF;
+    color: #FFFFFF;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.nivel_false {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
 .sup_izq {
     background-image: url('../imagenes/logo.png');
 }
@@ -310,7 +291,6 @@ a{
 .sup_cen {
     background-image: url('../imagenes/logo.png');
 }
-*/
 
 /* copy */
 p img, h1 img, h2 img, h3 img, h4 img, td img {

@@ -11,13 +11,13 @@
             <tr class='table_title'>
                 <td width='200px'>Nombre</td>
                 <td>Renombrar</td>
-                <td>Borra</td>
+                <td>Borrar</td>
             </tr>
         {% for esp in especialidades %}
             <tr class='{{ esp|slice:"2:"|first }}'>
             <td>{{ esp|slice:"1:"|first }}</td>
-            <td><a href='/medicos/especialidades/modificar/{{ esp|slice:"0:"|first }}'>Editar</a></td>
-            <td><a href='/medicos/especialidades/borrar/{{ esp|slice:"0:"|first }}'>Borrar</a></td>
+            <td><a href='/medicos/especialidades/modificar/{{ esp|slice:"0:"|first }}'><img src='/site_media/imagenes/icon_edit.png'></a></td>
+            <td><a href='/medicos/especialidades/borrar/{{ esp|slice:"0:"|first }}'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
             </tr>
         {% endfor %}
         </tbody>
