@@ -315,7 +315,7 @@ def borrado_paciente(request, pac_id=-1):
         dict['query'] = True
         dict['nombre'] = paciente.nombre_completo()
         paciente.user.delete()
-        paciente.delete()
+        #paciente.delete()
 
     else:
         dict['query'] = False

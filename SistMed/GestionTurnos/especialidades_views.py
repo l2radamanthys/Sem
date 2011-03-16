@@ -60,3 +60,16 @@ def listado(request):
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
+
+
+def borrar(request, esp_id=-1):
+    """
+        Borrar una Expecialidad Medica
+    """
+    plantilla = get_template('especialidades/borrar.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Borrar Especialidad Medica'
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)

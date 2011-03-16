@@ -1,0 +1,18 @@
+
+Mini Consultas en Django
+------------------------
+
+Un queryset sería el equivalente a un   SELECT
+Un filter sería el equivalente a un     WHERE
+
+-Comandos de Query:
+
+Todo el conjunto (SELECT * )
+    Objeto.objects.all()
+
+Un filtro para incluir  (WHERE)
+    Objeto.objects.filter()
+
+
+Objeto.objects.exclude()
+Objeto.objects.get() -> Busca un solo objeto

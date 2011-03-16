@@ -4,6 +4,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.db import connection, transaction
+
+
 from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE
 
 
@@ -108,12 +111,28 @@ class ExpecialidadesMedicos(models.Model):
     """
     #fk
     codigo_medico = models.ForeignKey(Medicos)
-    cod_expecialidad = models.ForeignKey(Expecialidades)
+    cod_expecialidad = models.ForeignKey(Expecialidades, unique=True)
 
 
     def __str__(self):
         return "%s - %s" %(self.codigo_medico, self.cod_expecialidad)
-    
+
+
+    def esp_not_in_medico_sql(self, med_id):
+        """
+            Consulta SQL Cruda
+            Devuelve un Array con todas las Especialidades q no fueron
+            asigandas al medico
+        """
+        cursor = connection.cursor()
+
+        #query = """
+        #SELECT *
+        #FROM GestionTurnos_expecialidades
+        #WHERE """
+        #cursor.execute(query)
+
+
 
 #sin usar por el momento
 class Consultorios(models.Model):

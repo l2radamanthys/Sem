@@ -203,7 +203,6 @@ def modificar_admin(request, adm_id=-1):
         dict['msj_class'] = 'msj_error'
         dict['mensaje'] = 'Error Datos Invalido'
 
-
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -254,7 +253,6 @@ def guardar_cambios_admin(request, adm_id=-1):
         dict['msj_class'] = 'msj_error'
         dict['mensaje'] = 'Error Datos Invalido'
 
-
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -290,7 +288,6 @@ def borrar_admin(request, adm_id=-1):
         dict['msj_class'] = 'msj_error'
         dict['mensaje'] = 'Error Datos Invalido'
 
-
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -312,17 +309,7 @@ def borrado_admin(request, adm_id=-1):
     """
     plantilla = get_template('administrativos/gestion_turnos/borrar.html')
     dict = generar_base_dict(request)
-
     dict['titulo'] = 'Borrar Admin'
-    #usuario estado
-    if request.user.is_authenticated():
-        dict['login_status'] = 'online'
-        dict['login_img'] = 'online.png'
-        dict['url_action'] = '/accounts/logout/'
-    else:
-        dict['login_status'] = 'offline'
-        dict['login_img'] = 'offline.png'
-        dict['url_action'] = '/accounts/login/'
 
     adm_id = int(adm_id)
 
@@ -331,7 +318,7 @@ def borrado_admin(request, adm_id=-1):
         dict['query'] = True
         dict['nombre'] = admin.nombre_completo()
         admin.user.delete()
-        admin.delete()
+        #admin.delete()
 
     else:
         dict['query'] = False
@@ -360,7 +347,6 @@ def buscar_admins(request):
     plantilla = get_template('administrativos/gestion_turnos/buscar.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Buscar Admin'
-
 
     #tipo de busqueda
     #1 usuario

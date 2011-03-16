@@ -99,6 +99,13 @@
         <div class="{{ msj_class }}">
             <p>{{ mensaje }}</p>
         </div>
+
+        {% ifequal msj_class 'msj_ok' %}
+            <br />
+            <a href='/medicos/agregar-especialidades/{{ med_id }}/' class='boton'>Agregar Expecialidades</a>
+
+        {% endifequal %}
+
     {% endif %}
     </div>
 

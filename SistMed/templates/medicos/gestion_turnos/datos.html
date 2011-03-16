@@ -7,8 +7,8 @@
 <!--- botones de accion -->
 <div align='right'>
     <hr />
-    <a class='boton' href='/administrativos/modificar/{{ adm_id }}/'>Modificar</a>
-    <a class='boton' href='/administrativos/borrar/{{ adm_id }}/'>Borrar</a>
+    <a class='boton' href='/medicos/modificar/{{ med_id }}/'>Modificar</a>
+    <a class='boton' href='/medicos/borrar/{{ med_id }}/'>Borrar</a>
     <a class='boton' href='/'>Volver al Inicio</a>
     <hr />
 </div>
@@ -25,6 +25,11 @@
         <tr>
             <td class='field_b'><label>Nombre:</label></td>
             <td class='field_a'><label>{{ nombre }}</label></td>
+        </tr>
+
+        <tr>
+            <td class='field_b'><label>Matricula:</label></td>
+            <td class='field_a'><label>{{ matricula }}</label></td>
         </tr>
 
         <tr>
@@ -49,9 +54,23 @@
     </tbody>
 </table>
 
-<!-- solicitudes turnos q hiso -->
+<hr />
 
-<!-- turnos asignados -->
+<!-- especialidades -->
+<table style="text-align: left;" border="0" width='200px' cellpadding="2" cellspacing="2">
+<tbody>
+    <tr class='table_title'>
+        <td>Especialidades</td>
+    </tr>
+    {% for esp in especialidades %}
+        <tr class='{{ esp|slice:"1:"|first }}'>
+            <td>{{ esp|slice:"0:"|first }}</td>
+        </tr>
+    {% endfor %}
+
+</tbody>
+</table>
+
 
 {% endblock %}
 
