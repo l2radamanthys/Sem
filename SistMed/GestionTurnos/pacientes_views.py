@@ -309,7 +309,6 @@ def borrado_paciente(request, pac_id=-1):
     dict['titulo'] = 'Borrar Paciente'
    
     pac_id = int(pac_id)
-
     if pac_id != -1:
         paciente = Pacientes.objects.get(id=pac_id)
         dict['query'] = True

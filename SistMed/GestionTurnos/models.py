@@ -124,8 +124,10 @@ class ExpecialidadesMedicos(models.Model):
             Devuelve un Array con todas las Especialidades q no fueron
             asigandas al medico
         """
-        cursor = connection.cursor()
+        #no se implemento por que encontre una manera alternativa de hacerlo
+        #sin tener q recurrir a consultas crudas de SQL
 
+        #cursor = connection.cursor()
         #query = """
         #SELECT *
         #FROM GestionTurnos_expecialidades
@@ -134,8 +136,14 @@ class ExpecialidadesMedicos(models.Model):
 
 
 
-#sin usar por el momento
+
+
 class Consultorios(models.Model):
+    """
+        Aunq el modelo fue definido, el mismo no se va a implementar por
+        el momento.. tal ves en proximas revisiones sea implementado
+    """
+    #sin usar por el momento
     nombre = models.CharField(max_length=30)
 
 
