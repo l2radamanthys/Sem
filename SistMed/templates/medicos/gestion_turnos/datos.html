@@ -57,11 +57,17 @@
 <hr />
 
 <!-- especialidades -->
-<table style="text-align: left;" border="0" width='200px' cellpadding="2" cellspacing="2">
+<span class='cat_title'>Expecialidades</span>
+<span class='cat_link'><a href=''>Agregar</a></span>
+<span class='cat_link'><a href=''>Modificar</a></span>
+<span class='cat_link'><a href=''>Borrar</a></span>
+<div class='cat_line'></div>
+
+<table style="text-align: left;" border="0" width='400px' cellpadding="2" cellspacing="2">
 <tbody>
-    <tr class='table_title'>
+    <!--tr class='table_title'>
         <td>Especialidades</td>
-    </tr>
+    </tr-->
     {% for esp in especialidades %}
         <tr class='{{ esp|slice:"1:"|first }}'>
             <td>{{ esp|slice:"0:"|first }}</td>
@@ -70,7 +76,13 @@
 
 </tbody>
 </table>
+<br />
 
+<span class='cat_title'>Dias Atencion</span>
+<span class='cat_link'><a href='/medicos/dias-atencion/agregar/{{ med_id }}/'>Agregar</a></span>
+<span class='cat_link'><a href=''>Modificar</a></span>
+<span class='cat_link'><a href=''>Borrar</a></span>
+<div class='cat_line'></div>
 
 {% endblock %}
 

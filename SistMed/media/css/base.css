@@ -4,19 +4,23 @@ body {
     font-size: 90%;
 }
 
+
 h1, h2, h3, h4, h5 {
     text-align: center;
 }
+
 
 h1, h2 {
     margin-top: 3px;
 }
 
+
 h1 {
-    font-size: 16;
+    font-size: 14;
     margin-left: 150px;
     margin-right: 150px;
 }
+
 
 a{
     text-decoration: None;
@@ -31,10 +35,12 @@ a{
     font-size: 85%;
 }
 
+
 .celda_izquierda {
     background-color: rgb(255, 255, 255);
     font-size: 80%;
 }
+
 
 .celda_central_index {
     background-image: url('../imagenes/logo.png');
@@ -44,10 +50,12 @@ a{
     font-size: 85%;
 }
 
+
 .celda_central {
     background-color: rgb(255, 255, 255);
     font-size: 85%;
 }
+
 
 .celda_inferior {
     background-color: rgb(255, 255, 255);
@@ -106,9 +114,11 @@ a{
     behavior:url(border-radius.htc);
 }
 
+
 .cont_flotante label{
     font-size: 75%;
 }
+
 
 .contenedor {
     /*margin-top: 100px;*/
@@ -231,6 +241,11 @@ a{
     border:1px solid #67BCC2;
 }
 
+.edt_c {
+    width: 50px;
+}
+
+
 /* menu css */
 .title_menu {
     font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -299,6 +314,28 @@ a{
 }
 /* menu css */
 
+
+.cat_title {
+    font-size: 14px;
+    text-align: left;
+    border-top: 1px solid #0080FF;
+    border-left: 1px solid #0080FF;
+    border-right: 1px solid #0080FF;
+    padding: 0px 5px 0px 5px;
+}
+
+.cat_link {
+    font-size: 10px;
+    text-align: right;
+    border-top: 1px solid #0080FF;
+    border-left: 1px solid #0080FF;
+    border-right: 1px solid #0080FF;
+    padding: 0px 5px 0px 5px;
+}
+
+.cat_line {
+    border-bottom: 1px solid #0080FF;
+}
 
 /*
 .sup_izq {

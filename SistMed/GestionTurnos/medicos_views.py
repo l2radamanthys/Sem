@@ -313,8 +313,21 @@ def agregar_dia_atencion(request, med_id=-1):
     med_id = int(med_id)
 
     if med_id != -1:
+        medico = Medicos.objects.get(id=med_id)
+        dict['med_name'] = medico.nombre_completo()
+
         if query: #si se envio un form
-            pass
+
+
+            dia = get_POST_value(request, 'dia', 'LUN')
+            ini_hh = int(get_POST_value(request, 'hora_ini_hh', '0'))
+            ini_mm = int(get_POST_value(request, 'hora_ini_mm', '0'))
+            fin_hh = int(get_POST_value(request, 'hora_fin_hh', '0'))
+            fin_mm = int(get_POST_value(request, 'hora_fin_mm', '0'))
+            dur_turn = int(get_POST_value(request, 'turno', '0'))
+            dur_inter = int(get_POST_value(request, 'intervalo', '0'))
+
+
 
         else:
             pass

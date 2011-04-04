@@ -27,14 +27,14 @@ def sexo_choice_expand(key):
 
 
 def get_GET_value(request, key='', default='', blank=''):
-    value = request.POST.get(key, default)
+    value = request.POST.get(key, default, blank)
     if value == '':
         value = default
     return value
 
 
 def get_POST_value(request, key='', default='', blank=''):
-     value = request.POST.get(key, default)
+     value = request.POST.get(key, default, blank)
      if value == '':
         value = default
      return value
