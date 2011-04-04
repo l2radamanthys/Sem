@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     #media
-    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT, 'show_indexes':True }),
+    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT, 'show_indexes': True }),
 
     #pagina inicio
     (r'^/?$', generics_views.index),
@@ -80,6 +80,15 @@ urlpatterns = patterns('',
     #(r'^medicos/especialidades/borrar/$', ),
     #(r'^medicos/especialidades/asignar/$', ),
 
+    # - Medicos - Dia Atencion
+    (r'^medicos/dias-atencion/agregar/$', medicos_views.agregar_dia_atencion),
+    (r'^medicos/dias-atencion/agregar/(\d{1,2})/$', medicos_views.agregar_dia_atencion),
+    #(r'^medicos/dias-atencion/modificar/$', medicos_views.borrar_medico),'
+    #(r'^medicos/dias-atencion/modificar/(\d{1,2})/$', medicos_views.borrar_medico),
+    #(r'^medicos/dias-atencion/guardar/$', medicos_views.borrar_medico),'
+    #(r'^medicos/dias-atencion/guardar/(\d{1,2})/$', medicos_views.borrar_medico),
+    #r'^medicos/dias-atencion/borrar/$', medicos_views.agregar_dia_atencion),
+    #r'^medicos/dias-atencion/borrar/(\d{1,2})/$', medicos_views.borrar_dia_atencion),
 
     # - Administrativos Views
     (r'^administrativos/nuevo/$', admin_views.nuevo_admin),

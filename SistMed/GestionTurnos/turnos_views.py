@@ -16,3 +16,5 @@ from django.contrib.auth.models import User#, Group
 #from GestionTurnos.models import Administrativos, TipoUsuario
 #from utils import get_field_css, sexo_choice_expand, get_POST_value, generar_base_dict
 from constantes import BASE_DIC
+
+

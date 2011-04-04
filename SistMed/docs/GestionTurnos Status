@@ -1,0 +1,42 @@
+
+* completo
+- incompleto
+
+- Usuarios
+    * Administrativos
+        * Alta
+        * Baja
+        * Datos
+        * Modificacion
+        * Busqueda
+    - Medicos
+        * Alta
+        * Baja
+        * Datos
+        - Modificacion
+        * Busqueda
+    * Pacientes
+        * Alta
+        * Baja
+        * Datos
+        * Modificacion
+        * Busqueda
+
+
+- GestionTurnos
+    - Medicos -> Dias Atencion
+        - Agregar
+        - Modificar
+        - Borrar
+
+    - Turnos
+        - Nuevo Turno
+        - Modificar Turno
+        - Anular
+        - Listado
+
+    - SolicitudTurno
+        - Nueva
+        - Borrar
+        - Revisar
+        - Estado

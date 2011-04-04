@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block cont_sec %}
+{% endblock %}
+
+{% block contenido %}
+    <p>Medico: {{ med_name }}</p>
+    <hr />
+    <div align='center'>
+    <form action="" method="POST" enctype="text/plain">
+    <table style="text-align: left;" border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td><label>Dia:</label></td>
+            <td>
+            <select name="dia">
+                <option value='LUN'>Lunes</option>
+                <option value='MAR'>Martes</option>
+                <option value='MIE'>Miercoles</option>
+                <option value='JUE'>Jueves</option>
+                <option value='VIE'>Viernes</option>
+                <option value='SAB'>Sabado</option>
+                <option value='DOM'>Domingo</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Hora Inicio:</label></td>
+            <td>
+            <select name='hora_ini_hh'>
+                {% for h in horas %}
+                    <option value='{{ h }}'>{{ h }}</option>
+                {% endfor %}
+            </select>
+                <label>:</label>
+            <select name='hora_ini_mm'>
+                {% for m in minutos %}
+                    <option value='{{ m }}'>{{ m }}</option>
+                {% endfor %}
+            </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label>Hora Finalizacion:</label></td>
+            <td>
+            <select name='hora_fin_hh'>
+                {% for h in horas %}
+                    <option value='{{ h }}'>{{ h }}</option>
+                {% endfor %}
+            </select>
+                <label>:</label>
+            <select name='hora_fin_mm'>
+                {% for m in minutos %}
+                    <option value='{{ m }}'>{{ m }}</option>
+                {% endfor %}
+            </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label>Duracion Turno (Minutos):</label></td>
+            <td><input  type='text' name='turno' /></td>
+        </tr>
+
+        <tr>
+            <td><label>Duracion Intervalo (Minutos):</label></td>
+            <td><input  type='text' name='intervalo' /></td>
+        </tr>
+
+        <tr>
+            <td>
+            <input type="submit" name="Agregar" value="Agregar" />
+            </td>
+            <td colspan='2' align='center'>
+            <input type="hidden" name="query" value="1"/>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+
+    {% if query %}
+        <div class="{{ msj_class }}">
+            <p>{{ mensaje }}</p>
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -38,6 +38,18 @@ SOLICITUD_ESTADO_CHOICE = (
 )
 
 
+DATE_CHOICE = (
+    ('LUN', 'Lunes'),
+    ('MAR', 'Martes'),
+    ('MIE', 'Miercoles'),
+    ('JUE', 'Jueves'),
+    ('VIE', 'Viernes'),
+    ('SAB', 'Sabado'),
+    ('DOM', 'Domingo'),
+)
+
+
+
 #nombres grupos
 #PACIENTES = 'Pacientes'
 #MEDICOS = 'Medicos'

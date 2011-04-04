@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.db import connection, transaction
 
 
-from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE
+from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE, DATE_CHOICE
 
 
 #modelos
@@ -175,7 +175,8 @@ class DiasAtencion(models.Model):
     """
         Horario de Atencion en un dia Particular
     """
-    fecha = models.DateField()
+    #fecha = models.DateField()
+    dia = models.CharField('Dia', max_length=3, default='LUN', choices=DATE_CHOICE)
     hora_inicio = models.TimeField()
     hora_fin = models.TimeField()
     cant_turno = models.IntegerField() #total de turnos asignados
