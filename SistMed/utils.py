@@ -18,6 +18,14 @@ def get_field_css(band=True):
     else:
         return "field_b"
 
+
+def date_choice_expand(key):
+    """
+        Expande el identificador del choice dia
+    """
+    return DATE_CHOICE_DIC[key]
+
+
 def sexo_choice_expand(key):
     """
         Expande el identificador del choice sexo
@@ -27,16 +35,16 @@ def sexo_choice_expand(key):
 
 
 def get_GET_value(request, key='', default='', blank=''):
-    value = request.POST.get(key, default, blank)
+    value = request.POST.get(key, default)
     if value == '':
-        value = default
+        value = blank
     return value
 
 
 def get_POST_value(request, key='', default='', blank=''):
-     value = request.POST.get(key, default, blank)
+     value = request.POST.get(key, default)
      if value == '':
-        value = default
+        value = blank
      return value
 
 

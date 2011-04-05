@@ -13,7 +13,7 @@ POST = 1
 #dicionario base
 BASE_DIC = {
     'css_template': '/site_media/css/base.css',
-    'page_title': 'Sistemas Medico',
+    'page_title': 'Sistemas de Gestion de Consultorio Medico',
 }
 
 #choices
@@ -48,7 +48,15 @@ DATE_CHOICE = (
     ('DOM', 'Domingo'),
 )
 
-
+DATE_CHOICE_DIC = {
+    'LUN': 'Lunes',
+    'MAR': 'Martes',
+    'MIE': 'Miercoles',
+    'JUE': 'Jueves',
+    'VIE': 'Viernes',
+    'SAB': 'Sabado',
+    'DOM': 'Domingo',
+}
 
 #nombres grupos
 #PACIENTES = 'Pacientes'
@@ -64,8 +72,6 @@ NIVEL_0 = 0
 NIVEL_1 = 1
 NIVEL_2 = 2
 NIVEL_3 = 3
-
-
 
 
 #ruta del proyecto

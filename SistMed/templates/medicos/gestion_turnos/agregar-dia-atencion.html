@@ -69,6 +69,17 @@
         </tr>
 
         <tr>
+            <td><label>Especialidad:</label></td>
+            <td>
+                <select name='especialidad'>
+                {% for esp in especialidades %}
+                    <option value='{{ esp|slice:"0:"|first }}'>{{ esp|slice:"1:"|first }}</option>
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+
+        <tr>
             <td>
             <input type="submit" name="Agregar" value="Agregar" />
             </td>
@@ -85,5 +96,24 @@
             <p>{{ mensaje }}</p>
         </div>
     {% endif %}
+
+    <table border="0" width='400px' cellpadding="2" cellspacing="2">
+        <tr class='table_title'>
+            <td>Dia</td>
+            <td>Inicio</td>
+            <td>Fin</td>
+            <td>Medico</td>
+            <td>Expecialidad</td>
+        </tr>
+    {% for h in horarios_atencion %}
+        <tr class='{{ h|slice:"0:"|first }}'>
+            <td>{{ h|slice:"1:"|first }}</td>
+            <td>{{ h|slice:"2:"|first }}</td>
+            <td>{{ h|slice:"3:"|first }}</td>
+            <td>{{ h|slice:"4:"|first }}</td>
+            <td>{{ h|slice:"5:"|first }}</td>
+        </tr>
+    {% endfor %}
+    </table>
 
 {% endblock %}

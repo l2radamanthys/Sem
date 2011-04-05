@@ -4,16 +4,17 @@
 """
     manejo de vistas de los pacientes
 """
-
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import get_template
 from django.template import Context
 from django.contrib import auth #para login
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User#, Group
 
-from GestionTurnos.models import Medicos, TipoUsuario, Expecialidades, ExpecialidadesMedicos
-from utils import get_field_css, sexo_choice_expand, get_POST_value, generar_base_dict
-from constantes import BASE_DIC, MSJ_OK, MSJ_ERROR
+import datetime
+
+from GestionTurnos.models import Medicos, TipoUsuario, Expecialidades, ExpecialidadesMedicos, HorarioAtencion
+from utils import get_field_css, sexo_choice_expand, date_choice_expand, get_POST_value, generar_base_dict
+from constantes import MSJ_OK, MSJ_ERROR
 
 def nuevo_medico(request):
     """
@@ -223,6 +224,13 @@ def datos_medico(request, med_id=-1):
             band = not(band)
         dict['especialidades'] = especialidades
 
+        hrs_atencion = []
+        band = True
+        for h in HorarioAtencion.objects.filter(cod_medico__id=med_id):
+            hrs_atencion.append((get_field_css(band), date_choice_expand(h.dia), str(h.hora_inicio), str(h.hora_fin), h.cod_medico.nombre_completo(), h.cod_expecialidad))
+            band = not(band)
+        dict['horarios_atencion'] = hrs_atencion
+        
     else:
         pass
 
@@ -300,7 +308,7 @@ def agregar_especialidad(request, med_id=-1):
     return HttpResponse(html)
 
 
-def agregar_dia_atencion(request, med_id=-1):
+def agregar_horario_atencion(request, med_id=-1):
     """
     """
     plantilla = get_template('medicos/gestion_turnos/agregar-dia-atencion.html')
@@ -316,24 +324,50 @@ def agregar_dia_atencion(request, med_id=-1):
         medico = Medicos.objects.get(id=med_id)
         dict['med_name'] = medico.nombre_completo()
 
-        if query: #si se envio un form
-
-
-            dia = get_POST_value(request, 'dia', 'LUN')
+        if query: #si se envio un form 
+            #falta comprobacion para evitar posibles errores de solapamiento
+            #de horarios en uns mismo dia
+            dia = get_POST_value(request, 'dia', 'LUN', 'LUN')
             ini_hh = int(get_POST_value(request, 'hora_ini_hh', '0'))
             ini_mm = int(get_POST_value(request, 'hora_ini_mm', '0'))
             fin_hh = int(get_POST_value(request, 'hora_fin_hh', '0'))
             fin_mm = int(get_POST_value(request, 'hora_fin_mm', '0'))
+            ini = datetime.time(ini_hh, ini_mm)
+            fin = datetime.time(fin_hh, fin_mm)
             dur_turn = int(get_POST_value(request, 'turno', '0'))
             dur_inter = int(get_POST_value(request, 'intervalo', '0'))
-
-
-
+            exp_id = int(get_POST_value(request, 'especialidad', '0'))
+            especialidad = Expecialidades.objects.get(id=exp_id)
+            horario_atencion = HorarioAtencion(
+                dia = dia,
+                hora_inicio = ini,
+                hora_fin = fin,
+                duracion_turno = dur_turn,
+                intervalo = dur_inter,
+                cod_medico = medico,
+                cod_expecialidad = especialidad
+            )
+            horario_atencion.save()
+            dict['msj_class'] = MSJ_OK
+            dict['mensaje'] = 'Horario de Atencion Agregado Correctamente'
+            
         else:
             pass
 
         dict['horas'] = [str(n).zfill(2) for n in range(24)]
         dict['minutos'] = [str(n).zfill(2) for n in range(60)]
+
+        especialidades = []
+        for esp in ExpecialidadesMedicos.objects.filter(codigo_medico__id=med_id):
+            especialidades.append((esp.cod_expecialidad.id, esp.cod_expecialidad.nombre))
+        dict['especialidades'] = especialidades
+
+        hrs_atencion = []
+        band = True
+        for h in HorarioAtencion.objects.filter(cod_medico__id=med_id):
+            hrs_atencion.append((get_field_css(band), date_choice_expand(h.dia), str(h.hora_inicio), str(h.hora_fin), h.cod_medico.nombre_completo(), h.cod_expecialidad))
+            band = not(band)
+        dict['horarios_atencion'] = hrs_atencion
     else:
         pass
 

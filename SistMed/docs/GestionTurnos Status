@@ -22,8 +22,19 @@
         * Modificacion
         * Busqueda
 
+Medicos - Expecialidades
+    * Agregar
+    * Modificar
+    - Borrar
+    - Listado
 
 - GestionTurnos
+    - Medicos -> Horario Atencion
+        * Agregar
+        - Modificar
+        - Borrar
+        * Listado
+
     - Medicos -> Dias Atencion
         - Agregar
         - Modificar

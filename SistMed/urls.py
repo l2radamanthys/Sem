@@ -40,6 +40,7 @@ urlpatterns = patterns('',
     (r'^accounts/datos-personales/$', generics_views.datos_personales),
     (r'^accounts/modificar-datos-personales/$', generics_views.datos_personales_modificar),
 
+
     ## - Gestion Turnos - ##
     # - Pacientes Views
     (r'^pacientes/nuevo/$', pacientes_views.nuevo_paciente),
@@ -56,11 +57,10 @@ urlpatterns = patterns('',
     (r'^pacientes/borrado/(\d{1,2})/$', pacientes_views.borrado_paciente),
     (r'^pacientes/buscar/$', pacientes_views.buscar_pacientes),
 
+
     # - Medicos Views
     (r'^medicos/nuevo/$', medicos_views.nuevo_medico),
     (r'^medicos/listado/$', medicos_views.listado_medicos),
-    (r'^medicos/agregar-especialidades/$', medicos_views.agregar_especialidad),
-    (r'^medicos/agregar-especialidades/(\d{1,2})/$', medicos_views.agregar_especialidad),
     (r'^medicos/datos/$', medicos_views.datos_medico),
     (r'^medicos/datos/(\d{1,2})/$', medicos_views.datos_medico),
     #(r'^medicos/modificar/$', medicos_views.modificar_medico),
@@ -71,24 +71,28 @@ urlpatterns = patterns('',
     (r'^medicos/borrar/(\d{1,2})/$', medicos_views.borrar_medico),
     (r'^medicos/borrado/$', medicos_views.borrado_medico),
     (r'^medicos/borrado/(\d{1,2})/$', medicos_views.borrado_medico),
-    #(r'^medicos/buscar/$', medicos_views.buscar_pacientes),
+    #(r'^medicos/buscar/$', medicos_views.buscar_,medicos),
+    (r'^medicos/agregar-especialidades/$', medicos_views.agregar_especialidad),
+    (r'^medicos/agregar-especialidades/(\d{1,2})/$', medicos_views.agregar_especialidad),
 
     # - Medicos - Especialidades
     (r'^medicos/especialidades/agregar/$', especialidades_views.agregar),
     (r'^medicos/especialidades/listado/$', especialidades_views.listado),
-    #(r'^medicos/especialidades/modificar/$', ),
-    #(r'^medicos/especialidades/borrar/$', ),
-    #(r'^medicos/especialidades/asignar/$', ),
-
+    (r'^medicos/especialidades/borrar/$', especialidades_views.borrar),
+    (r'^medicos/especialidades/borrar/(\d{1,2})/$', especialidades_views.borrar),
+    (r'^medicos/especialidades/borrado/$', especialidades_views.borrado),
+    (r'^medicos/especialidades/borrado/(\d{1,2})/$', especialidades_views.borrado),
+    
     # - Medicos - Dia Atencion
-    (r'^medicos/dias-atencion/agregar/$', medicos_views.agregar_dia_atencion),
-    (r'^medicos/dias-atencion/agregar/(\d{1,2})/$', medicos_views.agregar_dia_atencion),
+    (r'^medicos/horario-atencion/agregar/$', medicos_views.agregar_horario_atencion),
+    (r'^medicos/horario-atencion/agregar/(\d{1,2})/$', medicos_views.agregar_horario_atencion),
     #(r'^medicos/dias-atencion/modificar/$', medicos_views.borrar_medico),'
     #(r'^medicos/dias-atencion/modificar/(\d{1,2})/$', medicos_views.borrar_medico),
     #(r'^medicos/dias-atencion/guardar/$', medicos_views.borrar_medico),'
     #(r'^medicos/dias-atencion/guardar/(\d{1,2})/$', medicos_views.borrar_medico),
     #r'^medicos/dias-atencion/borrar/$', medicos_views.agregar_dia_atencion),
     #r'^medicos/dias-atencion/borrar/(\d{1,2})/$', medicos_views.borrar_dia_atencion),
+
 
     # - Administrativos Views
     (r'^administrativos/nuevo/$', admin_views.nuevo_admin),
@@ -106,10 +110,11 @@ urlpatterns = patterns('',
     (r'^administrativos/buscar/$', admin_views.buscar_admins),
 
 
-
     # - Turnos
 
+
     ## - Historia Clinica - ##
+
 
     ## - Otras Views - ##
     (r'^usuario-no-autorizado/$', generics_views.no_autorizado),

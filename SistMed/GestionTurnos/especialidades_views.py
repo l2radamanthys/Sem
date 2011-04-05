@@ -70,6 +70,55 @@ def borrar(request, esp_id=-1):
     dict = generar_base_dict(request)
     dict['titulo'] = 'Borrar Especialidad Medica'
 
+    esp_id = int(esp_id)
+    if esp_id != -1:
+        especialidad = Expecialidades.objects.get(id=esp_id)
+        dict['query'] = True
+        dict['nombre'] = especialidad.nombre
+        dict['esp_id'] = esp_id
+
+    else:
+        dict['query'] = False
+        dict['msj_class'] = MSJ_ERROR
+        dict['mensaje'] = 'Error Datos Invalido'
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def borrado(request, esp_id=-1):
+    """
+        Permite Borrar una Especialidad
+
+        pueden acceder
+        --------------
+        - administrativos
+        - medicos
+
+        sin acceso
+        ----------
+        - pacientes
+        - usuarios no registrados
+    """
+    plantilla = get_template('especialidades/borrado.html')
+    dict =  generar_base_dict(request)
+    dict['titulo'] = 'Borrar Especialidad Medica'
+
+    esp_id = int(esp_id)
+
+    if esp_id != -1:
+        especialidad = Expecialidades.objects.get(id=esp_id)
+        dict['query'] = True
+        dict['nombre'] = especialidad.nombre
+        #borramos
+        Expecialidades.objects.filter(id=esp_id).delete()
+        
+    else:
+        dict['query'] = False
+        dict['msj_class'] = MSJ_ERROR
+        dict['mensaje'] = 'Error Operacion No valida'
+
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)

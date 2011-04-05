@@ -111,14 +111,14 @@ class ExpecialidadesMedicos(models.Model):
     """
     #fk
     codigo_medico = models.ForeignKey(Medicos)
-    cod_expecialidad = models.ForeignKey(Expecialidades, unique=True)
+    cod_expecialidad = models.ForeignKey(Expecialidades)#, unique=True)
 
 
     def __str__(self):
         return "%s - %s" %(self.codigo_medico, self.cod_expecialidad)
 
 
-    def esp_not_in_medico_sql(self, med_id):
+    def esp_not_in_medico_sql(self, med_id=-1):
         """
             Consulta SQL Cruda
             Devuelve un Array con todas las Especialidades q no fueron
@@ -133,9 +133,7 @@ class ExpecialidadesMedicos(models.Model):
         #FROM GestionTurnos_expecialidades
         #WHERE """
         #cursor.execute(query)
-
-
-
+        pass
 
 
 class Consultorios(models.Model):
@@ -155,11 +153,12 @@ class HorarioAtencion(models.Model):
     """
         Definicion de Horarios de Atencion del Medico
     """
-    dia = models.DateField()
+    #dia = models.DateField()
+    dia = models.CharField('Dia', max_length=4, default='LUN', choices=DATE_CHOICE)
     hora_inicio = models.TimeField()
     hora_fin = models.TimeField()
-    duracion_turno = models.TimeField() #duracion en minutos
-    intervalo = models.TimeField() #entretiempo entre turnos por defecto es 0
+    duracion_turno = models.IntegerField() #duracion en minutos
+    intervalo = models.IntegerField() #entretiempo entre turnos por defecto es 0
 
     #FK
     cod_medico = models.ForeignKey(Medicos)
@@ -175,27 +174,43 @@ class DiasAtencion(models.Model):
     """
         Horario de Atencion en un dia Particular
     """
-    #fecha = models.DateField()
-    dia = models.CharField('Dia', max_length=3, default='LUN', choices=DATE_CHOICE)
-    hora_inicio = models.TimeField()
-    hora_fin = models.TimeField()
+    fecha = models.DateField()
     cant_turno = models.IntegerField() #total de turnos asignados
-
-    #opcionales todavia no definidos si se agregaran
-    duracion_turno = models.TimeField() #duracion en minutos
-    intervalo = models.TimeField() #entretiempo entre turnos
+    #estos datos se obtienen del horario
+    #hora_inicio = models.TimeField()
+    #hora_fin = models.TimeField()
+    #duracion_turno = models.TimeField() #duracion en minutos
+    #intervalo = models.TimeField() #entretiempo entre turnos
 
     #fk
     cod_medico = models.ForeignKey(Medicos)
-
+    cod_horario = models.ForeignKey(HorarioAtencion)
+    
 
     def n_turno(self):
         """
             devuelve los datos de un nuevo turno
         """
         #no implementado
-        self.cant_turno += 1
-        self.save()
+        #self.cant_turno += 1
+        #self.save()
+        pass
+
+
+    def h_ini(self):
+        """
+            Retorna un String con la Hora Inicio del Horario de Atencion
+            en formato hh:mm
+        """
+        return self.hora_inicio.strftime("%H:%M")
+
+
+    def h_fin(self):
+        """
+            Retorna un String con la Hora Finalizacion del Horario de
+            Atencion en formato hh:mm
+        """
+        return self.hora_fin.strftime("%H:%M")
 
 
 class Turnos(models.Model):

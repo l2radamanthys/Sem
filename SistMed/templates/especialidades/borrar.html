@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block cont_secundario %}
+{% endblock %}
 
 {% block contenido %}
     <div align='right'>
@@ -10,7 +12,7 @@
     <br />
     <div align='center'>
     {% if query %}
-        <p>¿Esta seguro que desea borrar el siguiente Medico:<strong>{{ nombre }} </strong>?</p>
+        <p>¿Esta seguro que desea borrar la siguiente Especialidad:<strong>{{ nombre }} </strong>?</p>
         <a class='boton' href='/medicos/especialidades/borrado/{{ esp_id }}/'>Borrar</a>
         <a class='boton' href='/medicos/especialidades/listado/'>Cancelar</a>
     {% else %}
