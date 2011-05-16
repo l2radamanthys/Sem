@@ -20,7 +20,7 @@
             </select>
             </td>
             <td>
-            <input type="submit" name="Agregar" value="Agregar" />
+            <input type="submit" name="Agregar" value="Agregar" class='boton'/>
             </td>
             <td colspan='2' align='center'>
             <input type="hidden" name="query" value="1"/>
@@ -47,7 +47,7 @@
             {% for esp in med_exp %}
                 <tr>
                     <td>{{ esp|slice:"1:"|first }}</td>
-                    <td><a href='{{ esp|slice:"0:"|first }}'>Borrar</a></td>
+                    <td><a href='{{ esp|slice:"0:"|first }}'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
                 <tr>
             {% endfor %}
         </tbody>

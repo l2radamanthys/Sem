@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-    listado de Funciones de Utilidad
+    listado de Funciones de Utilidad extendida
 """
 
 from constantes import *
@@ -35,7 +35,7 @@ def sexo_choice_expand(key):
 
 
 def get_GET_value(request, key='', default='', blank=''):
-    value = request.POST.get(key, default)
+    value = request.GET.get(key, default)
     if value == '':
         value = blank
     return value
@@ -76,7 +76,7 @@ def generar_base_dict(request):
         dict['url_action'] = '/accounts/login/'
         #request.session['usuario'] = ''
         #request.session['usuario_rol'] = ''
-        dict['user'] = ''
+        dict['user'] = 'offline'
         dict['user_id'] = '-1'
         #dict['user_rol'] = ''
         dict['user_autenticado'] = False

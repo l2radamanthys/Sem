@@ -203,7 +203,7 @@ def datos_medico(request, med_id=-1):
     """
     plantilla = get_template('medicos/gestion_turnos/datos.html')
     dict = dict = generar_base_dict(request)
-    dict['titulo'] = 'Datos Paciente'
+    dict['titulo'] = 'Datos Medico'
 
     med_id = int(med_id)
     if med_id != -1:

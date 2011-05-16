@@ -18,10 +18,12 @@
 
 <body>
     <div align='center'>
-    <table style="text-align: left;" border="1" cellpadding="5" cellspacing="0" width="900px">
+    <table style="text-align: left;" border="0" cellpadding="5" cellspacing="2" width="900px">
         <tr>
             <td class='celda_superior' colspan='2'>
-            <h1> {{ cabecera }} </h1>
+            <img src='/site_media/imagenes/baner_logo.png'>
+            <br /><br /><br />
+            <a href="{{ url_action }}" class='login_rect'><img src='/site_media/imagenes/{{ login_img }}' alt='{{ login_status }}' border='0px'/>{{ user }}</a>
             </td>
         </tr>
 
@@ -31,17 +33,23 @@
                 {% endblock %}
 
                 <span class='title_menu'><a onClick="desplegar('menu_1')">Secciones</a></span>
-                <div id='menu_1' class='nav_menu'>
+                <div id='menu_1' class='hide_nav_menu'>
                 <ul>
                     <li><a href='/'>Inicio</a><li/>
                     <li><a href='/'>Gestion Turnos</a><li/>
                     <li><a href='/'>Historia Clinica</a><li/>
+                    {% if nivel_0 %}
+                    <li><a href='/accounts/login/'>Entrar</a><li/>
+                    {% endif %}
+                    {% if nivel_1 %}
+                    <li><a href='/accounts/logout/'>Salir</a><li/>
+                    {% endif %}
                 </ul>
                 </div>
 
                 {% if nivel_1 %}
                     <span class='title_menu'><a onClick="desplegar('menu_2')">Usuario</a></span>
-                    <div id='menu_2' class='nav_menu'>
+                    <div id='menu_2' class='hide_nav_menu'>
                     <ul>
                     <li><a href='/accounts/datos-personales/'>Datos Personales</a><li/>
                     <li><a href='/accounts/modificar-datos-personales/'>Modificar Datos</a><li/>
@@ -52,15 +60,16 @@
 
                 {% if nivel_0 %}
                     <span class='title_menu'><a onClick="desplegar('menu_3')">Pacientes</a></span>
-                    <div id='menu_3' class='nav_menu'>
+                    <div id='menu_3' class='hide_nav_menu'>
                     <ul>
                         <li><a href='/pacientes/nuevo/'>Nuevo</a><li/>
                     </ul>
+                    </div>
                 {% endif %}
 
                 {% if nivel_2 %}
                     <span class='title_menu'><a onClick="desplegar('menu_3')">Pacientes</a></span>
-                    <div id='menu_3' class='nav_menu'>
+                    <div id='menu_3' class='hide_nav_menu'>
                     <ul>
                     <li><a href='/pacientes/buscar/'>buscar</a><li/>
                     <li><a href='/pacientes/listado/'>Listado</a><li/>
@@ -70,7 +79,7 @@
                 {% endif %}
 
                     <span class='title_menu'><a onClick="desplegar('menu_4')">Medicos</a></span>
-                    <div id='menu_4' class='nav_menu'>
+                    <div id='menu_4' class='hide_nav_menu'>
                     <ul>
                 {% if nivel_3 %}
                    <li><a href='/medicos/buscar/'>buscar</a><li/>
@@ -84,7 +93,7 @@
 
                 {% if nivel_3 %}
                     <span class='title_menu'><a onClick="desplegar('menu_5')">Administrativos</a></span>
-                    <div id='menu_5' class='nav_menu'>
+                    <div id='menu_5' class='hide_nav_menu'>
                     <ul>
                     <li><a href='/administrativos/buscar/'>buscar</a><li/>
                     <li><a href='/administrativos/listado/'>Listado</a><li/>
@@ -94,7 +103,7 @@
                 {% endif %}
 
                 <span class='title_menu'><a onClick="desplegar('menu_6')">Especialidades</a></span>
-                    <div id='menu_6' class='nav_menu'>
+                    <div id='menu_6' class='hide_nav_menu'>
                     <ul>
                     <li><a href='/medicos/especialidades/agregar'>Agregar</a><li/>
                     <li><a href='/medicos/especialidades/listado'>Listado</a><li/>
@@ -102,17 +111,14 @@
                 </div>
 
                 <span class='title_menu'><a onClick="desplegar('menu_7')">Menu</a></span>
-                    <div id='menu_7' class='nav_menu'>
+                    <div id='menu_7' class='hide_nav_menu'>
                     <ul>
                     </ul>
                 </div>
 
                 <br />
                 <br />
-                <div class='{{ login_status }}'>
-                    <label>{{ user }}</label>
-                    <a href="{{ url_action }}"><img src='/site_media/imagenes/{{ login_img }}' alt='{{ login_status }}' border='0px'/></a>
-                </div>
+
             </td>
 
             <td class='celda_central' valign='top'>
@@ -158,4 +164,5 @@
     </div>
 </body>
 </html>
+
 
