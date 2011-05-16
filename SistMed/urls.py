@@ -109,11 +109,10 @@ urlpatterns = patterns('',
     (r'^administrativos/borrado/(\d{1,2})/$', admin_views.borrado_admin),
     (r'^administrativos/buscar/$', admin_views.buscar_admins),
 
-
     # - Turnos
 
-
     ## - Historia Clinica - ##
+    
 
 
     ## - Otras Views - ##
