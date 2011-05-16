@@ -104,6 +104,8 @@
             <td>Fin</td>
             <td>Medico</td>
             <td>Expecialidad</td>
+            <td>Modificar</td>
+            <td>Borrar</td>
         </tr>
     {% for h in horarios_atencion %}
         <tr class='{{ h|slice:"0:"|first }}'>
@@ -112,8 +114,10 @@
             <td>{{ h|slice:"3:"|first }}</td>
             <td>{{ h|slice:"4:"|first }}</td>
             <td>{{ h|slice:"5:"|first }}</td>
+            <td><a href=""><img src="/site_media/imagenes/icon_modificar.png'"></a></td>
+            <td><a href=""><img src="/site_media/imagenes/icon_borrar.png'"></a></td>
         </tr>
     {% endfor %}
     </table>
-
+    </div>
 {% endblock %}

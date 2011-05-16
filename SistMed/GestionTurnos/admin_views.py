@@ -148,7 +148,7 @@ def datos_admin(request, adm_id=-1):
         dict['nombre'] = admin.nombre_completo()
         dict['direccion'] = admin.direccion
         dict['telefono'] = admin.telefono
-        dict['email'] = admin.username()
+        dict['email'] = admin.user.email
         dict['sexo'] = sexo_choice_expand(admin.sexo)
 
     else:

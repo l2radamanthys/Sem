@@ -15,6 +15,7 @@ import generics_views
 from GestionTurnos import pacientes_views, admin_views
 from GestionTurnos import medicos_views, especialidades_views
 
+
 urlpatterns = patterns('',
     # Example:
     # (r'^TurnGest/', include('TurnGest.foo.urls')),
@@ -63,9 +64,9 @@ urlpatterns = patterns('',
     (r'^medicos/listado/$', medicos_views.listado_medicos),
     (r'^medicos/datos/$', medicos_views.datos_medico),
     (r'^medicos/datos/(\d{1,2})/$', medicos_views.datos_medico),
-    #(r'^medicos/modificar/$', medicos_views.modificar_medico),
-    #(r'^medicos/modificar/(\d{1,2})/$', medicos_views.modificar_medico),
-    #(r'^medicos/guardar/$', medicos_views.guardar_cambios_medico),
+    (r'^medicos/modificar/$', medicos_views.modificar_medico),
+    (r'^medicos/modificar/(\d{1,2})/$', medicos_views.modificar_medico),
+    (r'^medicos/guardar/$', medicos_views.guardar_cambios_medico),
     #(r'^medicos/guardar/(\d{1,2})/$', medicos_views.guardar_cambios_medico),
     (r'^medicos/borrar/$', medicos_views.borrar_medico),
     (r'^medicos/borrar/(\d{1,2})/$', medicos_views.borrar_medico),

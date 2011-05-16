@@ -4,51 +4,66 @@
 {% endblock %}
 
 {% block contenido %}
-    <div align='center'>
-    {% if query %}
-        <form action="/administrativos/guardar/{{ adm_id }}/" method="POST" enctype="text/plain">
+
+<label>Medico: {{ med_name }}</label>
+<br />
+<span class='cat_link'><a onClick="mostrar('datos')">Datos Personales</a></span>
+<span class='cat_link'><a onClick="mostrar('especialidades')">Especialidades</a></span>
+<span class='cat_link'><a onClick="mostrar('turnos')">Horarios Atencion</a></span>
+<div class='cat_line'></div>
+
+<br />
+
+<!-- datos paciesnte -->
+<div id="datos" class="show_cont" align="center">
+    <form action="/medicos/guardar/" method="POST" enctype="text/plain">
         <table style="text-align: left;" border="0" cellpadding="0" cellspacing="0">
             <tbody>
 
             <tr>
                 <td colspan='2' class='tbl_separador'>
-                <h5>Datos Paciente</h5>
+                <h5>Datos Personales</h5>
                 </td>
             </tr>
             <tr>
                 <td><label>Nombre:</label></td>
-                <td><input type="text" name="nombre" value="{{ nombre }}" maxlength=""/></td>
+                <td><input type="text" name="nombre" value="{{ nombre }}" maxlength="" class='edt_m'/></td>
             </tr>
 
             <tr>
                 <td><label>Apellido:</label></td>
-                <td><input type="text" name="apellido" value="{{ apellido }}" maxlength=""/></td>
+                <td><input type="text" name="apellido" value="{{ apellido }}" maxlength="" class='edt_m'/></td>
             </tr>
 
             <tr>
                 <td><label>DNI:</label></td>
-                <td><input type="text" name="dni" value='0' value="{{ dni }}" maxlength=""/></td>
+                <td><input type="text" name="dni" value='0' value="{{ dni }}" maxlength="" class='edt_m'/></td>
             </tr>
 
             <tr>
+            <td><label>Matricula:</label></td>
+            <td><input type="text" name="matricula" value='{{ matricula }}' maxlength="" class='edt_m'/></td>
+        </tr>
+
+            <tr>
                 <td><label>Direccion:</label></td>
-                <td><input type="text" name="direccion" value="{{ direccion }}" maxlength=""/></td>
+                <td><input type="text" name="direccion" value="{{ direccion }}" maxlength="" class='edt_m'/></td>
             </tr>
 
             <tr>
                 <td><label>Telefono:</label></td>
-                <td><input type="text" name="telefono" value="{{ telefono }}" maxlength=""/></td>
+                <td><input type="text" name="telefono" value="{{ telefono }}" maxlength="" class='edt_m'/></td>
             </tr>
 
             <tr>
                 <td><label>Email:</label></td>
-                <td><input type="text" name="email" value="{{ email }}" maxlength=""/></td>
+                <td><input type="text" name="email" value="{{ email }}" maxlength="" class='edt_m'/></td>
             </tr>
 
             <tr>
                 <td><label>Sexo:</label></td>
                 <td>
-                <select name="sexo">
+                <select name="sexo" class='edt_m'>
                     <option value='-'>-------</option>
                     <option value='M'>Masculino</option>
                     <option value='F'>Femenino</option>
@@ -63,6 +78,8 @@
             <tr>
                 <td colspan='2' align='center'>
                 <input type="hidden" name="query" value="1"/>
+                <input type="hidden" name="action" value="datos"/>
+                <input type="hidden" name="med_id" value="{{ med_id }}"/>
                 <input type="submit" name="Guardar" value="Guardar" class='boton'/>
                 <input type="reset" name="Limpiar" value="Limpiar" class='boton'/>
                 </td>
@@ -70,13 +87,175 @@
             </tbody>
         </table>
         </form>
+</div>
 
-    {% else %}
+<div id="especialidades" class="hide_cont" align="center">
+    <form action="/medicos/guardar/" method="POST" enctype="text/plain">
+    <table style="text-align: left;" border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td><label>Especialidad</label></td>
+            <td>
+            <select name="especialidad">
+                {% for esp in especialidades_disp %}
+                    <option value='{{ esp|slice:"0:"|first }}'>{{ esp|slice:"1:"|first }}</option>
+                {% endfor %}
+            </select>
+            </td>
+            <td>
+            <input type="submit" name="Agregar" value="Agregar" class='boton'/>
+            </td>
+            <td colspan='2' align='center'>
+            <input type="hidden" name="query" value="1"/>
+            <input type="hidden" name="action" value="especialidades"/>
+            <input type="hidden" name="med_id" value="{{ med_id }}"/>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+
+    {% if query %}
         <div class="{{ msj_class }}">
             <p>{{ mensaje }}</p>
         </div>
     {% endif %}
+
+    <hr />
+
+    <table style="text-align: left;" width='300px' border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr class='table_title'>
+                <td>Especialidad</td>
+                <td>Borrar</td>
+            </tr>
+            {% for esp in especialidades_med %}
+                <tr>
+                    <td>{{ esp|slice:"1:"|first }}</td>
+                    <td><a href='{{ esp|slice:"0:"|first }}'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
+                <tr>
+            {% endfor %}
+        </tbody>
+    </table>
     </div>
+</div>
+
+<div id="turnos" class="hide_cont" align="center">
+    <form action="/medicos/guardar/" method="POST" enctype="text/plain">
+    <table style="text-align: left;" border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td><label>Dia:</label></td>
+            <td>
+            <select name="dia">
+                <option value='LUN'>Lunes</option>
+                <option value='MAR'>Martes</option>
+                <option value='MIE'>Miercoles</option>
+                <option value='JUE'>Jueves</option>
+                <option value='VIE'>Viernes</option>
+                <option value='SAB'>Sabado</option>
+                <option value='DOM'>Domingo</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Hora Inicio:</label></td>
+            <td>
+            <select name='hora_ini_hh'>
+                {% for h in horas %}
+                    <option value='{{ h }}'>{{ h }}</option>
+                {% endfor %}
+            </select>
+                <label>:</label>
+            <select name='hora_ini_mm'>
+                {% for m in minutos %}
+                    <option value='{{ m }}'>{{ m }}</option>
+                {% endfor %}
+            </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label>Hora Finalizacion:</label></td>
+            <td>
+            <select name='hora_fin_hh'>
+                {% for h in horas %}
+                    <option value='{{ h }}'>{{ h }}</option>
+                {% endfor %}
+            </select>
+                <label>:</label>
+            <select name='hora_fin_mm'>
+                {% for m in minutos %}
+                    <option value='{{ m }}'>{{ m }}</option>
+                {% endfor %}
+            </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label>Duracion Turno (Minutos):</label></td>
+            <td><input  type='text' name='turno' value='0' class='edt_c' /></td>
+        </tr>
+
+        <tr>
+            <td><label>Duracion Intervalo (Minutos):</label></td>
+            <td><input type='text' name='intervalo' value='0' class='edt_c'/></td>
+        </tr>
+
+        <tr>
+            <td><label>Especialidad:</label></td>
+            <td>
+                <select name='especialidad'>
+                {% for esp in especialidades %}
+                    <option value='{{ esp|slice:"0:"|first }}'>{{ esp|slice:"1:"|first }}</option>
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan='2' align='center'>
+            <input type="hidden" name="query" value="1"/>
+            <input type="hidden" name="action" value="especialidades"/>
+            <input type="hidden" name="med_id" value="{{ med_id }}"/>
+            <input type="submit" name="Agregar" value="Agregar" class='boton'/>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+
+    {% if query %}
+        <div class="{{ msj_class }}">
+            <p>{{ mensaje }}</p>
+        </div>
+    {% endif %}
+
+    <table border="0" width='400px' cellpadding="2" cellspacing="2">
+        <tr class='table_title'>
+            <td>Dia</td>
+            <td>Inicio</td>
+            <td>Fin</td>
+            <td>Medico</td>
+            <td>Expecialidad</td>
+            <!--td>Modificar</td-->
+            <td>Borrar</td>
+        </tr>
+    {% for h in horarios_atencion %}
+        <tr class='{{ h|slice:"0:"|first }}'>
+            <td>{{ h|slice:"1:"|first }}</td>
+            <td>{{ h|slice:"2:"|first }}</td>
+            <td>{{ h|slice:"3:"|first }}</td>
+            <td>{{ h|slice:"4:"|first }}</td>
+            <td>{{ h|slice:"5:"|first }}</td>
+            <!-- td><a href=""><img src="/site_media/imagenes/icon_modificar.png'"></a></td -->
+            <td><a href=""><img src="/site_media/imagenes/icon_borrar.png'"></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+
+
 {% endblock %}
 
 {% block pie_pagina %}

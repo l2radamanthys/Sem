@@ -32,6 +32,7 @@ class InformacionBasica(models.Model):
 
     user = models.ForeignKey(User, unique=True)
 
+
 class AntecedentesPerinatales(models.Model):
     """
         Referentes al nacimiento
@@ -238,7 +239,7 @@ class OtrosEstudio:
 
 class Imagen:
     examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
-    imagen =
+    imagen = models.ImageField(upload_to="/data/imagenes")
     descripcion = models.TextField()
     
    
@@ -249,14 +250,13 @@ class AnalisisLaboratorio:
 
 class Diagnostico:
     hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha =
-    observaciones =
+    fecha = models.DateField()
+    observaciones = models.TextField()
 
 
 class ConsultaMedica:
     hist_clinica = models.ForeignKey(InformacionBasica)
     fecha = models.DateField()
-    pass
 
 
 class MedicamentosRecetados:

@@ -394,6 +394,17 @@ a{
 .hide_nav_menu {
     display: none;
 }
+
+.show_cont {
+    display: block;
+}
+
+.hide_cont {
+    display: none;
+}
+
+
+
 /* menu css */
 
 
@@ -413,6 +424,11 @@ a{
     border-left: 1px solid #0080FF;
     border-right: 1px solid #0080FF;
     padding: 0px 5px 0px 5px;
+}
+
+.cat_link:hover {
+    padding-top: 2px;
+    border-top: 3px solid #0061C1;
 }
 
 .cat_line {
@@ -451,4 +467,6 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     padding-bottom: 3px;
     padding-right: 3px;
 }
+
+
 

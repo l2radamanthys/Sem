@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block cont_secundario %}
+{% endblock %}
+
+{% block contenido %}
+    <div align='center'>
+    {% if query %}
+        <form action="/administrativos/guardar/{{ adm_id }}/" method="POST" enctype="text/plain">
+        <table style="text-align: left;" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+
+            <tr>
+                <td colspan='2' class='tbl_separador'>
+                <h5>Datos Paciente</h5>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Nombre:</label></td>
+                <td><input type="text" name="nombre" value="{{ nombre }}" maxlength=""/></td>
+            </tr>
+
+            <tr>
+                <td><label>Apellido:</label></td>
+                <td><input type="text" name="apellido" value="{{ apellido }}" maxlength=""/></td>
+            </tr>
+
+            <tr>
+                <td><label>DNI:</label></td>
+                <td><input type="text" name="dni" value='0' value="{{ dni }}" maxlength=""/></td>
+            </tr>
+
+            <tr>
+                <td><label>Direccion:</label></td>
+                <td><input type="text" name="direccion" value="{{ direccion }}" maxlength=""/></td>
+            </tr>
+
+            <tr>
+                <td><label>Telefono:</label></td>
+                <td><input type="text" name="telefono" value="{{ telefono }}" maxlength=""/></td>
+            </tr>
+
+            <tr>
+                <td><label>Email:</label></td>
+                <td><input type="text" name="email" value="{{ email }}" maxlength=""/></td>
+            </tr>
+
+            <tr>
+                <td><label>Sexo:</label></td>
+                <td>
+                <select name="sexo">
+                    <option value='-'>-------</option>
+                    <option value='M'>Masculino</option>
+                    <option value='F'>Femenino</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='2'>
+                <br />
+                </td>
+            </tr>
+            <tr>
+                <td colspan='2' align='center'>
+                <input type="hidden" name="query" value="1"/>
+                <input type="submit" name="Guardar" value="Guardar" class='boton'/>
+                <input type="reset" name="Limpiar" value="Limpiar" class='boton'/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </form>
+
+    {% else %}
+        <div class="{{ msj_class }}">
+            <p>{{ mensaje }}</p>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}
+
+{% block pie_pagina %}
+{% endblock %}
