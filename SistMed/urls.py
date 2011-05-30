@@ -12,8 +12,8 @@ admin.autodiscover()
 from settings import MEDIA_ROOT
 
 import generics_views
-from GestionTurnos import pacientes_views, admin_views
-from GestionTurnos import medicos_views, especialidades_views
+from GestionTurnos import pacientes_views, admin_views, medicos_views
+from GestionTurnos import especialidades_views, turnos_views
 
 
 urlpatterns = patterns('',
@@ -93,6 +93,10 @@ urlpatterns = patterns('',
     #(r'^medicos/dias-atencion/guardar/(\d{1,2})/$', medicos_views.borrar_medico),
     #r'^medicos/dias-atencion/borrar/$', medicos_views.agregar_dia_atencion),
     #r'^medicos/dias-atencion/borrar/(\d{1,2})/$', medicos_views.borrar_dia_atencion),
+
+    # - Medico - Agenda
+    (r'^medicos/agenda/agregar-turno/$', turnos_views.nuevo_turno),
+    (r'^medicos/agenda/mostrar-por-dia/$', turnos_views.mostrar_agenda_por_dia),
 
 
     # - Administrativos Views
