@@ -175,12 +175,12 @@ class DiasAtencion(models.Model):
         Horario de Atencion en un dia Particular
     """
     fecha = models.DateField()
-    cant_turno = models.IntegerField() #total de turnos asignados
+    cant_turno = models.IntegerField() #contador de turnos asignados
     #estos datos se obtienen del horario
-    #hora_inicio = models.TimeField()
-    #hora_fin = models.TimeField()
-    #duracion_turno = models.TimeField() #duracion en minutos
-    #intervalo = models.TimeField() #entretiempo entre turnos
+    hora_inicio = models.TimeField()
+    hora_fin = models.TimeField()
+    duracion_turno = models.TimeField() #duracion en minutos
+    intervalo = models.TimeField() #entretiempo entre turnos
 
     #fk
     cod_medico = models.ForeignKey(Medicos)
