@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 from django.db import models
 from django.contrib.auth.models import User
-
-from django.db import connection, transaction
-
+#from django.db import connection, transaction
 
 from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE, DATE_CHOICE
 

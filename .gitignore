@@ -5,3 +5,5 @@
 *.ini
 /nbproject
 /data
+/.settings/
+/SistMed/nbproject/private/
