@@ -17,7 +17,7 @@ from django.contrib import auth #para login
 from django.contrib.auth.models import User
 from GestionTurnos.models import Usuarios, Pacientes, Medicos, Administrativos
 
-from utils import generar_base_dict
+from utils import *
 from constantes import *
 
 
@@ -62,7 +62,7 @@ def login(request):
             username = request.POST.get('username', '')
             password = request.POST.get('password', '')
             user = auth.authenticate(username=username, password=password)
-        
+
             if (user is not None) and user.is_active:
                 # Clave correcta, y el usuario estï¿½ marcado "activo"
                 auth.login(request, user)
@@ -76,13 +76,13 @@ def login(request):
 
                 # Redirigir a una pagina de Inicio.
                 return HttpResponseRedirect('/')
-    
+
             else:
                 dict['query'] = True
                 dict['msj_class'] = 'msj_error'
                 dict['mensaje'] = "Error: El Nombre de usuario o contraseÃ±a no son validos"
 
-    
+
         contexto = Context(dict)
         html = plantilla.render(contexto)
         return HttpResponse(html)
@@ -121,7 +121,7 @@ def cambio_contrasenia(request):
             user = User.objects.get(username__exact=request.session.get('usuario', ''))
             old_password = request.POST.get('old_password', '')
             new_password = request.POST.get('new_password', '')
-            #controla q la contraseña anterior sea valida
+            #controla q la contraseï¿½a anterior sea valida
             if user.check_password(old_password):
                 user.set_password(new_password)
                 user.save()
@@ -157,10 +157,10 @@ def datos_personales(request):
         elif rol == ADMINISTRATIVO:
             adm = Administrativos.objects.get(user__username__exact=username)
             url = '/administrativos/datos/%d/' %adm.id
-        
+
         else:
             url = '/usuario-no-autorizado/[%s]' %rol
-            
+
         return HttpResponseRedirect(url)
 
 
@@ -199,6 +199,19 @@ def error404(request):
     plantilla = get_template('404.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Error 404'
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def page_error(request):
+    """
+        Pagina para mostrar error de operacion..
+    """
+    plantilla = get_template('error.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Aplicacion Error - ' + get_GET_value(request, "title", "")
+    dict['msj_error'] = get_GET_value(request, "msj", "")
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)

@@ -85,7 +85,7 @@ urlpatterns = patterns('',
     (r'^medicos/especialidades/borrar/(\d{1,2})/$', especialidades_views.borrar),
     (r'^medicos/especialidades/borrado/$', especialidades_views.borrado),
     (r'^medicos/especialidades/borrado/(\d{1,2})/$', especialidades_views.borrado),
-    
+
     # - Medicos - Dia Atencion
     (r'^medicos/horario-atencion/agregar/$', medicos_views.agregar_horario_atencion),
     (r'^medicos/horario-atencion/agregar/(\d{1,2})/$', medicos_views.agregar_horario_atencion),
@@ -127,7 +127,8 @@ urlpatterns = patterns('',
     ## - Otras Views - ##
     (r'area/$', generics_views.area),
     (r'^usuario-no-autorizado/$', generics_views.no_autorizado),
-    
+    (r'^error/$', generics_views.page_error),
+
 )
 
 #paginas personalizadas para los errores 404 y 505

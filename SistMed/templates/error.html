@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block cont_secundario %}
+{% endblock %}
+
+{% block contenido %}
+    <br /><br /><br />
+    <div align='center'>
+        <div class="msj_error"><p>Error: {{ msj_error }}</p></div>
+        <br />
+        <a class="boton" href="javascript:history.back()"> Volver Atras </a>&nbsp;
+        <a class="boton" href="/"> Inicio </a>
+    </div>
+    <br /><br /><br />
+{% endblock %}

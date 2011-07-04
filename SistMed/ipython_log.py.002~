@@ -4,9 +4,14 @@
 #log# args = []
 #log# It is safe to make manual edits below here.
 #log#-----------------------------------------------------------------------
-import inicializar.py
-import inicializar.py
-import inicializar.py
-import inicializar.py
-import inicializar.py
-exit()
+import os
+os.rename().__doc__
+os.rename.__doc__()
+os.rename.__doc__
+os.listdir('/')
+os.listdir('/home/wyrven')
+os.
+os.getcwd 
+os.getcwd()
+cd[2~pydir
+os.path.join('hola', 'mudno')

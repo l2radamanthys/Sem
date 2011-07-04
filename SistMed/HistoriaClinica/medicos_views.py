@@ -31,9 +31,13 @@ def nueva(request):
 
     if query:
         paciente = Pacientes.objects.get(id=int(get_value(request, 'pac_id')))
-        fecha = date_split(get_value(request, 'pac_id', "01/01/01"))
-        grupo_sanguineo =
-        pass
+        fecha_nac = date_split(get_value(request, 'fecha_nac', "01/01/01"))
+        grupo_sanguineo = get_value(request, 'grupo_sanguineo', "--")
+        estado_civil = get_value(request, 'estado_civil', "-")
+        ocupacion = get_value(request, 'ocupacion', "-")
+        religion = get_value(request, 'religion', "-")
+        motivo = get_value(request, 'motivo_consulta', "-")
+
 
 
 
@@ -41,6 +45,11 @@ def nueva(request):
     #mas adelante tengo q hacer un filtrado d datos...
     for pac in Pacientes.objects.all():
         pacientes.append((pac.id, pac.nombre_completo()))
+
+    #en caso de no haber pacientes disponibles lanza error
+    if len(pacientes) == 0:
+        return HttpResponseRedirect('/error/$title="Invalid Request"&msj="no hay pacientes disponibles"')
+
     dict['pacientes'] = pacientes
 
     dict['grupos_sanguineos'] = GRUPOS_SANGUINEOS

@@ -4,6 +4,7 @@
 """
     listado de Funciones de Utilidad extendida
 """
+import datetime
 
 from constantes import *
 
@@ -61,9 +62,9 @@ def generar_base_dict(request):
     dict = BASE_DIC.copy()
     #usuario estado
     opc = request.session.get('area', "True")
-    if opc == "True": 
+    if opc == "True":
         opc = True
-    else: 
+    else:
         opc = False
     dict['menu_area'] = opc
     if request.user.is_authenticated():
@@ -93,7 +94,7 @@ def generar_base_dict(request):
 def insert_permisos_key(request, dict):
     """
         define las variables de permisos
-        
+
         - no registrado nivel_0
         - pacientes hasta nivel 1
         - medicos hasta nivel 2
@@ -128,14 +129,18 @@ def date_split(cad="01/01/1901"):
     """
         comvierte la cadena de texto en un objecto datetime
     """
-
-    fecha = [int(n) for n in cad.split("/")]
-    
-    pass
+    list = [int(n) for n in cad.split("/")].reverse()
+    if len(list) == 3: # ejem 01/01/1920 completo
+        fecha = datetime.datetime(list[2], list[1], list[0])
+    elif len(list) == 2: # ejem 01/03 falta el año por lo tanto año 0 -.-
+        fecha = datetime.datetime(0, list[1], list[0])
+    return fecha
 
 
 def time_split(str="00:00:00"):
     """
         comvierte la cadena de texto en un objecto time
     """
-    pass
+    list = [int(n) for n in cad.split(":")]
+    hora = datetime.time(list[1], list[0])
+    return hora
