@@ -302,7 +302,7 @@ a{
 }
 
 .edt_c {
-    width: 50px;
+    width: 60px;
     border: 1px solid #B0B0B0;
 
     -webkit-border-radius: 3px;
@@ -466,6 +466,45 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
 .login_rect img {
     padding-bottom: 3px;
     padding-right: 3px;
+}
+
+.recuadro {
+    /*height: 100px;*/
+    background-image: url('/site_media/imagenes/azulblanco.png');
+    background-color: transparent;
+    background-position: top left;
+    background-repeat: no-repeat;
+
+
+    width: 400px;
+    text-align: center;
+    border: 2px solid #B0B0B0;
+
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+    /*margin-left: 10px;
+    margin-right: 10px;*/
+    margin-bottom: 10px;
+
+}
+
+.recuadro:hover {
+     border: 2px solid #373737;
+}
+
+
+.recuadro a {
+    font-weight: bold;
+    color: #1F1F1F;
+
+    -webkit-text-shadow: 1px 1px 5px #858585;
+    -moz-text-shadow: 1px 1px 5px #858585;
+    text-shadow: 1px 1px 5px #858585;
 }
 
 

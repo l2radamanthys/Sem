@@ -36,8 +36,8 @@
                 <div id='menu_1' class='hide_nav_menu'>
                 <ul>
                     <li><a href='/'>Inicio</a><li/>
-                    <li><a href='/'>Gestion Turnos</a><li/>
-                    <li><a href='/'>Historia Clinica</a><li/>
+                    <li><a href='/area?opcion=gt'>Gestion Turnos</a><li/>
+                    <li><a href='/area?opcion=hc'>Historia Clinica</a><li/>
                     {% if nivel_0 %}
                     <li><a href='/accounts/login/'>Entrar</a><li/>
                     {% endif %}
@@ -57,6 +57,10 @@
                     </ul>
                     </div>
                 {% endif %}
+
+            <!-- Menu Gestion Turnos -->
+            {%if menu_area %}
+
 
                 {% if nivel_0 %}
                     <span class='title_menu'><a onClick="desplegar('menu_3')">Pacientes</a></span>
@@ -113,9 +117,22 @@
                 <span class='title_menu'><a onClick="desplegar('menu_7')">Menu</a></span>
                     <div id='menu_7' class='hide_nav_menu'>
                     <ul>
+                        <li><a href='/medicos/agenda/agregar-turno/'>Nuevo Turno</a><li/>
                     </ul>
                 </div>
 
+            <!-- Menu de Historia Clinica -->
+            {% else %}
+
+                <span class='title_menu'><a onClick="desplegar('menu_8')">DatosBase</a></a></span>
+                <div id='menu_8' class='hide_nav_menu'>
+                <ul>
+                    <li><a href='/historia-clinica/nueva/'>Nueva Historia Clinica</a><li/>
+                    <li><a href='/accounts/modificar-datos-personales/'>Modificar Datos</a><li/>
+                </ul>
+                </div>
+
+            {% endif %}
                 <br />
                 <br />
 

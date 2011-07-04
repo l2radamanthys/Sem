@@ -21,13 +21,25 @@ from utils import generar_base_dict
 from constantes import *
 
 
+def area(request):
+    """
+        Cambia los Menu q se van a mostrar
+    """
+    opcion = request.GET.get('opcion', 'gt')
+    if opcion == 'gt':
+        request.session['area'] = "True"
+    else:
+        request.session['area'] = "False"
+    return HttpResponseRedirect('/')
+
+
 def index(request):
     """
         Pagina de Inicio
     """
-    plantilla = get_template('base.html')
+    plantilla = get_template('index.html')
     dict = generar_base_dict(request)
-    dict['titulo'] = 'Inicio'
+    dict['titulo'] = 'Sistema de Gestion de Consultorio Medico'
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

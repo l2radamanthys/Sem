@@ -37,8 +37,7 @@ def mostrar_agenda_por_dia(request):
         dia, mes, anio = int(dia), int(mes), int(anio)
         
         #filtra todos los turnos referente a la fecha y medico actual
-        turnos = Turnos.objects.filter(codigo_medico=medico, \
-                    fecha__day=dia, fecha__mounth=mes, fecha__year=anio)
+        turnos = Turnos.objects.filter(codigo_medico=medico, fecha__day=dia, fecha__mounth=mes, fecha__year=anio)
 
 
     contexto = Context(dict)
@@ -47,7 +46,36 @@ def mostrar_agenda_por_dia(request):
 
 
 def nuevo_turno(request):
-    pass
+    plantilla = get_template('medicos/gestion_turnos/nuevo-turno.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Turnos - Nuevo'
+
+    query = int(get_POST_value(request, 'query', '0'))
+    dict['query'] = query
+
+    med_id = int(get_GET_value(request, "med_id", 0))
+    pac_id = int(get_GET_value(request, "pac_id", 0))
+
+    if med_id and pac_id:
+        dict['med_id'] = med_id
+        dict['med_name'] = Medicos.objects.get(id=med_id).nombre_completo()
+        dict['pac_id'] = med_id
+        dict['pac_name'] = Pacientes.objects.get(id=pac_id).nombre_completo()
+
+
+
+    if query:
+        fecha = get_value(request, "fecha", "00:00:00")
+        #falta parsear la fecha
+        
+        med_id = int(get_POST_value(request, "med_id", 0))
+        pac_id = int(get_POST_value(request, "pac_id", 0))
+        comentarios = get_value(request, "comentarios", "")
+
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
 
 
 def modificar_turno(request):

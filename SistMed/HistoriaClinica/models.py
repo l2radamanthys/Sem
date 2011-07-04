@@ -5,6 +5,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 #Modelo Base version intermedia
+from GestionTurnos.models import Pacientes
+from constantes import *
 
 
 class InformacionBasica(models.Model):
@@ -14,23 +16,21 @@ class InformacionBasica(models.Model):
     #los sig datos se obtienen directamente del usuario q se asigna
     #- Nombre y Apellido
     #- Email
-    dni = models.IntegerField()
-    sexo = models.CharField(max_length=1, default='-', choices=SEXO_CHOICE)
-    telefono = models.CharField(max_length=20)
-    direccion = models.CharField(max_length=60)
+    #dni = models.IntegerField()
+    #sexo = models.CharField(max_length=1, default='-', choices=SEXO_CHOICE)
+    
+    fecha_nacimiento = models.DateTimeField('Fecha Nacimiento')
+    lugar_nacimiento = models.CharField('Lugar Nacimiento', max_length=60)
+    grupo_sanguineo = models.CharField('Grupo Sanguineo', max_length=3, default='--', choices=GRUPO_SANGUINEO_CHOICE)
 
-    fecha_nacimiento = models.CharField('Fecha Nacimiento')
-    lugar_nacimiento = models.CharField()
-    grupo_sanguineo = models.CharField()
+    estado_civil = models.CharField('Estado Civil', max_length=1, default='-', choices=ESTADO_CIVIL_CHOICE)
+    ocupacion = models.CharField(max_length=30)
+    religion = models.CharField(max_length=30)
 
-    estado_civil = models.CharField()
-    ocupacion = models.CharField()
-    religion = models.CharField()
+    motivo_consulta = models.TextField()
+    antecedentes_enfermedad_actual = models.TextField()
 
-    motivo_consulta = models.CharField()#TEXT
-    antecedentes_enfermedad_actual = models.CharField()#TEXT
-
-    user = models.ForeignKey(User, unique=True)
+    paciente = models.ForeignKey(Pacientes, unique=True)
 
 
 class AntecedentesPerinatales(models.Model):
@@ -38,15 +38,16 @@ class AntecedentesPerinatales(models.Model):
         Referentes al nacimiento
     """
     hist_clinica = models.ForeignKey(InformacionBasica)
-    enbarazo_nro = models.CharField()
-    duracion_embarazo = models.CharField() #en semanas
-    controles = models.CharField() #si tubo controles durante el embarazo
-    parto_normal = models.CharField('Nacio de Parto Normal') #si nacio parto normal o cesareas
-    peso = models.CharField('Peso al Nacer') #peso al nacer
-    talla = models.CharField('Talla')
-    patologias = models.CharField('Patologias al Nacer') #al nacerS/N
-    atencion_medica = models.CharField('Requirio Atencion Medica')# requirio atencion medica S/N
-    otros_datos = models.TextField('Otros Datos de Relevancia') #otra informacion relevante
+
+    enbarazo_nro = models.IntegerField('Embarazo Nro')
+    duracion_embarazo = models.IntegerField('Duracion/Semanas') #en semanas
+    controles = models.BooleanField('Controles Durante Embarazo') #si tubo controles durante el embarazo
+    parto_normal = models.BooleanField('Nacio de Parto Normal') #si nacio parto normal o cesareas
+    peso = models.FloatField('Peso al Nacer') #peso al nacer
+    talla = models.FloatField('Talla')
+    patologias = models.BooleanField('Patologias al Nacer') #al nacer S/N
+    atencion_medica = models.BooleanField('Requirio Atencion Medica')# requirio atencion medica S/N
+    otros_datos = models.TextField('Otros Datos de Relevancia o Informacion Adicional') #otra informacion relevante
 
 
 #antecedentes personales
@@ -57,14 +58,15 @@ class HabitosToxicos(models.Model):
     hist_clinica = models.ForeignKey(InformacionBasica)
     fecha = models.DateTimeField()#fecha q se realizo el examem
 
-    alcohol = models.CharField() #S/N
-    tabaco = models.CharField()#S/N
-    drogas = models.CharField()#S/N
-    infuciones = models.CharField()#S/N
-    observaciones = models.TextField()#text
+    alcohol = models.BooleanField('Alcohol') #S/N
+    tabaco = models.BooleanField('Tabaquismo')#S/N
+    drogas = models.BooleanField('Drogas')#S/N
+    infuciones = models.BooleanField('Infusiones')#S/N
+    observaciones = models.TextField('Observaciones')#text
 
 
 #Examen Fisico
+'''
 class ExamenFisico:
     hist_clinica = models.ForeignKey(InformacionBasica)
     fecha = models.DateTimeField()#fecha q se realizo el examem
@@ -240,9 +242,9 @@ class OtrosEstudio:
 class Imagen:
     examen_fisico = models.ForeignKey(ExamenFisico, unique=True)
     imagen = models.ImageField(upload_to="/data/imagenes")
-    descripcion = models.TextField()
+    descripcion = models.TextField('Descripcion')
     
-   
+
 class AnalisisLaboratorio:
     hist_clinica = models.ForeignKey(InformacionBasica)
     pass
@@ -264,3 +266,4 @@ class MedicamentosRecetados:
     consulta_medica = models.ForeignKey(ConsultaMedica)
     medicamento = models.CharField()
     prescripcion = models.TextField()
+'''

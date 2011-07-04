@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block cont_sec %}
+
+{% endblock %}
+
+{% block contenido %}
+    <table>
+    <form action="""" method="post"  >
+    <tr><td><label>Paciente</label></td>
+    <td><select class="edt_m" name="paciente">
+            {% for pac in pacientes %}
+                <option value='{{ pac|slice:"0:"|first }}'>{{ pac|slice:"1:"|first }}</option>
+            {% endfor %}
+        </select>
+    </td></tr>
+    <!-- estos datos ya fueron definidos en modelos anteriores -.- (Paciente)
+    <tr><td><label>DNI</label></td><td><input name="dni" class="edt_m" type="text"  /></td></tr>
+    <tr><td><label>Sexo</label></td>
+    <td><select name="sexo" class="edt_m">
+            <option value="-">No Definido</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+        </select>
+    </td></tr>
+     -->
+
+    <tr><td><label>Fecha Nacimiento</label></td><td><input name="fecha_nac" class="edt_c" value="00/00/00" type="text"  /></td></tr>
+    <tr><td><label>Lugar Nacimiento</label></td><td><input name="lugar_nac" class="edt_g" type="text"  /></td></tr>
+    <tr><td><label>Grupo Sanguineo</label></td>
+    <td><select name="grupo_sanguineo" class="edt_c">
+            <option value="-">---</option>
+        {% for grupo in grupos_sanguineos %}
+            <option value="{{ grupo }}">{{ grupo }}</option>
+        {% endfor %}
+        </select>
+    </td></tr>
+    <tr><td><label>Estado Civil</label></td>
+    <td><select name="estado_civil" class="edt_m">
+            <option value="-">No Definido</option>
+            <option value="S">Soltero</option>
+            <option value="C">Casado</option>
+            <option value="V">Viudo</option>
+            <option value="D">Divorciado</option>
+            <option value="U">Union Libre</option>
+        </select>
+    </td></tr>
+    <tr><td><label>Ocupacion</label></td><td><input name="ocupacion" class="edt" type="text"  /></td></tr>
+    <tr><td><label>Religion</label></td><td><input name="religion" class="edt" type="text"  /></td></tr>
+    <tr><td><label>Motivo Consulta</label></td><td><textarea name="motivo_consulta" type="textarea" class="edt"  ></textarea></td></tr>
+    <tr><td colspan="2"><input type="hidden" value="1" name="query"  /></td></tr>
+    <tr><td colspan="2">
+        <input type="submit" value="Crear"  />
+        <input type="reset" value="Limpiar"  />
+    </td></tr>
+</form>
+</table>
+
+
+    {% if query %}
+        <div class="{{ msj_class }}">
+            <p>{{ mensaje }}</p>
+        </div>
+    {% endif %}
+    </div>
+
+{% endblock %}

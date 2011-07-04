@@ -61,6 +61,12 @@ def generar_base_dict(request):
     """
     dict = BASE_DIC.copy()
     #usuario estado
+    opc = request.session.get('area', "True")
+    if opc == "True": 
+        opc = True
+    else: 
+        opc = False
+    dict['menu_area'] = opc
     if request.user.is_authenticated():
         dict['login_status'] = 'online'
         dict['login_img'] = 'online.png'

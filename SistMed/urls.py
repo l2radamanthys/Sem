@@ -15,6 +15,8 @@ import generics_views
 from GestionTurnos import pacientes_views, admin_views, medicos_views
 from GestionTurnos import especialidades_views, turnos_views
 
+from HistoriaClinica import medicos_views as hc_med_views
+
 
 urlpatterns = patterns('',
     # Example:
@@ -115,12 +117,15 @@ urlpatterns = patterns('',
     (r'^administrativos/buscar/$', admin_views.buscar_admins),
 
     # - Turnos
+    (r'^medicos/agenda/agregar-turno/$', turnos_views.nuevo_turno),
 
     ## - Historia Clinica - ##
-    
+    # - Medicos Views
+    (r'^historia-clinica/nueva/$', hc_med_views.nueva),
 
 
     ## - Otras Views - ##
+    (r'area/$', generics_views.area),
     (r'^usuario-no-autorizado/$', generics_views.no_autorizado),
     
 )

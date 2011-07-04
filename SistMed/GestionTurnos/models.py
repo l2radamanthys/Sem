@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 from django.db import models
 from django.contrib.auth.models import User
-#from django.db import connection, transaction
+
+from django.db import connection, transaction
+
 
 from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE, DATE_CHOICE
 
@@ -46,8 +47,7 @@ class Usuarios(models.Model):
     #FK
     #tipo usuario (paciente, medico, administrativo)
     tipo_usuario = models.ForeignKey(TipoUsuario)
-    #segun django.es de esta forma anda con la clase user
-    #yo queria usar herencia :(
+    #segun django.es de esta forma anda con la clase user yo queria usar herencia :( pero no funka asi -.-
     user = models.ForeignKey(User, unique=True)
 
 
@@ -86,8 +86,11 @@ class Medicos(Usuarios):
 
 
 class Pacientes(Usuarios):
-    #por el momento no tiene canpos adjuntos mas adelantes tendra mas..
-    #cuando implemente la parte de Historia Clinica :P
+    """
+    por el momento no tiene canpos adjuntos mas adelantes tendra mas..
+    cuando implemente la parte de Historia Clinica :P pero eso datos
+    estaran alli
+    """
     pass
 
 

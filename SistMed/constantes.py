@@ -7,6 +7,7 @@
 
 import os
 
+
 GET = 0
 POST = 1
 
@@ -21,13 +22,13 @@ BASE_DIC = {
 SEXO_CHOICE = (
     ('M', 'Masculino'),
     ('F', 'Femenino'),
-    ('-', '-----'),
+    ('-', 'No Definido'),
 )
 
 SEXO_CHOICE_DIC = {
     'M' : 'Masculino',
     'F' : 'Femenino',
-    '-' : '-----',
+    '-' : 'No Definido',
 }
 
 #solicitud turnos
@@ -58,11 +59,40 @@ DATE_CHOICE_DIC = {
     'DOM': 'Domingo',
 }
 
-#nombres grupos
-#PACIENTES = 'Pacientes'
-#MEDICOS = 'Medicos'
-#ADMINISTRATIVOS = 'Administrativos'
 
+ESTADO_CIVIL_CHOICE = (
+    ('-', 'No Definido'),
+    ('S', 'Soltero'),
+    ('C', 'Casado'),
+    ('V', 'Viudo'),
+    ('D', 'Divorciado'),
+    ('U', 'Union Libre'),
+)
+
+
+GRUPO_SANGUINEO_CHOICE = (
+    ("O+", "O+"),
+    ("O-","O-"),
+    ("A+","A+"),
+    ("A-","A-"),
+    ("B+","B+"),
+    ("B-","B-"),
+    ("AB+","AB+"),
+    ("AB-","AB-"),
+)
+
+GRUPOS_SANGUINEOS = (
+    "O+",
+    "O-",
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "AB+",
+    "AB-",
+)
+
+#nombres grupos
 PACIENTE = 'Paciente'
 MEDICO = 'Medico'
 ADMINISTRATIVO = 'Administrativo'
