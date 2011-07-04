@@ -21,10 +21,24 @@ Rquerimientos
 - Django 1.1.x o superior
 - PosgreSQL 8.4 o superior
 
+Paquetes Opcionales
+-------------------
+- django-command-extensions
+svn checkout http://django-command-extensions.googlecode.com/svn/trunk/django-command-extensions
+
 
 Instalacion
 -----------
-Proyecto en desarrollo, todavia no tengo ningun release...
+Proyecto en desarrollo, todavia no tengo ningun release... pueden descargar la
+version actual para probarla... recuerde actualizar de ves en cuando para
+obtener nuevas actualizaciones y revisiones del mismo..
+
+- Instalar las Dependencias
+- Crear la BD en PosgreSQL con el nombre BDSem
+- situarse sobre la carpeta y en la consola ejecutar:
+    # creara las tablas y el usuario admin (dejelo con este nombre) y cargara
+    # los datos basicos
+    >>> ./init
 
 
 Testeado en
