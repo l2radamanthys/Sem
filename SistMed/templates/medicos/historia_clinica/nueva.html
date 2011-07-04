@@ -8,7 +8,7 @@
     <table>
     <form action="""" method="post"  >
     <tr><td><label>Paciente</label></td>
-    <td><select class="edt_m" name="paciente">
+    <td><select class="edt_m" name="pac_id">
             {% for pac in pacientes %}
                 <option value='{{ pac|slice:"0:"|first }}'>{{ pac|slice:"1:"|first }}</option>
             {% endfor %}
@@ -53,8 +53,8 @@
         <input type="submit" value="Crear"  />
         <input type="reset" value="Limpiar"  />
     </td></tr>
-</form>
-</table>
+    </form>
+    </table>
 
 
     {% if query %}

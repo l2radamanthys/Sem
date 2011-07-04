@@ -33,7 +33,6 @@ def sexo_choice_expand(key):
     return SEXO_CHOICE_DIC[key]
 
 
-
 def get_GET_value(request, key='', default='', blank=''):
     value = request.GET.get(key, default)
     if value == '':
@@ -123,3 +122,20 @@ def insert_permisos_key(request, dict):
         dict['nivel_3'] = True
 
     return dict
+
+
+def date_split(cad="01/01/1901"):
+    """
+        comvierte la cadena de texto en un objecto datetime
+    """
+
+    fecha = [int(n) for n in cad.split("/")]
+    
+    pass
+
+
+def time_split(str="00:00:00"):
+    """
+        comvierte la cadena de texto en un objecto time
+    """
+    pass

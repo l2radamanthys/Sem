@@ -4,7 +4,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#Modelo Base version intermedia
 from GestionTurnos.models import Pacientes
 from constantes import *
 
@@ -16,8 +15,8 @@ class InformacionBasica(models.Model):
     #los sig datos se obtienen directamente del usuario q se asigna
     #- Nombre y Apellido
     #- Email
-    #dni = models.IntegerField()
-    #sexo = models.CharField(max_length=1, default='-', choices=SEXO_CHOICE)
+    #- dni
+    #- sexo
     
     fecha_nacimiento = models.DateTimeField('Fecha Nacimiento')
     lugar_nacimiento = models.CharField('Lugar Nacimiento', max_length=60)
@@ -30,6 +29,7 @@ class InformacionBasica(models.Model):
     motivo_consulta = models.TextField()
     antecedentes_enfermedad_actual = models.TextField()
 
+    #fk datos paciente...
     paciente = models.ForeignKey(Pacientes, unique=True)
 
 

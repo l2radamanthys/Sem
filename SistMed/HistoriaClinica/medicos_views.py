@@ -29,6 +29,12 @@ def nueva(request):
     query = int(request.POST.get('query', '0'))
     dict['query'] = query
 
+    if query:
+        paciente = Pacientes.objects.get(id=int(get_value(request, 'pac_id')))
+        fecha = date_split(get_value(request, 'pac_id', "01/01/01"))
+        grupo_sanguineo =
+        pass
+
 
 
     pacientes = []

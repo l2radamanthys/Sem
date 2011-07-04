@@ -32,8 +32,8 @@ def mostrar_agenda_por_dia(request):
     if med_id != -1:
         medico = Medicos.objects.get(med_id)
 
-        cad = get_GET_value(request, "dia", "1.1.11")
-        dia, mes, anio = cad.split(".")
+        cad = get_GET_value(request, "dia", "01/01/01")
+        dia, mes, anio = cad.split("/")
         dia, mes, anio = int(dia), int(mes), int(anio)
         
         #filtra todos los turnos referente a la fecha y medico actual
