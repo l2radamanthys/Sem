@@ -30,16 +30,25 @@ def nueva(request):
     dict['query'] = query
 
     if query:
-        paciente = Pacientes.objects.get(id=int(get_value(request, 'pac_id')))
+        _paciente = Pacientes.objects.get(id=int(get_value(request, 'pac_id')))
         fecha_nac = date_split(get_value(request, 'fecha_nac', "01/01/01"))
-        grupo_sanguineo = get_value(request, 'grupo_sanguineo', "--")
-        estado_civil = get_value(request, 'estado_civil', "-")
-        ocupacion = get_value(request, 'ocupacion', "-")
-        religion = get_value(request, 'religion', "-")
+        lugar_nac = date_split(get_value(request, 'lugar_nac', ""))
+        grupo_sang = get_value(request, 'grupo_sanguineo', "--")
+        est_civil = get_value(request, 'estado_civil', "-")
+        _ocupacion = get_value(request, 'ocupacion', "-")
+        _religion = get_value(request, 'religion', "-")
         motivo = get_value(request, 'motivo_consulta', "-")
-
-
-
+        
+        hist_clinica = InformacionBasica.objects.create(
+                    paciente = _paciente, 
+                    fecha_nacimiento = fecha_nac, 
+                    lugar_nacimiento = lugar_nac, 
+                    grupo_sanguineo = grupo_sang, 
+                    estado_civil = est_civil, 
+                    ocupacion = _ocupacion, 
+                    religion = _religion, 
+                    motivo_consulta = motivo
+        )
 
     pacientes = []
     #mas adelante tengo q hacer un filtrado d datos...
@@ -57,3 +66,10 @@ def nueva(request):
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
+
+
+def mostrar_datos_paciente(request):
+    """
+        
+    """
+    

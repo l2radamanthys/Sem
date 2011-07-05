@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Project SYSTEM "Project-4.6.dtd">
+<!-- eric4 project file for project Sem -->
+<!-- Saved: 2011-07-05, 19:01:43 -->
+<!-- Copyright (C) 2011 Ricardo Daniel Quiroga, l2radamanthys@gmail.com -->
+<Project version="4.6">
+  <Language>es</Language>
+  <ProgLanguage mixed="0">Python</ProgLanguage>
+  <ProjectType>Django</ProjectType>
+  <Description>Mi Seminario de C.U. - Sistema de Gestion de Consultorio Medico</Description>
+  <Version>0.1</Version>
+  <Author>Ricardo Daniel Quiroga</Author>
+  <Email>l2radamanthys@gmail.com</Email>
+  <TranslationPattern>SistMed/locale/%language%/LC_MESSAGES/django.po</TranslationPattern>
+  <Sources>
+    <Source>SistMed/manage.py</Source>
+    <Source>SistMed/GestionTurnos/__init__.py</Source>
+    <Source>SistMed/GestionTurnos/especialidades_views.py</Source>
+    <Source>SistMed/GestionTurnos/admin.py</Source>
+    <Source>SistMed/GestionTurnos/views.py</Source>
+    <Source>SistMed/GestionTurnos/pacientes_views.py</Source>
+    <Source>SistMed/GestionTurnos/turnos_views.py</Source>
+    <Source>SistMed/GestionTurnos/medicos_views.py</Source>
+    <Source>SistMed/GestionTurnos/models.py</Source>
+    <Source>SistMed/GestionTurnos/admin_views.py</Source>
+    <Source>SistMed/__init__.py</Source>
+    <Source>SistMed/inicializar.py</Source>
+    <Source>SistMed/constantes.py</Source>
+    <Source>SistMed/ipython_log.py</Source>
+    <Source>SistMed/urls.py</Source>
+    <Source>SistMed/utils.py</Source>
+    <Source>SistMed/settings.py</Source>
+    <Source>SistMed/generics_views.py</Source>
+    <Source>SistMed/HistoriaClinica/__init__.py</Source>
+    <Source>SistMed/HistoriaClinica/admin.py</Source>
+    <Source>SistMed/HistoriaClinica/views.py</Source>
+    <Source>SistMed/HistoriaClinica/pacientes_views.py</Source>
+    <Source>SistMed/HistoriaClinica/admins_views.py</Source>
+    <Source>SistMed/HistoriaClinica/medicos_views.py</Source>
+    <Source>SistMed/HistoriaClinica/generics_views.py</Source>
+    <Source>SistMed/HistoriaClinica/models.py</Source>
+  </Sources>
+  <Forms>
+    <Form>SistMed/templates/cambio_contrasenia.html</Form>
+    <Form>SistMed/templates/login.html</Form>
+    <Form>SistMed/templates/logout.html</Form>
+    <Form>SistMed/templates/base.html</Form>
+    <Form>SistMed/templates/administrativos/gestion_turnos/nuevo.html</Form>
+    <Form>SistMed/templates/administrativos/gestion_turnos/guardar.html</Form>
+    <Form>SistMed/templates/administrativos/gestion_turnos/modificar.html</Form>
+    <Form>SistMed/templates/administrativos/gestion_turnos/borrado.html</Form>
+    <Form>SistMed/templates/administrativos/gestion_turnos/datos.html</Form>
+    <Form>SistMed/templates/administrativos/gestion_turnos/listado.html</Form>
+    <Form>SistMed/templates/administrativos/gestion_turnos/borrar.html</Form>
+    <Form>SistMed/templates/administrativos/gestion_turnos/buscar.html</Form>
+    <Form>SistMed/templates/404.html</Form>
+    <Form>SistMed/templates/index.html</Form>
+    <Form>SistMed/templates/error.html</Form>
+    <Form>SistMed/templates/medicos/historia_clinica/nueva.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/agregar-dia-atencion.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/nuevo-turno.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/nuevo.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/guardar.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/modificar.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/borrado.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/datos.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/modificar_0.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/listado.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/borrar.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/agenda-dia.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/buscar.html</Form>
+    <Form>SistMed/templates/medicos/gestion_turnos/agregar-especialidad.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/nueva-solicitud.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/cancelar-solicitud.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/nuevo.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/guardar.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/modificar.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/borrado.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/datos.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/listado.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/borrar.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/listado-solicitudes.html</Form>
+    <Form>SistMed/templates/pacientes/gestion_turnos/buscar.html</Form>
+    <Form>SistMed/templates/especialidades/nueva.html</Form>
+    <Form>SistMed/templates/especialidades/borrado.html</Form>
+    <Form>SistMed/templates/especialidades/listado.html</Form>
+    <Form>SistMed/templates/especialidades/borrar.html</Form>
+    <Form>SistMed/templates/no_autorizado.html</Form>
+    <Form>SistMed/media/scripts/funciones.js</Form>
+    <Form>SistMed/media/scripts/utils.js</Form>
+    <Form>SistMed/templates/medicos/historia_clinica/mostrar-datos-base.html</Form>
+  </Forms>
+  <Translations>
+  </Translations>
+  <Resources>
+  </Resources>
+  <Interfaces>
+  </Interfaces>
+  <Others>
+  </Others>
+  <MainScript>SistMed/manage.py</MainScript>
+  <Vcs>
+    <VcsType>None</VcsType>
+  </Vcs>
+  <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.html" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.mo" type="TRANSLATIONS" />
+    <FiletypeAssociation pattern="*.po" type="TRANSLATIONS" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.js" type="FORMS" />
+    <FiletypeAssociation pattern="*.pyw" type="SOURCES" />
+    <FiletypeAssociation pattern="*.htm" type="FORMS" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
+  </FiletypeAssociations>
+</Project>

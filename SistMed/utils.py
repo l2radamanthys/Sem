@@ -49,6 +49,9 @@ def get_POST_value(request, key='', default='', blank=''):
 
 
 def get_value(request=None, key='', default='', blank='', method=POST):
+    """
+        Obtiene valor de object request por los metodos POST/GET
+    """
     if method == POST:
         return get_POST_value(request, key, default, blank)
     else:
