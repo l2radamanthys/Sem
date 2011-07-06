@@ -128,14 +128,14 @@ def insert_permisos_key(request, dict):
     return dict
 
 
-def date_split(cad="01/01/1901"):
+def date_split(cad="01/01/1900"):
     """
         comvierte la cadena de texto en un objecto datetime
     """
     list = [int(n) for n in cad.split("/")].reverse()
     if len(list) == 3: # ejem 01/01/1920 completo
         fecha = datetime.datetime(list[2], list[1], list[0])
-    elif len(list) == 2: # ejem 01/03 falta el año por lo tanto año 0 -.-
+    elif len(list) == 2: # ejem 01/03 falta el anio por lo tanto anio=0 -.-
         fecha = datetime.datetime(0, list[1], list[0])
     return fecha
 
