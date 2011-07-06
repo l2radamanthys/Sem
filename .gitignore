@@ -3,6 +3,7 @@
 *.bat
 *log.py
 *.ini
+*.db
 /nbproject
 /data
 /.settings/
