@@ -24,18 +24,17 @@ def agregar(request):
     dict['query'] = query
 
     if query:
-        nombre = get_value(request, 'nombre', '', '', 'POST')
+        nombre = get_value(request, 'nombre', '')
         if nombre != '':
             if not(Expecialidades.objects.filter(nombre=nombre)):
                 exp = Expecialidades(nombre=nombre)
                 exp.save()
-                dict['query'] = True
                 dict['msj_class'] = MSJ_OK
                 dict['mensaje'] = 'Se a Agregado %s' %nombre
             else:
-                dict['query'] = True
                 dict['msj_class'] = MSJ_ERROR
                 dict['mensaje'] = 'Error la expecialidad ya existe %s' %nombre
+                
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

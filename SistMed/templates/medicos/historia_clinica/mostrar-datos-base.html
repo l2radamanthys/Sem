@@ -4,34 +4,72 @@
 {% endblock %}
 
 {% block contenido %}
-<table>
+
+
+<table width="700px" border="0" cellpadding="0" cellspacing="2">
+<tbody>
     <tr>
-        <td><label>Nombre:</label></td>
-        <td><label>{{ nombre }}</label></td>
+        <td colspan='3' width="400px" class='tbl_separador'><h5>Identificacion</h5></td>
+        <td><a href="" class="boton">Modificar</a></td>
     </tr>
     <tr>
-        <td><label>:</label></td>
-        <td><label>{{  }}</label></td>
+        <td><label><strong>Nombre:</strong></label></td><td>{{ nombre }}</td>
+        <td><label><strong>DNI:</strong></label></td><td>{{ dni }}</td>
     </tr>
     <tr>
-        <td><label>:</label></td>
-        <td><label>{{  }}</label></td>
+        <td><label><strong>Lugar de Nacimiento:</strong></label></td><td colspan="3">{{ lugar_nacimiento }}</td>
     </tr>
     <tr>
-        <td><label>:</label></td>
-        <td><label>{{  }}</label></td>
+        <td><label><strong>Padre:</strong></label></td><td colspan="3">{{ padre }}</td>
     </tr>
     <tr>
-        <td><label>:</label></td>
-        <td><label>{{  }}</label></td>
+        <td><label><strong>Madre:</strong></label></td><td colspan="3">{{ madre }}</td>
     </tr>
     <tr>
-        <td><label>:</label></td>
-        <td><label>{{  }}</label></td>
+        <td><label><strong>Obra Social:</strong></label></td><td><label>{{ obra_social }}</td>
+        <td><label><strong>Nro Afiliado:</strong></label></td><td><label>{{ nro_afiliado }}</td>
     </tr>
-    
+
+    <tr>
+        <td><label><strong>Sexo:</strong></label></td><td>{{ sexo }}</td>
+        <td><label><strong>Grupo Sanguineo:</strong></label></td><td>{{ grupo_sanguineo }}</td>
+    </tr>
+</tbody>
 </table>
 
+<br /><br />
 
+<table width="700px" border="0" cellpadding="0" cellspacing="2">
+<tbody>
+    <tr>
+        <td colspan='3' width="400px" class='tbl_separador'><h5>Antecedentes Perinatales</h5></td>
+        <td><a href="" class="boton">Modificar</a></td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Embarazo Nro:</strong></label></td><td>{{ nro_embarazo }}</td>
+        <td><label><strong>Duracion(semanas):</strong></label></td><td>{{ duracion }}</td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Controles:</strong></label></td><td>{{ controles }}</td>
+        <td><label><strong>Parto Normal:</strong></label></td><td>{{ parto_normal }}</td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Peso(gr):</strong></label></td><td>{{ peso }}</td>
+        <td><label><strong>Talla(cm):</strong></label></td><td>{{ talla }}</td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Requirio Atencion Medica:</strong></label></td><td>{{ req_aten_med }}</td>
+        <td><label><strong>Patologias:</strong></label></td><td>{{ patologias }}</td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Otra Informacion:</strong></label></td><td colspan="3">{{ otra_info }}</td>
+
+</tbody>
+</table>
 
 {% endblock %}

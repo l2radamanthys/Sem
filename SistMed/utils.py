@@ -132,11 +132,12 @@ def date_split(cad="01/01/1900"):
     """
         comvierte la cadena de texto en un objecto datetime
     """
-    list = [int(n) for n in cad.split("/")].reverse()
+    list = [int(n) for n in cad.split("/")]
+    list.reverse()
     if len(list) == 3: # ejem 01/01/1920 completo
-        fecha = datetime.datetime(list[2], list[1], list[0])
+        fecha = datetime.datetime(year=list[0], month=list[1], day=list[2])
     elif len(list) == 2: # ejem 01/03 falta el anio por lo tanto anio=0 -.-
-        fecha = datetime.datetime(0, list[1], list[0])
+        fecha = datetime.datetime(year=0, month=list[0], day=list[1])
     return fecha
 
 
@@ -147,3 +148,14 @@ def time_split(str="00:00:00"):
     list = [int(n) for n in cad.split(":")]
     hora = datetime.time(list[1], list[0])
     return hora
+
+
+def true_false(val=True):
+    """
+        Combierte Booleano en tipo SI/NO
+    """
+    if val:
+        return "Si"
+    else:
+        return "No"
+    

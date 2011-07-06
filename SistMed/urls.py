@@ -122,6 +122,8 @@ urlpatterns = patterns('',
     ## - Historia Clinica - ##
     # - Medicos Views
     (r'^historia-clinica/nueva/$', hc_med_views.nueva),
+    (r'^historia-clinica/mostrar-datos-base/$', hc_med_views.mostrar_datos_paciente),
+    (r'^historia-clinica/mostrar-datos-base/(\d{1,2})/$', hc_med_views.mostrar_datos_paciente),
 
 
     ## - Otras Views - ##

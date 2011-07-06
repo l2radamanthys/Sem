@@ -30,26 +30,23 @@ def nueva(request):
     dict['query'] = query
 
     if query:
-        _paciente = Pacientes.objects.get(id=int(get_value(request, 'pac_id')))
-        fecha_nac = date_split(get_value(request, 'fecha_nac', "01/01/01"))
-        lugar_nac = date_split(get_value(request, 'lugar_nac', ""))
-        grupo_sang = get_value(request, 'grupo_sanguineo', "--")
-        est_civil = get_value(request, 'estado_civil', "-")
-        _ocupacion = get_value(request, 'ocupacion', "-")
-        _religion = get_value(request, 'religion', "-")
-        motivo = get_value(request, 'motivo_consulta', "-")
-        
         hist_clinica = InformacionBasica.objects.create(
-                    paciente = _paciente, 
-                    fecha_nacimiento = fecha_nac, 
-                    lugar_nacimiento = lugar_nac, 
-                    grupo_sanguineo = grupo_sang, 
-                    estado_civil = est_civil, 
-                    ocupacion = _ocupacion, 
-                    religion = _religion, 
-                    motivo_consulta = motivo
-        )
-
+                    paciente = Pacientes.objects.get(id=int(get_value(request, 'pac_id'))),
+                    fecha_nacimiento = date_split(get_value(request, 'fecha_nac', "01/01/01")), 
+                    lugar_nacimiento = get_value(request, 'lugar_nac', ""), 
+                    grupo_sanguineo = get_value(request, 'grupo_sanguineo', "--"), 
+                    padre = get_value(request, 'padre', ""),
+                    madre = get_value(request, 'madre', ""),
+                    obra_social = get_value(request, 'obra_social', ""),
+                    nro_afiliado = get_value(request, 'nro_afiliado', ""),
+                    estado_civil = get_value(request, 'estado_civil', "-"), 
+                    ocupacion = get_value(request, 'ocupacion', "-"), 
+                    religion = get_value(request, 'religion', "-"), 
+                    motivo_consulta = get_value(request, 'motivo_consulta', "-")
+        )#guarda automaticament
+        dict['msj_class'] = MSJ_OK
+        dict['mensaje'] = 'Historia Clinica Creada'
+        
     pacientes = []
     #mas adelante tengo q hacer un filtrado d datos...
     for pac in Pacientes.objects.all():
@@ -68,8 +65,32 @@ def nueva(request):
     return HttpResponse(html)
 
 
-def mostrar_datos_paciente(request):
+def mostrar_datos_paciente(request, pac_id=-1):
     """
         
     """
+    plantilla = get_template('medicos/historia_clinica/mostrar-datos-base.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica' 
     
+    pac_id = int(pac_id)
+    if pac_id != -1:
+        _paciente = Pacientes.objects.get(id=pac_id)
+        hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
+        
+        dict["nombre"] = _paciente.nombre_completo()
+        dict["DNI"] = _paciente.dni
+        dict["lugar_nacimiento"] = hist_clinica.lugar_nacimiento
+        dict["padre"] = hist_clinica.padre
+        dict["madre"] = hist_clinica.madre
+        dict["obra_social"] = hist_clinica.obra_social
+        dict["nro_afiliado"] = hist_clinica.nro_afiliado
+        dict["sexo"] = sexo_choice_expand(_paciente.sexo)
+        dict["grupo_sanguineo"] = hist_clinica.grupo_sanguineo
+              
+    
+    
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+

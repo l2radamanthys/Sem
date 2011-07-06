@@ -22,6 +22,12 @@ class InformacionBasica(models.Model):
     lugar_nacimiento = models.CharField('Lugar Nacimiento', max_length=60)
     grupo_sanguineo = models.CharField('Grupo Sanguineo', max_length=3, default='--', choices=GRUPO_SANGUINEO_CHOICE)
 
+    #complementos agregados
+    padre = models.CharField('Padre', max_length=120)
+    madre = models.CharField('Madre', max_length=120)
+    obra_social = models.CharField('Obra Social', max_length=30)
+    nro_afiliado = models.CharField('Nro Afiliado', max_length=10)
+
     estado_civil = models.CharField('Estado Civil', max_length=1, default='-', choices=ESTADO_CIVIL_CHOICE)
     ocupacion = models.CharField(max_length=30)
     religion = models.CharField(max_length=30)
@@ -64,6 +70,18 @@ class HabitosToxicos(models.Model):
     infuciones = models.BooleanField('Infusiones')#S/N
     observaciones = models.TextField('Observaciones')#text
 
+
+#carnet de vacunacion
+class Vacuna(models.Model):
+    """
+        Para el Carnet de Vacunacion
+    """
+    hist_clinica = models.ForeignKey(InformacionBasica)
+    
+    fecha = models.DateTimeField()
+    descripcion = models.CharField(max_length=30)
+    tipo_dosis = models.CharField(max_length=3, default='---', choices=TIPO_DOSIS_CHOICE)
+    
 
 #Examen Fisico
 class ExamenBase(models.Model):
