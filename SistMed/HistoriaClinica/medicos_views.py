@@ -65,6 +65,28 @@ def nueva(request):
     return HttpResponse(html)
 
 
+def listado_pacientes(request):
+    """
+        
+    """
+    plantilla = get_template('medicos/historia_clinica/listado-pacientes.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Listado Historias Clinicas'
+
+    pacientes = []
+    
+    for info in InformacionBasica.objects.all():
+        pacientes.append([info.paciente.id, info.paciente.nombre_completo()])
+    
+    dict['pacientes'] = pacientes
+    
+    
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+
 def mostrar_datos_paciente(request, pac_id=-1):
     """
         
@@ -73,8 +95,12 @@ def mostrar_datos_paciente(request, pac_id=-1):
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica' 
     
+    
     pac_id = int(pac_id)
-    if pac_id != -1:
+    if pac_id != -1:    
+        pac_id = int(request.session.get('hc_pac_id', -1))
+    
+    if pac_id != -1:    
         _paciente = Pacientes.objects.get(id=pac_id)
         hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
         
@@ -87,10 +113,25 @@ def mostrar_datos_paciente(request, pac_id=-1):
         dict["nro_afiliado"] = hist_clinica.nro_afiliado
         dict["sexo"] = sexo_choice_expand(_paciente.sexo)
         dict["grupo_sanguineo"] = hist_clinica.grupo_sanguineo
+        dict['pac_id'] = pac_id
               
-    
-    
+        #grabamo en la session el id del paciente
+        request.session['hc_pac_id'] = pac_id
+                      
+              
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
 
+
+def mostrar_antecedentes_perinatales(request, pac_id=-1):
+    """
+
+    """
+    plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+    
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)

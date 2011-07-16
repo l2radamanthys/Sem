@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block cont_sec %}
+{% endblock %}
+
+{% block contenido %}
+    <div align="center">
+        <a href="/historia-clinica/mostrar-datos-base/{{ pac_id }}/" class='cat_link'>Datos Base</a>
+        <a href="/historia-clinica/mostrar-antecedentes-perinatales/" class='cat_link'>Antecedentes Perinatales</a>
+        <a href="/historia-clinica/listado-examen-fisico/" class='cat_link'>Examen Fisico</a>
+        <a href="/historia-clinica/habitos-toxicos/" class='cat_link'>Habitos Toxicos</a>
+        <a href="/historia-clinica/listado-vacunas/" class='cat_link'>Vacunas</a>
+        <a href="/historia-clinica/listado-diagnosticos/" class='cat_link'>Diagnosticos</a>
+        <div class='cat_line'></div>
+    {% block hc_contenido %}
+    {% endblock %}
+
+    </div>
+{% endblock %}
