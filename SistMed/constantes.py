@@ -90,6 +90,15 @@ TIPO_DOSIS_CHOICE = (
     ("REF","Refuerzo"),
 )
 
+TIPO_DOSIS_DIC = {
+    "UNI":"Unica Dosis",
+    "1ra":"1ra Dosis",
+    "2da":"2da Dosis",
+    "3ra":"3ra Dosis",
+    "REF":"Refuerzo",
+}
+
+
 
 GRUPOS_SANGUINEOS = (
     "O+",

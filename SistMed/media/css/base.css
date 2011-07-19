@@ -254,6 +254,8 @@ a{
 /* fin fanci boton */
 
 .boton {
+    font-size: 12px;
+
     background-image: url('../imagenes/boton_a.png');
     background-repeat: x-repeat;
     background-color: #FFF;

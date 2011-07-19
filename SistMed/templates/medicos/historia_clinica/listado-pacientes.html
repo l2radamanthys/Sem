@@ -7,11 +7,11 @@
     <div align="center">
     <table>
         <tr>
-            <td class='tbl_separador'><h5>Pacientes</h5></td>
+            <td class='tbl_separador' width="500px"><h5>Pacientes</h5></td>
         </tr>
             {% for pac in pacientes %}
             <tr>
-                <td class="field_link"><a href='{{ pac|slice:"0:"|first }}'>{{ pac|slice:"1:"|first }}</a></td>
+                <td class="field_link"><a href='/historia-clinica/mostrar-datos-base/{{ pac|slice:"0:"|first }}'>{{ pac|slice:"1:"|first }}</a></td>
             </tr>
             {% endfor %}
     </table>

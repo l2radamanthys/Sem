@@ -94,13 +94,17 @@ def mostrar_datos_paciente(request, pac_id=-1):
     plantilla = get_template('medicos/historia_clinica/mostrar-datos-base.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica' 
+
+    #if pac_id != "":
+    #    pac_id = int(pac_id)
+    #else:
+    #    pac_id = -1
+    #if pac_id == -1: #no es necesario
+    #    pac_id = int(request.session.get('hc_pac_id', -1))
     
-    
-    pac_id = int(pac_id)
-    if pac_id != -1:    
-        pac_id = int(request.session.get('hc_pac_id', -1))
-    
-    if pac_id != -1:    
+    #if pac_id != -1:
+    if pac_id != "" and pac_id != -1:
+        pac_id = int(pac_id)
         _paciente = Pacientes.objects.get(id=pac_id)
         hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
         
@@ -116,9 +120,8 @@ def mostrar_datos_paciente(request, pac_id=-1):
         dict['pac_id'] = pac_id
               
         #grabamo en la session el id del paciente
-        request.session['hc_pac_id'] = pac_id
+        #request.session['hc_pac_id'] = pac_id #no es necesario
                       
-              
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -131,7 +134,89 @@ def mostrar_antecedentes_perinatales(request, pac_id=-1):
     plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
-    
+
+    if pac_id != "" and pac_id != -1:
+        pac_id = int(pac_id)
+        _paciente = Pacientes.objects.get(id=pac_id)
+        hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
+
+        dict['pac_id'] = pac_id
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+
+#vacunas
+def agregar_vacuna(request, pac_id=-1):
+    """
+    """
+    plantilla = get_template('medicos/historia_clinica/agregar-vacuna.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    if pac_id != "" and pac_id != -1:
+        pac_id = int(pac_id)
+        _paciente = Pacientes.objects.get(id=pac_id)
+        hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
+
+        
+
+
+    dict['tipo_dosis'] = TIPO_DOSIS_CHOICE
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def listado_vacunas(request, pac_id=-1):
+    """
+        Muestra el listado de vacunacion al estilo carnet jaja
+    """
+    plantilla = get_template('medicos/historia_clinica/listado-vacunas.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    if pac_id != "" and pac_id != -1:
+        pac_id = int(pac_id)
+        _paciente = Pacientes.objects.get(id=pac_id)
+        _hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
+        #vacunas = Vacuna.objects.filter(hist_clinica=_hist_clinica)
+
+        list_vac = []
+        for vac in Vacuna.objects.filter(hist_clinica=_hist_clinica):
+            list_vac.append([vac.id, date_to_str(vac.fecha), vac.descripcion, TIPO_DOSIS_DIC.get(vac.tipo_dosis, 'ERROR')])
+
+        dict['vacunas'] = list_vac
+        
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def modificar_vacuna(request, pac_id=-1):
+    """
+    """
+    plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def borrar_vacuna(request, pac_id=-1):
+    """
+    """
+    plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)

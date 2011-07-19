@@ -1,0 +1,23 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block hc_contenido %}
+
+<table>
+    <form action="" method="post">
+    <tr><td><label>Fecha</label></td><td><input name="fecha" class="edt" value="00/00/00" type="text"  /></td></tr>
+    <tr><td><label>Descripcion</label></td><td><input name="descripcion" class="edt" type="text"  /></td></tr>
+    <tr><td><label>Tipo Dosis</label></td>
+    <td><select name="tipo_dosis" class="edt_m">
+       {% for dosis in tipos_dosis %}
+            <option value=''></option>
+       {% endfor %}
+    </select>
+    </td></tr>
+    <tr><td colspan="2">
+        <input type="submit" value="Crear"  />
+        <input type="reset" value="Limpiar"  /></td>
+    </tr>
+    </form>
+</table>
+
+{% endblock %}

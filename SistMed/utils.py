@@ -150,6 +150,13 @@ def time_split(str="00:00:00"):
     return hora
 
 
+def date_to_str(date):
+    """
+        combierte un objeto date a "DD/MM/AAAA"
+    """
+    return date.strftime('%d/%m/%Y')
+
+
 def true_false(val=True):
     """
         Combierte Booleano en tipo SI/NO
@@ -158,4 +165,5 @@ def true_false(val=True):
         return "Si"
     else:
         return "No"
-    
+
+
