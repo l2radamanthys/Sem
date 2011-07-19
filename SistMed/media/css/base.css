@@ -206,16 +206,19 @@ a{
 
 .field_a {
     background-color: #EEE;
+    font-size: 11px;
+    text-align: center;
 }
 
 .field_b {
     background-color: #DFF1F7;
+    font-size: 11px;
+    text-align: center;
 }
 
 .field_a a, .field_b a {
     color: #5b80b2;
     text-decoration: none;
-    font-size: 11px;
 }
 
 .field_a a:hover, .field_b a:hover {
@@ -286,48 +289,32 @@ a{
 }
 
 
-.edt .edt_c .edt_m, .edt_g {
-
+.edt, .edt_c, .edt_m, .edt_g {
+    font-size: 12px;
     border: 1px solid #B0B0B0;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .no_edt {
     border: 0px;
 }
 
-.edt {
-    border: 1px solid #B0B0B0;
-
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-}
+/*.edt {
+}*/
 
 .edt_c {
-    width: 60px;
-    border: 1px solid #B0B0B0;
-
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    width: 70px;
 }
 
 .edt_m {
     width: 150px;
-    border: 1px solid #B0B0B0;
-
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
 }
 
 .edt_g {
     width: 300px;
-    border: 1px solid #B0B0B0;
-
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
 }
 
 /* menu css */

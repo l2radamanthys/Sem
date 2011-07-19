@@ -4,18 +4,18 @@
 
 <table>
     <form action="" method="post">
-    <tr><td><label>Fecha</label></td><td><input name="fecha" class="edt" value="00/00/00" type="text"  /></td></tr>
-    <tr><td><label>Descripcion</label></td><td><input name="descripcion" class="edt" type="text"  /></td></tr>
+    <tr><td><label>Fecha</label></td><td><input name="fecha" class="edt_c" value="01/01/1900" type="text"  /></td></tr>
+    <tr><td><label>Descripcion</label></td><td><input name="descripcion" class="edt_g" type="text"  /></td></tr>
     <tr><td><label>Tipo Dosis</label></td>
     <td><select name="tipo_dosis" class="edt_m">
-       {% for dosis in tipos_dosis %}
-            <option value=''></option>
+       {% for dosis in tipo_dosis %}
+            <option value='{{ dosis|slice:"0:"|first }}'>{{ dosis|slice:"1:"|first }}</option>
        {% endfor %}
     </select>
     </td></tr>
     <tr><td colspan="2">
-        <input type="submit" value="Crear"  />
-        <input type="reset" value="Limpiar"  /></td>
+        <input class='boton' type="submit" value="Crear"  />
+        <input class='boton' type="reset" value="Limpiar"  /></td>
     </tr>
     </form>
 </table>

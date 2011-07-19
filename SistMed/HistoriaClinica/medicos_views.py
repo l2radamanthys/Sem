@@ -159,9 +159,14 @@ def agregar_vacuna(request, pac_id=-1):
     if pac_id != "" and pac_id != -1:
         pac_id = int(pac_id)
         _paciente = Pacientes.objects.get(id=pac_id)
-        hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
+        h_clinica = InformacionBasica.objects.get(paciente=_paciente)
 
-        
+        vac = Vacuna.objects.create(
+            hist_clinica=h_clinica,
+            fecha=date_split(get_value(request, 'fecha', '01/01/1900')),
+            descripcion=get_value(request, 'descripcion', ''),
+            tipo_dosis=get_value(request, 'tipo_dosis', '')
+        )
 
 
     dict['tipo_dosis'] = TIPO_DOSIS_CHOICE
@@ -187,9 +192,10 @@ def listado_vacunas(request, pac_id=-1):
 
         list_vac = []
         for vac in Vacuna.objects.filter(hist_clinica=_hist_clinica):
-            list_vac.append([vac.id, date_to_str(vac.fecha), vac.descripcion, TIPO_DOSIS_DIC.get(vac.tipo_dosis, 'ERROR')])
+            list_vac.append([vac.id, date_to_str(vac.fecha), vac.descripcion, TIPO_DOSIS_DIC.get(vac.tipo_dosis, 'ERROR'), field_css(vac.id)])
 
         dict['vacunas'] = list_vac
+        dict['pac_id'] = pac_id
         
     contexto = Context(dict)
     html = plantilla.render(contexto)

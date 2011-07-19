@@ -20,6 +20,13 @@ def get_field_css(band=True):
         return "field_b"
 
 
+def field_css(value):
+    """
+    """
+    return get_field_css(value % 2)
+
+
+
 def date_choice_expand(key):
     """
         Expande el identificador del choice dia
