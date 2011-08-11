@@ -133,6 +133,9 @@ urlpatterns = patterns('',
     (r'^historia-clinica/agregar-vacuna/$', hc_med_views.agregar_vacuna),
     (r'^historia-clinica/agregar-vacuna/(\d{0,2})/$', hc_med_views.agregar_vacuna),
 
+    (r'^historia-clinica/borrar-vacuna/$', hc_med_views.borrar_vacuna),
+
+
     ## - Otras Views - ##
     (r'area/$', generics_views.area),
     (r'^usuario-no-autorizado/$', generics_views.no_autorizado),

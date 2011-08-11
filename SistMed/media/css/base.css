@@ -205,24 +205,27 @@ a{
 }
 
 .field_a {
-    background-color: #EEE;
+    background-image: url('../imagenes/field_a.png');
+    /*background-color: #EEE;*/
     font-size: 11px;
     text-align: center;
 }
 
 .field_b {
-    background-color: #DFF1F7;
+    background-image: url('../imagenes/field_b.png');
+    /*background-color: #DFF1F7;*/
     font-size: 11px;
     text-align: center;
 }
 
 .field_a a, .field_b a {
-    color: #5b80b2;
+    color: #344E70;
     text-decoration: none;
 }
 
 .field_a a:hover, .field_b a:hover {
     color: #1E90FF;
+    font-weight: bold;
 }
 
 

@@ -20,13 +20,3 @@ function ocultar(key) {
 }
 
 
-function answer_redirect(pregunta, url_redirect) {
-    /*
-     funcion sencilla para confirmar borrado de algun elemento
-     en ves de tener q gastarme en armar una vista para confirmacion
-     */
-    answer_box = confirm (pregunta);
-    if (answer_box) {
-        window.location = url_redirect;
-    }
-}

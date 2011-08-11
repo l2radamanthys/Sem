@@ -76,7 +76,7 @@ def listado_pacientes(request):
     pacientes = []
     
     for info in InformacionBasica.objects.all():
-        pacientes.append([info.paciente.id, info.paciente.nombre_completo()])
+        pacientes.append([info.paciente.id, info.paciente.nombre_completo(), field_css(info.paciente.id)])
     
     dict['pacientes'] = pacientes
     

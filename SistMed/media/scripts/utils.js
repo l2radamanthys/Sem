@@ -1,6 +1,7 @@
 /*
-    Autor: Ricardo D. Quiroga
+    Autor: Ricardo D. Quiroga - L2Radamanthys
     Licencia: GPL2
+    Año: 2011
 */
 
 function desplegar(key) {
@@ -53,4 +54,16 @@ function mostrar(key) {
             turnos.className = 'show_cont';
             break;
     }
+}
+
+function answer_redirect(pregunta, url_redirect) {
+    /*
+     funcion sencilla para confirmar borrado de algun elemento
+     en ves de tener q gastarme en armar una vista para confirmacion
+     */
+    answer_box = confirm (pregunta);
+    if (answer_box) {
+        window.location = url_redirect;
+    }
+    alert("hola");
 }
