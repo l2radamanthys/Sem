@@ -56,14 +56,37 @@ function mostrar(key) {
     }
 }
 
+
 function answer_redirect(pregunta, url_redirect) {
     /*
-     funcion sencilla para confirmar borrado de algun elemento
+     funcion sencilla para confirmar redirecion de algun elemento
      en ves de tener q gastarme en armar una vista para confirmacion
+     normalmente se usara para borrar elementos
      */
-    answer_box = confirm (pregunta);
+     
+    //version JS PopUp despues lo remplazo por CSS
+    answer_box = confirm (pregunta); 
     if (answer_box) {
         window.location = url_redirect;
     }
-    alert("hola");
+}
+
+
+
+/********* Funciones Genericas de Validacion de Campos *******/
+function validate_field_blank(field) {
+    /*
+    comprueba si el campo no esta en blanco
+    en caso q si, retorna True, caso contrario False
+    */
+    return true;
+}
+
+
+function validate_field_len(field, len) {
+    /*
+    comprueba si la longitud del texto es mayor q el minimo requerido
+    en caso q si, retorna True, caso contrario False
+    */
+    return true;
 }
