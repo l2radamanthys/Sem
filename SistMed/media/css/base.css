@@ -5,7 +5,6 @@ body {
 }
 
 
-
 h1, h2, h3, h4, h5 {
     font-family: "DejaVu Sans", Verdana,"Bitstream Vera Sans",Arial,sans-serif;
     text-align: center;
@@ -259,6 +258,7 @@ a{
 * /
 /* fin fanci boton */
 
+/******
 .boton {
     font-size: 12px;
 
@@ -289,6 +289,47 @@ a{
     -webkit-box-shadow: -1px -1px 5px #858585;
     -moz-box-shadow: -1px -1px 5px #858585;
     box-shadow: -1px -1px 5px #858585;
+}
+***/
+
+.boton {
+    background-image: url('../imagenes/boton_a.png');
+    color: #333;
+    height: 32px;
+    /*width: 120px;*/
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid #AAA;
+    height: 28px;
+
+    -webkit-text-shadow: 1px 1px 5px #858585;
+    -moz-text-shadow: 1px 1px 5px #858585;
+    text-shadow: 1px 1px 5px #858585;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+    -webkit-box-shadow: 1px 1px 5px #858585;
+    -moz-box-shadow: 1px 1px 5px #858585;
+    box-shadow: 1px 1px 5px #858585;
+}
+
+.boton:hover {
+   background-image: url('../imagenes/boton_h.png');
+
+    -webkit-box-shadow: -1px -1px 5px #858585;
+    -moz-box-shadow: -1px -1px 5px #858585;
+    box-shadow: -1px -1px 5px #858585;
+}
+
+.boton img{
+    margin: 0px;
 }
 
 
@@ -509,3 +550,45 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     border-radius: 3px;
 }
 
+/*** prueba ***/
+
+.window {
+    font-family: Verdana;
+    font-size: 12px;
+    background-color: #E8F3FF;
+    border: 1px solid #C5C5C5;
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    behavior:url(border-radius.htc);
+
+    padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-botton: 5px;
+
+    display: block;
+}
+
+.win_title_bar {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #B9DAFF;
+    height: 16px;
+}
+
+.window_title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    color: #004D71;
+    /*width: 70%;*/
+    float:left;
+}
+
+
+/*
+.window {
+    width: 500px;
+    height: 300px; 
+}*/

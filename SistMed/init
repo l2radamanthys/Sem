@@ -7,4 +7,4 @@ python manage.py sqlclear
 python manage.py syncdb
 
 #agregar los campos necesarios
-python inicializar.py
+python manage.py "shell" "import inicializar.py"

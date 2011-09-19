@@ -18,15 +18,20 @@
 
 <body>
     <div align="center">
-    <div class='cont_flotante'>
-    <h4 class='title_ventana'>Cambio Contraseña</h4>
 
-    <form action='/accounts/change_password/'  method='post'>
-    <table border='0' cellpadding='0'>
-        <!--tr>
-            <td><label>Usuario</label></td>
-            <td><input type="text" name="username" value="" id="username" /></td>
-        </tr-->
+    <br />
+    <br />
+    <br />
+
+    <div class='window' style="width:400px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Cambio Contraseña</label>
+        </div>
+    </div>
+        <form action='/accounts/change_password/'  method='post'>
+        <table border='0' cellpadding='0' cellspacing="3px">
+
         <tr>
             <td><label>Contraseña Anterior:</label></td>
             <td><input class='edt_m' type="password" name="password_old" value="" id="password" /></td>
@@ -41,14 +46,19 @@
         </tr>
         <tr>
             <td colspan='2' align='center'>
+            <br />
             <input type="hidden" name="query" value="1"/>
             <input type='Submit' value='Cambiar' class='boton'/>
             <input type='Reset' value='Limpiar' class='boton'/>
             </td>
         </tr>
-    </table>
-    </form>
+        </table>
+        </form>
+        <br />
     </div>
+
+    
+    
     <br />
     {% if query %}
         <div class='{{ msj_class }}'>

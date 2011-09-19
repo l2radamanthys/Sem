@@ -92,7 +92,7 @@ INSTALLED_APPS = (
     'SistMed.HistoriaClinica',
 
     #utils
-    'django_extensions',
+    #'django_extensions',
 )
 
 

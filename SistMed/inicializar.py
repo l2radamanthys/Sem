@@ -21,10 +21,10 @@ from GestionTurnos.models import TipoUsuario, Administrativos
 print "Inicializando Datos de Interfaz..."
 #creo los tipo de usuario
 t_pac = TipoUsuario(nombre='Paciente')
-t_med = TipoUsuario(nombre='Medico')
-t_adm = TipoUsuario(nombre='Administrativo')
 t_pac.save()
+t_med = TipoUsuario(nombre='Medico')
 t_med.save()
+t_adm = TipoUsuario(nombre='Administrativo')
 t_adm.save()
 
 print "Comfigurando el usuario admin..."
@@ -39,3 +39,4 @@ n_adm = Administrativos(
     user=adm
 )
 n_adm.save()
+print "completo..."
