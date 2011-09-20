@@ -5,12 +5,12 @@
 
 {% block contenido %}
 
-<label>Medico: {{ med_name }}</label>
-<br />
-<span class='cat_link'><a onClick="mostrar('datos')">Datos Personales</a></span>
-<span class='cat_link'><a onClick="mostrar('especialidades')">Especialidades</a></span>
-<span class='cat_link'><a onClick="mostrar('turnos')">Horarios Atencion</a></span>
-<div class='cat_line'></div>
+<ul class="tab_list">
+    <li><label>Medico: <strong>{{ med_name }}</strong></label></li>
+    <li><a onClick="mostrar('datos')" class='tab'>Datos Personales</a></li>
+    <li><a onClick="mostrar('especialidades')" class='tab'>Especialidades</a></li>
+    <li><a onClick="mostrar('turnos')" class='tab'>Horarios Atencion</a></li>
+</ul>
 
 <br />
 
@@ -216,7 +216,7 @@
         <tr>
             <td colspan='2' align='center'>
             <input type="hidden" name="query" value="1"/>
-            <input type="hidden" name="action" value="especialidades"/>
+            <input type="hidden" name="action" value="turno"/>
             <input type="hidden" name="med_id" value="{{ med_id }}"/>
             <input type="submit" name="Agregar" value="Agregar" class='boton'/>
         </td>

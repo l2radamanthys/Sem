@@ -57,11 +57,11 @@
 <hr />
 
 <!-- especialidades -->
-<span class='cat_title'>Expecialidades</span>
-<span class='cat_link'><a href='/medicos/agregar-especialidades/{{ med_id }}/'>Agregar</a></span>
-<span class='cat_link'><a href='/medicos/especialidades/listado/'>Listado</a></span>
-
-<div class='cat_line'></div>
+<ul class="tab_list">
+    <li>Expecialidades</li>
+    <li><a href='/medicos/agregar-especialidades/{{ med_id }}/' class="tab">Agregar</a></span></li>
+    <li><a href='/medicos/especialidades/listado/' class="tab">Listado</a></li>
+</ul>
 
 <table style="text-align: left;" border="0" width='400px' cellpadding="2" cellspacing="2">
 <tbody>
@@ -78,11 +78,12 @@
 </table>
 <br />
 
-<span class='cat_title'>Horarios Atencion</span>
-<span class='cat_link'><a href='/medicos/horario-atencion/agregar/{{ med_id }}/'>Agregar</a></span>
-<span class='cat_link'><a href='/medicos/horario-atencion/modificar/{{ med_id }}/'>Modificar</a></span>
-<span class='cat_link'><a href='/medicos/horario-atencion/borrar/{{ med_id }}/'>Borrar</a></span>
-<div class='cat_line'></div>
+<ul class="tab_list">
+    <li>Horarios Atencion</li>
+    <li><a href='/medicos/horario-atencion/agregar/{{ med_id }}/' class='tab'>Agregar</a></li>
+    <li><a href='/medicos/horario-atencion/listado/{{ med_id }}/' class='tab'>Listado</a></li>
+    <!--li><a href='/medicos/horario-atencion/borrar/{{ med_id }}/' class='tab'>Borrar</a></li-->
+</ul>
 
 <table border="0" width='400px' cellpadding="2" cellspacing="2">
     <tbody>

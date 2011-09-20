@@ -18,9 +18,21 @@
 
 <body>
     <div align="center">
-    <div class='cont_flotante'>
-    <h4 class='title_ventana'>Login</h4>
+        <div class="barra_superior">
+        <a href='/' class='boton'><span>Volver al Inicio</span></a>
+    </div>
 
+    <br />
+    <br />
+    <br />
+
+    <div class='window' style="width:400px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Login</label>
+        </div>
+    </div>
+    
     <form action='/accounts/login/'  method='post'>
     <table border='0' cellpadding='0'>
         <tr>
@@ -33,6 +45,7 @@
         </tr>
         <tr>
             <td colspan='2' align='center'>
+            <br />
             <input type="hidden" name="query" value="1"/>
             <input type='Submit' value='Conectar' class='boton'/>
             <input type='Reset' value='Limpiar' class='boton'/>
@@ -48,8 +61,6 @@
         </div>
     {% endif %}
 
-    <br />
-    <a href='/' class='boton'><span>Volver al Inicio</span></a>
     </div>
 
 </body>

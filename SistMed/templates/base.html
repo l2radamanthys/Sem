@@ -21,9 +21,8 @@
     <table style="text-align: left;" border="0" cellpadding="5" cellspacing="2" width="900px">
         <tr>
             <td class='celda_superior' colspan='2'>
-            <img src='/site_media/imagenes/baner_logo.png'>
-            <br /><br /><br />
-            <a href="{{ url_action }}" class='login_rect'><img src='/site_media/imagenes/{{ login_img }}' alt='{{ login_status }}' border='0px'/>{{ user }}</a>
+            <img stile="float: left;" src='/site_media/imagenes/baner_logo.png' width="140px" height="40px">
+            <a href="{{ url_action }}" class='login_rect'><img src='/site_media/imagenes/{{ login_img }}' alt='{{ login_status }}' border='0px' width="6px" height="6px"/>{{ user }}</a>
             </td>
         </tr>
 
@@ -32,8 +31,10 @@
                 {% block cont_sec %}
                 {% endblock %}
 
-                <span class='title_menu'><a onClick="desplegar('menu_1')">Secciones</a></span>
-                <div id='menu_1' class='hide_nav_menu'>
+                <!--span class='title_menu'><a onClick="desplegar('menu_1')">Secciones</a></span>
+                <div id='menu_1' class='hide_nav_menu'-->
+                <span class='title_menu'><a>Secciones</a></span>
+                <div id='menu_1' class='nav_menu'>
                 <ul>
                     <li><a href='/'>Inicio</a><li/>
                     <li><a href='/area?opcion=gt'>Gestion Turnos</a><li/>

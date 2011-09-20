@@ -36,14 +36,16 @@ a{
     text-decoration: None;
 }
 
+label {
+    font-size: 11px;
+}
 
 /*contenedores principales*/
 .celda_superior {
     background-image: url('/site_media/imagenes/baner_bg.png');
     background-repeat: x-repeat;
     background-color: rgb(250, 250, 250);
-    font-size: 85%;
-    height: 140px;
+    /*font-size: 85%;*/
 }
 
 
@@ -66,6 +68,7 @@ a{
 .celda_central {
     background-color: rgb(255, 255, 255);
     /*font-size: 85%;*/
+    padding: 10px;
 }
 
 
@@ -227,71 +230,7 @@ a{
     font-weight: bold;
 }
 
-
-/* inicio fanci boton */
-/*
-.boton {
-    background-color: #3B5998;
-    color: #FFF;
-    font-family: Verdana, Arial, sans-serif;
-    font-size: 9pt;
-    font-weight: Bold;
-    text-decoration: None;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin: 1px;
-    border: 2px solid #627AAD;
-
-    -moz-border-left-radius: 5px;
-    -webkit-border-radius: 5px;
-    behavior:url(border-radius.htc);
-}
-
-
-.boton:hover {
-    background-color: #78A7D6;
-    color: #00376F;
-    border: 2px solid #3B5998;
-}
-* /
-/* fin fanci boton */
-
-/******
-.boton {
-    font-size: 12px;
-
-    background-image: url('../imagenes/boton_a.png');
-    background-repeat: x-repeat;
-    background-color: #FFF;
-    padding: 3px 4px 3px 4px;
-    color: #484848;
-    border: 1px solid #676767;
-
-    -webkit-text-shadow: 1px 1px 5px #858585;
-    -moz-text-shadow: 1px 1px 5px #858585;
-    text-shadow: 1px 1px 5px #858585;
-
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-
-    -webkit-box-shadow: 1px 1px 5px #858585;
-    -moz-box-shadow: 1px 1px 5px #858585;
-    box-shadow: 1px 1px 5px #858585;
-}
-
-.boton:hover {
-    background-image: url('../imagenes/boton_h.png');
-    background-color: #D7EBFF;
-
-    -webkit-box-shadow: -1px -1px 5px #858585;
-    -moz-box-shadow: -1px -1px 5px #858585;
-    box-shadow: -1px -1px 5px #858585;
-}
-***/
-
+/*** estilo Boton ***/
 .boton {
     background-image: url('../imagenes/boton_a.png');
     color: #333;
@@ -315,9 +254,6 @@ a{
     -moz-border-radius: 3px;
     border-radius: 3px;
 
-    -webkit-box-shadow: 1px 1px 5px #858585;
-    -moz-box-shadow: 1px 1px 5px #858585;
-    box-shadow: 1px 1px 5px #858585;
 }
 
 .boton:hover {
@@ -331,15 +267,27 @@ a{
 .boton img{
     margin: 0px;
 }
+/*** Fin Estilo Boton***/
 
 
 .edt, .edt_c, .edt_m, .edt_g {
-    font-size: 12px;
+    margin-left: 10px;
+    margin-bottom: 3px;
+    font-family: Verdana;
+    font-size: 11px;
     border: 1px solid #B0B0B0;
+
+    -webkit-box-shadow: 1px 1px 5px #858585;
+    -moz-box-shadow: 1px 1px 5px #858585;
+    box-shadow: 1px 1px 5px #858585;
 
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+}
+
+.edt:focus, .edt_c:focus, .edt_m:focus, .edt_g:focus{
+    border: 1px solid #000;
 }
 
 .no_edt {
@@ -364,7 +312,7 @@ a{
 /* menu css */
 .title_menu {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: bold;
     text-decoration: none;
     Cursor : pointer;
@@ -380,7 +328,7 @@ a{
     padding:6px 5px 0 5px;
     width: 160px;
     display: block;
-    height: 24px;
+    height: 18px;
     margin: 0px;
 }
 
@@ -405,12 +353,12 @@ a{
 .nav_menu a {
     background-color: #efefef;
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: bold;
     text-decoration: None;
     color: #3D98C5;
     padding-top: 3px;
-    padding-bottom: 2px;
+    padding-bottom: 1px;
     padding-left: 6px;
     border: 1px solid #FFF;
     border-right: 1px solid #CCC;
@@ -468,32 +416,20 @@ a{
     border-bottom: 1px solid #0080FF;
 }
 
-/*
-.sup_izq {
-    background-image: url('../imagenes/logo.png');
-}
-
-.sup_der {
-    background-image: url('../imagenes/logo.png');
-}
-
-.sup_cen {
-    background-image: url('../imagenes/logo.png');
-}
-*/
-
 /* copy */
 p img, h1 img, h2 img, h3 img, h4 img, td img {
     vertical-align: middle;
 }
 
 .login_rect {
+    font-size: 8px;
     background-color: #FFF;
     border: 1px solid #D4D4D4;
     color: #383838;
     text-transform: UPPERCASE;
     padding: 1px 2px 2px 2px;
     vertical-align: middle;
+    float: right;
 }
 
 .login_rect img {
@@ -502,7 +438,6 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
 }
 
 .recuadro {
-    /*height: 100px;*/
     background-image: url('/site_media/imagenes/azulblanco.png');
     background-color: transparent;
     background-position: top left;
@@ -550,8 +485,8 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     border-radius: 3px;
 }
 
-/*** prueba ***/
 
+/*** Estilo Ventana ***/
 .window {
     font-family: Verdana;
     font-size: 12px;
@@ -565,7 +500,7 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     padding-top: 3px;
     padding-left: 5px;
     padding-right: 5px;
-    padding-botton: 5px;
+    padding-bottom: 5px;
 
     display: block;
 }
@@ -586,9 +521,55 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     float:left;
 }
 
+.barra_superior {
+    padding-top: 10px;
+    padding-right: 30px;
+    text-align: right;
+    background-color: #000;
+    height: 32px;
+}
+/*** Fin Estilo Ventana ***/ 
 
-/*
-.window {
-    width: 500px;
-    height: 300px; 
-}*/
+/*** Estilo para Pestañas ***/
+.tab_list {
+    list-style: none;
+    padding: 0px;
+    margin: px;
+    border-bottom: 1px solid #AAA;
+}
+
+.tab_list li {
+    display:inline;
+    margin: 0px;
+}
+
+
+.tab, .select_tab {
+    background-image: url('../imagenes/boton_a.png');
+    color: #333;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10px;
+    text-decoration: none;
+    padding-top: 4px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-top: 1px solid #AAA;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    
+    
+    margin: 0px;
+    margin-right: 0px;
+    margin-bottom: 1px;
+}
+
+.tab:hover, .select_tab {
+   background-image: url('../imagenes/boton_h.png');
+}
+
+.tab img{
+    margin: 0px;
+}
+
+/*** Fin Estilo Pestañas***/

@@ -325,8 +325,9 @@ def guardar_cambios_medico(request):
         #define q formulario envio la consulta
         action = get_value(request, 'action', "")
         medico = Medicos.objects.get(id=med_id)
-        esp_id = int(get_POST_value(request,'especialidad','-1','-1'))
-        especialidad = Expecialidades.objects.get(id=esp_id)
+        esp_id = int(get_POST_value(request,'especialidad',-1,-1))
+        if esp_id != -1:
+            especialidad = Expecialidades.objects.get(id=esp_id)
         
         if action == "datos":
             medico.user.first_name = get_POST_value(request,'nombre','')
