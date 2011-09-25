@@ -10,7 +10,7 @@
 
     <table>
     <form action="" method="post">
-        <tr><td><label>Fecha</label></td><td><input name="fecha" id="fecha" class="edt_c" value="{{ vacuna.fecha|date:'SHORT_DATE_FORMAT' }}" type="text"  /></td></tr>
+        <tr><td><label>Fecha</label></td><td><input name="fecha" id="fecha" class="edt_c" value="{{ vacuna.fecha|date:'d/m/Y' }}" type="text"  /></td></tr>
         <tr><td><label>Descripcion</label></td><td><input name="descripcion" class="edt_g" type="text" value="{{ vacuna.descripcion }}" /></td></tr>
         <tr><td><label>Tipo Dosis</label></td>
         <td><select name="tipo_dosis" class="edt_m">
@@ -35,9 +35,10 @@
     </div>
 {% endif %}
 
-<!-- Date Selector Codes -->
+<!-- Inicio Date Selector Code -->
 <script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
 <script type="text/javascript">
     DatePicker.SetUpElement("fecha");
 </script>
+<!-- Fin Date Selector Code -->
 {% endblock %}

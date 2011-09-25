@@ -23,7 +23,8 @@ var DatePicker = (function() {
 		      var button = document.createElement("input");
 		      button.type = "button";
 		      button.onclick = function () { DatePicker.GetCalendar(inputField, this); }
-		      button.value = "Select";
+		      button.value = "<<";
+              button.className = "mini_boton"
 		      fieldParent.appendChild(button);
 		  },
         GetCalendar : function (inputField, activator) {

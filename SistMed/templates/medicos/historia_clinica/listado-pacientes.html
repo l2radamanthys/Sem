@@ -4,14 +4,20 @@
 {% endblock %}
 
 {% block contenido %}
+    <div align='right'>
+    <hr />
+    <a class='boton' href='/medicos/modificar/{{ med_id }}/'>Nueva Hist Clinica</a>
+    <hr />
+    </div>
+    
     <div align="center">
     <table>
         <tr>
-            <td class='tbl_separador' width="400px"><h5>Pacientes</h5></td>
+            <td class='tbl_separador' width="600px"><h5>Pacientes</h5></td>
         </tr>
             {% for pac in pacientes %}
             <tr>
-                <td class='{{ pac|slice:"2:"|first }}'><a href='/historia-clinica/mostrar-datos-base/{{ pac|slice:"0:"|first }}'>{{ pac|slice:"1:"|first }}</a></td>
+                <td class='{{ pac|slice:"2:"|first }}' align="left"><a href='/historia-clinica/mostrar-datos-base/?pac_id={{ pac|slice:"0:"|first }}'><img src="/site_media/imagenes/document.png">&nbsp;{{ pac|slice:"1:"|first }}</a></td>
             </tr>
             {% endfor %}
     </table>

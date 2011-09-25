@@ -87,7 +87,7 @@ def listado_pacientes(request):
 
 
 
-def mostrar_datos_paciente(request, pac_id=-1):
+def mostrar_datos_paciente(request):
     """
         
     """
@@ -102,7 +102,7 @@ def mostrar_datos_paciente(request, pac_id=-1):
     #if pac_id == -1: #no es necesario
     #    pac_id = int(request.session.get('hc_pac_id', -1))
     
-    #if pac_id != -1:
+    pac_id = get_GET_value(request, "pac_id", -1)
     if pac_id != "" and pac_id != -1:
         pac_id = int(pac_id)
         _paciente = Pacientes.objects.get(id=pac_id)
@@ -110,6 +110,7 @@ def mostrar_datos_paciente(request, pac_id=-1):
         
         dict["nombre"] = _paciente.nombre_completo()
         dict["DNI"] = _paciente.dni
+        dict['fecha_nacimiento'] =  hist_clinica.fecha_nacimiento
         dict["lugar_nacimiento"] = hist_clinica.lugar_nacimiento
         dict["padre"] = hist_clinica.padre
         dict["madre"] = hist_clinica.madre
@@ -117,8 +118,10 @@ def mostrar_datos_paciente(request, pac_id=-1):
         dict["nro_afiliado"] = hist_clinica.nro_afiliado
         dict["sexo"] = sexo_choice_expand(_paciente.sexo)
         dict["grupo_sanguineo"] = hist_clinica.grupo_sanguineo
+        dict['estado_civil'] = estado_civil_expand(hist_clinica.estado_civil)
         dict['pac_id'] = pac_id
-              
+        
+
         #grabamo en la session el id del paciente
         #request.session['hc_pac_id'] = pac_id #no es necesario
                       
@@ -127,7 +130,55 @@ def mostrar_datos_paciente(request, pac_id=-1):
     return HttpResponse(html)
 
 
-def mostrar_antecedentes_perinatales(request, pac_id=-1):
+def modificar_datos_paciente(request):
+    """
+    """
+    plantilla = get_template('medicos/historia_clinica/modificar-datos-base.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    pac_id = int(get_GET_value(request, "pac_id", -1))
+    query = int(request.POST.get('query', '0'))
+    dict['query'] = query
+
+    if pac_id != "" and pac_id != -1:
+        #pac_id = int(pac_id)
+        
+        
+
+        pac = Pacientes.objects.get(id=pac_id)
+        dict['pac_nombre'] = pac.nombre_completo()
+        dict['pac_dni'] = pac.dni
+        hist_clinica = InformacionBasica.objects.get(paciente=pac)
+
+        if query:
+            hist_clinica.lugar_nacimiento = get_value(request, 'lugar_nac', "")
+            hist_clinica.fecha_nacimiento = date_split(get_value(request, 'fecha_nac', ""))
+            hist_clinica.grupo_sanguineo = get_value(request, 'grupo_sanguineo', "--")
+            hist_clinica.padre = get_value(request, 'padre', "")
+            hist_clinica.madre = get_value(request, 'madre', "")
+            hist_clinica.obra_social = get_value(request, 'obra_social', "")
+            hist_clinica.nro_afiliado = get_value(request, 'nro_afiliado', "")
+            hist_clinica.estado_civil = get_value(request, 'estado_civil', "-")
+            hist_clinica.ocupacion = get_value(request, 'ocupacion', "-")
+            hist_clinica.religion = get_value(request, 'religion', "-")
+            hist_clinica.save()
+
+            dict['msj_class'] = MSJ_OK
+            dict['mensaje'] = 'Datos Modificados...'
+
+        dict['hc'] = hist_clinica
+        dict['pac_id'] = pac_id
+        dict['grupos_sanguineos'] = GRUPOS_SANGUINEOS
+        
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+
+def mostrar_antecedentes_perinatales(request):
     """
 
     """
@@ -135,6 +186,7 @@ def mostrar_antecedentes_perinatales(request, pac_id=-1):
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 
+    pac_id = get_GET_value(request, "pac_id", -1)
     if pac_id != "" and pac_id != -1:
         pac_id = int(pac_id)
         _paciente = Pacientes.objects.get(id=pac_id)
@@ -183,7 +235,7 @@ def agregar_vacuna(request, pac_id=-1):
     return HttpResponse(html)
 
 
-def listado_vacunas(request, pac_id=-1):
+def listado_vacunas(request):
     """
         Muestra el listado de vacunacion al estilo carnet jaja
     """
@@ -191,6 +243,7 @@ def listado_vacunas(request, pac_id=-1):
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 
+    pac_id = get_GET_value(request, "pac_id", -1)
     if pac_id != "" and pac_id != -1:
         pac_id = int(pac_id)
         _paciente = Pacientes.objects.get(id=pac_id)
@@ -237,7 +290,6 @@ def modificar_vacuna(request):
 
     dict['pac_id'] = pac_id
 
-
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -246,21 +298,39 @@ def modificar_vacuna(request):
 def borrar_vacuna(request):
     """
     """
-    #plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
-    #dict = generar_base_dict(request)
-    #dict['titulo'] = 'Historia Clinica'
-
-    #contexto = Context(dict)
-    #html = plantilla.render(contexto)
-    #return HttpResponse(html)
-
-
     pac_id = get_GET_value(request, "pac_id", -1)
     vac_id = get_GET_value(request, "vac_id", -1)
     if pac_id != -1 and vac_id != -1:
         vacuna = Vacuna.objects.get(id=vac_id)
         vacuna.delete()
-        return HttpResponseRedirect("/historia-clinica/listado-vacunas/%s/" %pac_id)
+        return HttpResponseRedirect("/historia-clinica/listado-vacunas/?pac_id=%s" %pac_id)
     else:
         return HttpResponseRedirect('/error/?title="Invalid Request"&msj="Parametros invalidos..."')
-    
+
+
+def nuevo_examen_base(request):
+    """
+    """
+    plantilla = get_template('medicos/historia_clinica/nuevo-examen-base.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_examenes_fisicos(request):
+    """
+    """
+    plantilla = get_template('medicos/historia_clinica/listado-examen-fisico.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+
+    dict['pac_id'] = pac_id
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)

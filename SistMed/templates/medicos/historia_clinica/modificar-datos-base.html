@@ -1,19 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
 
-{% block cont_sec %}
+{% block hc_contenido %}
 
-{% endblock %}
-
-{% block contenido %}
     <table>
-    <form action="""" method="post"  >
-    <tr><td><label>Paciente</label></td>
-    <td><select class="edt_m" name="pac_id">
-            {% for pac in pacientes %}
-                <option value='{{ pac|slice:"0:"|first }}'>{{ pac|slice:"1:"|first }}</option>
-            {% endfor %}
-        </select>
-    </td></tr>
+    <form action="" method="post"  >
+
     <!-- estos datos ya fueron definidos en modelos anteriores -.- (Paciente)
     <tr><td><label>DNI</label></td><td><input name="dni" class="edt_m" type="text"  /></td></tr>
     <tr><td><label>Sexo</label></td>
@@ -25,11 +16,18 @@
     </td></tr>
      -->
 
-    <tr><td><label>Fecha Nacimiento</label></td><td><input name="fecha_nac" id="fecha_nac" class="edt_c" value="01/01/01" type="text"  /></td></tr>
-    <tr><td><label>Lugar Nacimiento</label></td><td><input name="lugar_nac" class="edt_g" type="text"  /></td></tr>
+    <tr>
+        <td colspan='4' class='tbl_separador'><h5>Datos Personales</h5></td>
+    </tr>
+    <tr><td><label>Nombre:</label></td><td><label>{{ pac_nombre }}</label></td></tr>
+    <tr><td><label>DNI:</label></td><td><label>{{ pac_dni }}</label></td></tr>
 
-    <tr><td><label>Nombre del Padre</label></td><td><input name="padre" class="edt_g" type="text"  /></td></tr>
-    <tr><td><label>Nombre de la Madre</label></td><td><input name="madre" class="edt_g" type="text"  /></td></tr>
+
+    <tr><td><label>Fecha Nacimiento</label></td><td><input name="fecha_nac" id="fecha_nac" class="edt_c" type="text" value="{{ hc.fecha_nacimiento|date:'d/m/Y' }}" /></td></tr>
+    <tr><td><label>Lugar Nacimiento</label></td><td><input name="lugar_nac" class="edt_g" type="text" value="{{ hc.lugar_nacimiento }}" /></td></tr>
+
+    <tr><td><label>Nombre del Padre</label></td><td><input name="padre" value="{{ hc.padre }}" class="edt_g" type="text"  /></td></tr>
+    <tr><td><label>Nombre de la Madre</label></td><td><input name="madre" value="{{ hc.madre }}" class="edt_g" type="text"  /></td></tr>
 
     <tr><td><label>Grupo Sanguineo</label></td>
     <td><select name="grupo_sanguineo" class="edt_c">
@@ -49,16 +47,15 @@
             <option value="U">Union Libre</option>
         </select>
     </td></tr>
-    <tr><td><label>Ocupacion</label></td><td><input name="ocupacion" class="edt" type="text"  /></td></tr>
-    <tr><td><label>Religion</label></td><td><input name="religion" class="edt" type="text"  /></td></tr>
+    <tr><td><label>Ocupacion</label></td><td><input name="ocupacion" class="edt" value="{{ hc.ocupacion }}" type="text"  /></td></tr>
+    <tr><td><label>Religion</label></td><td><input name="religion" class="edt" value="{{ hc.religion }}" type="text"  /></td></tr>
 
-    <tr><td><label>Obra Social</label></td><td><input name="obra_social" class="edt" type="text"  /></td></tr>
-    <tr><td><label>Nro Afiliado</label></td><td><input name="nro_afiliado" class="edt" type="text"  /></td></tr>
-    <tr><td><label>Motivo Consulta</label></td><td><textarea name="motivo_consulta" type="textarea" class="edt_g"  ></textarea></td></tr>
-    <tr><td colspan="2"><input type="hidden" value="1" name="query"  /></td></tr>
+    <tr><td><label>Obra Social</label></td><td><input name="obra_social" class="edt" type="text" value="{{ hc.obra_social }}" /></td></tr>
+    <tr><td><label>Nro Afiliado</label></td><td><input name="nro_afiliado" class="edt" type="text" value="{{ hc.nro_afiliado }}" /></td></tr>
+    
     <tr><td colspan="2" align="center">
-        
-        <input type="submit" value="Crear" class="boton"/>
+        <input type="hidden" value="1" name="query" />
+        <input type="submit" value="Modificar" class="boton"/>
         <input type="reset" value="Limpiar" class="boton"/>
     </td></tr>
     </form>

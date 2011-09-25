@@ -122,11 +122,15 @@ urlpatterns = patterns('',
     ## - Historia Clinica - ##
     # - Medicos Views
     (r'^historia-clinica/nueva/$', hc_med_views.nueva),
-    (r'^historia-clinica/mostrar-datos-base/$', hc_med_views.mostrar_datos_paciente),
-    (r'^historia-clinica/mostrar-datos-base/(\d{0,2})/$', hc_med_views.mostrar_datos_paciente),
-    (r'^historia-clinica/mostrar-antecedentes-perinatales/$', hc_med_views.mostrar_antecedentes_perinatales), #incompleto
-    (r'^historia-clinica/mostrar-antecedentes-perinatales/(\d{0,2})/$', hc_med_views.mostrar_antecedentes_perinatales), #incompleto
     (r'^historia-clinica/listado-pacientes/$', hc_med_views.listado_pacientes),
+
+    (r'^historia-clinica/mostrar-datos-base/$', hc_med_views.mostrar_datos_paciente),
+    (r'^historia-clinica/modificar-datos-base/$', hc_med_views.modificar_datos_paciente),
+
+    (r'^historia-clinica/mostrar-antecedentes-perinatales/$', hc_med_views.mostrar_antecedentes_perinatales), #incompleto
+    #(r'^historia-clinica/modificar-antecedentes-perinatales/$', hc_med_views.modificar_antecedentes_perinatales)
+
+    # - Vacunas
     (r'^historia-clinica/listado-vacunas/$', hc_med_views.listado_vacunas),
     (r'^historia-clinica/listado-vacunas/(\d{0,2})/$', hc_med_views.listado_vacunas),
     (r'^historia-clinica/agregar-vacuna/$', hc_med_views.agregar_vacuna),
@@ -134,6 +138,11 @@ urlpatterns = patterns('',
     (r'^historia-clinica/borrar-vacuna/$', hc_med_views.borrar_vacuna),
     (r'^historia-clinica/modificar-vacuna/$', hc_med_views.modificar_vacuna),
 
+    #- Examen Fisico
+    (r'^historia-clinica/nuevo-examen-base/$', hc_med_views.nuevo_examen_base),
+    (r'^historia-clinica/listado-examen-fisico/$', hc_med_views.mostrar_examenes_fisicos),
+
+    #- Imagenes
 
     ## - Otras Views - ##
     (r'area/$', generics_views.area),

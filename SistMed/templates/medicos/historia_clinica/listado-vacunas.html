@@ -1,30 +1,36 @@
 {% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
 
 {% block hc_contenido %}
+<div align='right'>
+    <hr />
+    <a href="/historia-clinica/agregar-vacuna/{{ pac_id }}/" class="boton">Agregar Vacuna</a>
+    <hr />
+</div>
+
 <div align="center">
     <table>
         <tr>
-            <td colspan="5" class='tbl_separador' width="500px" border="1px"><h5>Vacunas</h5></td>
+            <td colspan="5" class='tbl_separador' width="600px" border="1px"><h5>Vacunas</h5></td>
         </tr>
 
         <tr class='table_title'>
             <td>Fecha</td>
             <td>Descripcion</td>
             <td>Tipo Dosis</td>
-            <td>Modificar</td>
-            <td>Borrar</td>
+            <td style="width:40px; text-align:center;">Modificar</td>
+            <td style="width:40px; text-align:center;">Borrar</td>
         </tr>
 
         {% for vac in vacunas %}
-            <tr class='{{ vac|slice:"4:"|first }}'>
+            <tr class='{{ vac|slice:"4:"|first }}' align="center">
                 <td>{{ vac|slice:"1:"|first }}</td>
                 <td>{{ vac|slice:"2:"|first }}</td>
                 <td>{{ vac|slice:"3:"|first }}</td>
                 <td><a href='/historia-clinica/modificar-vacuna/?pac_id={{ pac_id }}&vac_id={{  vac|slice:"0:"|first }}'><img src="/site_media/imagenes/icon_edit.png" alt="Modificar"></a></td>
                 <td><a onClick="answer_redirect('Desea Borrar: {{ vac|slice:'2:'|first }}','/historia-clinica/borrar-vacuna/?pac_id={{ pac_id }}&vac_id={{ vac|slice:'0:'|first }}')"><img src="/site_media/imagenes/icon_borrar.png" alt="Borrar"></a></td>
             </tr>
-        {% endfor %}
+        {% endfor %}       
     </table>
-    <br /><a href="/historia-clinica/agregar-vacuna/{{ pac_id }}/" class="boton">Agregar Vacuna</a>
+    
 </div>
 {% endblock %}

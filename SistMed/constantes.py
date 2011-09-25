@@ -69,6 +69,15 @@ ESTADO_CIVIL_CHOICE = (
     ('U', 'Union Libre'),
 )
 
+ESTADO_CIVIL_DIC = {
+    '-': 'No Definido',
+    'S': 'Soltero',
+    'C': 'Casado',
+    'V': 'Viudo',
+    'D': 'Divorciado',
+    'U': 'Union Libre',
+}
+
 
 GRUPO_SANGUINEO_CHOICE = (
     ("O+", "O+"),

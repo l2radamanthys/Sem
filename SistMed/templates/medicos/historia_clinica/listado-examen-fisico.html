@@ -1,0 +1,19 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block hc_contenido %}
+    <div align='right'>
+    <hr />
+    <a class='boton' href='/historia-clinica/nuevo-examen-base/?pac_id={{ pac_id }}/'>Nuevo Examen Base</a>
+    <hr />
+    </div>
+    <table>
+        <tr>
+            <td class='tbl_separador' width="600px"><h5>Examen-Fisico</h5></td>
+        </tr>
+        {% for examen in examenes %}
+        </tr>
+            <td class='{{ examen|slice:"2:"|first }}' align="left"><a href='/historia-clinica/mostrar-examen-fisico/?pac_id={{ examen|slice:"0:"|first }}'><img src="/site_media/imagenes/document.png">&nbsp;{{ examen|slice:"1:"|first }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

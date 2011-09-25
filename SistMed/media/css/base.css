@@ -206,18 +206,23 @@ label {
     color: #4985C1;
 }
 
-.field_a {
-    background-image: url('../imagenes/field_a.png');
-    /*background-color: #EEE;*/
+.field_a, .field_b {
     font-size: 11px;
-    text-align: center;
+    /*text-align: left;*/
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.field_a {
+    /*background-image: url('../imagenes/field_a.png');*/
+    /*background-color: #EEE;*/
+    background-color: #EEE;
 }
 
 .field_b {
-    background-image: url('../imagenes/field_b.png');
+    /*background-image: url('../imagenes/field_b.png');*/
     /*background-color: #DFF1F7;*/
-    font-size: 11px;
-    text-align: center;
+    background-color: #DFF1F7;
 }
 
 .field_a a, .field_b a {
@@ -231,7 +236,7 @@ label {
 }
 
 /*** estilo Boton ***/
-.boton {
+.boton, .mini_boton {
     background-image: url('../imagenes/boton_a.png');
     color: #333;
     height: 32px;
@@ -253,10 +258,21 @@ label {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-
 }
 
-.boton:hover {
+.mini_boton {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10px;
+    text-decoration: none;
+    padding-top: 2px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.boton:hover, .mini_boton:hover {
    background-image: url('../imagenes/boton_h.png');
 
     -webkit-box-shadow: -1px -1px 5px #858585;
@@ -264,7 +280,7 @@ label {
     box-shadow: -1px -1px 5px #858585;
 }
 
-.boton img{
+.boton img, .mini_boton img{
     margin: 0px;
 }
 /*** Fin Estilo Boton***/

@@ -1,0 +1,85 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block hc_contenido %}
+
+<form  action="" method="post">
+<table>
+    <tr>
+        <td colspan='2' class='tbl_separador'><h5>Nuevo Examen Base</h5></td>
+    </tr>
+
+	<tr>
+		<td><label>Fecha</label></td>
+		<td><input type="text" name="fecha" id="fecha" class="edt_c" value="01/01/1900"/></td>
+	</tr>
+	<tr>
+		<td><label>Temperatura Corporal</label></td>
+		<td><input type="text" name="temp_corporal" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Presion Arterial Sistolica</label></td>
+		<td><input type="text" name="pres_art_sist" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Presion Arterial Dastolica</label></td>
+		<td><input type="text" name="pres_art_diast" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Frecuencia Respiratoria</label></td>
+		<td><input type="text" name="frec_respiratoria" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Pulso</label></td>
+		<td><input type="text" name="pulso" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Altura Media en Mtrs</label></td>
+		<td><input type="text" name="peso_medio" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Peso Medio en Kgs</label></td>
+		<td><input type="text" name="altura_media" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Altura en Mts</label></td>
+		<td><input type="text" name="altura" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Peso en Kgs</label></td>
+		<td><input type="text" name="peso" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Talla</label></td>
+		<td><input type="text" name="talla" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Indice de Masa Corporal (BMI)</label></td>
+		<td><input type="text" name="bmi" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Imprecion General</label></td>
+		<td><textarea name="imprecion_general" class="edt_g" rows="4"/></textarea></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+        <input type="hidden" name="query" value="1"/>
+        <input type="submit" value="Crear" class="boton"/>
+        <input type="reset" value="Limpiar" class="boton"/>
+        </td>
+	</tr>
+</table>
+</form>
+
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
+
+<!--  -->
+<script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
+<script type="text/javascript">
+    DatePicker.SetUpElement("fecha");
+</script>
+{% endblock %}

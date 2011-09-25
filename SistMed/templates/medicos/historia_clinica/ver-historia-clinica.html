@@ -5,12 +5,13 @@
 
 {% block contenido %}
     <ul class="tab_list">
-        <li><a href="/historia-clinica/mostrar-datos-base/{{ pac_id }}" class='tab'>Datos Base</a></li>
-        <li><a href="/historia-clinica/mostrar-antecedentes-perinatales/{{ pac_id }}" class='tab'>Antecedentes Perinatales</a></li>
-        <li><a href="/historia-clinica/listado-examen-fisico/{{ pac_id }}" class='tab'>Examen Fisico</a></li>
-        <li><a href="/historia-clinica/habitos-toxicos/{{ pac_id }}" class='tab'>Habitos Toxicos</a></li>
-        <li><a href="/historia-clinica/listado-vacunas/{{ pac_id }}" class='tab'>Vacunas</a></li>
-        <li><a href="/historia-clinica/listado-diagnosticos/{{ pac_id }}" class='tab'>Diagnosticos</a></li>
+        <li><a href="/historia-clinica/mostrar-datos-base/?pac_id={{ pac_id }}" class='tab'>Datos Base</a></li>
+        <li><a href="/historia-clinica/mostrar-antecedentes-perinatales/?pac_id={{ pac_id }}" class='tab'>Antecedentes Perinatales</a></li>
+        <li><a href="/historia-clinica/listado-examen-fisico/?pac_id={{ pac_id }}" class='tab'>Examen Fisico</a></li>
+        <li><a href="/historia-clinica/habitos-toxicos/?pac_id={{ pac_id }}" class='tab'>Habitos Toxicos</a></li>
+        <li><a href="/historia-clinica/listado-vacunas/?pac_id={{ pac_id }}" class='tab'>Vacunas</a></li>
+        <li><a href="/historia-clinica/listado-diagnosticos/?pac_id={{ pac_id }}" class='tab'>Diagnosticos</a></li>
+        <li><a href="/historia-clinica/listado-imagenes/?pac_id={{ pac_id }}" class='tab'>Imagenes</a></li>
     </ul>
     {% block hc_contenido %}
     {% endblock %}

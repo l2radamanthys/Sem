@@ -41,6 +41,11 @@ def sexo_choice_expand(key):
     return SEXO_CHOICE_DIC[key]
 
 
+def estado_civil_expand(key):
+    return ESTADO_CIVIL_DIC[key]
+
+
+
 def get_GET_value(request, key='', default='', blank=''):
     value = request.GET.get(key, default)
     if value == '':

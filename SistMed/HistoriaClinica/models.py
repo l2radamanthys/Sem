@@ -110,11 +110,11 @@ class ExamenBase(models.Model):
     peso = models.FloatField()
     altura = models.FloatField()
     talla = models.CharField(max_length=30)
-    #BMI = models.CharField()
+    #BMI = models.CharField() #indice de masa corporal
     imprecion_general = models.TextField() #text
 
 
-    #calculado segun
+    #calculado segun info obtenida en la siguiente presentacion
     #http://www.slideshare.net/lSpical/5examen-fisico-signos-vitales-y-apreciacion-general
     def presion_art_pulso(self):
         """
@@ -126,6 +126,10 @@ class ExamenBase(models.Model):
         """
         """
         return pres_art_diast + (self.pres_art_pulso() / 3)
+
+
+    def __str__(self):
+        return "Fecha de Realizacion de Examen: %s" %date_to_str(fecha)
 
 
 #Examen Fisico
