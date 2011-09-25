@@ -129,11 +129,10 @@ urlpatterns = patterns('',
     (r'^historia-clinica/listado-pacientes/$', hc_med_views.listado_pacientes),
     (r'^historia-clinica/listado-vacunas/$', hc_med_views.listado_vacunas),
     (r'^historia-clinica/listado-vacunas/(\d{0,2})/$', hc_med_views.listado_vacunas),
-
     (r'^historia-clinica/agregar-vacuna/$', hc_med_views.agregar_vacuna),
     (r'^historia-clinica/agregar-vacuna/(\d{0,2})/$', hc_med_views.agregar_vacuna),
-
     (r'^historia-clinica/borrar-vacuna/$', hc_med_views.borrar_vacuna),
+    (r'^historia-clinica/modificar-vacuna/$', hc_med_views.modificar_vacuna),
 
 
     ## - Otras Views - ##

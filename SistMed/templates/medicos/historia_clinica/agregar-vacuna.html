@@ -2,22 +2,44 @@
 
 {% block hc_contenido %}
 
-<table>
-    <form action="" method="post">
-    <tr><td><label>Fecha</label></td><td><input name="fecha" class="edt_c" value="01/01/1900" type="text"  /></td></tr>
-    <tr><td><label>Descripcion</label></td><td><input name="descripcion" class="edt_g" type="text"  /></td></tr>
-    <tr><td><label>Tipo Dosis</label></td>
-    <td><select name="tipo_dosis" class="edt_m">
-       {% for dosis in tipo_dosis %}
-            <option value='{{ dosis|slice:"0:"|first }}'>{{ dosis|slice:"1:"|first }}</option>
-       {% endfor %}
-    </select>
-    </td></tr>
-    <tr><td colspan="2">
-        <input class='boton' type="submit" value="Crear"  />
-        <input class='boton' type="reset" value="Limpiar"  /></td>
-    </tr>
-    </form>
-</table>
 
+    <div class='window' style="width:400px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Añadir Vacuna</label>
+        </div>
+    </div>
+
+    <table>
+    <form action="" method="post">
+        <tr><td><label>Fecha</label></td><td><input name="fecha" id="fecha" class="edt_c" value="01/01/1900" type="text"  /></td></tr>
+        <tr><td><label>Descripcion</label></td><td><input name="descripcion" class="edt_g" type="text"  /></td></tr>
+        <tr><td><label>Tipo Dosis</label></td>
+        <td><select name="tipo_dosis" class="edt_m">
+        {% for dosis in tipo_dosis %}
+            <option value='{{ dosis|slice:"0:"|first }}'>{{ dosis|slice:"1:"|first }}</option>
+        {% endfor %}
+        </select>
+        </td></tr>
+        <tr><td colspan="2" align="center">
+            <input type="hidden" name="query" value="1"/>
+            <input class='boton' type="submit" value="Agregar"  />
+            <input class='boton' type="reset" value="Limpiar"  /></td>
+        </tr>
+    </form>
+    </table>
+</div>
+
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
+
+<!--  -->
+<script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
+<script type="text/javascript">
+    DatePicker.SetUpElement("fecha");
+</script>
 {% endblock %}

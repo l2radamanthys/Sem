@@ -1,0 +1,43 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block hc_contenido %}
+    <div class='window' style="width:400px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Modificar Vacuna</label>
+        </div>
+    </div>
+
+    <table>
+    <form action="" method="post">
+        <tr><td><label>Fecha</label></td><td><input name="fecha" id="fecha" class="edt_c" value="{{ vacuna.fecha|date:'SHORT_DATE_FORMAT' }}" type="text"  /></td></tr>
+        <tr><td><label>Descripcion</label></td><td><input name="descripcion" class="edt_g" type="text" value="{{ vacuna.descripcion }}" /></td></tr>
+        <tr><td><label>Tipo Dosis</label></td>
+        <td><select name="tipo_dosis" class="edt_m">
+        {% for dosis in tipo_dosis %}
+            <option value='{{ dosis|slice:"0:"|first }}'>{{ dosis|slice:"1:"|first }}</option>
+        {% endfor %}
+        </select>
+        </td></tr>
+        <tr><td colspan="2" align="center">
+            <input type="hidden" name="query" value="1"/>
+            <input class='boton' type="submit" value="Guardar"  />
+            <input class='boton' type="reset" value="Limpiar"  /></td>
+        </tr>
+    </form>
+    </table>
+
+</div>
+
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
+<!-- Date Selector Codes -->
+<script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
+<script type="text/javascript">
+    DatePicker.SetUpElement("fecha");
+</script>
+{% endblock %}

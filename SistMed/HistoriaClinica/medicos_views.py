@@ -54,7 +54,7 @@ def nueva(request):
 
     #en caso de no haber pacientes disponibles lanza error
     if len(pacientes) == 0:
-        return HttpResponseRedirect('/error/$title="Invalid Request"&msj="no hay pacientes disponibles"')
+        return HttpResponseRedirect('/error/?title="Invalid Request"&msj="no hay pacientes disponibles"')
 
     dict['pacientes'] = pacientes
 
@@ -156,7 +156,11 @@ def agregar_vacuna(request, pac_id=-1):
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 
-    if pac_id != "" and pac_id != -1:
+    query = int(request.POST.get('query', '0'))
+    dict['query'] = query
+
+
+    if pac_id != "" and pac_id != -1 and query:
         pac_id = int(pac_id)
         _paciente = Pacientes.objects.get(id=pac_id)
         h_clinica = InformacionBasica.objects.get(paciente=_paciente)
@@ -167,9 +171,12 @@ def agregar_vacuna(request, pac_id=-1):
             descripcion=get_value(request, 'descripcion', ''),
             tipo_dosis=get_value(request, 'tipo_dosis', '')
         )
+        dict['msj_class'] = MSJ_OK
+        dict['mensaje'] = 'Vacuna Agregada'
 
 
     dict['tipo_dosis'] = TIPO_DOSIS_CHOICE
+    dict['pac_id'] = pac_id
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
@@ -202,12 +209,33 @@ def listado_vacunas(request, pac_id=-1):
     return HttpResponse(html)
 
 
-def modificar_vacuna(request, pac_id=-1):
+def modificar_vacuna(request):
     """
     """
-    plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
+    plantilla = get_template('medicos/historia_clinica/modificar-vacuna.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
+
+    query = int(request.POST.get('query', '0'))
+    dict['query'] = query
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    vac_id = get_GET_value(request, "vac_id", -1)
+    if pac_id != -1 and vac_id != -1:
+        vacuna = Vacuna.objects.get(id=vac_id)
+        dict['vacuna'] = vacuna
+        dict['tipo_dosis'] = TIPO_DOSIS_CHOICE
+
+        if query:
+            vacuna.fecha = date_split(get_value(request, 'fecha', '01/01/1900'))
+            vacuna.descripcion = get_value(request, 'descripcion', '')
+            vacuna.tipo_dosis = get_value(request, 'tipo_dosis', '')
+            vacuna.save()
+
+            dict['msj_class'] = MSJ_OK
+            dict['mensaje'] = 'Cambios Modificados'
+
+    dict['pac_id'] = pac_id
 
 
     contexto = Context(dict)
@@ -215,14 +243,24 @@ def modificar_vacuna(request, pac_id=-1):
     return HttpResponse(html)
 
 
-def borrar_vacuna(request, pac_id=-1):
+def borrar_vacuna(request):
     """
     """
-    plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
-    dict = generar_base_dict(request)
-    dict['titulo'] = 'Historia Clinica'
+    #plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
+    #dict = generar_base_dict(request)
+    #dict['titulo'] = 'Historia Clinica'
+
+    #contexto = Context(dict)
+    #html = plantilla.render(contexto)
+    #return HttpResponse(html)
 
 
-    contexto = Context(dict)
-    html = plantilla.render(contexto)
-    return HttpResponse(html)
+    pac_id = get_GET_value(request, "pac_id", -1)
+    vac_id = get_GET_value(request, "vac_id", -1)
+    if pac_id != -1 and vac_id != -1:
+        vacuna = Vacuna.objects.get(id=vac_id)
+        vacuna.delete()
+        return HttpResponseRedirect("/historia-clinica/listado-vacunas/%s/" %pac_id)
+    else:
+        return HttpResponseRedirect('/error/?title="Invalid Request"&msj="Parametros invalidos..."')
+    

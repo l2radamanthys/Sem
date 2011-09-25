@@ -81,7 +81,14 @@ class Vacuna(models.Model):
     fecha = models.DateTimeField()
     descripcion = models.CharField(max_length=30)
     tipo_dosis = models.CharField(max_length=3, default='---', choices=TIPO_DOSIS_CHOICE)
-    
+
+
+    def date(self):
+        """
+        """
+        return fecha.strftime('%d/%m/%Y')
+
+
 
 #Examen Fisico
 class ExamenBase(models.Model):
