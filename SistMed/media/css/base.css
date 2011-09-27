@@ -649,3 +649,12 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     height: 100%;
 }
 /** Date Picker estilo **/
+
+
+/*** NicEditor Estilo ***/
+
+.nicEdit-selected {
+        background-color: #FFF !important;
+        border: 2px solid #97CBFF !important;
+}
+/*** NicEditor Estilo ***/

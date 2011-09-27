@@ -19,7 +19,7 @@
     </tr>
     <tr>
         <td colspan="2">
-            <textarea name="observaciones" id="edt" cols="50" rows="10"></textarea>
+            <textarea name="observaciones" id="edt" cols="50" rows="10" ></textarea>
         </td>
     </tr>
         <tr>
@@ -48,7 +48,7 @@
 bkLib.onDomLoaded(function() {
 	new nicEditor({
         iconsPath : '/site_media/imagenes/nicEditorIcons.gif',
-        buttonList : ['fontFamily','fontSize','left','center','right','justify','bold','italic','underline','subscript','superscript','html','subscript']
+        buttonList : ['fontFamily','fontSize','left','center','right','justify','bold','italic','underline','subscript','superscript','html','subscript','forecolor']
         }).panelInstance('edt');
 });
 </script>
