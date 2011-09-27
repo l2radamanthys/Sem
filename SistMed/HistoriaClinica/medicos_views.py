@@ -177,10 +177,9 @@ def modificar_datos_paciente(request):
     return HttpResponse(html)
 
 
-
+### - Antecedentes perinatales - ###
 def mostrar_antecedentes_perinatales(request):
     """
-
     """
     plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
     dict = generar_base_dict(request)
@@ -199,8 +198,13 @@ def mostrar_antecedentes_perinatales(request):
     return HttpResponse(html)
 
 
+def modificar_antecedentes_perinatales(request):
+    """
+    """
+    pass
 
-#vacunas
+
+### - Vacunas - ###
 def agregar_vacuna(request, pac_id=-1):
     """
     """
@@ -308,6 +312,7 @@ def borrar_vacuna(request):
         return HttpResponseRedirect('/error/?title="Invalid Request"&msj="Parametros invalidos..."')
 
 
+### - Examen Fisico - ###
 def nuevo_examen_base(request):
     """
     """
@@ -328,7 +333,27 @@ def mostrar_examenes_fisicos(request):
     dict['titulo'] = 'Historia Clinica'
 
     pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = pac_id
 
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+### - Consultas Medicas - ###
+def listado_consultas_medicas(request):
+    pass
+
+
+def nueva_consulta_medica(request):
+    plantilla = get_template('medicos/historia_clinica/nueva-consulta-medica.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    
+
+
+    pac_id = get_GET_value(request, "pac_id", -1)
     dict['pac_id'] = pac_id
 
     contexto = Context(dict)

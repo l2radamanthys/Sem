@@ -298,17 +298,21 @@ class Diagnostico(models.Model):
     hist_clinica = models.ForeignKey(InformacionBasica)
     fecha = models.DateField()
     observaciones = models.TextField()
+    #observaciones =
 
-'''
+
+
 class ConsultaMedica(models.Model):
     hist_clinica = models.ForeignKey(InformacionBasica)
     fecha = models.DateField()
+    observaciones = models.TextField()
 
 
-
-class MedicamentosRecetados(models.Model):
-    hist_clinica = models.ForeignKey(InformacionBasica)
+#tipica receta
+"""
+class Receta(models.Model):
+    #hist_clinica = models.ForeignKey(InformacionBasica)
     consulta_medica = models.ForeignKey(ConsultaMedica)
-    medicamento = models.CharField()
+    medicamento = models.CharField("Medicamento", max_lenght=250)
     prescripcion = models.TextField()
-'''
+"""

@@ -138,11 +138,16 @@ urlpatterns = patterns('',
     (r'^historia-clinica/borrar-vacuna/$', hc_med_views.borrar_vacuna),
     (r'^historia-clinica/modificar-vacuna/$', hc_med_views.modificar_vacuna),
 
-    #- Examen Fisico
+    # - Examen Fisico
     (r'^historia-clinica/nuevo-examen-base/$', hc_med_views.nuevo_examen_base),
     (r'^historia-clinica/listado-examen-fisico/$', hc_med_views.mostrar_examenes_fisicos),
 
-    #- Imagenes
+    # - Consultas
+    (r'^historia-clinica/listado-consultas/$', hc_med_views.listado_consultas_medicas),
+    (r'^historia-clinica/nueva-consulta/$', hc_med_views.nueva_consulta_medica),
+
+
+    # - Imagenes
 
     ## - Otras Views - ##
     (r'area/$', generics_views.area),

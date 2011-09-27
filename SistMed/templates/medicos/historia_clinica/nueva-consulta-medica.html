@@ -1,0 +1,57 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block hc_contenido %}
+
+<div class='window' style="width:500px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Nueva Consulta</label>
+        </div>
+    </div>
+<form action="" metod="POST">
+<table>
+    <tr>
+        <td><label>Fecha:</label></td>
+        <td><input type="text" name="fecha" id="fecha"  value="01/01/1900" class="edt_c"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><label>Consulta:</label></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <textarea name="observaciones" id="edt" cols="50" rows="10"></textarea>
+        </td>
+    </tr>
+        <tr>
+    <tr>
+        <td colspan="2" align="center">
+            <input type="hidden" value="1" name="query"/>
+            <input type="submit" value="Crear" class="boton"/>
+            <input type="reset" value="Limpiar" class="boton"/>
+        </td>
+    </tr>
+    </tr>
+</table>
+</form>
+</div>
+
+<!-- Inicio Date Selector Code -->
+<script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
+<script type="text/javascript">
+    DatePicker.SetUpElement("fecha");
+</script>
+<!-- Fin Date Selector Code -->
+
+<!-- Inicio NicEditor Code -->
+<script src="/site_media/scripts/nicEdit.js" type="text/javascript"></script>
+<script type="text/javascript">
+bkLib.onDomLoaded(function() {
+	new nicEditor({
+        iconsPath : '/site_media/imagenes/nicEditorIcons.gif',
+        buttonList : ['fontFamily','fontSize','left','center','right','justify','bold','italic','underline','subscript','superscript','html','subscript']
+        }).panelInstance('edt');
+});
+</script>
+<!-- FIn NicEditor Code -->
+
+{% endblock %}

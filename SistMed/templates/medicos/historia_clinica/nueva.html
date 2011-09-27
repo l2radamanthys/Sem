@@ -6,7 +6,7 @@
 
 {% block contenido %}
     <table>
-    <form action="""" method="post"  >
+    <form action="" method="post"  >
     <tr><td><label>Paciente</label></td>
     <td><select class="edt_m" name="pac_id">
             {% for pac in pacientes %}
@@ -55,9 +55,8 @@
     <tr><td><label>Obra Social</label></td><td><input name="obra_social" class="edt" type="text"  /></td></tr>
     <tr><td><label>Nro Afiliado</label></td><td><input name="nro_afiliado" class="edt" type="text"  /></td></tr>
     <tr><td><label>Motivo Consulta</label></td><td><textarea name="motivo_consulta" type="textarea" class="edt_g"  ></textarea></td></tr>
-    <tr><td colspan="2"><input type="hidden" value="1" name="query"  /></td></tr>
-    <tr><td colspan="2" align="center">
-        
+    <tr><td colspan="2">
+        <input type="hidden" value="1" name="query"/>
         <input type="submit" value="Crear" class="boton"/>
         <input type="reset" value="Limpiar" class="boton"/>
     </td></tr>
