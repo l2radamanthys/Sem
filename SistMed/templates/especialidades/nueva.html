@@ -4,13 +4,34 @@
 {% endblock %}
 
 {% block contenido %}
+
+<script type="text/javascript" src="/site_media/scripts/validate-form.js"></script>
+<script type="text/javascript">
+var validator = new Validator([
+    ['nombre', {'method': 'min_lenght', 'lenght':3, 'cont_id':'error', 'msj_error':'Error campo demaciado Corto'}],
+]);
+        
+function validar(form_id) {
+    var form = document.getElementById(form_id);
+    if (validator.eval_fields()) {
+        form.submit();
+    } 
+}
+
+function limpiar() { validator.clear_all_cont() }
+</script>
+
     <div align='center'>
     {% if nivel_2 %}
-        <form action='/medicos/especialidades/agregar/' method='post'>
+        <form action='/medicos/especialidades/agregar/' id="mi_form" method='post'> <!--onSubmit="return (validar());"-->
             <label>Expecialidad</label>
-            <input type='text' name="nombre" value=""/><br />
+            <input type='text' name="nombre" id="nombre" value="" class="edt"/><br />
+            <span id="error"></span>
             <input type="hidden" name="query" value="1"/>
-            <input type='Submit' value='Agregar' class='boton'/>
+            <br />
+            <input type='button' value='Agregar' class='boton' onClick="validar('mi_form')"/>
+            <input type='Reset' value='Limpiar' class='boton' onClick="limpiar()"/>
+            
         </form>
 
         {% if query %}

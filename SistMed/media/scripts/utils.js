@@ -71,22 +71,3 @@ function answer_redirect(pregunta, url_redirect) {
     }
 }
 
-
-
-/********* Funciones Genericas de Validacion de Campos *******/
-function validate_field_blank(field) {
-    /*
-    comprueba si el campo no esta en blanco
-    en caso q si, retorna True, caso contrario False
-    */
-    return true;
-}
-
-
-function validate_field_len(field, len) {
-    /*
-    comprueba si la longitud del texto es mayor q el minimo requerido
-    en caso q si, retorna True, caso contrario False
-    */
-    return true;
-}

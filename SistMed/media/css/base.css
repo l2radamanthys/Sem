@@ -654,7 +654,27 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
 /*** NicEditor Estilo ***/
 
 .nicEdit-selected {
-        background-color: #FFF !important;
-        border: 2px solid #97CBFF !important;
+    background-color: #FFF !important;
+    border: 2px solid #97CBFF !important;
 }
 /*** NicEditor Estilo ***/
+
+
+/*** FielValidator ****/
+.field_error {
+    background-color: #F0F000;
+    background-image: url('../imagenes/error.png');
+    background-position:left center;
+    background-repeat: no-repeat;
+    color: #000;
+    font-family: Verdana;
+    font-size: 10px;
+    border: 1px solid #FF8040;
+    padding: 2px;
+    padding-left: 14px;
+    margin: 0px;
+    margin-top: 3px;
+    max-width: 400px;
+}
+
+/*** FielValidator ****/

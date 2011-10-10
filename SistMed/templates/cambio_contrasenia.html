@@ -13,10 +13,28 @@
     </title>
 
     <link type="text/css" rel="stylesheet" media="all" href="{{ css_template }}">
-    <!--script language="JavaScript" type="text/javascript" src=""></script -->
 </head>
 
 <body>
+
+<script type="text/javascript" src="/site_media/scripts/validate-form.js"></script>
+<script type="text/javascript">
+var validator = new Validator([
+
+    ['pswd_1', {'method': 'min_lenght', 'lenght':3, 'cont_id':'error_1', 'msj_error':'Error campo demaciado Corto'}],
+    ['pswd_2', {'method': 'cmp_field', 'field_cmp':'pswd_1','cont_id':'error_2', 'msj_error':'La Nueva Contraseña no coincide'}],
+]);
+        
+function validar(form_id) {
+    var form = document.getElementById(form_id);
+    if (validator.eval_fields()) {
+        form.submit();
+    } 
+}
+
+function limpiar() { validator.clear_all_cont() }
+</script>
+
     <div align="center">
 
     <div class="barra_superior">
@@ -33,7 +51,7 @@
             <label>Cambio Contraseña</label>
         </div>
     </div>
-        <form action='/accounts/change_password/'  method='post'>
+        <form action='/accounts/change_password/'  method='post' id="mi_form">
         <table border='0' cellpadding='0' cellspacing="3px">
 
         <tr>
@@ -42,25 +60,26 @@
         </tr>
         <tr>
             <td><label>Nueva Contraseña:</label></td>
-            <td><input class='edt_m' type="password" name="password_new0" value="" id="password" /></td>
+            <td><input class='edt_m' type="password" name="password_new0" value="" id="pswd_1" /></td>
         </tr>
+        <tr><td colspan="2"><span id="error_1"></span></td></tr>
         <tr>
             <td><label>Repetir Nueva Contraseña:</label></td>
-            <td><input class='edt_m' type="password" name="password_new1" value="" id="password" /></td>
+            <td><input class='edt_m' type="password" name="password_new1" value="" id="pswd_2" /></td>
         </tr>
+        <tr><td colspan="2"><span id="error_2"></span></td></tr>
         <tr>
             <td colspan='2' align='center'>
             <br />
             <input type="hidden" name="query" value="1"/>
-            <input type='Submit' value='Cambiar' class='boton'/>
-            <input type='Reset' value='Limpiar' class='boton'/>
+            <input type='button' value='Cambiar' class='boton' onClick="validar('mi_form')"/>
+            <input type='Reset' value='Limpiar' class='boton' onClick="limpiar()"/>
             </td>
         </tr>
         </table>
         </form>
     </div>
 
-    
     
     <br />
     {% if query %}
