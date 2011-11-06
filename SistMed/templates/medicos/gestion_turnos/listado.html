@@ -8,11 +8,11 @@
 <table style="text-align: center;" width="600px" border="0" cellpadding="0" cellspacing="1">
     <tbody>
         <tr class='table_title'>
-            <td>Usuario</td>
-            <td>Nombre y Apellido</td>
-            <td>Ver</td>
-            <td>Modificar</td>
-            <td>Borra</td>
+            <td style='width: 100px;'>Usuario</td>
+            <td >Nombre y Apellido</td>
+            <td style='width: 70px;'>Ver</td>
+            <td style='width: 70px;'>Modificar</td>
+            <td style='width: 70px;'>Borra</td>
         </tr>
         {% for med in listado_medicos %}
             <tr class='{{ med|slice:"3:"|first }}'>

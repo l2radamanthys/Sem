@@ -27,36 +27,34 @@
         </tr>
 
         <tr>
-            <td class='celda_izquierda' valign='top' width='150px' >
+            <td class='celda_izquierda' valign='top' width='150px' height='500px;' >
                 {% block cont_sec %}
                 {% endblock %}
 
                 <!--span class='title_menu'><a onClick="desplegar('menu_1')">Secciones</a></span>
                 <div id='menu_1' class='hide_nav_menu'-->
                 <span class='title_menu'><a>Secciones</a></span>
-                <div id='menu_1' class='nav_menu'>
-                <ul>
-                    <li><a href='/'>Inicio</a><li/>
-                    <li><a href='/area?opcion=gt'>Gestion Turnos</a><li/>
-                    <li><a href='/area?opcion=hc'>Historia Clinica</a><li/>
+
+                <ul id='menu_1' class='nav_menu'>
+                    <li><a href='/'>Inicio</a></li>
+                    <li><a href='/area?opcion=gt'>Gestion Turnos</a></li>
+                    <li><a href='/area?opcion=hc'>Historia Clinica</a></li>
                     {% if nivel_0 %}
-                    <li><a href='/accounts/login/'>Entrar</a><li/>
+                        <li><a href='/accounts/login/'>loguear</a></li>
                     {% endif %}
                     {% if nivel_1 %}
-                    <li><a href='/accounts/logout/'>Salir</a><li/>
+                        <li><a href='/accounts/logout/'>Desloguear</a></li>
                     {% endif %}
                 </ul>
-                </div>
+
 
                 {% if nivel_1 %}
                     <span class='title_menu'><a onClick="desplegar('menu_2')">Usuario</a></span>
-                    <div id='menu_2' class='hide_nav_menu'>
-                    <ul>
-                    <li><a href='/accounts/datos-personales/'>Datos Personales</a><li/>
-                    <li><a href='/accounts/modificar-datos-personales/'>Modificar Datos</a><li/>
-                    <li><a href='/accounts/change_password/'>Cambio Contraseña</a><li/>
+                    <ul id='menu_2' class='hide_nav_menu'>
+                        <li><a href='/accounts/datos-personales/'>Datos Personales</a></li>
+                        <li><a href='/accounts/modificar-datos-personales/'>Modificar Datos</a></li>
+                        <li><a href='/accounts/change_password/'>Cambio Contraseña</a></li>
                     </ul>
-                    </div>
                 {% endif %}
 
             <!-- Menu Gestion Turnos -->
@@ -65,83 +63,68 @@
 
                 {% if nivel_0 %}
                     <span class='title_menu'><a onClick="desplegar('menu_3')">Pacientes</a></span>
-                    <div id='menu_3' class='hide_nav_menu'>
-                    <ul>
-                        <li><a href='/pacientes/nuevo/'>Nuevo</a><li/>
+                    <ul id='menu_3' class='hide_nav_menu'>
+                        <li><a href='/pacientes/nuevo/'>Nuevo</a></li>
                     </ul>
-                    </div>
                 {% endif %}
 
                 {% if nivel_2 %}
                     <span class='title_menu'><a onClick="desplegar('menu_3')">Pacientes</a></span>
-                    <div id='menu_3' class='hide_nav_menu'>
-                    <ul>
-                    <li><a href='/pacientes/buscar/'>buscar</a><li/>
-                    <li><a href='/pacientes/listado/'>Listado</a><li/>
-                    <li><a href='/pacientes/nuevo/'>Nuevo</a><li/>
+                    <ul id='menu_3' class='hide_nav_menu'>
+                    <li><a href='/pacientes/buscar/'>buscar</a></li>
+                    <li><a href='/pacientes/listado/'>Listado</a></li>
+                    <li><a href='/pacientes/nuevo/'>Nuevo</a></li>
                     </ul>
-                    </div>
                 {% endif %}
 
                     <span class='title_menu'><a onClick="desplegar('menu_4')">Medicos</a></span>
-                    <div id='menu_4' class='hide_nav_menu'>
-                    <ul>
+                    <ul id='menu_4' class='hide_nav_menu'>
                 {% if nivel_3 %}
-                   <li><a href='/medicos/buscar/'>buscar</a><li/>
+                   <li><a href='/medicos/buscar/'>buscar</a></li>
                 {% endif %}
-                    <li><a href='/medicos/listado/'>Listado</a><li/>
+                    <li><a href='/medicos/listado/'>Listado</a></li>
                 {% if nivel_3 %}
-                    <li><a href='/medicos/nuevo/'>Nuevo</a><li/>
+                    <li><a href='/medicos/nuevo/'>Nuevo</a></li>
                 {% endif %}
                     </ul>
-                    </div>
 
                 {% if nivel_3 %}
                     <span class='title_menu'><a onClick="desplegar('menu_5')">Administrativos</a></span>
-                    <div id='menu_5' class='hide_nav_menu'>
-                    <ul>
-                    <li><a href='/administrativos/buscar/'>buscar</a><li/>
-                    <li><a href='/administrativos/listado/'>Listado</a><li/>
-                    <li><a href='/administrativos/nuevo/'>Nuevo</a><li/>
+                    <ul id='menu_5' class='hide_nav_menu'>
+                    <li><a href='/administrativos/buscar/'>buscar</a></li>
+                    <li><a href='/administrativos/listado/'>Listado</a></li>
+                    <li><a href='/administrativos/nuevo/'>Nuevo</a></li>
                     </ul>
-                    </div>
                 {% endif %}
 
                 <span class='title_menu'><a onClick="desplegar('menu_6')">Especialidades</a></span>
-                    <div id='menu_6' class='hide_nav_menu'>
-                    <ul>
-                    <li><a href='/medicos/especialidades/agregar'>Agregar</a><li/>
-                    <li><a href='/medicos/especialidades/listado'>Listado</a><li/>
+                    <ul id='menu_6' class='hide_nav_menu'>
+                    <li><a href='/medicos/especialidades/agregar'>Agregar</a></li>
+                    <li><a href='/medicos/especialidades/listado'>Listado</a></li>
                     </ul>
-                </div>
 
                 <span class='title_menu'><a onClick="desplegar('menu_7')">Menu</a></span>
-                    <div id='menu_7' class='hide_nav_menu'>
-                    <ul>
-                        <li><a href='/medicos/agenda/agregar-turno/'>Nuevo Turno</a><li/>
+                    <ul id='menu_7' class='hide_nav_menu'>
+                        <li><a href='/medicos/agenda/agregar-turno/'>Nuevo Turno</a></li>
                     </ul>
-                </div>
 
             <!-- Menu de Historia Clinica -->
             {% else %}
 
                 <span class='title_menu'><a onClick="desplegar('menu_8')">DatosBase</a></a></span>
-                <div id='menu_8' class='hide_nav_menu'>
-                <ul>
-                    <li><a href='/historia-clinica/nueva/'>Nueva Historia Clinica</a><li/>
-                    <li><a href='/historia-clinica/buscar-pacientes/'>Buscar</a><li/>
-                    <li><a href='/historia-clinica/listado-pacientes/'>Listado Pacientes</a><li/>
+                <ul id='menu_8' class='hide_nav_menu'>
+                    <li><a href='/historia-clinica/nueva/'>Nueva Historia Clinica</a></li>
+                    <li><a href='/historia-clinica/buscar-pacientes/'>Buscar</a></li>
+                    <li><a href='/historia-clinica/listado-pacientes/'>Listado Pacientes</a></li>
                 </ul>
-                </div>
 
             {% endif %}
-                <br />
-                <br />
-
             </td>
 
-            <td class='celda_central' valign='top' align="center">
-                <h1> {{ titulo }} </h1>
+            <td class='celda_central' valign='top' align="center" style='min-height:800px;'>
+                {% if not sin_titulo %}
+                    <h1> {{ titulo }} </h1>
+                {% endif %}
 
                 {% block contenido %}
                 {% endblock %}

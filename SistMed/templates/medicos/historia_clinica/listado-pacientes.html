@@ -11,15 +11,11 @@
     </div>
     
     <div align="center">
-    <table>
-        <tr>
-            <td class='tbl_separador' width="600px"><h5>Pacientes</h5></td>
-        </tr>
-            {% for pac in pacientes %}
-            <tr>
-                <td class='{{ pac|slice:"2:"|first }}' align="left"><a href='/historia-clinica/mostrar-datos-base/?pac_id={{ pac|slice:"0:"|first }}'><img src="/site_media/imagenes/document.png">&nbsp;{{ pac|slice:"1:"|first }}</a></td>
-            </tr>
-            {% endfor %}
-    </table>
+    <h5 class='tbl_separador'>Pacientes</h5>
+    <ul class='listado-pac'>
+    {% for pac in pacientes %}
+        <li><a href='/historia-clinica/mostrar-datos-base/?pac_id={{ pac|slice:"0:"|first }}'><img src="/site_media/imagenes/document.png" width="24px" height="24px">&nbsp;{{ pac|slice:"1:"|first }}</a></li>
+    {% endfor %}
+    </ul>
     </div>
 {% endblock %}

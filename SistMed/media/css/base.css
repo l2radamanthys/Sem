@@ -83,7 +83,7 @@ label {
     background-image: url('../imagenes/symbol_delete.png');
     background-repeat: no-repeat;
     background-position: left;
-    height: 48px;
+    min-height: 48px;
     text-align:center;
     background-color: #ECEFF2;
     color: #000; /*FFFFFF;*/
@@ -103,7 +103,7 @@ label {
     background-image: url('../imagenes/symbol_check.png');
     background-repeat: no-repeat;
     background-position: left;
-    height: 48px;
+    min-height: 48px;
     text-align: center;
     background-color: #ECEFF2;
     color: #000;
@@ -291,15 +291,17 @@ label {
     margin-bottom: 3px;
     font-family: Verdana;
     font-size: 11px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     border: 1px solid #B0B0B0;
 
     -webkit-box-shadow: 1px 1px 5px #858585;
     -moz-box-shadow: 1px 1px 5px #858585;
     box-shadow: 1px 1px 5px #858585;
 
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 
 .edt:focus, .edt_c:focus, .edt_m:focus, .edt_g:focus{
@@ -332,6 +334,7 @@ label {
     font-weight: bold;
     text-decoration: none;
     Cursor : pointer;
+    
 }
 
 .title_menu a{
@@ -342,7 +345,7 @@ label {
     text-decoration: None;
     color: #000;
     padding:6px 5px 0 5px;
-    width: 160px;
+    /*width: 160px;*/
     display: block;
     height: 18px;
     margin: 0px;
@@ -353,38 +356,40 @@ label {
     color: #FFF;
 }
 
-.nav_menu {
-    /*display: none;*/
-    Cursor : pointer;
-}
 
-.nav_menu, .nav_menu ul, .nav_menu li {
+.nav_menu {
     margin: 0px;
-    border: 0 none;
     padding: 0px;
     /*width: 160px; /*For KHTML*/
     list-style: none;
+    margin-bottom: 3px;
 }
 
-.nav_menu a {
+.nav_menu li {
     background-color: #efefef;
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    font-weight: bold;
+    font-size: 11px;
     text-decoration: None;
-    color: #3D98C5;
     padding-top: 3px;
-    padding-bottom: 1px;
+    padding-bottom: 2px;
     padding-left: 6px;
-    border: 1px solid #FFF;
     border-right: 1px solid #CCC;
     border-bottom: 1px solid #CCC;
     width: 160px;
-    display: block;
+    /**display: block;*/
+}
+
+.nav_menu li:hover {
+    background-color: #11324A;
+    color: #FFF;
+}
+
+.nav_menu a {
+    color: #3D98C5;
+    /*font-weight: bold;*/
 }
 
 .nav_menu a:hover {
-    background-color: #8CC8F4;
     color: #FFF;
 }
 
@@ -454,13 +459,7 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
 }
 
 .recuadro {
-    background-image: url('/site_media/imagenes/azulblanco.png');
-    background-color: transparent;
-    background-position: top left;
-    background-repeat: no-repeat;
-
-
-    width: 400px;
+    width: 200px;
     text-align: center;
     border: 2px solid #B0B0B0;
 
@@ -474,7 +473,7 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     /*margin-left: 10px;
     margin-right: 10px;*/
     margin-bottom: 10px;
-
+    
 }
 
 .recuadro:hover {
@@ -489,6 +488,10 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     -webkit-text-shadow: 1px 1px 5px #858585;
     -moz-text-shadow: 1px 1px 5px #858585;
     text-shadow: 1px 1px 5px #858585;
+}
+
+.recuadro a:hover {
+    color: #5F93B2;
 }
 
 .field_link {
@@ -678,3 +681,42 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
 }
 
 /*** FielValidator ****/
+
+title-col {
+
+}
+
+.listado-pac {
+    margin: 3px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.listado-pac li {
+    text-align: left;
+    margin-bottom: 2px;
+}
+
+.listado-pac li:hover {
+    background-color: #DADFEA;
+}
+
+.listado-pac li a {
+    text-align: left;
+    color: #57574C;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

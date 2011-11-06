@@ -4,14 +4,17 @@
 {% endblock %}
 
 {% block contenido %}
-    <div align="center">
-    <div class='contenedor'>
-    <h4 class='title_ventana'>Buscar</h4>
+    <div class='window' style="width:400px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Buscar</label>
+        </div>
+    </div>
     <form action="" method="POST" enctype="text/plain">
     <table>
         <tbody>
             <tr>
-                <td><input type='text' name='buscar_text' class='edt_m'></td>
+                <td><input type='text' name='buscar_text' class='edt_g'></td>
                 <td><input type="submit" name="Buscar" value="Buscar" /></td>
             </tr>
             <tr>
@@ -37,19 +40,19 @@
     <table style="text-align: center;" width="600px" border="0" cellpadding="0" cellspacing="1">
     <tbody>
         <tr class='table_title'>
-            <td>Usuario</td>
+            <td style='width:100px;'>Usuario</td>
             <td>Nombre y Apellido</td>
-            <td>Ver</td>
-            <td>Modificar</td>
-            <td>Borrar</td>
+            <td style='width:70px;'>Ver</td>
+            <td style='width:70px;'>Modificar</td>
+            <td style='width:70px;'>Borrar</td>
         </tr>
         {% for adm in listado_admins %}
             <tr class='{{ adm|slice:"3:"|first }}'>
                 <td>{{ adm|slice:"1:"|first }}</td>
                 <td>{{ adm|slice:"2:"|first }}</td>
-                <td><a href='/admnistrativos/datos/{{ adm|first }}/'><img src='/site_media/imagenes/icon_ver.png'></a></td>
-                <td><a href='/admnistrativos/modificar/{{ adm|first }}/'><img src='/site_media/imagenes/icon_edit.png'></a></td>
-                <td><a href='/admnistrativos/borrar/{{ adm|first }}/'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
+                <td style='text-align:center;'><a href='/admnistrativos/datos/{{ adm|first }}/'><img src='/site_media/imagenes/icon_ver.png'></a></td>
+                <td style='text-align:center;'><a href='/admnistrativos/modificar/{{ adm|first }}/'><img src='/site_media/imagenes/icon_edit.png'></a></td>
+                <td style='text-align:center;'><a href='/admnistrativos/borrar/{{ adm|first }}/'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
             </tr>
         {% endfor %}
     </tbody>
