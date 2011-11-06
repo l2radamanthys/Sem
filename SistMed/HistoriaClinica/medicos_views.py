@@ -346,11 +346,13 @@ def listado_consultas_medicas(request):
 
 
 def nueva_consulta_medica(request):
-    plantilla = get_template('medicos/historia_clinica/nueva-consulta-medica.html')
+    plantilla = get_template('medicos/historia_clinica/consultas_medicas/nueva-consulta-medica.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 
-    
+    medicos = Medicos.objects.all()
+    dict["medicos"] = medicos
+
 
 
     pac_id = get_GET_value(request, "pac_id", -1)

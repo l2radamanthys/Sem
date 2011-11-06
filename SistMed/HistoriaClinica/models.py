@@ -4,7 +4,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from GestionTurnos.models import Pacientes
+from GestionTurnos.models import Pacientes, Medicos
 from constantes import *
 
 
@@ -306,6 +306,8 @@ class ConsultaMedica(models.Model):
     hist_clinica = models.ForeignKey(InformacionBasica)
     fecha = models.DateField()
     observaciones = models.TextField()
+
+    medico = models.ForeignKey(Medicos)
 
 
 #tipica receta
