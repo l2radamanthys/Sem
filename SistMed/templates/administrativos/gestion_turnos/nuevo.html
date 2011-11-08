@@ -5,8 +5,27 @@
 {% endblock %}
 
 {% block contenido %}
+
+<script type="text/javascript" src="/site_media/scripts/validate-form.js"></script>
+<script type="text/javascript">
+var validator = new Validator([
+    ['usuario', {'method': 'min_lenght', 'lenght':5, 'cont_id':'error_1', 'msj_error':'Error El nombre de usuario debe tener una longitud de entre 5 y 16 caracteres'}],
+    ['password_1', {'method': 'min_lenght', 'lenght':6, 'cont_id':'error_2', 'msj_error':'Error la contraseña debe tener una longitud de entre 6 y 16 caracteres'}],
+    ['password_2', {'method': 'cmp_field', 'field_cmp':'password_1','cont_id':'error_3', 'msj_error':'La Nueva Contraseña no coincide'}],
+]);
+        
+function validar(form_id) {
+    var form = document.getElementById(form_id);
+    if (validator.eval_fields()) {
+        form.submit();
+    } 
+}
+function limpiar() { validator.clear_all_cont() }
+</script>
+
+
     <div align='center'>
-    <form action="" method="POST" enctype="text/plain">
+    <form action="" method="POST" enctype="text/plain" id="form">
     <table style="text-align: left;" border="0" cellpadding="0" cellspacing="0">
         <tbody>
         <tr>
@@ -16,17 +35,20 @@
         </tr>
         <tr>
             <td><label>Usuario:</label></td>
-            <td><input type="text" name="usuario" maxlength="" class='edt_m'/></td>
+            <td><input type="text" name="usuario" id="usuario" class='edt_m'/></td>
         </tr>
+        <tr><td colspan="2"><span id="error_1"></span></td></tr>
         <tr>
             <td><label>Contraseña:</label></td>
-            <td><input type="password" name="password_1" maxlength=""class='edt_m'/></td>
+            <td><input type="password" name="password_1" id="password_1" class='edt_m'/></td>
         </tr>
+        <tr><td colspan="2"><span id="error_2"></span></td></tr>
         <tr>
             <td><label>Repetir Contraseña:</label></td>
-            <td><input type="password" name="password_2" maxlength=""class='edt_m'/></td>
+            <td><input type="password" name="password_2" id="password_2" class='edt_m'/></td>
         </tr>
-
+        <tr><td colspan="2"><span id="error_3"></span></td></tr>
+        
         <tr>
             <td colspan='2' class='tbl_separador'>
             <h5>Datos Paciente</h5>
@@ -65,7 +87,7 @@
         <tr>
             <td><label>Sexo:</label></td>
             <td>
-            <select name="sexo">
+            <select name="sexo" class="edt">
                 <option value='-'>-------</option>
                 <option value='M'>Masculino</option>
                 <option value='F'>Femenino</option>
@@ -81,8 +103,8 @@
         </tr>
         <td colspan='2' align='center'>
             <input type="hidden" name="query" value="1"/>
-            <input type="submit" name="Agregar" value="Agregar" />
-            <input type="reset" name="Limpiar" value="Limpiar" />
+            <input type='button' value='Agregar' class='boton' onClick="validar('form')"/>
+            <input type='Reset' value='Limpiar' class='boton' onClick="limpiar()"/>
         </td>
         </tr>
         </tbody>

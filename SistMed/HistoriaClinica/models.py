@@ -304,9 +304,10 @@ class Diagnostico(models.Model):
 
 class ConsultaMedica(models.Model):
     hist_clinica = models.ForeignKey(InformacionBasica)
-    fecha = models.DateField()
+    fecha = models.DateTimeField()
     observaciones = models.TextField()
-
+    #fk
+    paciente = models.ForeignKey(Pacientes)
     medico = models.ForeignKey(Medicos)
 
 

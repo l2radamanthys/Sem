@@ -342,21 +342,44 @@ def mostrar_examenes_fisicos(request):
 
 ### - Consultas Medicas - ###
 def listado_consultas_medicas(request):
-    pass
+    """
+    """
+    plantilla = get_template('medicos/historia_clinica/consultas_medicas/listado-consultas-medicas.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = pac_id
+
+    consultas = ConsultaMedica.objects.all();
+    dict["consultas"] = consultas
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
 
 
 def nueva_consulta_medica(request):
+    """
+    """
     plantilla = get_template('medicos/historia_clinica/consultas_medicas/nueva-consulta-medica.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 
+    dict["fecha_hoy"] = date_today_str()
+
     medicos = Medicos.objects.all()
     dict["medicos"] = medicos
 
-
-
     pac_id = get_GET_value(request, "pac_id", -1)
     dict['pac_id'] = pac_id
+
+    query = int(get_value(request, "query", 0))
+    if query:
+        pac_id = int(get_value(request, "pac_id", 0))
+        dict['pac_id'] = pac_id
+
+
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

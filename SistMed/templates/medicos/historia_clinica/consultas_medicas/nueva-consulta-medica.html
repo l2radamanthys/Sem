@@ -12,7 +12,7 @@
 <table>
     <tr>
         <td><label>Fecha:</label></td>
-        <td><input type="text" name="fecha" id="fecha"  value="01/01/1900" class="edt_c"></td>
+        <td><input type="text" name="fecha" id="fecha"  value="{{ fecha_hoy }}" class="edt_c"></td>
     </tr>
     <tr>
         <td><label>Medico:</label></td>
@@ -36,6 +36,7 @@
     <tr>
         <td colspan="2" align="center">
             <input type="hidden" value="1" name="query"/>
+            <input type="hidden" value="{{ pac_id }}" name="pac_id"/>
             <input type="submit" value="Crear" class="boton"/>
             <input type="reset" value="Limpiar" class="boton"/>
         </td>
@@ -45,12 +46,14 @@
 </form>
 </div>
 
+
 <!-- Inicio Date Selector Code -->
 <script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
 <script type="text/javascript">
     DatePicker.SetUpElement("fecha");
 </script>
 <!-- Fin Date Selector Code -->
+
 
 <!-- Inicio NicEditor Code -->
 <script src="/site_media/scripts/nicEdit.js" type="text/javascript"></script>

@@ -5,6 +5,7 @@
     listado de Funciones de Utilidad extendida
 """
 import datetime
+import time
 
 from constantes import *
 
@@ -179,3 +180,5 @@ def true_false(val=True):
         return "No"
 
 
+def date_today_str():
+    return datetime.datetime.today().strftime("%d/%m/%Y")

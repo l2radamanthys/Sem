@@ -3,6 +3,24 @@
 {% block hc_contenido %}
 
 
+<script type="text/javascript" src="/site_media/scripts/validate-form.js"></script>
+<script type="text/javascript">
+var validator = new Validator([
+
+    //['fecha', {'method': 'min_lenght', 'lenght':3, 'cont_id':'error_1', 'msj_error':'Error campo demaciado Corto'}],
+    ['descripcion', {'method': 'min_lenght', 'lenght':3, 'cont_id':'error_2', 'msj_error':'Error campo "Descripcion" demaciado Corto'}],
+]);
+        
+function validar(form_id) {
+    var form = document.getElementById(form_id);
+    if (validator.eval_fields()) {
+        form.submit();
+    } 
+}
+function limpiar() { validator.clear_all_cont() }
+</script>
+
+
     <div class='window' style="width:400px;">
     <div class="win_title_bar">
         <div class="window_title">
@@ -11,9 +29,11 @@
     </div>
 
     <table>
-    <form action="" method="post">
+    <form action="" method="post" id="form">
         <tr><td><label>Fecha</label></td><td><input name="fecha" id="fecha" class="edt_c" value="01/01/1900" type="text"  /></td></tr>
-        <tr><td><label>Descripcion</label></td><td><input name="descripcion" class="edt_g" type="text"  /></td></tr>
+        <tr><td colspan="2"><span id="error_1"></span></td></tr>
+        <tr><td><label>Descripcion</label></td><td><input name="descripcion" id="descripcion" class="edt_g" type="text"  /></td></tr>
+        <tr><td colspan="2"><span id="error_2"></span></td></tr>
         <tr><td><label>Tipo Dosis</label></td>
         <td><select name="tipo_dosis" class="edt_m">
         {% for dosis in tipo_dosis %}
@@ -23,8 +43,8 @@
         </td></tr>
         <tr><td colspan="2" align="center">
             <input type="hidden" name="query" value="1"/>
-            <input class='boton' type="submit" value="Agregar"  />
-            <input class='boton' type="reset" value="Limpiar"  /></td>
+            <input type='button' value='Agregar' class='boton' onClick="validar('form')"/>
+            <input type='Reset' value='Limpiar' class='boton' onClick="limpiar()"/>
         </tr>
     </form>
     </table>

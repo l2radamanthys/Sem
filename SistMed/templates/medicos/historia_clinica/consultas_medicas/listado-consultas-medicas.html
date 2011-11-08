@@ -1,7 +1,35 @@
 {% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
 
 {% block hc_contenido %}
+<div align='right'>
+    <hr />
+    <a href="/historia-clinica/nueva-consulta/?pac_id={{ pac_id }}" class="boton">Nueva Consulta Medica</a>
+    <hr />
+</div>
 
+    <table>
+        <tr>
+            <td colspan="5" class='tbl_separador' width="600px" border="1px"><h5>Consultas Medicas</h5></td>
+        </tr>
 
+        <tr class='table_title' align="center">
+            <td width="70px">Fecha</td>
+            <td>Medico</td>
+            <td style="width:70px; text-align:center;">Mostrar</td>
+            <td style="width:70px; text-align:center;">Modificar</td>
+            <td style="width:70px; text-align:center;">Borrar</td>
+        </tr>
+        {% for cons in consultas %}
+        <tr>
+            <td>cons.fecha</td>
+            <td>cons.medico</td>
+            <td></td>
+            <td><a href=""><img src="/site_media/imagenes/icon_ver.png"></a></td>
+            <td><a href=""><img src="/site_media/imagenes/icon_edit.png"></a></td>
+            <td><a href=""><img src="/site_media/imagenes/icon_borrar.png"></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    
 
 {% endblock %}
