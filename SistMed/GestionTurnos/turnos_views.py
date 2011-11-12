@@ -90,7 +90,43 @@ def nueva_solicitud_turno(request):
     """
         Crea una nueva solicitud de turno
     """
-    pass
+    plantilla = get_template('pacientes/gestion_turnos/nueva-solicitud-turno.html')
+    dict = generar_base_dict(request)
+    dict['sin_titulo'] = True #'Turnos - Solicitar Turno'
+
+    dict['username'] = Pacientes.objects.get(id=request.session['usuario_id']).nombre_completo()
+    dict["hoy"] = date_today_str()
+    dict['pacientes'] = Pacientes.objects.all()
+    dict['medicos'] = Medicos.objects.all()
+
+    
+    query = int(get_value(request, 'query', '0'))
+    dict['query'] = query
+
+    if query:
+        if get_value(request, 'request', 'pac') == "pac":
+            paciente = Pacientes.objects.get(id=request.session['usuario_id'])
+        else:
+            paciente = Pacientes.objects.get(id=int(get_value(request, 'pac_id', '-1')))
+
+
+        medico = Medicos.objects.get(id=int(get_value(request, 'med_id', '-1')))
+        fecha = date_split(get_value(request, 'fecha', '01/01/1900'))
+
+        solicitud = SolitudesTurnos(
+            fecha_requerida=fecha,
+            estado="p",
+            comentarios="",
+            codigo_paciente=paciente,
+            codigo_medico=medico
+        )
+        solicitud.save()
+        dict['msj_class'] = MSJ_OK
+        dict['mensaje'] = 'Solicitud de Turno Creada'
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
 
 
 def cancelar_solicitud(request):
@@ -100,15 +136,30 @@ def cancelar_solicitud(request):
     pass
 
 
-def listado_solicitudes(request):
+def listado_solicitudes_turno_pac(request):
     """
         listado de solicitudes de turno para un
         medico en particular
     """
-    pass
+    plantilla = get_template('pacientes/gestion_turnos/listado-solicitudes-turno.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Turnos - Listado de Solicitud de Turnos'
+
+    solicitudes = []
+    band = True
+    for sol in SolitudesTurnos.objects.all(): #por el momento todas, hay que filtrarlas por usuario
+        solicitudes.append([get_field_css(band), sol.id, sol.codigo_medico.nombre_completo, estado_solicitud_expand(sol.estado)])
+        band = not(band)
+
+    dict["solicitudes"] = solicitudes
 
 
-def listado_solicitudes_pac(request):
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def listado_solicitudes_turno(request):
     """
         listado de solicitudes de turnos q realizo un paciente
     """

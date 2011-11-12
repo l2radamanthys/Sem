@@ -46,6 +46,9 @@ def estado_civil_expand(key):
     return ESTADO_CIVIL_DIC[key]
 
 
+def estado_solicitud_expand(key):
+    return SOLICITUD_ESTADO_CHOICE_DIC[key]
+
 
 def get_GET_value(request, key='', default='', blank=''):
     value = request.GET.get(key, default)
@@ -181,4 +184,7 @@ def true_false(val=True):
 
 
 def date_today_str():
+    """
+        Formatea la fecha Actual com Str
+    """
     return datetime.datetime.today().strftime("%d/%m/%Y")

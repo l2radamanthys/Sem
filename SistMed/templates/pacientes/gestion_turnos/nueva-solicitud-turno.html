@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+    <div class='window' style="width:400px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Nueva Solicitud de Turno</label>
+        </div>
+    </div>
+    <form action="" method="POST" enctype="text/plain">
+    <table>
+    <tr>
+        <td><label>Paciente:</label></td>
+    {% if nivel_1 and not nivel_2 and not nivel_3 %}
+        <input type="hidden" name="request" value="pac"/>
+        <td>&nbsp;{{ username }}</td>
+    {% endif %}
+
+    {% if nivel_2 %}
+        <td>
+        <select name="pac_id" class="edt">
+        {% for pac in pacientes %}
+            <option value="{{ pac.id }}"> {{ pac.nombre_completo }} </option>
+        {% endfor %}
+        </select>
+        <input type="hidden" name="request" value="med"/>
+        </td>
+    {% endif %}
+
+    <tr>
+        <td><label>Medico: </label></td>
+        <td>
+        <select name="med_id" class="edt">
+        {% for med in medicos %}
+            <option value="{{ med.id }}">{{ med.nombre_completo }}</option>
+        {% endfor %}
+        </select></td>
+    </tr>
+
+    <tr>
+        <td><label>Fecha: </label></td>
+        <td><input name="fecha" id="fecha" class="edt_c" value="{{ hoy }}" type="text"/></td>
+    </tr>
+    
+    <tr>
+        <td colspan='2' align='center'>
+        <br />
+        <input type="hidden" name="query" value="1"/>
+        <input type='submit' value='Agregar' class='boton'/>
+        <input type='Reset' value='Limpiar' class='boton'/>
+        </td>
+    </tr>
+    </table>
+
+    </form>
+    </div>
+
+    <br />
+    {% if query %}
+        <div class='{{ msj_class }}'>
+        <p>{{ mensaje }} </p>
+        </div>
+    {% endif %}
+    <br />
+
+<script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
+<script type="text/javascript">
+    DatePicker.SetUpElement("fecha");
+</script>
+
+{% endblock %}

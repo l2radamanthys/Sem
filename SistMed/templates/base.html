@@ -97,16 +97,25 @@
                     </ul>
                 {% endif %}
 
+                {% if nivel_2 %}
                 <span class='title_menu'><a onClick="desplegar('menu_6')">Especialidades</a></span>
                     <ul id='menu_6' class='hide_nav_menu'>
                     <li><a href='/medicos/especialidades/agregar'>Agregar</a></li>
                     <li><a href='/medicos/especialidades/listado'>Listado</a></li>
                     </ul>
+                {% endif %}
 
+
+                {% if nivel_1 and not nivel_2 and not nivel_3 %}
                 <span class='title_menu'><a onClick="desplegar('menu_7')">Menu</a></span>
                     <ul id='menu_7' class='hide_nav_menu'>
-                        <li><a href='/medicos/agenda/agregar-turno/'>Nuevo Turno</a></li>
+                        <li><a href='/pacientes/turnos/nueva-solicitud/'>Nueva Solicitud Turno</a></li>
+                        <li><a href='/pacientes/turnos/listado-solicitudes'>Listado Solicitudes Turno</a></li>
+                        <li><a href='/pacientes/turnos/listado-turnos/'>Turnos Asignados</a></li>
                     </ul>
+                {% endif %}
+
+
 
             <!-- Menu de Historia Clinica -->
             {% else %}

@@ -38,6 +38,13 @@ SOLICITUD_ESTADO_CHOICE = (
     ('C','Cancelado'),
 )
 
+SOLICITUD_ESTADO_CHOICE_DIC = {
+    'P':'Pendiente',
+    'A':'Aceptado',
+    'C':'Cancelado',
+}
+
+
 
 DATE_CHOICE = (
     ('LUN', 'Lunes'),

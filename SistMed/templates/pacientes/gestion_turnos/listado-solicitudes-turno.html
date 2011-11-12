@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+
+<table width="600px">
+    <tr class='table_title'>
+        <td style='width:70px;'>Fecha</td>
+        <td>Medico</td>
+        <td style='width:70px;'>Estado</td>
+        <td style='width:70px;'>Detalle</td>
+        <td style='width:70px;'>Cancelar</td>
+    </tr>
+    {% for sol in solicitudes %}
+    <tr class='{{ sol|slice:"0:"|first }}'>
+        <td>{{ sol|slice:"1:"|first }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

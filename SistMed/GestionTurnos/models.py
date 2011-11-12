@@ -233,7 +233,7 @@ class SolitudesTurnos(models.Model):
     """
         Solicitudes de Turnos q realizan los Pacientes
     """
-    fecha_solicitud = models.DateField() #fecha en la q se solicito el turno
+    fecha_solicitud = models.DateField(auto_now_add=True) #fecha en la q se solicito el turno
     fecha_requerida = models.DateField()#fecha para la cual se solicito turno
     estado = models.CharField(max_length=1, default='P' ,choices=SOLICITUD_ESTADO_CHOICE)
     comentarios = models.TextField()
