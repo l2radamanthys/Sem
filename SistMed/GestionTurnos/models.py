@@ -159,16 +159,15 @@ class HorarioAtencion(models.Model):
     """
         Definicion de Horarios de Atencion del Medico
     """
-    #dia = models.DateField()
     dia = models.CharField('Dia', max_length=4, default='LUN', choices=DATE_CHOICE)
     hora_inicio = models.TimeField()
     hora_fin = models.TimeField()
-    duracion_turno = models.IntegerField() #duracion en minutos
-    intervalo = models.IntegerField() #entretiempo entre turnos por defecto es 0
+    duracion_turno = models.IntegerField(default=15) #duracion en minutos del turno por defecto 15 min
+    intervalo = models.IntegerField(default=0) #entretiempo entre turnos por defecto es 0 (es en minutos)
 
     #FK
-    cod_medico = models.ForeignKey(Medicos)
-    cod_expecialidad = models.ForeignKey(Expecialidades)
+    medico = models.ForeignKey(Medicos)
+    #cod_expecialidad = models.ForeignKey(Expecialidades) //para que no sea tan complicado no tomara en cuenta expecialidades
 
 
     def __str__(self):
@@ -182,15 +181,15 @@ class DiasAtencion(models.Model):
     """
     fecha = models.DateField()
     cant_turno = models.IntegerField() #contador de turnos asignados
-    #estos datos se obtienen del horario
-    hora_inicio = models.TimeField()
-    hora_fin = models.TimeField()
-    duracion_turno = models.TimeField() #duracion en minutos
-    intervalo = models.TimeField() #entretiempo entre turnos
+    ##estos datos se obtienen del horario
+    #hora_inicio = models.TimeField()
+    #hora_fin = models.TimeField()
+    #duracion_turno = models.TimeField() #duracion en minutos
+    #intervalo = models.TimeField() #entretiempo entre turnos
 
     #fk
-    cod_medico = models.ForeignKey(Medicos)
-    cod_horario = models.ForeignKey(HorarioAtencion)
+    medico = models.ForeignKey(Medicos)
+    horario_atenc = models.ForeignKey(HorarioAtencion)
     
 
     def n_turno(self):
@@ -229,8 +228,8 @@ class Turnos(models.Model):
     comentarios = models.TextField()
 
     #fk
-    codigo_paciente = models.ForeignKey(Pacientes)
-    codigo_medico = models.ForeignKey(Medicos)
+    paciente = models.ForeignKey(Pacientes)
+    medico = models.ForeignKey(Medicos)
 
 
 class SolitudesTurnos(models.Model):

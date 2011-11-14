@@ -16,6 +16,7 @@ from GestionTurnos.models import Medicos, TipoUsuario, Expecialidades, Expeciali
 from utils import *
 from constantes import MSJ_OK, MSJ_ERROR
 
+
 def nuevo_medico(request):
     """
         Vista que Permite crear un nuevo paciente
@@ -226,8 +227,8 @@ def datos_medico(request, med_id=-1):
 
         hrs_atencion = []
         band = True
-        for h in HorarioAtencion.objects.filter(cod_medico__id=med_id):
-            hrs_atencion.append((get_field_css(band), date_choice_expand(h.dia), str(h.hora_inicio), str(h.hora_fin), h.cod_medico.nombre_completo(), h.cod_expecialidad))
+        for h in HorarioAtencion.objects.filter(medico__id=med_id):
+            hrs_atencion.append((get_field_css(band), date_choice_expand(h.dia), str(h.hora_inicio), str(h.hora_fin), h.medico.nombre_completo()))
             band = not(band)
         dict['horarios_atencion'] = hrs_atencion
         
@@ -277,35 +278,15 @@ def modificar_medico(request, med_id=-1):
         #esp disponibles
         #nota esta parte no se sire la mejor implementacion pero almenos funciona jejej
         list = []
-        for espxmed in ExpecialidadesMedicos.objects.filter(codigo_medico__id=med_id):
-            list.append(espxmed.cod_expecialidad.id)
-
-        for esp in Expecialidades.objects.exclude(id__in = list).order_by('nombre'):
-            especialidades_disp.append((esp.id, esp.nombre))
-
-        dict['especialidades_med'] = especialidades_no_disp
-        dict['especialidades_disp'] = especialidades_disp
 
         ### turnos  -------------------
         dict['horas'] = [str(n).zfill(2) for n in range(24)]
         dict['minutos'] = [str(n).zfill(2) for n in range(60)]
 
-        especialidades = []
-        for esp in ExpecialidadesMedicos.objects.filter(codigo_medico__id=med_id):
-            especialidades.append((esp.cod_expecialidad.id, esp.cod_expecialidad.nombre))
-        dict['especialidades'] = especialidades
-
-        hrs_atencion = []
-        band = True
-        for h in HorarioAtencion.objects.filter(cod_medico__id=med_id):
-            hrs_atencion.append((get_field_css(band), date_choice_expand(h.dia), str(h.hora_inicio), str(h.hora_fin), h.cod_medico.nombre_completo(), h.cod_expecialidad))
-            band = not(band)
-        dict['horarios_atencion'] = hrs_atencion
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
-
 
 
 def guardar_cambios_medico(request):
@@ -396,8 +377,6 @@ def guardar_cambios_medico(request):
     return HttpResponse(html)
 
 
-
-
 def agregar_especialidad(request, med_id=-1):
     """
     """
@@ -472,8 +451,16 @@ def agregar_horario_atencion(request, med_id=-1):
     med_id = int(med_id)
 
     if med_id != -1:
-        medico = Medicos.objects.get(id=med_id)
-        dict['med_name'] = medico.nombre_completo()
+        _medico = Medicos.objects.get(id=med_id)
+        dict['med_name'] = _medico.nombre_completo()
+
+        dict['horas'] = [str(n).zfill(2) for n in range(24)]
+        dict['minutos'] = [str(n).zfill(2) for n in range(60)]
+
+        especialidades = []
+        for esp in ExpecialidadesMedicos.objects.filter(codigo_medico__id=med_id):
+            especialidades.append((esp.cod_expecialidad.id, esp.cod_expecialidad.nombre))
+        dict['especialidades'] = especialidades
 
         if query: #si se envio un form 
             #falta comprobacion para evitar posibles errores de solapamiento
@@ -487,43 +474,31 @@ def agregar_horario_atencion(request, med_id=-1):
             fin = datetime.time(fin_hh, fin_mm)
             dur_turn = int(get_POST_value(request, 'turno', '0'))
             dur_inter = int(get_POST_value(request, 'intervalo', '0'))
-            exp_id = int(get_POST_value(request, 'especialidad', '0'))
-            especialidad = Expecialidades.objects.get(id=exp_id)
+            
             horario_atencion = HorarioAtencion(
                 dia = dia,
                 hora_inicio = ini,
                 hora_fin = fin,
                 duracion_turno = dur_turn,
                 intervalo = dur_inter,
-                cod_medico = medico,
-                cod_expecialidad = especialidad
+                medico = _medico,
             )
             horario_atencion.save()
             dict['msj_class'] = MSJ_OK
             dict['mensaje'] = 'Horario de Atencion Agregado Correctamente'
-            
+
         else:
             pass
 
-        dict['horas'] = [str(n).zfill(2) for n in range(24)]
-        dict['minutos'] = [str(n).zfill(2) for n in range(60)]
-
-        especialidades = []
-        for esp in ExpecialidadesMedicos.objects.filter(codigo_medico__id=med_id):
-            especialidades.append((esp.cod_expecialidad.id, esp.cod_expecialidad.nombre))
-        dict['especialidades'] = especialidades
-
         hrs_atencion = []
         band = True
-        for h in HorarioAtencion.objects.filter(cod_medico__id=med_id):
-            hrs_atencion.append((get_field_css(band), date_choice_expand(h.dia), str(h.hora_inicio), str(h.hora_fin), h.cod_medico.nombre_completo(), h.cod_expecialidad))
-            band = not(band)
+        for h in HorarioAtencion.objects.filter(medico__id=med_id):
+            hrs_atencion.append([get_field_css(band), date_choice_expand(h.dia), str(h.hora_inicio), str(h.hora_fin), h.medico.nombre_completo()])
+            #band = not(band)
         dict['horarios_atencion'] = hrs_atencion
+        
     else:
         pass
-
-
-    
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

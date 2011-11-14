@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block contenido %}
-    <p>Medico: {{ med_name }}</p>
+    <span align="left"><label>Medico: {{ med_name }}</label></span>
     <hr />
     <div align='center'>
     <form action="" method="POST" enctype="text/plain">
@@ -60,15 +60,15 @@
 
         <tr>
             <td><label>Duracion Turno (Minutos):</label></td>
-            <td><input  type='text' name='turno' value='0' class='edt_c' /></td>
+            <td><input  type='text' name='turno' value='15' class='edt_mc' style="text-align: right;" /></td>
         </tr>
 
         <tr>
             <td><label>Duracion Intervalo (Minutos):</label></td>
-            <td><input type='text' name='intervalo' value='0' class='edt_c'/></td>
+            <td><input type='text' name='intervalo' value='0' class='edt_mc' style="text-align: right;"/></td>
         </tr>
 
-        <tr>
+        <!-- tr>
             <td><label>Especialidad:</label></td>
             <td>
                 <select name='especialidad'>
@@ -77,7 +77,7 @@
                 {% endfor %}
                 </select>
             </td>
-        </tr>
+        </tr -->
 
         <tr>
             <td>
@@ -97,25 +97,23 @@
         </div>
     {% endif %}
 
-    <table border="0" width='400px' cellpadding="2" cellspacing="2">
+    <hr />
+
+    <table border="0" width='500px' cellpadding="2" cellspacing="2">
         <tr class='table_title'>
             <td>Dia</td>
             <td>Inicio</td>
             <td>Fin</td>
-            <td>Medico</td>
-            <td>Expecialidad</td>
-            <td>Modificar</td>
-            <td>Borrar</td>
+            <td width="70px">Modificar</td>
+            <td width="70px">Borrar</td>
         </tr>
     {% for h in horarios_atencion %}
         <tr class='{{ h|slice:"0:"|first }}'>
             <td>{{ h|slice:"1:"|first }}</td>
             <td>{{ h|slice:"2:"|first }}</td>
             <td>{{ h|slice:"3:"|first }}</td>
-            <td>{{ h|slice:"4:"|first }}</td>
-            <td>{{ h|slice:"5:"|first }}</td>
-            <td><a href=""><img src="/site_media/imagenes/icon_modificar.png'"></a></td>
-            <td><a href=""><img src="/site_media/imagenes/icon_borrar.png'"></a></td>
+            <td align="center"><a href=""><img src="/site_media/imagenes/icon_edit.png"></a></td>
+            <td align="center"><a href=""><img src="/site_media/imagenes/icon_borrar.png"></a></td>
         </tr>
     {% endfor %}
     </table>

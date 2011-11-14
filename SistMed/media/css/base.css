@@ -6,30 +6,34 @@ body {
 
 
 h1, h2, h3, h4, h5 {
-    font-family: "DejaVu Sans", Verdana,"Bitstream Vera Sans",Arial,sans-serif;
+    font-family: "DejaVu Sans", Verdana, "Bitstream Vera Sans", Arial,sans-serif;
     text-align: center;
 }
 
 
-h1, h2 {
+h1, h2, h3 {
     margin-top: 3px;
 }
 
-
-h1 {
-    font-size: 24px;
-    color: #3C3C3C;
-    margin-left: 50px;
-    margin-right: 50px;
-    text-shadow: 2px -3px 1px #C3C3C3;
+h3 {
+    background-color: #005782;
+    color: #FFF;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 1px;
 }
 
-h2 {
+a img {
+    border: 0px;
+}
+
+
+h1, h2 {
     font-size: 22px;
     color: #3C3C3C;
     margin-left: 50px;
     margin-right: 50px;
-    text-shadow: 2px -3px 1px #C3C3C3;
+    text-shadow: 2px -2px 1px #C3C3C3;
 }
 
 a{
@@ -242,7 +246,7 @@ label {
     height: 32px;
     /*width: 120px;*/
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     text-decoration: none;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -286,7 +290,7 @@ label {
 /*** Fin Estilo Boton***/
 
 
-.edt, .edt_c, .edt_m, .edt_g {
+.edt, .edt_mc, .edt_c, .edt_m, .edt_g {
     margin-left: 10px;
     margin-bottom: 3px;
     font-family: Verdana;
@@ -304,7 +308,7 @@ label {
     border-radius: 2px;
 }
 
-.edt:focus, .edt_c:focus, .edt_m:focus, .edt_g:focus{
+.edt:focus, .edt_mc:focus, .edt_c:focus, .edt_m:focus, .edt_g:focus{
     border: 1px solid #000;
 }
 
@@ -314,6 +318,10 @@ label {
 
 /*.edt {
 }*/
+.edt_mc {
+    width: 30px;
+}
+
 
 .edt_c {
     width: 70px;
@@ -343,7 +351,7 @@ label {
     background-position: top left;
     background-repeat: x-repeat;
     text-decoration: None;
-    color: #000;
+    color: #151515;
     padding:6px 5px 0 5px;
     /*width: 160px;*/
     display: block;
@@ -377,16 +385,16 @@ label {
     border-right: 1px solid #CCC;
     border-bottom: 1px solid #CCC;
     width: 160px;
-    /**display: block;*/
+    display: block;
 }
 
 .nav_menu li:hover {
     background-color: #11324A;
-    color: #FFF;
+    color: #202020;
 }
 
 .nav_menu a {
-    color: #3D98C5;
+    color: #000;
     /*font-weight: bold;*/
 }
 

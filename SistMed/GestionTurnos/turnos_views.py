@@ -45,8 +45,35 @@ def mostrar_agenda_por_dia(request):
     return HttpResponse(html)
 
 
-def nuevo_turno(request):
+def nuevo_turno(request, med_id=-1):
     plantilla = get_template('medicos/gestion_turnos/nuevo-turno.html')
+    dict = generar_base_dict(request)
+    dict['sin_titulo'] = True #'Turnos - Nuevo'
+
+    dict["med_name"] = Medicos.objects.get(id=int(med_id)).nombre_completo()
+
+    dict["pacientes"] = Pacientes.objects.all()
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def nuevo_turno_adm(request, med_id=-1):
+    plantilla = get_template('medicos/gestion_turnos/nuevo-turno-adm.html')
+    dict = generar_base_dict(request)
+    dict['sin_titulo'] = True #'Turnos - Nuevo'
+
+    dict["medicos"] = Medicos.objects.all()
+    dict["pacientes"] = Pacientes.objects.all()
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def nuevo_turno_pac(request):
+    plantilla = get_template('medicos/gestion_turnos/nuevo-turno-pac.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Turnos - Nuevo'
 
@@ -59,10 +86,8 @@ def nuevo_turno(request):
     if med_id and pac_id:
         dict['med_id'] = med_id
         dict['med_name'] = Medicos.objects.get(id=med_id).nombre_completo()
-        dict['pac_id'] = med_id
+        dict['pac_id'] = pac_id
         dict['pac_name'] = Pacientes.objects.get(id=pac_id).nombre_completo()
-
-
 
     if query:
         fecha = get_value(request, "fecha", "00:00:00")
@@ -136,18 +161,42 @@ def cancelar_solicitud(request):
     pass
 
 
+def listado_solicitudes_turno(request, user_id):
+    """
+        listado de solicitudes de turno de  un paciente
+    """
+    plantilla = get_template('medicos/gestion_turnos/listado-solicitudes-turno.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Turnos - Listado de Solicitud de Turnos'
+
+
+    medico = Medicos.objects.get(id=user_id)
+    solicitudes = []
+    band = True
+    for sol in SolitudesTurnos.objects.filter(codigo_medico=medico): #por el momento todas, hay que filtrarlas por usuario
+        solicitudes.append([get_field_css(band), date_to_str(sol.fecha_requerida), sol.codigo_paciente.nombre_completo(), estado_solicitud_expand(sol.estado), sol.id])
+        band = not(band)
+
+    dict["solicitudes"] = solicitudes
+
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
 def listado_solicitudes_turno_pac(request):
     """
-        listado de solicitudes de turno para un
-        medico en particular
+        listado de solicitudes de turnos q realizo un paciente
     """
     plantilla = get_template('pacientes/gestion_turnos/listado-solicitudes-turno.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Turnos - Listado de Solicitud de Turnos'
 
+    paciente = Pacientes.objects.get(id=request.session.get('usuario_id', '-1'))
     solicitudes = []
     band = True
-    for sol in SolitudesTurnos.objects.all(): #por el momento todas, hay que filtrarlas por usuario
+    for sol in SolitudesTurnos.objects.filter(codigo_paciente=paciente): #por el momento todas, hay que filtrarlas por usuario
         solicitudes.append([get_field_css(band), date_to_str(sol.fecha_requerida), sol.codigo_medico.nombre_completo(), estado_solicitud_expand(sol.estado), sol.id])
         band = not(band)
 
@@ -161,14 +210,6 @@ def listado_solicitudes_turno_pac(request):
 
 def detalle_solicitud_turno_pac(request):
     """
-    """
-    pass
-
-
-
-def listado_solicitudes_turno(request):
-    """
-        listado de solicitudes de turnos q realizo un paciente
     """
     pass
 

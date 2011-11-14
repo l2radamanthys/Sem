@@ -118,9 +118,14 @@ urlpatterns = patterns('',
 
     # - Turnos
     (r'^pacientes/turnos/nueva-solicitud/$', turnos_views.nueva_solicitud_turno),
-    (r'^pacientes/turnos/listado-solicitudes$', turnos_views.listado_solicitudes_turno_pac),
+    (r'^pacientes/turnos/listado-solicitudes/$', turnos_views.listado_solicitudes_turno_pac),
+    (r'^medicos/turnos/listado-solicitudes/(\d{1,2})/$', turnos_views.listado_solicitudes_turno),
 
     #(r'^medicos/agenda/agregar-turno/$', turnos_views.nuevo_turno),
+    (r'^medicos/turnos/nuevo-turno/$', generics_views.error404),
+    (r'^medicos/turnos/nuevo-turno/(\d{1,2})/$', turnos_views.nuevo_turno),
+    (r'^administrativos/turnos/nuevo-turno/$', turnos_views.nuevo_turno_adm),
+
 
     ## - Historia Clinica - ##
     # - Medicos Views

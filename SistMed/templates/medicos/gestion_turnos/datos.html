@@ -5,17 +5,15 @@
 
 {% block contenido %}
 <!--- botones de accion -->
-<div align='right'>
-    <hr />
-    {% if nivel_3 %}
-    <a class='boton' href='/medicos/modificar/{{ med_id }}/'>Modificar</a>
-    <a class='boton' href='/medicos/borrar/{{ med_id }}/'>Borrar</a>
-    {% endif %}
-    <a class='boton' href='/'>Volver al Inicio</a>
-    <hr />
-</div>
-<br />
 
+
+<ul class="tab_list" align="left">
+    <li>Datos Basicos</li>
+    {% if nivel_3 %}
+    <li><a href='/medicos/modificar/{{ med_id }}/' class="tab">Modificar</a></li>
+    <li><a href='/medicos/borrar/{{ med_id }}/' class="tab">Borrar</a></li>
+    {% endif %}
+</ul>
 <!-- detalles -->
 <table style="text-align: left;" border="0" width='400px' cellpadding="2" cellspacing="2">
     <tbody>
@@ -57,10 +55,9 @@
     </tbody>
 </table>
 
-<hr />
 
 <!-- especialidades -->
-<ul class="tab_list">
+<ul class="tab_list" align="left">
     <li>Expecialidades</li>
     {% if nivel_3 %}
     <li><a href='/medicos/agregar-especialidades/{{ med_id }}/' class="tab">Agregar</a></span></li>
@@ -80,13 +77,11 @@
 
 </tbody>
 </table>
-<br />
 
-<ul class="tab_list">
+<ul class="tab_list" align="left">
     <li>Horarios Atencion</li>
     {% if nivel_3 %}
     <li><a href='/medicos/horario-atencion/agregar/{{ med_id }}/' class='tab'>Agregar</a></li>
-    <li><a href='/medicos/horario-atencion/listado/{{ med_id }}/' class='tab'>Listado</a></li>
     {% endif %}
     <!--li><a href='/medicos/horario-atencion/borrar/{{ med_id }}/' class='tab'>Borrar</a></li-->
 </ul>
@@ -103,7 +98,6 @@
                 <td>{{ h|slice:"1:"|first }}</td>
                 <td>{{ h|slice:"2:"|first }}</td>
                 <td>{{ h|slice:"3:"|first }}</td>
-
             </tr>
         {% endfor %}
     </tbody>
