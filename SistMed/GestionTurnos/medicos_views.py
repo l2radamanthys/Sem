@@ -63,7 +63,7 @@ def nuevo_medico(request):
                 sexo = get_POST_value(request,'sexo','-','-'),
                 telefono = request.POST.get('telefono', ''),
                 direccion = request.POST.get('direccion', ''),
-                tipo_usuario = TipoUsuario.objects.get(nombre__exact='Paciente'),
+                tipo_usuario = TipoUsuario.objects.get(nombre__exact='Medico'),
                 user = User.objects.get(username__exact=username),
                 matricula = request.POST.get('matricula', '0'),
             )

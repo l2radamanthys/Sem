@@ -357,13 +357,14 @@ label {
 }
 
 
-.nav_menu {
+.nav_menu, .menu_nav {
     margin: 0px;
     padding: 0px;
     /*width: 160px; /*For KHTML*/
     list-style: none;
     margin-bottom: 3px;
 }
+
 
 .nav_menu li {
     background-color: #efefef;

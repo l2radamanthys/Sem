@@ -47,7 +47,7 @@ def estado_civil_expand(key):
 
 
 def estado_solicitud_expand(key):
-    return SOLICITUD_ESTADO_CHOICE_DIC[key]
+    return SOLICITUD_ESTADO_CHOICE_DIC[key.upper()]
 
 
 def get_GET_value(request, key='', default='', blank=''):
@@ -120,20 +120,31 @@ def insert_permisos_key(request, dict):
         - admins hasta nivel 3
 
     """
-    rol = request.session.get('usuario_rol', '')
-    dict['nivel_0'] = True
-    dict['nivel_1'] = False
-    dict['nivel_2'] = False
-    dict['nivel_3'] = False
 
-    if rol == PACIENTE:
+    if request.session.get('usuario', '') == "admin":
+        dict["super_admin"] = True
+    else:
+        dict["super_admin"] = False
+
+    rol = request.session.get('usuario_rol', 'Anonimo')
+    dict["user_rol"] = rol
+    if rol == ANONIMO:
+        dict['nivel_0'] = True
+        dict['nivel_1'] = False
+        dict['nivel_2'] = False
+        dict['nivel_3'] = False
+
+    elif rol == PACIENTE:
         dict['nivel_0'] = False
         dict['nivel_1'] = True
+        dict['nivel_2'] = False
+        dict['nivel_3'] = False
 
     elif rol == MEDICO:
         dict['nivel_0'] = False
         dict['nivel_1'] = True
         dict['nivel_2'] = True
+        dict['nivel_3'] = False
 
     elif rol == ADMINISTRATIVO:
         dict['nivel_0'] = False

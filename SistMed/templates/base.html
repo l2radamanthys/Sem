@@ -27,49 +27,50 @@
         </tr>
 
         <tr>
-            <td class='celda_izquierda' valign='top' width='150px' height='500px;' >
+            <td class='celda_izquierda' valign='top' width='165px' height='500px;' >
                 {% block cont_sec %}
                 {% endblock %}
 
                 <!--span class='title_menu'><a onClick="desplegar('menu_1')">Secciones</a></span>
                 <div id='menu_1' class='hide_nav_menu'-->
-                <span class='title_menu'><a>Secciones</a></span>
-
-                <ul id='menu_1' class='nav_menu'>
-                    <li><a href='/'>Inicio</a></li>
-                    <li><a href='/area?opcion=gt'>Gestion Turnos</a></li>
-                    <li><a href='/area?opcion=hc'>Historia Clinica</a></li>
+                <!-- span class='title_menu'><a>Secciones</a></span -->
+                <h3>Menu Principal</h3>
+                <ul id='menu_1' class="menu_nav">
+                    <li class='title_menu'><a href='/'>Home/Inicio</a></li>
+                    <li class='title_menu'><a href='/area?opcion=gt'>Gestion Turnos</a></li>
+                    <li class='title_menu'><a href='/area?opcion=hc'>Historia Clinica</a></li>
                     {% if nivel_0 %}
-                        <li><a href='/accounts/login/'>loguear</a></li>
+                        <li class='title_menu'><a href='/accounts/login/' >loguear</a></li>
                     {% endif %}
                     {% if nivel_1 %}
-                        <li><a href='/accounts/logout/'>Desloguear</a></li>
+                        <li class='title_menu'><a href='/accounts/logout/'>Desloguear</a></li>
+                    {% endif %}
+                    
+                    {% if super_admin %}
+                        <li class='title_menu'><a href='/admin/' style="color: #EF4811">Super Admin Area</a></li>
                     {% endif %}
                 </ul>
 
-
                 {% if nivel_1 %}
-                    <span class='title_menu'><a onClick="desplegar('menu_2')">Usuario</a></span>
+                    <span class='title_menu'><a onClick="desplegar('menu_2')"><img src="/site_media/imagenes/flecha_menu.jpg" align="top" style="margin-right: 5px">Mis Datos</a></span>
                     <ul id='menu_2' class='hide_nav_menu'>
                         <li><a href='/accounts/datos-personales/'>Datos Personales</a></li>
                         <li><a href='/accounts/modificar-datos-personales/'>Modificar Datos</a></li>
                         <li><a href='/accounts/change_password/'>Cambio Contraseña</a></li>
                     </ul>
                 {% endif %}
-
+                
+            
             <!-- Menu Gestion Turnos -->
             {%if menu_area %}
-
+                <h3>Gestion Turnos</h3>
 
                 {% if nivel_0 %}
-                    <span class='title_menu'><a onClick="desplegar('menu_3')">Pacientes</a></span>
-                    <ul id='menu_3' class='hide_nav_menu'>
-                        <li><a href='/pacientes/nuevo/'>Nuevo</a></li>
-                    </ul>
+                    <span class='title_menu'><a href='/pacientes/nuevo/'>Nuevo Pacientes</a></span>
                 {% endif %}
 
                 {% if nivel_2 %}
-                    <span class='title_menu'><a onClick="desplegar('menu_3')">Pacientes</a></span>
+                    <span class='title_menu'><a onClick="desplegar('menu_3')"><img src="/site_media/imagenes/flecha_menu.jpg" align="top" style="margin-right: 5px">Pacientes</a></span>
                     <ul id='menu_3' class='hide_nav_menu'>
                     <li><a href='/pacientes/buscar/'>buscar</a></li>
                     <li><a href='/pacientes/listado/'>Listado</a></li>
@@ -77,7 +78,7 @@
                     </ul>
                 {% endif %}
 
-                    <span class='title_menu'><a onClick="desplegar('menu_4')">Medicos</a></span>
+                    <span class='title_menu'><a onClick="desplegar('menu_4')"><img src="/site_media/imagenes/flecha_menu.jpg" align="top" style="margin-right: 5px">Medicos</a></span>
                     <ul id='menu_4' class='hide_nav_menu'>
                 {% if nivel_3 %}
                    <li><a href='/medicos/buscar/'>buscar</a></li>
@@ -89,7 +90,7 @@
                     </ul>
 
                 {% if nivel_3 %}
-                    <span class='title_menu'><a onClick="desplegar('menu_5')">Administrativos</a></span>
+                    <span class='title_menu'><a onClick="desplegar('menu_5')"><img src="/site_media/imagenes/flecha_menu.jpg" align="top" style="margin-right: 5px">Administrativos</a></span>
                     <ul id='menu_5' class='hide_nav_menu'>
                     <li><a href='/administrativos/buscar/'>buscar</a></li>
                     <li><a href='/administrativos/listado/'>Listado</a></li>
@@ -98,7 +99,7 @@
                 {% endif %}
 
                 {% if nivel_2 %}
-                <span class='title_menu'><a onClick="desplegar('menu_6')">Especialidades</a></span>
+                <span class='title_menu'><a onClick="desplegar('menu_6')"><img src="/site_media/imagenes/flecha_menu.jpg" align="top" style="margin-right: 5px">Especialidades</a></span>
                     <ul id='menu_6' class='hide_nav_menu'>
                     <li><a href='/medicos/especialidades/agregar'>Agregar</a></li>
                     <li><a href='/medicos/especialidades/listado'>Listado</a></li>
@@ -107,7 +108,7 @@
 
 
                 {% if nivel_1 and not nivel_2 and not nivel_3 %}
-                <span class='title_menu'><a onClick="desplegar('menu_7')">Menu</a></span>
+                <span class='title_menu'><a onClick="desplegar('menu_7')"><img src="/site_media/imagenes/flecha_menu.jpg" align="top" style="margin-right: 5px">Menu</a></span>
                     <ul id='menu_7' class='hide_nav_menu'>
                         <li><a href='/pacientes/turnos/nueva-solicitud/'>Nueva Solicitud Turno</a></li>
                         <li><a href='/pacientes/turnos/listado-solicitudes'>Listado Solicitudes Turno</a></li>
@@ -119,14 +120,20 @@
 
             <!-- Menu de Historia Clinica -->
             {% else %}
-
-                <span class='title_menu'><a onClick="desplegar('menu_8')">DatosBase</a></a></span>
-                <ul id='menu_8' class='hide_nav_menu'>
+                <h3>Historias Clinica</h3>
+                {% if nivel_1 %}
+                    <span class='title_menu'><a onClick="desplegar('menu_8')">Mi Historia Clinica</a></span>
+                {% endif %}
+                
+                {% if nivel_2 %}
+                <span class='title_menu'><a onClick="desplegar('menu_8')"><img src="/site_media/imagenes/flecha_menu.jpg" align="top" style="margin-right: 5px">Menu</a></span>
+                <ul id='menu_8' class='nav_menu'>
                     <li><a href='/historia-clinica/nueva/'>Nueva Historia Clinica</a></li>
                     <li><a href='/historia-clinica/buscar-pacientes/'>Buscar</a></li>
                     <li><a href='/historia-clinica/listado-pacientes/'>Listado Pacientes</a></li>
                 </ul>
-
+                {% endif %}
+                
             {% endif %}
             </td>
 
@@ -166,6 +173,7 @@
                     <img src='/site_media/imagenes/icon-no.gif'>
                 {% endif %}
 
+                <label>USER ROL: {{ user_rol }}</label>
             </td>
 
 

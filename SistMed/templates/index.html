@@ -4,8 +4,13 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="recuadro" style="padding: 50px">
-        <div class="recuadro"><a href="/area?opcion=gt">Gestion Turnos</a></div>
-        <div class="recuadro"><a href="/area?opcion=hc">Historia Clinica</a></div>
+    <div align="center" style="margin-top: 100px">
+        <img src="/site_media/imagenes/logo.png">
     </div>
+    <br />
+    {%if menu_area %}
+        <h2>Area Activa: Gestion Turnos</h2>
+    {% else %}
+        <h2>Area Activa: Manejo Historia Clinica</h2>
+    {% endif %}
 {% endblock %}

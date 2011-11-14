@@ -62,7 +62,11 @@ class Usuarios(models.Model):
         """
             Nombre completo del paciente
         """
-        return self.user.first_name + " " + self.user.last_name
+        nombre = self.user.first_name + " " + self.user.last_name
+        if len(nombre) > 5:
+            return nombre
+        else:
+            return "<None>"
 
         
     def tipo(self):

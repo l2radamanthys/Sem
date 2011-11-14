@@ -39,7 +39,7 @@ def index(request):
     """
     plantilla = get_template('index.html')
     dict = generar_base_dict(request)
-    dict['titulo'] = 'Sistema de Gestion de Consultorio Medico'
+    dict['sin_titulo'] = True # 'Sistema de Gestion de Consultorio Medico'
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

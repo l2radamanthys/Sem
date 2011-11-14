@@ -131,6 +131,7 @@ GRUPOS_SANGUINEOS = (
 PACIENTE = 'Paciente'
 MEDICO = 'Medico'
 ADMINISTRATIVO = 'Administrativo'
+ANONIMO = "Anonimo"
 
 #permisos
 NIVEL_0 = 0

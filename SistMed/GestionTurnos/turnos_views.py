@@ -148,7 +148,7 @@ def listado_solicitudes_turno_pac(request):
     solicitudes = []
     band = True
     for sol in SolitudesTurnos.objects.all(): #por el momento todas, hay que filtrarlas por usuario
-        solicitudes.append([get_field_css(band), sol.id, sol.codigo_medico.nombre_completo, estado_solicitud_expand(sol.estado)])
+        solicitudes.append([get_field_css(band), date_to_str(sol.fecha_requerida), sol.codigo_medico.nombre_completo(), estado_solicitud_expand(sol.estado), sol.id])
         band = not(band)
 
     dict["solicitudes"] = solicitudes
@@ -157,6 +157,13 @@ def listado_solicitudes_turno_pac(request):
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
+
+
+def detalle_solicitud_turno_pac(request):
+    """
+    """
+    pass
+
 
 
 def listado_solicitudes_turno(request):

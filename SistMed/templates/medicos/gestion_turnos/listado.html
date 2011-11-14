@@ -11,16 +11,20 @@
             <td style='width: 100px;'>Usuario</td>
             <td >Nombre y Apellido</td>
             <td style='width: 70px;'>Ver</td>
+        {% if nivel_3 %}
             <td style='width: 70px;'>Modificar</td>
             <td style='width: 70px;'>Borra</td>
+        {% endif %}
         </tr>
         {% for med in listado_medicos %}
             <tr class='{{ med|slice:"3:"|first }}'>
                 <td>{{ med|slice:"1:"|first }}</td>
                 <td>{{ med|slice:"2:"|first }}</td>
                 <td><a href='/medicos/datos/{{ med|first }}/'><img src='/site_media/imagenes/icon_ver.png'></a></td>
+                {% if nivel_3 %}
                 <td><a href='/medicos/modificar/{{ med|first }}/'><img src='/site_media/imagenes/icon_edit.png'></a></td>
                 <td><a href='/medicos/borrar/{{ med|first }}/'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
+                {% endif %}
             </tr>
         {% endfor %}
     </tbody>
