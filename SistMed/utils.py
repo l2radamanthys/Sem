@@ -199,3 +199,6 @@ def date_today_str():
         Formatea la fecha Actual com Str
     """
     return datetime.datetime.today().strftime("%d/%m/%Y")
+
+
+

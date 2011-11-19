@@ -1,6 +1,6 @@
 {% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
 
-{% block contenido %}
+{% block hc_contenido %}
 
 <div class='window' style="width:500px;">
     <div class="win_title_bar">

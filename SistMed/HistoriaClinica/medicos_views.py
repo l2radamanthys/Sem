@@ -201,7 +201,21 @@ def mostrar_antecedentes_perinatales(request):
 def modificar_antecedentes_perinatales(request):
     """
     """
-    pass
+    plantilla = get_template('medicos/historia_clinica/modificar-antece-perinatales.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    if pac_id != "" and pac_id != -1:
+        pac_id = int(pac_id)
+        _paciente = Pacientes.objects.get(id=pac_id)
+        hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
+
+        dict['pac_id'] = pac_id
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
 
 
 ### - Vacunas - ###
@@ -316,24 +330,60 @@ def borrar_vacuna(request):
 def nuevo_examen_base(request):
     """
     """
-    plantilla = get_template('medicos/historia_clinica/nuevo-examen-base.html')
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/nuevo.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+    
+    dict["date_hoy"] = date_today_str()
+    
+    query = int(get_value(request, "query", 0))
+    dict["query"] = query
+ 
+    if pac_id != "" and pac_id != -1 and query:
+        h_clinica = InformacionBasica.objects.get(paciente=Pacientes.objects.get(id=pac_id))
+        examen = ExamenBase(
+            hist_clinica = h_clinica,
+            fecha = date_split(get_value(request, "fecha", "01/01/2000")),
+            temp_corporal = float(get_value(request, "temp_corporal", "0.0")),
+            pres_art_sist = int(get_value(request, "pres_art_sist", "0")),
+            pres_art_diast = int(get_value(request, "pres_art_diast", "0")),
+            frec_respiratoria = int(get_value(request, "frec_respiratoria", "0")),
+            pulso = int(get_value(request, "pulso", "0")),
+            peso_medio = float(get_value(request, "peso_medio", "0.0")),
+            altura_media = float(get_value(request, "altura_media", "0.0")),
+            peso = float(get_value(request, "peso", "0.0")),
+            altura = float(get_value(request, "altura", "0.0")),
+            talla = get_value(request, "talla", "0.0"),
+            bmi = float(get_value(request, "bmi", "0.0")),
+            imprecion_general = get_value(request, "imprecion_general", "")
+        )
+        examen.save()
+        
+        dict["msj_class"] = "msj_ok"
+        dict["mensaje"] = "Examen Fisico Agregado"
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
 
 
-def mostrar_examenes_fisicos(request):
+def listado_examenes_fisicos(request):
     """
     """
-    plantilla = get_template('medicos/historia_clinica/listado-examen-fisico.html')
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/listado.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 
     pac_id = get_GET_value(request, "pac_id", -1)
     dict['pac_id'] = pac_id
+
+    examenes = []
+    _paciente = Pacientes.objects.get(id=pac_id)
+    for exam in ExamenBase.objects.all():
+        examenes.append([exam.id, exam])
+    dict["examenes"] = examenes
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

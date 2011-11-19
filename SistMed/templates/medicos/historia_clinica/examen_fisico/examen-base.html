@@ -1,0 +1,107 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block contenido %}
+
+<form  action="" method="post" id="mi_form">
+<table>
+    <tr>
+        <td colspan='2' class='tbl_separador'><h5>Nuevo Examen Base</h5></td>
+    </tr>
+
+	<tr>
+		<td><label>Fecha</label></td>
+		<td><input type="text" name="fecha" id="fecha" class="edt_c" value="{{ date_hoy }}"/></td>
+	</tr>
+	<tr>
+		<td><label>Temperatura Corporal</label></td>
+		<td><input type="text" name="temp_corporal" id="temp" value="0" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Presion Arterial Sistolica</label></td>
+		<td><input type="text" name="pres_art_sist"  id="pre_sist" value="0" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Presion Arterial Dastolica</label></td>
+		<td><input type="text" name="pres_art_diast" id="pre_diast" value="0" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Frecuencia Respiratoria</label></td>
+		<td><input type="text" name="frec_respiratoria" id="frec_resp" value="0" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Pulso</label></td>
+		<td><input type="text" name="pulso" id="pulso" value="0" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Altura Media en Mtrs</label></td>
+		<td><input type="text" name="altura_media" id="altura_m"  value="0.0" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Peso Medio en Kgs</label></td>
+		<td><input type="text" name="peso_medio"  id="peso_m"  value="0.0" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Altura en Mts</label></td>
+		<td><input type="text" name="altura" id="altura" value="0.0" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Peso en Kgs</label></td>
+		<td><input type="text" name="peso"  id="peso" value="0.0" class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Talla</label></td>
+		<td><input type="text" name="talla"  class="edt_c" /></td>
+	</tr>
+	<tr>
+		<td><label>Indice de Masa Corporal (BMI)</label></td>
+		<td><input type="text" name="bmi" class="edt_c" id="bmi" value="0.0" /></td>
+	</tr>
+	<tr>
+		<td><label>Imprecion General</label></td>
+		<td><textarea name="imprecion_general" class="edt_g" rows="4"/></textarea></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+        <input type="hidden" name="query" value="1"/>
+        <!-- input type="submit" value="Crear" class="boton"/ -->
+        <input type="button" value="Agregar" class="boton" onClick="validator.evalAndSend('mi_form')">
+        <input type="reset" value="Limpiar" onClick="clearAllMsj()" class="boton"/>
+        </td>
+	</tr>
+</table>
+</form>
+
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
+
+<!-- form validator -->
+<script type="text/javascript" src="/site_media/scripts/jquery.js"></script>
+<script type="text/javascript" src="/site_media/scripts/ValidateForm.js"></script>
+<script type="text/javascript">
+var validator = new Validator({
+    "temp": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+    "pre_sist": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+    "pre_diast": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+    "frec_resp": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+    "pulso": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+    "peso_m": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+    "altura_m": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+    "peso": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+    "altura": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+    "bmi": { "method":"number", "msj":"Error El campo no contiene un valor Numerico" },
+});
+</script>
+
+<!--  -->
+<script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
+<script type="text/javascript">
+    DatePicker.SetUpElement("fecha");
+</script>
+
+
+
+{% endblock %}

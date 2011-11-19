@@ -4,8 +4,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 from GestionTurnos.models import Pacientes, Medicos
 from constantes import *
+from utils import date_to_str
 
 
 class InformacionBasica(models.Model):
@@ -110,7 +112,7 @@ class ExamenBase(models.Model):
     peso = models.FloatField()
     altura = models.FloatField()
     talla = models.CharField(max_length=30)
-    #BMI = models.CharField() #indice de masa corporal
+    bmi = models.FloatField("Indice de Masa Corporal") #indice de masa corporal
     imprecion_general = models.TextField() #text
 
 
@@ -129,7 +131,7 @@ class ExamenBase(models.Model):
 
 
     def __str__(self):
-        return "Fecha de Realizacion de Examen: %s" %date_to_str(fecha)
+        return "Examen Realizado el: %s" %date_to_str(self.fecha)
 
 
 #Examen Fisico

@@ -1,6 +1,6 @@
 {% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
 
-{% block contenido %}
+{% block hc_contenido %}
 
 
 <script type="text/javascript" src="/site_media/scripts/validate-form.js"></script>

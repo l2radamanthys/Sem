@@ -1,6 +1,6 @@
 {% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
 
-{% block contenido %}
+{% block hc_contenido %}
 
     <table>
     <form action="" method="post"  >

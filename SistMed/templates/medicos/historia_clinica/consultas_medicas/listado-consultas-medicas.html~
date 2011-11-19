@@ -1,6 +1,6 @@
 {% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
 
-{% block contenido %}
+{% block hc_contenido %}
 <div align='right'>
     <hr />
     <a href="/historia-clinica/nueva-consulta/?pac_id={{ pac_id }}" class="boton">Nueva Consulta Medica</a>

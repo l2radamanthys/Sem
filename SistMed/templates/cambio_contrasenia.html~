@@ -24,7 +24,7 @@
 <script type="text/javascript" src="/site_media/scripts/ValidateForm.js"></script>
 <script type="text/javascript">
 var validator = new Validator({
-    "pswd_1": { "method":"rangelenght", "min":6, "max":16, "msj":"Error la longitud del campo dever ser de entre 6 y 16 caracteres" },
+    "pswd_1": { "method":"rangelenght", "min":6, "max":16 "msj":"Error la longitud del campo dever ser de entre 6 y 16 caracteres" },
     "pswd_2": { "method":"compare", "other":"pswd_1", "msj":"Error las contraseñas deben coincidir" },
 });
 </script>

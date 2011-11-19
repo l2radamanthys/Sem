@@ -8,7 +8,7 @@
         <li><a href="/historia-clinica/mostrar-datos-base/?pac_id={{ pac_id }}">Datos Base</a></li>
         <li><a href="/historia-clinica/mostrar-antecedentes-perinatales/?pac_id={{ pac_id }}">Antecedentes Perinatales</a></li>
         <li><a href="/historia-clinica/listado-examen-fisico/?pac_id={{ pac_id }}">Examen Fisico</a></li>
-        <!-- li><a href="/historia-clinica/habitos-toxicos/?pac_id={{ pac_id }}">Habitos Toxicos</a></li --> <!-- deshabilit para presentar avance -->
+        <li><a href="/historia-clinica/habitos-toxicos/?pac_id={{ pac_id }}">Habitos Toxicos</a></li>
         <li><a href="/historia-clinica/listado-vacunas/?pac_id={{ pac_id }}" >Vacunas</a></li>
         <li><a href="/historia-clinica/listado-consultas/?pac_id={{ pac_id }}">Consultas</a></li>
         <!--li><a href="/historia-clinica/listado-imagenes/?pac_id={{ pac_id }}" class='tab'>Imagenes</a></li-->

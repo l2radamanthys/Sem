@@ -148,7 +148,7 @@ urlpatterns = patterns('',
 
     # - Examen Fisico
     (r'^historia-clinica/nuevo-examen-base/$', hc_med_views.nuevo_examen_base),
-    (r'^historia-clinica/listado-examen-fisico/$', hc_med_views.mostrar_examenes_fisicos),
+    (r'^historia-clinica/listado-examen-fisico/$', hc_med_views.listado_examenes_fisicos),
 
     # - Consultas
     (r'^historia-clinica/listado-consultas/$', hc_med_views.listado_consultas_medicas),

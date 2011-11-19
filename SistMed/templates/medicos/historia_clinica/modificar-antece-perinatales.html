@@ -1,0 +1,43 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+
+{% block contenido %}
+<div align='right'>
+    <hr />
+    <a href="" class="boton">Modificar</a>
+    <hr />
+</div>
+
+<table width="600px" border="0" cellpadding="0" cellspacing="2">
+<tbody>
+    <tr>
+        <td colspan='4' class='tbl_separador'><h5>Antecedentes Perinatales</h5></td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Embarazo Nro:</strong></label></td><td>{{ nro_embarazo }}</td>
+        <td><label><strong>Duracion(semanas):</strong></label></td><td>{{ duracion }}</td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Controles:</strong></label></td><td>{{ controles }}</td>
+        <td><label><strong>Parto Normal:</strong></label></td><td>{{ parto_normal }}</td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Peso(gr):</strong></label></td><td>{{ peso }}</td>
+        <td><label><strong>Talla(cm):</strong></label></td><td>{{ talla }}</td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Requirio Atencion Medica:</strong></label></td><td>{{ req_aten_med }}</td>
+        <td><label><strong>Patologias:</strong></label></td><td>{{ patologias }}</td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Otra Informacion:</strong></label></td><td colspan="3">{{ otra_info }}</td>
+    </tr>
+</tbody>
+</table>
+
+{% endblock %}
