@@ -1,0 +1,36 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block contenido %}
+
+<hr />
+<div align="right">
+    <a href="/historia-clinica/listado-consultas/?pac_id={{ pac_id }}" class="boton">Atras</a>
+    <a href="/historia-clinica/modificar-consulta/?pac_id={{ pac_id }}&cons_id={{ consulta.id }}" class="boton">Modificar</a>
+</div>
+<hr />
+<table>
+    <tr>
+        <td><label>Fecha:</label></td>
+        <td><label>{{ consulta.fecha_ }}</label></td>
+    </tr>
+    <tr>
+        <td><label>Paciente:</label></td>
+        <td><label>{{ consulta.hist_clinica.paciente.nombre_completo }}</label></td>
+    </tr>
+    <tr>
+        <td><label>Medico:</label></td>
+        <td><label>{{ consulta.medico.nombre_completo }}</label></td>
+    </tr>
+    <tr>
+        <td colspan="2"><label>Consulta:</label></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <textarea name="observaciones" id="edt" cols="50" rows="10" readonly>{{ consulta.observaciones }}</textarea>
+        </td>
+    </tr>
+</table>
+</form>
+</div>
+
+{% endblock %}

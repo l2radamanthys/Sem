@@ -170,15 +170,15 @@ def datos_personales_modificar(request):
         username = request.session.get('usuario', '')
 
         if rol == PACIENTE:
-            pac = Pacientes.objects.get(user__username=username)
+            pac = Pacientes.objects.get(id=request.session.get('usuario_id', '-1'))
             url = '/pacientes/modificar/%d/' %pac.id
 
-        #elif rol == MEDICO:
-        #    med = Medicos.objects.get(user__username__exact=username)
-        #    url = '/medicos/modificar/%d/' %pac.id
+        elif rol == MEDICO:
+            med = Medicos.objects.get(id=request.session.get('usuario_id', '-1'))
+            url = '/medicos/modificar/%d/' %med.id
 
         elif rol == ADMINISTRATIVO:
-            adm = Administrativos.objects.get(user__username__exact=username)
+            adm = Administrativos.objects.get(id=request.session.get('usuario_id', '-1'))
             url = '/administrativos/modificar/%d/' %adm.id
 
         else:

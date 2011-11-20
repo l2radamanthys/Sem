@@ -414,21 +414,61 @@ def nueva_consulta_medica(request):
     """
     plantilla = get_template('medicos/historia_clinica/consultas_medicas/nueva-consulta-medica.html')
     dict = generar_base_dict(request)
-    dict['titulo'] = 'Historia Clinica'
+    dict['sin_titulo'] = True #'Historia Clinica'
+    pac_id = int(get_GET_value(request, "pac_id", -1))
+    dict['pac_id'] = pac_id
 
     dict["fecha_hoy"] = date_today_str()
 
     medicos = Medicos.objects.all()
     dict["medicos"] = medicos
 
-    pac_id = get_GET_value(request, "pac_id", -1)
-    dict['pac_id'] = pac_id
+    if dict['nivel_2'] and not(dict['nivel_3']):
+        dict["med_name"] = Medicos.objects.get(id=dict['user_id']).nombre_completo()
+
+    dict['pac_name'] = Pacientes.objects.get(id=pac_id).nombre_completo()
 
     query = int(get_value(request, "query", 0))
+    dict["query"] = query
     if query:
         pac_id = int(get_value(request, "pac_id", 0))
         dict['pac_id'] = pac_id
+        pac = Pacientes.objects.get(id=pac_id)
+        med_id = int(get_value(request, 'med_id', -1))
+        if med_id != -1:
+            med = Medicos.objects.get(id=med_id)
+        else:
+            med = Medicos.objects.get(id=dict['user_id'])
 
+        consulta = ConsultaMedica(
+            hist_clinica = InformacionBasica.objects.get(paciente=pac),
+            fecha = date_split(get_value(request, "fecha", "")),
+            observaciones = get_value(request, "observaciones", "<none>"),
+            medico = med
+        )
+        consulta.save()
+
+        dict["msj_class"] = "msj_ok"
+        dict["mensaje"] = "Consulta Medica Agregada"
+
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_consulta_medica(request):
+    """
+    """
+    plantilla = get_template('medicos/historia_clinica/consultas_medicas/mostrar-consulta-medica.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = pac_id
+    
+    cons_id = int(get_GET_value(request, "cons_id", -1))
+    dict["consulta"] = ConsultaMedica.objects.get(id=cons_id)
 
 
     contexto = Context(dict)

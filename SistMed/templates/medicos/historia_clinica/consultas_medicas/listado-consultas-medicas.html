@@ -21,12 +21,11 @@
         </tr>
         {% for cons in consultas %}
         <tr>
-            <td>cons.fecha</td>
-            <td>cons.medico</td>
-            <td></td>
-            <td><a href=""><img src="/site_media/imagenes/icon_ver.png"></a></td>
-            <td><a href=""><img src="/site_media/imagenes/icon_edit.png"></a></td>
-            <td><a href=""><img src="/site_media/imagenes/icon_borrar.png"></a></td>
+            <td>{{ cons.fecha_ }}</td>
+            <td>{{ cons.medico.nombre_completo }}</td>
+            <td align="center"><a href="/historia-clinica/mostrar-consulta/?pac_id={{ pac_id }}&cons_id={{ cons.id }}"><img src="/site_media/imagenes/icon_ver.png"></a></td>
+            <td align="center"><a href="/historia-clinica/modificar-consulta/?pac_id={{ pac_id }}&cons_id={{ cons.id }}"><img src="/site_media/imagenes/icon_edit.png"></a></td>
+            <td align="center"><a href=""><img src="/site_media/imagenes/icon_borrar.png"></a></td>
         </tr>
         {% endfor %}
     </table>

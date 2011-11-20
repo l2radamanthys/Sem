@@ -309,8 +309,11 @@ class ConsultaMedica(models.Model):
     fecha = models.DateTimeField()
     observaciones = models.TextField()
     #fk
-    paciente = models.ForeignKey(Pacientes)
+    #paciente = models.ForeignKey(Pacientes) al pedo -.-
     medico = models.ForeignKey(Medicos)
+
+    def fecha_(self):
+        return  date_to_str(self.fecha)
 
 
 #tipica receta

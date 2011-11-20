@@ -1,27 +1,42 @@
 {% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
 
 {% block contenido %}
-
+<hr />
+<div align="right">
+    <a href="/historia-clinica/listado-consultas/?pac_id={{ pac_id }}" class="boton">Atras</a>
+</div>
+<hr />
+<br />
 <div class='window' style="width:500px;">
     <div class="win_title_bar">
         <div class="window_title">
             <label>Nueva Consulta</label>
         </div>
     </div>
-<form action="" metod="POST">
+<form action="" method="POST">
 <table>
     <tr>
         <td><label>Fecha:</label></td>
-        <td><input type="text" name="fecha" id="fecha"  value="{{ fecha_hoy }}" class="edt_c"></td>
+        <td><input type="text" name="fecha" id="fecha" value="{{ fecha_hoy }}" class="edt_c"></td>
+    </tr>
+    <tr>
+        <td><label>Paciente:</label></td>
+        <td><label>{{ pac_name }}</label></td>
     </tr>
     <tr>
         <td><label>Medico:</label></td>
         <td>
+        {% if nivel_3 %}
         <select name="med_id" class="edt">
             {% for med in medicos %}
                 <option value="{{ med.id }}">{{ med.nombre_completo }}</option>
             {% endfor %}
         </select>
+        {% else %}
+            {% if nivel_2 and not nivel_3 %}
+                <label>{{ med_name }}</label>
+            {% endif %}
+        {% endif %}
         </td>
     </tr>
     <tr>
@@ -46,6 +61,12 @@
 </form>
 </div>
 
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
 
 <!-- Inicio Date Selector Code -->
 <script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
@@ -56,7 +77,7 @@
 
 
 <!-- Inicio NicEditor Code -->
-<script src="/site_media/scripts/nicEdit.js" type="text/javascript"></script>
+<!--script src="/site_media/scripts/nicEdit.js" type="text/javascript"></script>
 <script type="text/javascript">
 bkLib.onDomLoaded(function() {
 	new nicEditor({

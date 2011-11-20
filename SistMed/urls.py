@@ -153,7 +153,7 @@ urlpatterns = patterns('',
     # - Consultas
     (r'^historia-clinica/listado-consultas/$', hc_med_views.listado_consultas_medicas),
     (r'^historia-clinica/nueva-consulta/$', hc_med_views.nueva_consulta_medica),
-
+    (r'^historia-clinica/mostrar-consulta/$', hc_med_views.mostrar_consulta_medica),
 
     # - Imagenes
 
