@@ -49,12 +49,12 @@ class AntecedentesPerinatales(models.Model):
 
     enbarazo_nro = models.IntegerField('Embarazo Nro')
     duracion_embarazo = models.IntegerField('Duracion/Semanas') #en semanas
-    controles = models.BooleanField('Controles Durante Embarazo') #si tubo controles durante el embarazo
-    parto_normal = models.BooleanField('Nacio de Parto Normal') #si nacio parto normal o cesareas
+    controles = models.CharField('Controles Durante Embarazo', max_length=1, choices=TRUE_FALSE_CHOICE) #si tubo controles durante el embarazo
+    parto_normal = models.CharField('Parto Normal', max_length=1, choices=TRUE_FALSE_CHOICE) #si nacio parto normal o cesareas
     peso = models.FloatField('Peso al Nacer') #peso al nacer
     talla = models.FloatField('Talla')
-    patologias = models.BooleanField('Patologias al Nacer') #al nacer S/N
-    atencion_medica = models.BooleanField('Requirio Atencion Medica')# requirio atencion medica S/N
+    patologias = models.CharField('Presento Patologias al Nacer', max_length=1, choices=TRUE_FALSE_CHOICE) #al nacer S/N
+    atencion_medica = models.CharField('Requirio Atencion Medica', max_length=1, choices=TRUE_FALSE_CHOICE)# requirio atencion medica S/N
     otros_datos = models.TextField('Otros Datos de Relevancia o Informacion Adicional') #otra informacion relevante
 
 

@@ -106,11 +106,11 @@ def mostrar_datos_paciente(request):
     if pac_id != "" and pac_id != -1:
         pac_id = int(pac_id)
         _paciente = Pacientes.objects.get(id=pac_id)
-        hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
+        hist_clinica = InformacionBasica.objects.get(paciente__id=pac_id)
         
         dict["nombre"] = _paciente.nombre_completo()
         dict["DNI"] = _paciente.dni
-        dict['fecha_nacimiento'] =  hist_clinica.fecha_nacimiento
+        dict['fecha_nacimiento'] =  date_to_str(hist_clinica.fecha_nacimiento)
         dict["lugar_nacimiento"] = hist_clinica.lugar_nacimiento
         dict["padre"] = hist_clinica.padre
         dict["madre"] = hist_clinica.madre
@@ -142,14 +142,10 @@ def modificar_datos_paciente(request):
     dict['query'] = query
 
     if pac_id != "" and pac_id != -1:
-        #pac_id = int(pac_id)
-        
-        
-
         pac = Pacientes.objects.get(id=pac_id)
         dict['pac_nombre'] = pac.nombre_completo()
         dict['pac_dni'] = pac.dni
-        hist_clinica = InformacionBasica.objects.get(paciente=pac)
+        hist_clinica = InformacionBasica.objects.get(paciente__id=pac_id)
 
         if query:
             hist_clinica.lugar_nacimiento = get_value(request, 'lugar_nac', "")
@@ -185,13 +181,14 @@ def mostrar_antecedentes_perinatales(request):
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 
-    pac_id = get_GET_value(request, "pac_id", -1)
-    if pac_id != "" and pac_id != -1:
-        pac_id = int(pac_id)
-        _paciente = Pacientes.objects.get(id=pac_id)
-        hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
-
-        dict['pac_id'] = pac_id
+    pac_id = int(get_GET_value(request, "pac_id", -1))
+    dict['pac_id'] = pac_id
+    
+    if pac_id != -1:
+        try:
+            dict["antecedentes"] = AntecedentesPerinatales.objects.get(hist_clinica__paciente__id=pac_id)
+        except:
+            dict["antecedentes"] = False
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
@@ -205,17 +202,35 @@ def modificar_antecedentes_perinatales(request):
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 
-    pac_id = get_GET_value(request, "pac_id", -1)
-    if pac_id != "" and pac_id != -1:
-        pac_id = int(pac_id)
-        _paciente = Pacientes.objects.get(id=pac_id)
-        hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
+    pac_id = int(get_GET_value(request, "pac_id", -1))
+    dict['pac_id'] = pac_id
+    
+    if pac_id != -1:
+        try:
+            dict["antecedentes"] = AntecedentesPerinatales.objects.get(hist_clinica__paciente__id=pac_id)
+        except:
+            dict["antecedentes"] = False
 
-        dict['pac_id'] = pac_id
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
+
+
+def agregar_antecedentes_perinatales(request):
+    """
+    """
+    plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Historia Clinica'
+
+    pac_id = int(get_GET_value(request, "pac_id", -1))
+    dict['pac_id'] = pac_id
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
 
 
 ### - Vacunas - ###
@@ -232,8 +247,7 @@ def agregar_vacuna(request, pac_id=-1):
 
     if pac_id != "" and pac_id != -1 and query:
         pac_id = int(pac_id)
-        _paciente = Pacientes.objects.get(id=pac_id)
-        h_clinica = InformacionBasica.objects.get(paciente=_paciente)
+        h_clinica = InformacionBasica.objects.get(paciente__id=pac_id)
 
         vac = Vacuna.objects.create(
             hist_clinica=h_clinica,
@@ -264,12 +278,8 @@ def listado_vacunas(request):
     pac_id = get_GET_value(request, "pac_id", -1)
     if pac_id != "" and pac_id != -1:
         pac_id = int(pac_id)
-        _paciente = Pacientes.objects.get(id=pac_id)
-        _hist_clinica = InformacionBasica.objects.get(paciente=_paciente)
-        #vacunas = Vacuna.objects.filter(hist_clinica=_hist_clinica)
-
         list_vac = []
-        for vac in Vacuna.objects.filter(hist_clinica=_hist_clinica):
+        for vac in Vacuna.objects.filter(hist_clinica__paciente__id=pac_id):
             list_vac.append([vac.id, date_to_str(vac.fecha), vac.descripcion, TIPO_DOSIS_DIC.get(vac.tipo_dosis, 'ERROR'), field_css(vac.id)])
 
         dict['vacunas'] = list_vac
@@ -291,8 +301,10 @@ def modificar_vacuna(request):
     dict['query'] = query
 
     pac_id = get_GET_value(request, "pac_id", -1)
-    vac_id = get_GET_value(request, "vac_id", -1)
-    if pac_id != -1 and vac_id != -1:
+    dict['pac_id'] = int(pac_id)
+
+    vac_id = int(get_GET_value(request, "vac_id", -1))
+    if vac_id != -1:
         vacuna = Vacuna.objects.get(id=vac_id)
         dict['vacuna'] = vacuna
         dict['tipo_dosis'] = TIPO_DOSIS_CHOICE
@@ -306,8 +318,6 @@ def modificar_vacuna(request):
             dict['msj_class'] = MSJ_OK
             dict['mensaje'] = 'Cambios Modificados'
 
-    dict['pac_id'] = pac_id
-
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -317,7 +327,7 @@ def borrar_vacuna(request):
     """
     """
     pac_id = get_GET_value(request, "pac_id", -1)
-    vac_id = get_GET_value(request, "vac_id", -1)
+    vac_id = int(get_GET_value(request, "vac_id", -1))
     if pac_id != -1 and vac_id != -1:
         vacuna = Vacuna.objects.get(id=vac_id)
         vacuna.delete()
@@ -342,7 +352,7 @@ def nuevo_examen_base(request):
     dict["query"] = query
  
     if pac_id != "" and pac_id != -1 and query:
-        h_clinica = InformacionBasica.objects.get(paciente=Pacientes.objects.get(id=pac_id))
+        h_clinica = InformacionBasica.objects.get(paciente__id=pac_id)
         examen = ExamenBase(
             hist_clinica = h_clinica,
             fecha = date_split(get_value(request, "fecha", "01/01/2000")),
@@ -380,9 +390,7 @@ def listado_examenes_fisicos(request):
     dict['pac_id'] = int(pac_id)
 
     examenes = []
-    _paciente = Pacientes.objects.get(id=pac_id)
-    hc = InformacionBasica.objects.get(paciente=_paciente)
-    for exam in ExamenBase.objects.filter(hist_clinica=hc):
+    for exam in ExamenBase.objects.filter(hist_clinica__paciente__id=pac_id):
         examenes.append([exam.id, exam])
     dict["examenes"] = examenes
 
@@ -458,6 +466,13 @@ def mostrar_examen_cabeza(request):
     exam_id = int(get_GET_value(request, "exam_id", -1))
     dict["exam_id"] = exam_id
 
+    #eb = ExamenBase.objects.get(id=exam_id)
+    try:
+        examen = Cabeza.objects.get(examen_fisico__id=exam_id)
+        dict["examen"] = examen
+    except:
+        dict["examen"] = False
+
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -474,7 +489,35 @@ def nuevo_examen_cabeza(request):
     exam_id = int(get_GET_value(request, "exam_id", -1))
     dict["exam_id"] = exam_id
 
-    
+    query = int(get_value(request, "query", 0))
+    dict["query"] = query
+    if query:
+
+        eb = ExamenBase.objects.get(id=exam_id)
+        exa_cabeza = Cabeza(
+            examen_fisico = eb,
+            craneo = get_value(request, "craneo", '-'),
+            fontanelas_y_suturas = get_value(request, "font_y_sut", '-'),
+            facie = get_value(request, "facie", '-'),
+            parpados = get_value(request, "parpados", '-'),
+            conjuntivas =  get_value(request, "conjuntivas", '-'),
+            globo_ocular_mov = get_value(request, "ojo_mov", '-'),
+            vision = get_value(request, "vision", '-'),
+            nariz_fosas_nasales = get_value(request, "nariz", '-'),
+            labios = get_value(request, "labios", '-'),
+            dientes = get_value(request, "dientes", '-'),
+            lengua = get_value(request, "lengua", '-'),
+            mucosa_bucofaringea = get_value(request, "mucosa_buco_far", 0),
+            amigdalas = get_value(request, "amigdalas", '-'),
+            pabellones_auriculares = get_value(request, "pab_aur", '-'),
+            cond_audit_externo = get_value(request, "cond_aud_ext", '-'),
+            timpanos = get_value(request, "timpanos", '-'),
+            audicion = get_value(request, "audicion", '-'),
+            observaciones = get_value(request, "observaciones", '-'),
+        )
+        exa_cabeza.save()
+        dict["msj_class"] = "msj_ok"
+        dict["mensaje"] = "Examen Cabeza Agregado"
 
     contexto = Context(dict)
     html = plantilla.render(contexto)
@@ -482,7 +525,7 @@ def nuevo_examen_cabeza(request):
 
 
 def mostrar_examen_cuello(request):
-    plantilla = get_template('medicos/historia_clinica/examen_fisico/nuevo-examen-cabeza.html')
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-examen-cuello.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Examen Fisico'
 

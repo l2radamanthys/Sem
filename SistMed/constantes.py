@@ -119,7 +119,18 @@ ESTADO_CHOICE = (
     ("N","Normal"),
     ("A","Alterado"),
     ("-","------"),
+)
 
+ESTADO_CHOICE_DIC = {
+    "N":"Normal",
+    "A":"Alterado",
+    "-":"------",
+}
+
+TRUE_FALSE_CHOICE = (
+    ('S', 'Si'),
+    ('N', 'No'),
+    ('-', '--'),
 )
 
 

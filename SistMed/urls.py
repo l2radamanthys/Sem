@@ -135,8 +135,9 @@ urlpatterns = patterns('',
     (r'^historia-clinica/mostrar-datos-base/$', hc_med_views.mostrar_datos_paciente),
     (r'^historia-clinica/modificar-datos-base/$', hc_med_views.modificar_datos_paciente),
 
-    (r'^historia-clinica/mostrar-antecedentes-perinatales/$', hc_med_views.mostrar_antecedentes_perinatales), #incompleto
-    #(r'^historia-clinica/modificar-antecedentes-perinatales/$', hc_med_views.modificar_antecedentes_perinatales)
+    (r'^historia-clinica/mostrar-antecedentes-perinatales/$', hc_med_views.mostrar_antecedentes_perinatales),
+    (r'^historia-clinica/agregar-antecedentes-perinatales/$', hc_med_views.agregar_antecedentes_perinatales),
+    #(r'^historia-clinica/modificar-antecedentes-perinatales/$', hc_med_views.modificar_antecedentes_perinatales),
 
     # - Vacunas
     (r'^historia-clinica/listado-vacunas/$', hc_med_views.listado_vacunas),

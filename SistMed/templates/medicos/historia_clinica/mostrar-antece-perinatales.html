@@ -2,42 +2,51 @@
 
 
 {% block contenido %}
+
+{% if not antecedentes %}
+<div align='right'>
+    <hr />
+    <a href="" class="boton">Agregar</a>
+    <hr />
+    <h3>Antecedentes Perinatales</h3>
+</div>
+
+{% else %}
 <div align='right'>
     <hr />
     <a href="" class="boton">Modificar</a>
     <hr />
+    <h3>Antecedentes Perinatales</h3>
 </div>
 
 <table width="600px" border="0" cellpadding="0" cellspacing="2">
 <tbody>
-    <tr>
-        <td colspan='4' class='tbl_separador'><h5>Antecedentes Perinatales</h5></td>
+    <tr class="field_a">
+        <td><label><strong>Embarazo Nro:</strong></label></td><td>{{ antecedentes.embarazo_nro }}</td>
+        <td><label><strong>Duracion del Embarazo(semanas):</strong></label></td><td>{{ antecedentes.duracion_embarazo }}</td>
     </tr>
 
-    <tr>
-        <td><label><strong>Embarazo Nro:</strong></label></td><td>{{ nro_embarazo }}</td>
-        <td><label><strong>Duracion(semanas):</strong></label></td><td>{{ duracion }}</td>
+    <tr class="field_b">
+        <td><label><strong>Controles Durante el Embarazo:</strong></label></td><td>{{ antecedentes.controles }}</td>
+        <td><label><strong>Nacio de Parto Normal:</strong></label></td><td>{{ antecedentes.parto_normal }}</td>
     </tr>
 
-    <tr>
-        <td><label><strong>Controles:</strong></label></td><td>{{ controles }}</td>
-        <td><label><strong>Parto Normal:</strong></label></td><td>{{ parto_normal }}</td>
+    <tr class="field_a">
+        <td><label><strong>Peso(gr):</strong></label></td><td>{{ antecedentes.peso }}</td>
+        <td><label><strong>Talla(cm):</strong></label></td><td>{{ antecedentes.talla }}</td>
     </tr>
 
-    <tr>
-        <td><label><strong>Peso(gr):</strong></label></td><td>{{ peso }}</td>
-        <td><label><strong>Talla(cm):</strong></label></td><td>{{ talla }}</td>
+    <tr class="field_b">
+        <td><label><strong>Requirio Atencion Medica:</strong></label></td><td>{{ antecedentes.atencion_medica }}</td>
+        <td><label><strong>Patologias al Nacer:</strong></label></td><td>{{ antecedentes.patologias }}</td>
     </tr>
-
-    <tr>
-        <td><label><strong>Requirio Atencion Medica:</strong></label></td><td>{{ req_aten_med }}</td>
-        <td><label><strong>Patologias:</strong></label></td><td>{{ patologias }}</td>
-    </tr>
-
-    <tr>
-        <td><label><strong>Otra Informacion:</strong></label></td><td colspan="3">{{ otra_info }}</td>
+    
+    <tr class="field_a">
+        <td><label><strong>Otra Informacion:</strong></label></td><td colspan="3">{{ antecedentes.otros_datos }}</td>
     </tr>
 </tbody>
 </table>
+
+{% endif %}
 
 {% endblock %}

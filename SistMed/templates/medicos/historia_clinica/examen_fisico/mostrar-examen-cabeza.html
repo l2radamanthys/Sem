@@ -2,16 +2,115 @@
 
 {% block contenido_examen %}
 
-{% if not examenes %}
+{% if not examen %}
     <div align="right">
         <a href="/historia-clinica/nuevo-examen-cabeza/?exam_id={{ exam_id }}&pac_id={{ pac_id }}" class="boton">Nuevo</a>
     </div><hr />
     <h3>Examen de Cabeza</h3>
 {% else %}
+    <div align="right">
+        <a href="/historia-clinica/nuevo-examen-cabeza/?exam_id={{ exam_id }}&pac_id={{ pac_id }}" class="boton">Modificar</a>
+    </div><hr />
     <h3>Examen de Cabeza</h3>
-    
+<table>
+<tr class='table_title' align="center">
+    <td width="200px;"><label>Area</label></td>
+    <td><label>Estado</label></td>
+</tr>
 
+<tr class="field_a">
+    <td><label>Craneo:</label></td>
+    <td align="center"><label>{{ examen.get_craneo_display }}</label></td>
+</tr>
 
+<tr class="field_b">
+    <td><label>Fontanelas y Suturas:</label></td>
+    <td align="center"><label>{{ examen.get_fontanelas_y_suturas_display }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td><label>Facie:</label></td>
+    <td align="center"><label>{{ examen.get_facie_display }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td><label>Parpados:</label></td>
+    <td align="center"><label>{{ examen.get_parpados_display }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td><label>Conjuntivas:</label></td>
+    <td align="center"><label>{{ examen.get_conjuntivas_display }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td><label>Movimiento del Globo Ocular:</label></td>
+    <td align="center"><label>{{ examen.get_globo_ocular_mov_display }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td><label>Vision:</label></td>
+    <td align="center"><label>{{ examen.get_vision_display }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td><label>Nariz y Fosas Nasales:</label></td>
+    <td align="center"><label>{{ examen.get_nariz_fosas_nasales_display }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td><label>Labios:</label></td>
+    <td align="center"><label>{{ examen.get_labios_display }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td><label>Dientes:</label></td>
+    <td align="center"><label>{{ examen.get_dientes_display }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td><label>Lengua:</label></td>
+    <td align="center"><label>{{ examen.get_lengua_display }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td><label>Mucosa BucoFaringea:</label></td>
+    <td align="center"><label>{{ examen.get_mucosa_bucofaringea_display }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td><label>Amigdalas:</label></td>
+    <td align="center"><label>{{ examen.get_amigdalas_display }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td><label>Pabellones Auriculares:</label></td>
+    <td align="center"><label>{{ examen.get_pabellones_auriculares_display }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td><label>Conducto Auditivo Externo:</label></td>
+    <td align="center"><label>{{ examen.get_cond_audit_externo_display }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td><label>Timpanos:</label></td>
+    <td align="center"><label>{{ examen.get_timpanos_display }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td><label>Audicion:</label></td>
+    <td align="center"><label>{{ examen.get_audicion_display }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td colspan="2"><label>Observaciones:</label></td>
+</tr>
+<tr class="field_b">
+    <td colspan="2" align="center"><textarea class="edt_g" rows="4" name="observaciones" readonly>{{ examen.observaciones }}</textarea></td>
+</tr>
+
+</table>
 {% endif %}
 
 {% endblock %}
