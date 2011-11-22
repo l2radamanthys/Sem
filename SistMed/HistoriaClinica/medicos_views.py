@@ -220,7 +220,7 @@ def modificar_antecedentes_perinatales(request):
 def agregar_antecedentes_perinatales(request):
     """
     """
-    plantilla = get_template('medicos/historia_clinica/mostrar-antece-perinatales.html')
+    plantilla = get_template('medicos/historia_clinica/agregar-antece-perinatales.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 

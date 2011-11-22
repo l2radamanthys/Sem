@@ -1,0 +1,97 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block contenido %}
+    <h3>Antecedentes Perinatales</h3>
+    
+    
+<form action="" method="POST" id="mi_form">
+
+<table>
+
+<tr>
+    <td><label>Embarazo Nro:</label></td>
+    <td><input type="text" class="edt_c" name="embarazo_nro" id="embarazo_nro">
+</tr>
+
+<tr>
+    <td><label>Duracion Embarazon (semanas):</label></td>
+    <td><input type="text" class="edt_c" name="duracion" id=""></td>
+</tr>
+
+<tr>
+    <td><label>Controles durante el Embarazo:</label></td>
+    <td><select name="controles" class="edt_c">
+        <option value="S">Si</option>
+        <option value="N">No</option>
+        <option value="-" checked>No Sabe</option>
+    </select></td>
+</tr>
+
+<tr>
+    <td><label>Nacio de Parto Normal:</label></td>
+    <td><select name="parto_normal" class="edt_c">
+        <option value="S">Si</option>
+        <option value="N">No</option>
+        <option value="-" checked>No Sabe</option>
+    </select></td>
+</tr>
+
+<tr>
+    <td><label>Peso al Nacer (grs):</label></td>
+    <td><input type="text" class="edt_c" name="peso" id="peso"></td>
+</tr>
+
+<tr>
+    <td><label>Talla:</label></td>
+    <td><input type="text" class="edt" name="talla" id=""></td>
+</tr>
+
+<tr>
+    <td><label>Presento Patologias al Nacer:</label></td>
+    <td><select name="patologias" class="edt_c">
+        <option value="S">Si</option>
+        <option value="N">No</option>
+        <option value="-" checked>No Sabe</option>
+    </select></td>
+</tr>
+
+<tr>
+    <td><label>Atencion Medica:</label></td>
+    <td><select name="atencion_medica" class="edt_c">
+        <option value="S">Si</option>
+        <option value="N">No</option>
+        <option value="-" checked>No Sabe</option>
+    </select></td>
+</tr>
+
+<tr>
+    <td><label>Otros Datos:</label></td>
+    <td><textarea rows="4" class="edt_g" name="otros_datos"></textarea></td>
+</tr>
+    
+    <tr><td colspan="2" align="center">
+        <input type="hidden" value="1" name="query" />
+        <input type="submit" value="Modificar" class="boton"/>
+        <input type="reset" value="Limpiar" class="boton"/>
+    </td></tr>
+    
+</table>
+</form>
+
+    {% if query %}
+        <div class="{{ msj_class }}">
+            <p>{{ mensaje }}</p>
+        </div>
+    {% endif %}
+    </div>
+
+
+<!-- Inicio Date Selector Code -->
+<script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
+<script type="text/javascript">
+    DatePicker.SetUpElement("fecha_nac");
+</script>
+
+<!-- Fin Date Selector Code -->
+
+{% endblock %}

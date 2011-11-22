@@ -46,7 +46,6 @@ class AntecedentesPerinatales(models.Model):
         Referentes al nacimiento
     """
     hist_clinica = models.ForeignKey(InformacionBasica)
-
     enbarazo_nro = models.IntegerField('Embarazo Nro')
     duracion_embarazo = models.IntegerField('Duracion/Semanas') #en semanas
     controles = models.CharField('Controles Durante Embarazo', max_length=1, choices=TRUE_FALSE_CHOICE) #si tubo controles durante el embarazo

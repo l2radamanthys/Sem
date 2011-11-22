@@ -4,7 +4,7 @@
 
 from django.conf.urls.defaults import *
 
-#admni
+#site admin
 from django.contrib import admin
 admin.autodiscover()
 
@@ -14,14 +14,10 @@ from settings import MEDIA_ROOT
 import generics_views
 from GestionTurnos import pacientes_views, admin_views, medicos_views
 from GestionTurnos import especialidades_views, turnos_views
-
 from HistoriaClinica import medicos_views as hc_med_views
 
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^TurnGest/', include('TurnGest.foo.urls')),
-
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs'
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -33,10 +29,10 @@ urlpatterns = patterns('',
     #media
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT, 'show_indexes': True }),
 
-    #pagina inicio
+    #Pagina inicio
     (r'^/?$', generics_views.index),
 
-    #sesiones
+    ## - Sessiones - ##
     (r'^accounts/login/$', generics_views.login),
     (r'^accounts/logout/$', generics_views.logout),
     (r'^accounts/change_password/$', generics_views.cambio_contrasenia),
@@ -127,17 +123,18 @@ urlpatterns = patterns('',
     (r'^administrativos/turnos/nuevo-turno/$', turnos_views.nuevo_turno_adm),
 
 
-    ## - Historia Clinica - ##
-    # - Medicos Views
+    ## - Historia Clinica - ## (solo visible para medicos)
     (r'^historia-clinica/nueva/$', hc_med_views.nueva),
     (r'^historia-clinica/listado-pacientes/$', hc_med_views.listado_pacientes),
 
+    # - Datps Base
     (r'^historia-clinica/mostrar-datos-base/$', hc_med_views.mostrar_datos_paciente),
     (r'^historia-clinica/modificar-datos-base/$', hc_med_views.modificar_datos_paciente),
 
+    # - Antecedentes Perinatales
     (r'^historia-clinica/mostrar-antecedentes-perinatales/$', hc_med_views.mostrar_antecedentes_perinatales),
     (r'^historia-clinica/agregar-antecedentes-perinatales/$', hc_med_views.agregar_antecedentes_perinatales),
-    #(r'^historia-clinica/modificar-antecedentes-perinatales/$', hc_med_views.modificar_antecedentes_perinatales),
+    (r'^historia-clinica/modificar-antecedentes-perinatales/$', hc_med_views.modificar_antecedentes_perinatales),
 
     # - Vacunas
     (r'^historia-clinica/listado-vacunas/$', hc_med_views.listado_vacunas),
@@ -148,26 +145,35 @@ urlpatterns = patterns('',
     (r'^historia-clinica/modificar-vacuna/$', hc_med_views.modificar_vacuna),
 
     # - Examen Fisico
+    # - Examen Fisico -> Examen Base
     (r'^historia-clinica/nuevo-examen-base/$', hc_med_views.nuevo_examen_base),
+    (r'^historia-clinica/mostrar-examen-base/$', hc_med_views.mostrar_examen_base),
     (r'^historia-clinica/listado-examen-fisico/$', hc_med_views.listado_examenes_fisicos),
 
-    (r'^historia-clinica/mostrar-examen-base/$', hc_med_views.mostrar_examen_base),
+    # - Examen Fisico -> Examen Cardio Vascular
     (r'^historia-clinica/mostrar-examen-cardio-vascular/$', hc_med_views.mostrar_examen_cardio_vascular),
+
+    # - Examen Fisico -> Examen Aparato Respiratorio
     (r'^historia-clinica/mostrar-examen-aparato-respiratorio/$', hc_med_views.mostrar_examen_aparato_respiratorio),
+
+    # - Examen Fisico -> Examen Cabeza
     (r'^historia-clinica/mostrar-examen-cabeza/$', hc_med_views.mostrar_examen_cabeza),
     (r'^historia-clinica/nuevo-examen-cabeza/$', hc_med_views.nuevo_examen_cabeza),
+
+    # - Examen Fisico -> Examen Cuello
     (r'^historia-clinica/mostrar-examen-cuello/$', hc_med_views.mostrar_examen_cuello),
+
+    # - Examen Fisico -> Imagenes
     (r'^historia-clinica/mostrar-imagenes/$', hc_med_views.mostrar_imagenes),
+
+    # - Examen Fisico -> Analisis de Laboratorio
     (r'^historia-clinica/mostrar-analisis-lab/$', hc_med_views.mostrar_analisis_lab),
 
-
-
-    # - Consultas
+    # - Consultas Medicas
     (r'^historia-clinica/listado-consultas/$', hc_med_views.listado_consultas_medicas),
     (r'^historia-clinica/nueva-consulta/$', hc_med_views.nueva_consulta_medica),
     (r'^historia-clinica/mostrar-consulta/$', hc_med_views.mostrar_consulta_medica),
 
-    # - Imagenes
 
     ## - Otras Views - ##
     (r'area/$', generics_views.area),
