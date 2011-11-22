@@ -330,7 +330,7 @@ def borrar_vacuna(request):
 def nuevo_examen_base(request):
     """
     """
-    plantilla = get_template('medicos/historia_clinica/examen_fisico/nuevo.html')
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/nuevo-examen-base.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
     pac_id = get_GET_value(request, "pac_id", -1)
@@ -377,13 +377,132 @@ def listado_examenes_fisicos(request):
     dict['titulo'] = 'Historia Clinica'
 
     pac_id = get_GET_value(request, "pac_id", -1)
-    dict['pac_id'] = pac_id
+    dict['pac_id'] = int(pac_id)
 
     examenes = []
     _paciente = Pacientes.objects.get(id=pac_id)
-    for exam in ExamenBase.objects.all():
+    hc = InformacionBasica.objects.get(paciente=_paciente)
+    for exam in ExamenBase.objects.filter(hist_clinica=hc):
         examenes.append([exam.id, exam])
     dict["examenes"] = examenes
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_examen_base(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-examen-base.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    examen = ExamenBase.objects.get(id=exam_id)
+    dict["examen"] = examen
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_examen_cardio_vascular(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-examen-cardio-vascular.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    eb = ExamenBase.objects.get(id=exam_id)
+    #model no implementado
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_examen_aparato_respiratorio(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-examen-aparato-respiratorio.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_examen_cabeza(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-examen-cabeza.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_examen_cuello(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-examen-cuello.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_imagenes(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-imagenes.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_analisis_lab(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-analisis-lab.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

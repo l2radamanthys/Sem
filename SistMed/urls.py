@@ -150,6 +150,16 @@ urlpatterns = patterns('',
     (r'^historia-clinica/nuevo-examen-base/$', hc_med_views.nuevo_examen_base),
     (r'^historia-clinica/listado-examen-fisico/$', hc_med_views.listado_examenes_fisicos),
 
+    (r'^historia-clinica/mostrar-examen-base/$', hc_med_views.mostrar_examen_base),
+    (r'^historia-clinica/mostrar-examen-cardio-vascular/$', hc_med_views.mostrar_examen_cardio_vascular),
+    (r'^historia-clinica/mostrar-examen-aparato-respiratorio/$', hc_med_views.mostrar_examen_aparato_respiratorio),
+    (r'^historia-clinica/mostrar-examen-cabeza/$', hc_med_views.mostrar_examen_cabeza),
+    (r'^historia-clinica/mostrar-examen-cuello/$', hc_med_views.mostrar_examen_cuello),
+    (r'^historia-clinica/mostrar-imagenes/$', hc_med_views.mostrar_imagenes),
+    (r'^historia-clinica/mostrar-analisis-lab/$', hc_med_views.mostrar_analisis_lab),
+
+
+
     # - Consultas
     (r'^historia-clinica/listado-consultas/$', hc_med_views.listado_consultas_medicas),
     (r'^historia-clinica/nueva-consulta/$', hc_med_views.nueva_consulta_medica),

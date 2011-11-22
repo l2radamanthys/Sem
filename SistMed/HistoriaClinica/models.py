@@ -129,6 +129,12 @@ class ExamenBase(models.Model):
         """
         return pres_art_diast + (self.pres_art_pulso() / 3)
 
+    
+    def date(self):
+        """
+        """
+        return self.fecha.strftime('%d/%m/%Y')
+
 
     def __str__(self):
         return "Examen Realizado el: %s" %date_to_str(self.fecha)
@@ -189,7 +195,7 @@ class Cuello:
     percucion = models.CharField('Percucion')
     ausculacion = models.CharField('Ausculacion')
     observaciones = models.TextField('Observaciones')
-
+'''
 
 
 #Examen Fisico
@@ -211,7 +217,7 @@ class ToraxAparatoRespiratorio:
 
     observaciones = models.TextField('Observaciones')
 
-
+'''
 #Examen Fisico
 class AparatoCardiovascular:
     """
