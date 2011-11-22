@@ -156,7 +156,7 @@ class PielFaneasTejidoCelularSubcutaneo(models.Model):
 
 
 #Examen Fisico
-class Cabeza():
+class Cabeza(models.Model):
     """
         Examen Fisico - Cabeza
     """
@@ -182,7 +182,7 @@ class Cabeza():
 
 
 #Examen Fisico
-class Cuello:
+class Cuello(models.Model):
     """
         Examen Fisico - Cuello
     """

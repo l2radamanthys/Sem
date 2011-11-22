@@ -442,7 +442,6 @@ def mostrar_examen_aparato_respiratorio(request):
 
     eb = ExamenBase.objects.get(id=exam_id)
     
-
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -464,8 +463,26 @@ def mostrar_examen_cabeza(request):
     return HttpResponse(html)
 
 
+def nuevo_examen_cabeza(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/nuevo-examen-cabeza.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
 def mostrar_examen_cuello(request):
-    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-examen-cuello.html')
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/nuevo-examen-cabeza.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Examen Fisico'
 
@@ -478,6 +495,7 @@ def mostrar_examen_cuello(request):
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
+
 
 
 def mostrar_imagenes(request):

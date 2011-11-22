@@ -1,0 +1,140 @@
+{% extends 'medicos/historia_clinica/examen_fisico/examen-base.html' %}
+
+{% block contenido_examen %}
+
+<h3>Nuevo Examen Cabeza</h3>
+
+<form action="" method="POST">
+<table>
+<tr class='table_title' align="center">
+    <td width="200px;"><label>Area</label></td>
+    <td><label>Normal</label></td>
+    <td><label>Alterado</label></td>
+</tr>
+
+<tr>
+    <td><label>Craneo:</label></td>
+    <td align="center"><input type="radio" value="N" name="craneo" checked></td>
+    <td align="center"><input type="radio" value="A" name="craneo" ></td>
+</tr>
+
+<tr>
+    <td><label>Fontanelas y Suturas:</label></td>
+    <td align="center"><input type="radio" value="N" name="font_y_sut" checked></td>
+    <td align="center"><input type="radio" value="A" name="font_y_sut" ></td>
+</tr>
+
+<tr>
+    <td><label>Facie:</label></td>
+    <td align="center"><input type="radio" value="N" name="facie" checked></td>
+    <td align="center"><input type="radio" value="A" name="facie" ></td>
+</tr>
+
+<tr>
+    <td><label>Parpados:</label></td>
+    <td align="center"><input type="radio" value="N" name="parpados" checked></td>
+    <td align="center"><input type="radio" value="A" name="parpados" ></td>
+</tr>
+
+<tr>
+    <td><label>Conjuntivas:</label></td>
+    <td align="center"><input type="radio" value="N" name="conjuntivas" checked></td>
+    <td align="center"><input type="radio" value="A" name="conjuntivas" ></td>
+</tr>
+
+<tr>
+    <td><label>Movimiento del Globo Ocular:</label></td>
+    <td align="center"><input type="radio" value="N" name="ojo_mov" checked></td>
+    <td align="center"><input type="radio" value="A" name="ojo_ocular_mov" ></td>
+</tr>
+
+<tr>
+    <td><label>Vision:</label></td>
+    <td align="center"><input type="radio" value="N" name="vision" checked></td>
+    <td align="center"><input type="radio" value="A" name="vision" ></td>
+</tr>
+
+<tr>
+    <td><label>Nariz y Fosas Nasales:</label></td>
+    <td align="center"><input type="radio" value="N" name="nariz" checked></td>
+    <td align="center"><input type="radio" value="A" name="nariz" ></td>
+</tr>
+
+<tr>
+    <td><label>Labios:</label></td>
+    <td align="center"><input type="radio" value="N" name="labios" checked></td>
+    <td align="center"><input type="radio" value="A" name="labios" ></td>
+</tr>
+
+<tr>
+    <td><label>Dientes:</label></td>
+    <td align="center"><input type="radio" value="N" name="dientes" checked></td>
+    <td align="center"><input type="radio" value="A" name="dientes" ></td>
+</tr>
+
+<tr>
+    <td><label>Lengua:</label></td>
+    <td align="center"><input type="radio" value="N" name="lengua" checked></td>
+    <td align="center"><input type="radio" value="A" name="lengua" ></td>
+</tr>
+
+<tr>
+    <td><label>Mucosa BucoFaringea:</label></td>
+    <td align="center"><input type="radio" value="N" name="mucosa_bucofar" checked></td>
+    <td align="center"><input type="radio" value="A" name="mucosa_bucofar" ></td>
+</tr>
+
+<tr>
+    <td><label>Amigdalas:</label></td>
+    <td align="center"><input type="radio" value="N" name="amigdalas" checked></td>
+    <td align="center"><input type="radio" value="A" name="amigdalas" ></td>
+</tr>
+
+<tr>
+    <td><label>Pabellones Auriculares:</label></td>
+    <td align="center"><input type="radio" value="N" name="pab_aur" checked></td>
+    <td align="center"><input type="radio" value="A" name="pab_aur" ></td>
+</tr>
+
+<tr>
+    <td><label>Conducto Auditivo Externo:</label></td>
+    <td align="center"><input type="radio" value="N" name="cond_aud_ext" checked></td>
+    <td align="center"><input type="radio" value="A" name="cond_aud_ext" ></td>
+</tr>
+
+<tr>
+    <td><label>Timpanos:</label></td>
+    <td align="center"><input type="radio" value="N" name="timpanos" checked></td>
+    <td align="center"><input type="radio" value="A" name="timpanos" ></td>
+</tr>
+
+<tr>
+    <td><label>Audicion:</label></td>
+    <td align="center"><input type="radio" value="N" name="audicion" checked></td>
+    <td align="center"><input type="radio" value="A" name="audicion" ></td>
+</tr>
+
+<tr>
+    <td><label>Observaciones:</label></td>
+    <td colspan="2" align="center"><textarea class="edt_g" rows="4" name="observaciones"></textarea></td>
+</tr>
+
+<tr>
+    <td colspan="3" align="center">
+        <input type="hidden" name="query" value="1"/>
+        <input type="submit" value="Agregar" class="boton"/>
+        <input type="reset" value="Limpiar" class="boton"/>
+    </td>
+</tr>
+
+</table>
+</form>
+
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
+
+{% endblock %}

@@ -2,7 +2,16 @@
 
 {% block contenido_examen %}
 
-<h3>Examen de Cabeza</h3>
+{% if not examenes %}
+    <div align="right">
+        <a href="/historia-clinica/nuevo-examen-cabeza/?exam_id={{ exam_id }}&pac_id={{ pac_id }}" class="boton">Nuevo</a>
+    </div><hr />
+    <h3>Examen de Cabeza</h3>
+{% else %}
+    <h3>Examen de Cabeza</h3>
+    
 
+
+{% endif %}
 
 {% endblock %}
