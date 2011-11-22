@@ -155,31 +155,29 @@ class PielFaneasTejidoCelularSubcutaneo(models.Model):
     tejido_cel_subcutaneo = models.TextField('Tejido Celular Subcutaneo')
 
 
-'''
 #Examen Fisico
 class Cabeza():
     """
         Examen Fisico - Cabeza
     """
-    examen_fisico = models.ForeignKey(ExamenBase, unique=True)
-
-    craneo = models.CharField()  #N/A Normal - Alterado
-    fontanelas_y_suturas = models.CharField()  #N/A Normal - Alterado
-    facie = models.CharField()  #N/A Normal - Alterado
-    parpados = models.CharField()  #N/A Normal - Alterado
-    conjuntivas = models.CharField()  #N/A Normal - Alterado
-    globo_ocular_mov = models.CharField()  #N/A Normal - Alterado
-    vision = models.CharField()  #N/A Normal - Alterado
-    nariz_fosas_nasales = models.CharField()  #N/A Normal - Alterado
-    labios = models.CharField()  #N/A Normal - Alterado
-    dientes = models.CharField()  #N/A Normal - Alterado
-    lengua = models.CharField()  #N/A Normal - Alterado
-    mucosa_bucofaringea = models.CharField()  #N/A Normal - Alterado
-    amigdalas = models.CharField()  #N/A Normal - Alterado
-    pabellones_auriculares = models.CharField()  #N/A Normal - Alterado
-    cond_audit_externo = models.CharField()  #N/A Normal - Alterado
-    timpanos = models.CharField()  #N/A Normal - Alterado
-    audicion = models.CharField()  #N/A Normal - Alterado
+    examen_fisico = models.ForeignKey(ExamenBase)
+    craneo = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    fontanelas_y_suturas = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    facie = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    parpados = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    conjuntivas = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    globo_ocular_mov = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    vision = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    nariz_fosas_nasales = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    labios = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    dientes = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    lengua = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    mucosa_bucofaringea = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    amigdalas = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    pabellones_auriculares = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    cond_audit_externo = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    timpanos = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
+    audicion = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)  #N/A Normal - Alterado
     observaciones = models.TextField('Observaciones')
 
 
@@ -188,16 +186,15 @@ class Cuello:
     """
         Examen Fisico - Cuello
     """
-    examen_fisico = models.ForeignKey(ExamenBase, unique=True)
+    examen_fisico = models.ForeignKey(ExamenBase)
+    inspecion = models.CharField('Inspecion', max_length=250)
+    palpacion = models.CharField('Palpacion', max_length=250)
+    percucion = models.CharField('Percucion', max_length=250)
+    ausculacion = models.CharField('Ausculacion', max_length=250)
+    observaciones = models.TextField('Observaciones', max_length=250)
 
-    inspecion = models.CharField('Inspecion')
-    palpacion = models.CharField('Palpacion')
-    percucion = models.CharField('Percucion')
-    ausculacion = models.CharField('Ausculacion')
-    observaciones = models.TextField('Observaciones')
+
 '''
-
-
 #Examen Fisico
 class ToraxAparatoRespiratorio:
     """
@@ -217,7 +214,7 @@ class ToraxAparatoRespiratorio:
 
     observaciones = models.TextField('Observaciones')
 
-'''
+
 #Examen Fisico
 class AparatoCardiovascular:
     """

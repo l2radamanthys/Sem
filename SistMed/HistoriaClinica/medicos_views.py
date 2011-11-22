@@ -440,6 +440,9 @@ def mostrar_examen_aparato_respiratorio(request):
     exam_id = int(get_GET_value(request, "exam_id", -1))
     dict["exam_id"] = exam_id
 
+    eb = ExamenBase.objects.get(id=exam_id)
+    
+
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)

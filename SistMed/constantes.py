@@ -115,6 +115,13 @@ TIPO_DOSIS_DIC = {
 }
 
 
+ESTADO_CHOICE = (
+    ("N","Normal"),
+    ("A","Alterado"),
+    ("-","------"),
+
+)
+
 
 GRUPOS_SANGUINEOS = (
     "O+",
