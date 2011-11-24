@@ -346,7 +346,7 @@ def buscar_admins(request):
     """
     plantilla = get_template('administrativos/gestion_turnos/buscar.html')
     dict = generar_base_dict(request)
-    dict['titulo'] = 'Buscar Admin'
+    dict['sin_titulo'] = True
 
     #tipo de busqueda
     #1 usuario

@@ -344,7 +344,7 @@ def buscar_pacientes(request):
     """
     plantilla = get_template('pacientes/gestion_turnos/buscar.html')
     dict =  generar_base_dict(request)
-    dict['titulo'] = 'Buscar Paciente'
+    dict['sin_titulo'] = True
    
     #tipo de busqueda
     #1 usuario

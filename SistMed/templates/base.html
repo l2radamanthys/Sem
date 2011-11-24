@@ -35,14 +35,21 @@
                 <h3>Menu Principal</h3>
                 <ul id='menu_1' class="menu_nav">
                     <li class='title_menu'><a href='/'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Home/Inicio</a></li>
-                    <li class='title_menu'><a href='/area?opcion=gt'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Gestion Turnos</a></li>
+
+                    
+
                     
                     {% if nivel_0 %}
-                        <li class='title_menu'><a href='/accounts/login/'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">loguear</a></li>
+                        <li class='title_menu'><a href='/accounts/login/' style="color: #00AA00"><img src="/site_media/imagenes/flecha_iten.png" align="top"  style="margin-right: 5px">Conectarse</a></li>
                     {% endif %}
-                    {% if nivel_1 %}
+                    {% if nivel_2 and not_nivel_3 %}
+                        <li class='title_menu'><a href='/area?opcion=gt'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Gestion Turnos</a></li>
                         <li class='title_menu'><a href='/area?opcion=hc'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Historia Clinica</a></li>
-                        <li class='title_menu'><a href='/accounts/logout/'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Desloguear</a></li>
+                        <!--li class='title_menu'><a href='/accounts/logout/'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Desloguear</a></li-->
+                    {% endif %}
+
+                    {% if nivel_1 %}
+                        <li class='title_menu'><a href='/accounts/logout/'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Desconectarse</a></li>
                     {% endif %}
                     
                     {% if super_admin %}
@@ -108,8 +115,8 @@
 
                 <!-- menu paciente -->
                 {% if nivel_1 and not nivel_2 and not nivel_3 %}
-                <span class='title_menu'><a onClick="desplegar('menu_7')"><img src="/site_media/imagenes/flecha_menu.png" align="top" style="margin-right: 5px">Menu</a></span>
-                    <ul id='menu_7' class='hide_nav_menu'>
+                <span class='title_menu'><a onClick="desplegar('menu_7')"><img src="/site_media/imagenes/flecha_menu.png" align="top" style="margin-right: 5px">Mi Menu</a></span>
+                    <ul id='menu_7' class='nav_menu'>
                         <li><a href='/pacientes/turnos/nueva-solicitud/'>Nueva Solicitud Turno</a></li>
                         <li><a href='/pacientes/turnos/listado-solicitudes'>Listado Solicitudes Turno</a></li>
                         <li><a href='/pacientes/turnos/listado-turnos/'>Turnos Asignados</a></li>
@@ -118,8 +125,8 @@
 
                 <!-- menu medico -->
                 {% if nivel_2 and not nivel_3 %}
-                <span class='title_menu'><a onClick="desplegar('menu_7')"><img src="/site_media/imagenes/flecha_menu.png" align="top" style="margin-right: 5px">Menu</a></span>
-                    <ul id='menu_7' class='hide_nav_menu'>
+                <span class='title_menu'><a onClick="desplegar('menu_7')"><img src="/site_media/imagenes/flecha_menu.png" align="top" style="margin-right: 5px">Mi Menu</a></span>
+                    <ul id='menu_7' class='nav_menu'>
                         <li><a href='/medicos/turnos/listado-solicitudes/{{ user_id }}'>Solicitudes de Turno</a></li>
                         <li><a href='/medicos/turnos/nuevo-turno/{{ user_id }}'>Nuevo Turno</a></li>
                         <li><a href='/medicos/agregar-especialidades/{{ user_id }}'>Mis Expecialidades</a></li>
@@ -130,8 +137,8 @@
 
                 <!-- menu administrativo -->
                 {% if nivel_3 %}
-                <span class='title_menu'><a onClick="desplegar('menu_7')"><img src="/site_media/imagenes/flecha_menu.png" align="top" style="margin-right: 5px">Menu</a></span>
-                    <ul id='menu_7' class='hide_nav_menu'>
+                <span class='title_menu'><a onClick="desplegar('menu_7')"><img src="/site_media/imagenes/flecha_menu.png" align="top" style="margin-right: 5px">Mi Menu</a></span>
+                    <ul id='menu_7' class='nav_menu'>
                         <!--li><a href='/medicos/turnos/listado-solicitudes/{{ user_id }}'>Solicitudes de Turno</a></li-->
                         <li><a href='/administrativos/turnos/nuevo-turno/'>Nuevo Turno</a></li>
                         <!--li><a href='/medicos/agregar-especialidades/{{ user_id }}'>Mis Expecialidades</a></li>

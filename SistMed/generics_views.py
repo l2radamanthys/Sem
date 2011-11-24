@@ -112,15 +112,14 @@ def cambio_contrasenia(request):
 
     if request.user.is_authenticated():
         plantilla = get_template('cambio_contrasenia.html')
-
         dict = BASE_DIC.copy()
 
         query = int(request.POST.get('query', '0'))
         dict['query'] = query
         if query:
             user = User.objects.get(username__exact=request.session.get('usuario', ''))
-            old_password = request.POST.get('old_password', '')
-            new_password = request.POST.get('new_password', '')
+            old_password = request.POST.get('password_old', '')
+            new_password = request.POST.get('password_new', '')
             #controla q la contrase�a anterior sea valida
             if user.check_password(old_password):
                 user.set_password(new_password)
@@ -128,7 +127,7 @@ def cambio_contrasenia(request):
                 dict['mensaje'] = 'Contrasenia Actualizada'
                 dict['msj_class'] = MSJ_OK
             else:
-                dict['mensaje'] = 'Error Contrasenia Invalida'
+                dict['mensaje'] = 'Error Contrasenia Invalida %s - %s' %(old_password, new_password)
                 dict['msj_class'] = MSJ_ERROR
 
         contexto = Context(dict)

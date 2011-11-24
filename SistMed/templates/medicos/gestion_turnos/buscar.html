@@ -7,14 +7,14 @@
     <div class='window' style="width:400px;">
     <div class="win_title_bar">
         <div class="window_title">
-            <label>Buscar</label>
+            <label>Buscar Medicos</label>
         </div>
     </div>
     <form action="" method="POST" enctype="text/plain">
     <table>
         <tbody>
             <tr>
-                <td><input type='text' name='buscar_text' class='edt_m'></td>
+                <td><input type='text' name='buscar_text' class='edt_g'></td>
                 <td><input type="submit" name="Buscar" value="Buscar" class='boton'/></td>
             </tr>
             <tr>
@@ -46,13 +46,13 @@
             <td style='width:70px;'>Modificar</td>
             <td style='width:70px;'>Borrar</td>
         </tr>
-        {% for adm in listado_admins %}
-            <tr class='{{ adm|slice:"3:"|first }}'>
-                <td>{{ adm|slice:"1:"|first }}</td>
-                <td>{{ adm|slice:"2:"|first }}</td>
-                <td style='text-align:center;'><a href='/admnistrativos/datos/{{ adm|first }}/'>Ver</a></td>
-                <td style='text-align:center;'><a href='/admnistrativos/modificar/{{ adm|first }}/'>Modificar</a></td>
-                <td style='text-align:center;'><a href='/admnistrativos/borrar/{{ adm|first }}/'>Borrar</a></td>
+        {% for med in medicos %}
+            <tr class='{{ med|slice:"3:"|first }}'>
+                <td>{{ med|slice:"1:"|first }}</td>
+                <td>{{ med|slice:"2:"|first }}</td>
+                <td style='text-align:center;'><a href='/medicos/datos/{{ med|first }}/'><img src='/site_media/imagenes/icon_ver.png'></a></td>
+                <td style='text-align:center;'><a href='/medicos/modificar/{{ med|first }}/'><img src='/site_media/imagenes/icon_edit.png'></a></td>
+                <td style='text-align:center;'><a href='/medicos/borrar/{{ med|first }}/'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
             </tr>
         {% endfor %}
     </tbody>

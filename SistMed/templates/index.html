@@ -8,9 +8,11 @@
         <img src="/site_media/imagenes/logo.png">
     </div>
     <br />
-    {%if menu_area %}
-        <h2>Area Activa: Gestion Turnos</h2>
-    {% else %}
-        <h2>Area Activa: Manejo Historia Clinica</h2>
+    {% if nivel_2 and not nivel_3 %}
+        {%if menu_area %}
+            <h2>Area Activa: Gestion Turnos</h2>
+        {% else %}
+            <h2>Area Activa: Manejo Historia Clinica</h2>
+        {% endif %}
     {% endif %}
 {% endblock %}

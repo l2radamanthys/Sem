@@ -295,7 +295,7 @@ def guardar_cambios_medico(request):
         medicos_modificar
     """
     plantilla = get_template('medicos/gestion_turnos/guardar.html')
-    dict = dict = generar_base_dict(request)
+    dict = generar_base_dict(request)
     dict['titulo'] = 'Medico Modificar Datos'
 
     med_id = int(get_value(request, 'med_id', "-1", "-1"))
@@ -439,6 +439,9 @@ def agregar_especialidad(request, med_id=-1):
 
 
 def borrar_expecialidad(request):
+    """
+        Desasigna una especialidar asignada al medico
+    """
     plantilla = get_template('medicos/gestion_turnos/borrar-especialidad.html')
     dict = dict = generar_base_dict(request)
     dict['sin_titulo'] = True
@@ -527,4 +530,62 @@ def mostrar_dias_atencion(request, med_id=-1):
     """
     pass
 
+
+def buscar_medicos(request):
+    """
+        Permite Buscar un admin por nombre, apellido o usuario
+
+        pueden acceder
+        --------------
+        - administrativos
+        - medicos
+
+        sin acceso
+        ----------
+        - admins
+        - usuarios no registrados
+    """
+    plantilla = get_template('medicos/gestion_turnos/buscar.html')
+    dict = generar_base_dict(request)
+    dict['sin_titulo'] = True
+
+    #tipo de busqueda
+    #1 usuario
+    #2 nombre
+    #3 apellido
+    query = int(request.POST.get('query', '0'))
+    dict['query'] = query
+    if query:
+        buscar_text = request.POST.get('buscar_text', '')
+        buscar_por = int(request.POST.get('buscar_por', '0'))
+
+        if buscar_text != "":
+            if buscar_por == 0:
+                medicos = Medicos.objects.filter(user__username__icontains=buscar_text)
+
+            elif buscar_por == 1:
+                medicos = Medicos.objects.filter(user__first_name__icontains=buscar_text)
+
+            elif buscar_por == 2:
+                medicos = Medicos.objects.filter(user__last_name__icontains=buscar_text)
+
+        #si se ingreso text en blanco pongo todos
+        else:
+            medicos = Medicos.objects.all()
+
+
+        _medicos = []
+        band = True
+        for med in medicos:
+            id = med.id
+            username = med.user.username
+            nombre = med.nombre_completo()
+            css = get_field_css(band)
+            band = not(band)
+            _medicos.append([id, username, nombre, css])
+        dict['medicos'] = _medicos
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
 
