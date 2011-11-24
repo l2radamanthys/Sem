@@ -237,9 +237,9 @@ def agregar_antecedentes_perinatales(request):
 def agregar_vacuna(request, pac_id=-1):
     """
     """
-    plantilla = get_template('medicos/historia_clinica/agregar-vacuna.html')
+    plantilla = get_template('medicos/historia_clinica/vacunas/agregar-vacuna.html')
     dict = generar_base_dict(request)
-    dict['titulo'] = 'Historia Clinica'
+    dict['sin_titulo'] = True #'Historia Clinica'
 
     query = int(request.POST.get('query', '0'))
     dict['query'] = query
@@ -271,7 +271,7 @@ def listado_vacunas(request):
     """
         Muestra el listado de vacunacion al estilo carnet jaja
     """
-    plantilla = get_template('medicos/historia_clinica/listado-vacunas.html')
+    plantilla = get_template('medicos/historia_clinica/vacunas/listado-vacunas.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Historia Clinica'
 
@@ -293,9 +293,9 @@ def listado_vacunas(request):
 def modificar_vacuna(request):
     """
     """
-    plantilla = get_template('medicos/historia_clinica/modificar-vacuna.html')
+    plantilla = get_template('medicos/historia_clinica/vacunas/modificar-vacuna.html')
     dict = generar_base_dict(request)
-    dict['titulo'] = 'Historia Clinica'
+    dict['sin_titulo'] = True #'Historia Clinica'
 
     query = int(request.POST.get('query', '0'))
     dict['query'] = query
@@ -326,12 +326,23 @@ def modificar_vacuna(request):
 def borrar_vacuna(request):
     """
     """
+    plantilla = get_template('medicos/historia_clinica/vacunas/borrar-vacuna.html')
+    dict = generar_base_dict(request)
+    dict['sin_titulo'] = True #'Historia Clinica'
+
     pac_id = get_GET_value(request, "pac_id", -1)
     vac_id = int(get_GET_value(request, "vac_id", -1))
     if pac_id != -1 and vac_id != -1:
         vacuna = Vacuna.objects.get(id=vac_id)
+        dict["nombre"] = vacuna.descripcion + " - " + vacuna.tipo_dosis
+        dict["pac_id"] = pac_id
+        dict["query"] = True
         vacuna.delete()
-        return HttpResponseRedirect("/historia-clinica/listado-vacunas/?pac_id=%s" %pac_id)
+
+        contexto = Context(dict)
+        html = plantilla.render(contexto)
+        return HttpResponse(html)
+
     else:
         return HttpResponseRedirect('/error/?title="Invalid Request"&msj="Parametros invalidos..."')
 

@@ -1,0 +1,15 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block contenido %}
+
+<div align='right'>
+    <a class='boton' href='/historia-clinica/listado-vacunas/?pac_id={{ pac_id }}'>Atras</a>
+    <hr />
+</div>
+
+    <br />
+    <div align='center'>
+        <p  class='msj_ok'>Operacion exitosa, se ha Borrado la Vacuna :<strong>{{ nombre }} </strong></p>
+    </div>
+</div>
+{% endblock %}

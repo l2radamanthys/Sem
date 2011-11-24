@@ -47,7 +47,8 @@
             {% for esp in med_exp %}
                 <tr>
                     <td>{{ esp|slice:"1:"|first }}</td>
-                    <td style='text-align:center;'><a href='{{ esp|slice:"0:"|first }}'><img src='/site_media/imagenes/icon_borrar.png'></a></td>
+                    <td style='text-align:center;'><a onClick="answer_redirect('Desea Borrar: {{ esp|slice:'1:'|first }}','/medicos/borrar-especialidad/?exp_med_id={{ esp|slice:"0:"|first }}')"><img src='/site_media/imagenes/icon_borrar.png'></a></td>
+                    
                 <tr>
             {% endfor %}
         </tbody>

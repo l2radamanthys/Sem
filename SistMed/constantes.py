@@ -36,6 +36,9 @@ SOLICITUD_ESTADO_CHOICE = (
     ('P','Pendiente'),
     ('A','Aceptado'),
     ('C','Cancelado'),
+    ('p','Pendiente'),
+    ('a','Aceptado'),
+    ('c','Cancelado'),
 )
 
 SOLICITUD_ESTADO_CHOICE_DIC = {

@@ -438,6 +438,23 @@ def agregar_especialidad(request, med_id=-1):
     return HttpResponse(html)
 
 
+def borrar_expecialidad(request):
+    plantilla = get_template('medicos/gestion_turnos/borrar-especialidad.html')
+    dict = dict = generar_base_dict(request)
+    dict['sin_titulo'] = True
+
+    exp_med_id = int(get_GET_value(request, "exp_med_id", -1))
+
+    especialidad = ExpecialidadesMedicos.objects.get(id=exp_med_id)
+    dict["nombre"] = especialidad.cod_expecialidad.nombre
+    dict["med_id"] = especialidad.codigo_medico.id
+    especialidad.delete()
+    
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
 def agregar_horario_atencion(request, med_id=-1):
     """
     """

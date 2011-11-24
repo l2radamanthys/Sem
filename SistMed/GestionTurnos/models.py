@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from django.db import connection, transaction
 
-
+from utils import *
 from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE, DATE_CHOICE
 
 
@@ -244,3 +244,11 @@ class SolitudesTurnos(models.Model):
     #fk
     codigo_paciente = models.ForeignKey(Pacientes)
     codigo_medico = models.ForeignKey(Medicos)
+
+
+    def date_sol(self):
+        return date_to_str(self.fecha_solicitud)
+
+
+    def date_req(self):
+        return date_to_str(self.fecha_requerida)

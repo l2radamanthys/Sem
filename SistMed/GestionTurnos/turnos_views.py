@@ -211,7 +211,24 @@ def listado_solicitudes_turno_pac(request):
 def detalle_solicitud_turno_pac(request):
     """
     """
-    pass
+    plantilla = get_template('pacientes/gestion_turnos/mostrar-solicitud-turno.html')
+    dict = generar_base_dict(request)
+    dict['sin_titulo'] = True
+
+    sol_id = int(get_GET_value(request, "sol_id", -1))
+    if sol_id != -1:
+        dict["sol"] = SolitudesTurnos.objects.get(id=sol_id)
+
+
+    else:
+        #HttpResponseRedirect("error")
+        pass
+    
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
 
 
 def modificar_solicitud(request):

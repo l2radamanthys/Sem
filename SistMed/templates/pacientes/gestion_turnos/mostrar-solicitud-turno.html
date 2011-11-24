@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+<div align="right">
+<a href="/pacientes/turnos/listado-solicitudes/" class="boton">Atras</a>
+</div>
+<hr /><br />
+
+<div class='window' style="width:400px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Solicitud de Turno</label>
+        </div>
+    </div>
+    <table>
+    <tr>
+        <td><label><strong>Paciente:</strong></label></td>
+        <td><label>{{ sol.codigo_paciente.nombre_completo }}</label></td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Medico:</strong></label></td>
+        <td><label>{{ sol.codigo_medico.nombre_completo }}</label></td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Fecha Solicitud:</strong></label></td>
+        <td><label>{{ sol.date_sol }}</label></td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Fecha Requerida:</strong></label></td>
+        <td><label>{{ sol.date_req }}</label></td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Estado:</strong></label></td>
+        <td><label>{{ sol.get_estado_display }}</label></td>
+    </tr>
+
+    <tr>
+        <td><label><strong>Comentarios:</strong>:</strong></label></td>
+        <td><textarea rows="4" readonly>{{ sol.comentarios }}</textarea></td>
+    </tr>
+    </table>
+</div>
+
+{% endblock %}

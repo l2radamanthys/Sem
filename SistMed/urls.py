@@ -73,6 +73,7 @@ urlpatterns = patterns('',
     #(r'^medicos/buscar/$', medicos_views.buscar_,medicos),
     (r'^medicos/agregar-especialidades/$', medicos_views.agregar_especialidad),
     (r'^medicos/agregar-especialidades/(\d{1,2})/$', medicos_views.agregar_especialidad),
+    (r'^medicos/borrar-especialidad/$', medicos_views.borrar_expecialidad),
 
     # - Medicos - Especialidades
     (r'^medicos/especialidades/agregar/$', especialidades_views.agregar),
@@ -115,7 +116,9 @@ urlpatterns = patterns('',
     # - Turnos
     (r'^pacientes/turnos/nueva-solicitud/$', turnos_views.nueva_solicitud_turno),
     (r'^pacientes/turnos/listado-solicitudes/$', turnos_views.listado_solicitudes_turno_pac),
+    (r'^pacientes/turnos/mostrar-solicitud/$', turnos_views.detalle_solicitud_turno_pac),
     (r'^medicos/turnos/listado-solicitudes/(\d{1,2})/$', turnos_views.listado_solicitudes_turno),
+
 
     #(r'^medicos/agenda/agregar-turno/$', turnos_views.nuevo_turno),
     (r'^medicos/turnos/nuevo-turno/$', generics_views.error404),
@@ -127,7 +130,7 @@ urlpatterns = patterns('',
     (r'^historia-clinica/nueva/$', hc_med_views.nueva),
     (r'^historia-clinica/listado-pacientes/$', hc_med_views.listado_pacientes),
 
-    # - Datps Base
+    # - Datos Base
     (r'^historia-clinica/mostrar-datos-base/$', hc_med_views.mostrar_datos_paciente),
     (r'^historia-clinica/modificar-datos-base/$', hc_med_views.modificar_datos_paciente),
 

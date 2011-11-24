@@ -1,0 +1,50 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block contenido %}
+
+<div align='right'>
+    <a class='boton' href='/historia-clinica/listado-vacunas/?pac_id={{ pac_id }}'>Atras</a>
+    <hr />
+</div>
+
+    <div class='window' style="width:400px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Modificar Vacuna</label>
+        </div>
+    </div>
+
+    <table>
+    <form action="" method="post">
+        <tr><td><label>Fecha</label></td><td><input name="fecha" id="fecha" class="edt_c" value="{{ vacuna.fecha|date:'d/m/Y' }}" type="text"  /></td></tr>
+        <tr><td><label>Descripcion</label></td><td><input name="descripcion" class="edt_g" type="text" value="{{ vacuna.descripcion }}" /></td></tr>
+        <tr><td><label>Tipo Dosis</label></td>
+        <td><select name="tipo_dosis" class="edt_m">
+        {% for dosis in tipo_dosis %}
+            <option value='{{ dosis|slice:"0:"|first }}'>{{ dosis|slice:"1:"|first }}</option>
+        {% endfor %}
+        </select>
+        </td></tr>
+        <tr><td colspan="2" align="center">
+            <input type="hidden" name="query" value="1"/>
+            <input class='boton' type="submit" value="Guardar"  />
+            <input class='boton' type="reset" value="Limpiar"  /></td>
+        </tr>
+    </form>
+    </table>
+
+</div>
+
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
+<!-- Inicio Date Selector Code -->
+<script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
+<script type="text/javascript">
+    DatePicker.SetUpElement("fecha");
+</script>
+<!-- Fin Date Selector Code -->
+{% endblock %}

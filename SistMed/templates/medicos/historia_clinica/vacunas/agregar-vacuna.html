@@ -1,0 +1,70 @@
+{% extends 'medicos/historia_clinica/ver-historia-clinica.html' %}
+
+{% block contenido %}
+
+
+<script type="text/javascript" src="/site_media/scripts/validate-form.js"></script>
+<script type="text/javascript">
+var validator = new Validator([
+
+    //['fecha', {'method': 'min_lenght', 'lenght':3, 'cont_id':'error_1', 'msj_error':'Error campo demaciado Corto'}],
+    ['descripcion', {'method': 'min_lenght', 'lenght':3, 'cont_id':'error_2', 'msj_error':'Error campo "Descripcion" demaciado Corto'}],
+]);
+        
+function validar(form_id) {
+    var form = document.getElementById(form_id);
+    if (validator.eval_fields()) {
+        form.submit();
+    } 
+}
+function limpiar() { validator.clear_all_cont() }
+</script>
+
+
+<div align='right'>
+    <a class='boton' href='/historia-clinica/listado-vacunas/?pac_id={{ pac_id }}'>Atras</a>
+    <hr />
+</div>
+
+    <div class='window' style="width:400px;">
+    <div class="win_title_bar">
+        <div class="window_title">
+            <label>Añadir Vacuna</label>
+        </div>
+    </div>
+
+    <table>
+    <form action="" method="post" id="form">
+        <tr><td><label>Fecha</label></td><td><input name="fecha" id="fecha" class="edt_c" value="01/01/1900" type="text"  /></td></tr>
+        <tr><td colspan="2"><span id="error_1"></span></td></tr>
+        <tr><td><label>Descripcion</label></td><td><input name="descripcion" id="descripcion" class="edt_g" type="text"  /></td></tr>
+        <tr><td colspan="2"><span id="error_2"></span></td></tr>
+        <tr><td><label>Tipo Dosis</label></td>
+        <td><select name="tipo_dosis" class="edt_m">
+        {% for dosis in tipo_dosis %}
+            <option value='{{ dosis|slice:"0:"|first }}'>{{ dosis|slice:"1:"|first }}</option>
+        {% endfor %}
+        </select>
+        </td></tr>
+        <tr><td colspan="2" align="center">
+            <input type="hidden" name="query" value="1"/>
+            <input type='button' value='Agregar' class='boton' onClick="validar('form')"/>
+            <input type='Reset' value='Limpiar' class='boton' onClick="limpiar()"/>
+        </tr>
+    </form>
+    </table>
+</div>
+
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
+
+<!--  -->
+<script type="text/javascript" src="/site_media/scripts/DatePicker.js"></script>
+<script type="text/javascript">
+    DatePicker.SetUpElement("fecha");
+</script>
+{% endblock %}
