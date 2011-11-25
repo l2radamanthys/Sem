@@ -1,0 +1,54 @@
+{% extends 'medicos/historia_clinica/examen_fisico/examen-base.html' %}
+
+{% block contenido_examen %}
+
+<h3>Nuevo Examen de Cuello</h3>
+
+<form action="" method="POST">
+<table>
+<tr>
+    <td><label>Inspecion:</label></td>
+    <td><input type="text" class="edt_g" name="inspecion"/></td>
+</tr>
+
+<tr>
+    <td><label>Palpacion:</label></td>
+    <td><input type="text" class="edt_g" name="palpacion"/></td>
+</tr>
+
+<tr>
+    <td><label>Percucion:</label></td>
+    <td><input type="text" class="edt_g" name="percucion"/></td>
+</tr>
+
+<tr>
+    <td><label>Ausculacion:</label></td>
+    <td><input type="text" class="edt_g" name="ausculacion"/></td>
+</tr>
+
+<tr>
+    <td colspan="2"><label>Observaciones:</label></td>
+</tr>
+<tr>
+    <td colspan="2" align="center"><textarea class="edt_g" rows="4" name="observaciones" ></textarea></td>
+</tr>
+
+<tr>
+    <td colspan="2" align="center">
+        <input type="hidden" name="query" value="1"/>
+        <input type="submit" value="Agregar" class="boton"/>
+        <input type="reset" value="Limpiar" class="boton"/>
+    </td>
+</tr>
+
+</table>
+</form>
+
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
+
+{% endblock %}

@@ -546,10 +546,48 @@ def mostrar_examen_cuello(request):
     exam_id = int(get_GET_value(request, "exam_id", -1))
     dict["exam_id"] = exam_id
 
+    try:
+        examen = Cuello.objects.get(examen_fisico__id=exam_id)
+        dict["examen"] = examen
+    except:
+        dict["examen"] = False
+
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
 
+
+def nuevo_examen_cuello(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/nuevo-examen-cuello.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    query = int(get_value(request, "query", 0))
+    dict["query"] = query
+    if query:
+        eb = ExamenBase.objects.get(id=exam_id)
+        cuello = Cuello(
+            examen_fisico = eb,
+            inspecion = get_value(request, "inspecion", '-'),
+            palpacion = get_value(request, "palpacion", '-'),
+            percucion = get_value(request, "percucion", '-'),
+            ausculacion = get_value(request, "ausculacion", '-'),
+            observaciones = get_value(request, "observaciones", '-'),
+        )
+        cuello.save()
+        
+        dict["msj_class"] = "msj_ok"
+        dict["mensaje"] = "Examen de Cuello Agregado"
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
 
 
 def mostrar_imagenes(request):

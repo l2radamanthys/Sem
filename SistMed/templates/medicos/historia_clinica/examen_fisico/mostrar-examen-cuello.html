@@ -15,6 +15,33 @@
 
 <table>
 
+<tr class="field_a">
+    <td><label>Inspecion:</label></td>
+    <td><label>{{ examen.inspecion }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td><label>Palpacion:</label></td>
+    <td><label>{{ examen.palpacion }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td><label>Percucion:</label></td>
+    <td><label>{{ examen.percucion }}</label></td>
+</tr>
+
+<tr class="field_b">
+    <td><label>Ausculacion:</label></td>
+    <td><label>{{ examen.ausculacion }}</label></td>
+</tr>
+
+<tr class="field_a">
+    <td colspan="2"><label>Observaciones:</label></td>
+</tr>
+<tr class="field_a">
+    <td colspan="2" align="center"><textarea class="edt_g" rows="4" name="observaciones" readonly>{{ examen.observaciones }}</textarea></td>
+</tr>
+
 </table>
 {% endif %}
     

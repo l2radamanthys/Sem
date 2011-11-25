@@ -57,21 +57,6 @@ class AntecedentesPerinatales(models.Model):
     otros_datos = models.TextField('Otros Datos de Relevancia o Informacion Adicional') #otra informacion relevante
 
 
-#antecedentes personales
-class HabitosToxicos(models.Model):
-    """
-        Habitos toxicos del paciente
-    """
-    examen_fisico = models.ForeignKey(ExamenBase)
-    fecha = models.DateTimeField()#fecha q se realizo el examem
-
-    alcohol = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE) #S/N
-    tabaco = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)#S/N
-    drogas = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)#S/N
-    infuciones = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)#S/N
-    observaciones = models.TextField('Observaciones')#text
-
-
 #carnet de vacunacion
 class Vacuna(models.Model):
     """
@@ -140,6 +125,21 @@ class ExamenBase(models.Model):
 
 
 #Examen Fisico
+class HabitosToxicos(models.Model):
+    """
+        Habitos toxicos del paciente
+    """
+    examen_fisico = models.ForeignKey(ExamenBase)
+    fecha = models.DateTimeField()#fecha q se realizo el examem
+
+    alcohol = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE) #S/N
+    tabaco = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)#S/N
+    drogas = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)#S/N
+    infuciones = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)#S/N
+    observaciones = models.TextField('Observaciones')#text
+
+
+#Examen Fisico
 class PielFaneasTejidoCelularSubcutaneo(models.Model):
     #tengo q buscarle un nombre mas corto
     """
@@ -190,7 +190,7 @@ class Cuello(models.Model):
     palpacion = models.CharField('Palpacion', max_length=250)
     percucion = models.CharField('Percucion', max_length=250)
     ausculacion = models.CharField('Ausculacion', max_length=250)
-    observaciones = models.TextField('Observaciones', max_length=250)
+    observaciones = models.TextField('Observaciones')
 
 
 '''
@@ -287,8 +287,9 @@ class OtrosEstudio(models.Model):
 
 class Imagen(models.Model):
     examen_fisico = models.ForeignKey(ExamenBase, unique=True)
-    imagen = models.ImageField(upload_to="/data/imagenes/estudios")
+    titulo = models.CharField('titulo', max_length=250)
     descripcion = models.TextField('Descripcion')
+    imagen = models.ImageField(upload_to="/data/imagenes/estudios")
 
 
 '''

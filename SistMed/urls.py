@@ -165,6 +165,7 @@ urlpatterns = patterns('',
 
     # - Examen Fisico -> Examen Cuello
     (r'^historia-clinica/mostrar-examen-cuello/$', hc_med_views.mostrar_examen_cuello),
+    (r'^historia-clinica/nuevo-examen-cuello/$', hc_med_views.nuevo_examen_cuello),
 
     # - Examen Fisico -> Imagenes
     (r'^historia-clinica/mostrar-imagenes/$', hc_med_views.mostrar_imagenes),
