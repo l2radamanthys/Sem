@@ -1,0 +1,45 @@
+{% extends 'medicos/historia_clinica/examen_fisico/examen-base.html' %}
+
+{% block contenido_examen %}
+
+<div align="right">
+    <a href="/historia-clinica/listado-imagenes/?exam_id={{ exam_id }}&pac_id={{ pac_id }}" class="boton">Atras</a>
+</div><hr />
+ 
+<h3>Agregar Imagen</h3>
+
+<form action="" method="POST" enctype="multipart/form-data">
+<table>
+<tr>
+    <td><label>Titulo:</label></td>
+    <td><input type="text" class="edt_g" name="titulo"/></td>
+</tr>
+
+<tr>
+    <td><label>Descripcion:</label></td>
+    <td><textarea class="edt_g" rows="4" name="descripcion" ></textarea></td>
+</tr>
+
+<tr>
+    <td><label>Imagen:</label></td>
+    <td><input type="file" name="imagen" class="boton" style="height:20px;margin-left:10px"/></td>
+</tr>
+
+<tr>
+    <td colspan="2" align="center">
+        <input type="hidden" name="query" value="1"/>
+        <input type="submit" value="Agregar" class="boton"/>
+        <input type="reset" value="Limpiar" class="boton"/>
+    </td>
+</tr>
+
+</table>
+</form>
+
+{% if query %}
+    <div class='{{ msj_class }}'>
+    <p>{{ mensaje }} </p>
+    </div>
+{% endif %}
+
+{% endblock %}

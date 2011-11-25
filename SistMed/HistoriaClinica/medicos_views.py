@@ -606,8 +606,37 @@ def mostrar_imagenes(request):
     return HttpResponse(html)
 
 
+def agregar_imagen(request):
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/agregar-imagen.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    query = int(get_value(request, "query", 0))
+    dict["query"] = query
+    if query:
+        eb = ExamenBase.objects.get(id=exam_id)
+        img = Imagen(
+            examen_fisico = eb,
+            titulo = get_value(request, "titulo", "<None>"),
+            descripcion = get_value(request, "descripcion", "<None>"),
+            imagen = request.FILES["imagen"]
+        )
+        img.save()
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+
 def mostrar_analisis_lab(request):
-    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-analisis-lab.html')
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/agregar-imagen.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Examen Fisico'
 
@@ -706,3 +735,6 @@ def mostrar_consulta_medica(request):
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
+
+
+
