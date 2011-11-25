@@ -2,7 +2,20 @@
 
 {% block contenido_examen %}
 
-<h3>Examen de Cuello</h3>
+{% if not examen %}
+    <div align="right">
+        <a href="/historia-clinica/nuevo-examen-cuello/?exam_id={{ exam_id }}&pac_id={{ pac_id }}" class="boton">Nuevo</a>
+    </div><hr />
+    <h3>Examen de Cuello</h3>
+{% else %}
+    <div align="right">
+        <a href="/historia-clinica/modificar-examen-cuello/?exam_id={{ exam_id }}&pac_id={{ pac_id }}" class="boton">Modificar</a>
+    </div><hr />
+    <h3>Examen de Cuello</h3>
 
+<table>
 
+</table>
+{% endif %}
+    
 {% endblock %}

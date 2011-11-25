@@ -13,7 +13,7 @@ from django.contrib import auth #para login
 from django.contrib.auth.models import User, Group
 
 from GestionTurnos.models import Administrativos, TipoUsuario
-from utils import get_field_css, sexo_choice_expand, get_POST_value, generar_base_dict
+from utils import *
 from constantes import BASE_DIC
 
 
@@ -38,6 +38,8 @@ def nuevo_admin(request):
     #si se realizo una consulta
     query = int(request.POST.get('query', '0'))
     dict['query'] = query
+
+    dict["tipo_doc"] = TIPO_DOC_CHOICE
 
     if query:
         username = request.POST.get('usuario', '')
@@ -64,6 +66,7 @@ def nuevo_admin(request):
             user.save()
             admin = Administrativos(
                 dni = int(get_POST_value(request,'dni','0','0')),
+                tipo_doc = get_POST_value(request,'tipo_doc','',''),
                 sexo = get_POST_value(request,'sexo','-','-'),
                 telefono = request.POST.get('telefono', ''),
                 direccion = request.POST.get('direccion', ''),
@@ -150,7 +153,8 @@ def datos_admin(request, adm_id=-1):
         dict['telefono'] = admin.telefono
         dict['email'] = admin.user.email
         dict['sexo'] = sexo_choice_expand(admin.sexo)
-
+        dict['doc'] = admin.doc()
+        
     else:
         pass
 
@@ -177,7 +181,9 @@ def modificar_admin(request, adm_id=-1):
     plantilla = get_template('administrativos/gestion_turnos/modificar.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Modificar Datos Admin'
-    
+
+    dict["tipo_doc"] = TIPO_DOC_CHOICE
+
     adm_id = int(adm_id)
     if adm_id != -1:
         #query = int(get_POST_value(request,'query', '0'))
@@ -236,6 +242,7 @@ def guardar_cambios_admin(request, adm_id=-1):
         admin.user.last_name = get_POST_value(request,'apellido','')
         admin.user.save()
         admin.dni = int(get_POST_value(request,'dni','0','0'))
+        admin.tipo_doc = get_POST_value(request,'tipo_doc','','')
         admin.direccion = get_POST_value(request,'direccion','')
         admin.telefono = get_POST_value(request,'telefono','')
         admin.email = get_POST_value(request,'email','')

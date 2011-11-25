@@ -13,7 +13,7 @@ from django.contrib.auth.models import User, Group
 
 from GestionTurnos.models import Pacientes, TipoUsuario
 from utils import get_field_css, sexo_choice_expand, get_POST_value, generar_base_dict
-from constantes import BASE_DIC, MSJ_OK, MSJ_ERROR
+from constantes import *
 
 
 def nuevo_paciente(request):
@@ -38,6 +38,8 @@ def nuevo_paciente(request):
     query = int(request.POST.get('query', '0'))
     dict['query'] = query
 
+    dict["tipo_doc"] = TIPO_DOC_CHOICE
+
     if query:
         username = request.POST.get('usuario', '')
         password = request.POST.get('password_1', '')
@@ -59,6 +61,7 @@ def nuevo_paciente(request):
             user.save()
             paciente = Pacientes(
                 dni = int(get_POST_value(request,'dni','0','0')),
+                tipo_doc = get_POST_value(request,'tipo_doc','',''),
                 sexo = get_POST_value(request,'sexo','-','-'),
                 telefono = request.POST.get('telefono', ''),
                 direccion = request.POST.get('direccion', ''),
@@ -144,6 +147,7 @@ def datos_paciente(request, pac_id=-1):
         dict['direccion'] = paciente.direccion
         dict['telefono'] = paciente.telefono
         dict['email'] = paciente.user.email
+        dict["doc"] = paciente.doc()
         dict['sexo'] = sexo_choice_expand(paciente.sexo)
 
     else:
@@ -171,7 +175,9 @@ def modificar_paciente(request, pac_id=-1):
     plantilla = get_template('pacientes/gestion_turnos/modificar.html')
     dict = generar_base_dict(request)
     dict['titulo'] = 'Modificar Datos Paciente'
-    
+
+    dict["tipo_doc"] = TIPO_DOC_CHOICE
+
     pac_id = int(pac_id)
     if pac_id != -1:
         #query = int(get_POST_value(request,'query', '0'))
@@ -230,6 +236,7 @@ def guardar_cambios_paciente(request, pac_id=-1):
         paciente.user.last_name = get_POST_value(request,'apellido','')
         paciente.user.save()
         paciente.dni = int(get_POST_value(request,'dni','0','0'))
+        paciente.tipo_doc = get_POST_value(request,'tipo_doc','--','--')
         paciente.direccion = get_POST_value(request,'direccion','')
         paciente.telefono = get_POST_value(request,'telefono','')
         paciente.email = get_POST_value(request,'email','')
@@ -313,15 +320,13 @@ def borrado_paciente(request, pac_id=-1):
         paciente = Pacientes.objects.get(id=pac_id)
         dict['query'] = True
         dict['nombre'] = paciente.nombre_completo()
-        paciente.user.delete()
+        paciente.user.delete() #se eliminan datos en cascada
         #paciente.delete()
 
     else:
         dict['query'] = False
         dict['msj_class'] = MSJ_ERROR
         dict['mensaje'] = 'Error Operacion No valida'
-
-
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

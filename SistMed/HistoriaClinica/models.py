@@ -62,13 +62,13 @@ class HabitosToxicos(models.Model):
     """
         Habitos toxicos del paciente
     """
-    hist_clinica = models.ForeignKey(InformacionBasica)
+    examen_fisico = models.ForeignKey(ExamenBase)
     fecha = models.DateTimeField()#fecha q se realizo el examem
 
-    alcohol = models.BooleanField('Alcohol') #S/N
-    tabaco = models.BooleanField('Tabaquismo')#S/N
-    drogas = models.BooleanField('Drogas')#S/N
-    infuciones = models.BooleanField('Infusiones')#S/N
+    alcohol = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE) #S/N
+    tabaco = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)#S/N
+    drogas = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)#S/N
+    infuciones = models.CharField(max_length=1, default='-', choices=ESTADO_CHOICE)#S/N
     observaciones = models.TextField('Observaciones')#text
 
 

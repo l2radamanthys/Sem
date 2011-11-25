@@ -44,8 +44,19 @@
         </tr>
 
         <tr>
-            <td><label>DNI:</label></td>
-            <td><input type="text" name="dni" value='0' maxlength=""class='edt_m'/></td>
+            <td><label>Documento:</label></td>
+            <td><input type="text" name="dni" value='0' maxlength=""class='edt_m' style="text-align: right"/></td>
+        </tr>
+
+
+        <tr>
+            <td><label>Tipo Doc:</label></td>
+            <td><select name="tipo_doc" class="edt">
+                {% for tipo in tipo_doc %}
+                    <option value="{{ tipo|first }}">{{ tipo|slice:"1:"|first }}</option>
+                {% endfor %}
+                </select>
+            </td>
         </tr>
 
         <tr>

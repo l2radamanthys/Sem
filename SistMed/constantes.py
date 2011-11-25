@@ -130,6 +130,14 @@ ESTADO_CHOICE_DIC = {
     "-":"------",
 }
 
+TIPO_DOC_CHOICE = (
+    ("--", "No Definido"),
+    ("DNI","Doc Nac de Identidad"),
+    ("LE","Lib de Enrrolamiento"),
+   
+)
+
+
 TRUE_FALSE_CHOICE = (
     ('S', 'Si'),
     ('N', 'No'),

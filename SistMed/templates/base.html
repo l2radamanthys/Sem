@@ -42,10 +42,9 @@
                     {% if nivel_0 %}
                         <li class='title_menu'><a href='/accounts/login/' style="color: #00AA00;"><img src="/site_media/imagenes/flecha_iten.png" align="top"  style="margin-right: 5px">Conectarse</a></li>
                     {% endif %}
-                    {% if nivel_2 and not_nivel_3 %}
+                    {% if nivel_2 and not nivel_3 %}
                         <li class='title_menu'><a href='/area?opcion=gt'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Gestion Turnos</a></li>
                         <li class='title_menu'><a href='/area?opcion=hc'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Historia Clinica</a></li>
-                        <!--li class='title_menu'><a href='/accounts/logout/'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Desloguear</a></li-->
                     {% endif %}
 
                     {% if nivel_1 %}
@@ -139,10 +138,7 @@
                 {% if nivel_3 %}
                 <span class='title_menu'><a onClick="desplegar('menu_7')"><img src="/site_media/imagenes/flecha_menu.png" align="top" style="margin-right: 5px">Mi Menu</a></span>
                     <ul id='menu_7' class='nav_menu'>
-                        <!--li><a href='/medicos/turnos/listado-solicitudes/{{ user_id }}'>Solicitudes de Turno</a></li-->
-                        <li><a href='/administrativos/turnos/nuevo-turno/'>Nuevo Turno</a></li>
-                        <!--li><a href='/medicos/agregar-especialidades/{{ user_id }}'>Mis Expecialidades</a></li>
-                        <li><a href='/medicos/horario-atencion/agregar/{{ user_id }}'>Agregar Horarios Atencion</a></li-->
+                        <li><a href='/administrativos/turnos/nuevo-turno/'>Nuevo Turno</a></li>>
                     </ul>
                 {% endif %}
 
@@ -150,11 +146,11 @@
             <!-- Menu de Historia Clinica -->
             {% else %}
                 <h3>Historias Clinica</h3>
-                {% if nivel_1 and not nivel_2 %}
+                <!--{% if nivel_1 and not nivel_2 %}
                     <span class='title_menu'><a href="">Mi Historia Clinica</a></span>
-                {% endif %}
+                {% endif %} -->
                 
-                {% if nivel_2 %}
+                {% if nivel_2 and not nivel_3 %}
                 <!-- span class='title_menu'><a onClick="desplegar('menu_8')"><img src="/site_media/imagenes/flecha_menu.png" align="top" style="margin-right: 5px">Menu</a></span -->
                 <ul id='menu_8' class='menu_nav'>
                     <li class='title_menu'><a href='/historia-clinica/nueva/'><img src="/site_media/imagenes/flecha_iten.png" align="top" style="margin-right: 5px">Nueva Historia Clinica</a></li>

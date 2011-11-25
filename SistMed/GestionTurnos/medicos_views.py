@@ -40,6 +40,8 @@ def nuevo_medico(request):
     query = int(request.POST.get('query', '0'))
     dict['query'] = query
 
+    dict["tipo_doc"] = TIPO_DOC_CHOICE
+
     if query:
         username = request.POST.get('usuario', '')
         password = request.POST.get('password_1', '')
@@ -61,6 +63,7 @@ def nuevo_medico(request):
             user.save()
             medico = Medicos(
                 dni = int(get_POST_value(request,'dni','0','0')),
+                tipo_doc = get_POST_value(request,'tipo_doc','',''),
                 sexo = get_POST_value(request,'sexo','-','-'),
                 telefono = request.POST.get('telefono', ''),
                 direccion = request.POST.get('direccion', ''),
@@ -217,6 +220,7 @@ def datos_medico(request, med_id=-1):
         dict['telefono'] = medico.telefono
         dict['email'] = medico.user.email
         dict['sexo'] = sexo_choice_expand(medico.sexo)
+        dict["doc"] = medico.doc()
 
         especialidades = []
         band = True
@@ -250,6 +254,8 @@ def modificar_medico(request, med_id=-1):
 
     med_id = int(med_id)
     dict["med_id"] = med_id
+
+    dict["tipo_doc"] = TIPO_DOC_CHOICE
     
     if med_id != -1:
         #### datos  -------------------
@@ -315,6 +321,7 @@ def guardar_cambios_medico(request):
             medico.user.last_name = get_POST_value(request,'apellido','')
             medico.user.save()
             medico.dni = int(get_POST_value(request,'dni','0','0'))
+            medico.tipo_doc = get_POST_value(request,'tipo_doc','',''),
             medico.direccion = get_POST_value(request,'direccion','')
             medico.telefono = get_POST_value(request,'telefono','')
             medico.email = get_POST_value(request,'email','')

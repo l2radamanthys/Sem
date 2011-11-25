@@ -15,10 +15,10 @@
 #from settings import *
 from django.conf.urls.defaults import *
 from django.contrib.auth.models import User
-from GestionTurnos.models import TipoUsuario, Administrativos
+from GestionTurnos.models import *
 
 
-print "Inicializando Datos de Interfaz..."
+print "Inicializando Datos de Interfaz...",
 #creo los tipo de usuario
 t_pac = TipoUsuario(nombre='Paciente')
 t_pac.save()
@@ -26,9 +26,10 @@ t_med = TipoUsuario(nombre='Medico')
 t_med.save()
 t_adm = TipoUsuario(nombre='Administrativo')
 t_adm.save()
+print "OK"
 
-print "Comfigurando el usuario admin..."
 #crea el usuario administrativo interno del sistema
+print "Comfigurando el usuario admin...",
 adm = User.objects.get(username="admin")
 n_adm = Administrativos(
     dni = 123,
@@ -39,4 +40,6 @@ n_adm = Administrativos(
     user=adm
 )
 n_adm.save()
-print "completo..."
+print "Ok"
+
+

@@ -35,11 +35,24 @@ class Expecialidades(models.Model):
         return self.nombre
 
 
+class TipoDocumento:
+    """
+        tipo documento
+    """
+    nombre = models.CharField("nombre", max_length=150)
+
+    
+    def __str__(self):
+        return self.nombre
+
+
 class Usuarios(models.Model):
     """
         Para el login y el manejo de secciones
     """
     dni = models.IntegerField()
+    #nro_doc = models.ChardField("Nro Documento", max_lenght="5")
+    tipo_doc = user = models.CharField("Tipo Documento", max_length="5", choices=TIPO_DOC_CHOICE, default="--")
     sexo = models.CharField(max_length=1, default='-', choices=SEXO_CHOICE)
     telefono = models.CharField(max_length=20)
     direccion = models.CharField(max_length=60)
@@ -49,6 +62,10 @@ class Usuarios(models.Model):
     tipo_usuario = models.ForeignKey(TipoUsuario)
     #segun django.es de esta forma anda con la clase user yo queria usar herencia :( pero no funka asi -.-
     user = models.ForeignKey(User, unique=True)
+
+
+    def doc(self):
+        return "%s - %s" %(self.tipo_doc, self.dni)
 
 
     def username(self):
