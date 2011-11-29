@@ -16,7 +16,7 @@ from utils import *
 from constantes import *
 
 
-
+#nueva HC
 def nueva(request):
     """
         cargar datos base para nueva historia clinica
@@ -46,18 +46,23 @@ def nueva(request):
         )#guarda automaticament
         dict['msj_class'] = MSJ_OK
         dict['mensaje'] = 'Historia Clinica Creada'
-        
+
     pacientes = []
-    #mas adelante tengo q hacer un filtrado d datos...
-    for pac in Pacientes.objects.all():
+
+    #forma basica de filtrado
+    con_hc = []
+    for hc in InformacionBasica.objects.all():
+        con_hc.append(hc.paciente.id)
+
+    for pac in Pacientes.objects.exclude(id__in=con_hc):
         pacientes.append((pac.id, pac.nombre_completo()))
 
     #en caso de no haber pacientes disponibles lanza error
     if len(pacientes) == 0:
-        return HttpResponseRedirect('/error/?title="Invalid Request"&msj="no hay pacientes disponibles"')
+        return HttpResponseRedirect('/error/?title="Invalid Request"&msj="Actulmente todos los Pacientes tienen asignada una Historia Clinica"')
 
+    dict["hoy"] = date_today_str()
     dict['pacientes'] = pacientes
-
     dict['grupos_sanguineos'] = GRUPOS_SANGUINEOS
 
     contexto = Context(dict)
@@ -109,7 +114,7 @@ def mostrar_datos_paciente(request):
         hist_clinica = InformacionBasica.objects.get(paciente__id=pac_id)
         
         dict["nombre"] = _paciente.nombre_completo()
-        dict["DNI"] = _paciente.dni
+        dict["doc"] = _paciente.doc()
         dict['fecha_nacimiento'] =  date_to_str(hist_clinica.fecha_nacimiento)
         dict["lugar_nacimiento"] = hist_clinica.lugar_nacimiento
         dict["padre"] = hist_clinica.padre
@@ -601,6 +606,30 @@ def mostrar_imagenes(request):
     exam_id = int(get_GET_value(request, "exam_id", -1))
     dict["exam_id"] = exam_id
 
+    dict["imagenes"] = Imagen.objects.filter(examen_fisico__id=exam_id)
+
+    contexto = Context(dict)
+    html = plantilla.render(contexto)
+    return HttpResponse(html)
+
+
+def mostrar_imagen(request):
+    """
+        Visualiza una imagen
+    """
+    plantilla = get_template('medicos/historia_clinica/examen_fisico/mostrar-imagen.html')
+    dict = generar_base_dict(request)
+    dict['titulo'] = 'Examen Fisico'
+
+    pac_id = get_GET_value(request, "pac_id", -1)
+    dict['pac_id'] = int(pac_id)
+
+    exam_id = int(get_GET_value(request, "exam_id", -1))
+    dict["exam_id"] = exam_id
+
+    img_id = int(get_GET_value(request, "img_id", -1))
+    dict["imagen"] = Imagen.objects.get(id=img_id)
+
     contexto = Context(dict)
     html = plantilla.render(contexto)
     return HttpResponse(html)
@@ -628,6 +657,9 @@ def agregar_imagen(request):
             imagen = request.FILES["imagen"]
         )
         img.save()
+
+        dict["msj_class"] = "msj_ok"
+        dict["mensaje"] = "Imagen Agregada"
 
     contexto = Context(dict)
     html = plantilla.render(contexto)

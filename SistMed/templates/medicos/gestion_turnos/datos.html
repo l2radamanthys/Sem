@@ -28,10 +28,12 @@
             <td class='field_a'><label>{{ nombre }}</label></td>
         </tr>
 
+        {% if nivel_3 %}
         <tr>
             <td class='field_b'><label>Documento:</label></td>
             <td class='field_a'><label>{{ doc }}</label></td>
         </tr>
+        {% endif %}
 
         <tr>
             <td class='field_b'><label>Matricula:</label></td>

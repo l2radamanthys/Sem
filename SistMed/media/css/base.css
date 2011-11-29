@@ -46,9 +46,8 @@ label {
 
 /*contenedores principales*/
 .celda_superior {
-    background-image: url('/site_media/imagenes/baner_bg.png');
+    background-color: #005782; /* url('/site_media/imagenes/baner_bg.png');*/
     background-repeat: x-repeat;
-    background-color: rgb(250, 250, 250);
     /*font-size: 85%;*/
 }
 
@@ -375,15 +374,19 @@ label {
 
 
 .nav_menu li {
-    background-color: #efefef;
+    /*background-color: #F3F3F3;*/
+    background-color: #EBF1F0;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 11px;
     text-decoration: None;
     padding-top: 3px;
     padding-bottom: 2px;
     padding-left: 6px;
-    border-right: 1px solid #CCC;
-    border-bottom: 1px solid #CCC;
+    border-right: 1px solid #0080FF;
+    border-left: 1px solid #0080FF;
+    border-top: 1px solid #CCC;
+    margin-top: -1px;
+    border-bottom: 1px solid #0080FF;
     width: 160px;
     display: block;
 }
@@ -394,7 +397,7 @@ label {
 }
 
 .nav_menu a {
-    color: #000;
+    color: #00356A;
     /*font-weight: bold;*/
 }
 
@@ -553,7 +556,7 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     padding-top: 10px;
     padding-right: 30px;
     text-align: right;
-    background-color: #000;
+    background-color: #005782;
     height: 32px;
 }
 /*** Fin Estilo Ventana ***/ 

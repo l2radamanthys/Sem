@@ -169,6 +169,7 @@ urlpatterns = patterns('',
 
     # - Examen Fisico -> Imagenes
     (r'^historia-clinica/mostrar-imagenes/$', hc_med_views.mostrar_imagenes),
+    (r'^historia-clinica/mostrar-imagen/$', hc_med_views.mostrar_imagen),
     (r'^historia-clinica/agregar-imagen/$', hc_med_views.agregar_imagen),
 
     # - Examen Fisico -> Analisis de Laboratorio

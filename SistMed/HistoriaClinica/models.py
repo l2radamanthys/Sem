@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 from GestionTurnos.models import Pacientes, Medicos
 from constantes import *
+from constantes import _MEDIA_ROOT
 from utils import date_to_str
 
 
@@ -286,10 +287,10 @@ class OtrosEstudio(models.Model):
 
 
 class Imagen(models.Model):
-    examen_fisico = models.ForeignKey(ExamenBase, unique=True)
+    examen_fisico = models.ForeignKey(ExamenBase)
     titulo = models.CharField('titulo', max_length=250)
     descripcion = models.TextField('Descripcion')
-    imagen = models.ImageField(upload_to="/data/imagenes/estudios")
+    imagen = models.ImageField(upload_to="estudios/imagenes")
 
 
 '''

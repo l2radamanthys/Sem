@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta name="author" content="Ricardo D. Quiroga -> L2Radamanthys"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
+    <meta http-equiv="content-style-type" content="text/css"/>
+
+    <title>
+        {{ page_title }}
+    </title>
+
+    <link type="text/css" rel="stylesheet" media="all" href="{{ css_template }}">
+    <script language="JavaScript" type="text/javascript" src="/site_media/scripts/JQuery.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/site_media/scripts/zoomi.js"></script>
+</head>
+
+<body>
+    
+    <div align="center">
+    <div style="background-color: #FFF; width: 1000px; margin-top: 50px" >
+    <div class="barra_superior">
+        <a href='/historia-clinica/mostrar-imagenes/?exam_id={{ exam_id }}&pac_id={{ pac_id }}' class='boton'><span>Atras</span></a>
+    </div>
+    
+        <br /><br />
+        <img height="50%" src="/site_media/{{ imagen.imagen }}" style="float: left; padding-left: 30px; padding-right: 30px;" >
+        <h2>Titulo: {{ imagen.titulo }}</h2>
+        <p style="text-align: left;"><strong>Descripcion:</strong> {{ imagen.descripcion }}</p>
+        <div style="clear: left;"></div>
+        <br /><br />
+    </div>
+    </div>
+
+    
+
+</body>
+</html>
+

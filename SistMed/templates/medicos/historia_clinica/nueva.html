@@ -8,7 +8,7 @@
     <table>
     <form action="" method="post"  >
     <tr><td><label>Paciente</label></td>
-    <td><select class="edt_m" name="pac_id">
+    <td><select class="edt_g" name="pac_id">
             {% for pac in pacientes %}
                 <option value='{{ pac|slice:"0:"|first }}'>{{ pac|slice:"1:"|first }}</option>
             {% endfor %}
@@ -25,7 +25,7 @@
     </td></tr>
      -->
 
-    <tr><td><label>Fecha Nacimiento</label></td><td><input name="fecha_nac" id="fecha_nac" class="edt_c" value="01/01/01" type="text"  /></td></tr>
+    <tr><td><label>Fecha Nacimiento</label></td><td><input name="fecha_nac" id="fecha_nac" class="edt_c" value="{{ hoy }}" type="text"  /></td></tr>
     <tr><td><label>Lugar Nacimiento</label></td><td><input name="lugar_nac" class="edt_g" type="text"  /></td></tr>
 
     <tr><td><label>Nombre del Padre</label></td><td><input name="padre" class="edt_g" type="text"  /></td></tr>

@@ -8,5 +8,18 @@
  
 <h3>Imagenes</h3>
 
-
+<table width="500px" cellspacing="2px">
+<tr class="table_title">
+    <td>Nombre</td>
+    <td width="70px">Mostrar</td>
+    <td width="70px">Borrar</td>
+</tr>
+{% for img in imagenes %}
+<tr class="field_a">
+    <td>{{ img.titulo }}</td>
+    <td align="center"><a href="/historia-clinica/mostrar-imagen/?exam_id={{ exam_id }}&pac_id={{ pac_id }}&img_id={{ img.id }}"><img src="/site_media/imagenes/icon_ver.png" /></a></td>
+    <td align="center"><a href="/historia-clinica/borrar-imagen/?exam_id={{ exam_id }}&pac_id={{ pac_id }}&img_id={{ img.id }}"><img src="/site_media/imagenes/icon_borrar.png" /></a></td>
+</tr>
+{% endfor %}
+</table>
 {% endblock %}

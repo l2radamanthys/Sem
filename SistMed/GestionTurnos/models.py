@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.db import connection, transaction
 
 from utils import *
-from constantes import SEXO_CHOICE, SOLICITUD_ESTADO_CHOICE, DATE_CHOICE
+from constantes import *
 
 
 #modelos

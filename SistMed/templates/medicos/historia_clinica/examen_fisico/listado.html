@@ -12,7 +12,7 @@
         </tr>
         {% for examen in examenes %}
         </tr>
-            <td class='{{ examen|slice:"2:"|first }}' align="left"><a href='/historia-clinica/mostrar-examen-base/?exam_id={{ examen|slice:"0:"|first }}&pac_id={{ pac_id }}'><img src="/site_media/imagenes/document.png">&nbsp;{{ examen|slice:"1:"|first }}</a></td>
+            <td class='{{ examen|slice:"2:"|first }}' align="left"><a style="color: #005EBB" href='/historia-clinica/mostrar-examen-base/?exam_id={{ examen|slice:"0:"|first }}&pac_id={{ pac_id }}'><img src="/site_media/imagenes/document.png">&nbsp;{{ examen|slice:"1:"|first }}</a></td>
         </tr>
         {% endfor %}
     </table>
